@@ -1,0 +1,7820 @@
+1
+01:03:50,616 --> 01:03:58,683
+ (Exhales) (Bell Dings)
+
+2
+01:05:22,033 --> 01:05:23,199
+ our
+
+3
+01:05:24,066 --> 01:05:25,866
+.</
+
+4
+01:05:33,550 --> 01:05:36,199
+ I gave a short of everyone.
+
+5
+01:05:36,199 --> 01:05:36,949
+ You already have met
+
+6
+01:05:36,949 --> 01:05:38,250
+ Swati, Sanjia and Hanuk.
+
+7
+01:05:38,949 --> 01:05:42,866
+ Hari is from our production team and
+
+8
+01:05:42,866 --> 01:05:44,383
+ Swati is more from the
+
+9
+01:05:44,383 --> 01:05:45,283
+ post-production team.
+
+10
+01:05:45,783 --> 01:05:50,166
+ So Hari right now edited your demo screen
+
+11
+01:05:50,166 --> 01:05:51,050
+ share that you shared.
+
+12
+01:05:52,000 --> 01:05:54,133
+ And then we shared it with Sanjia and
+
+13
+01:05:54,133 --> 01:05:55,683
+ Hanuk for the final review.
+
+14
+01:05:56,483 --> 01:05:58,966
+ So then Hanuk has a few
+
+15
+01:05:58,966 --> 01:06:01,183
+ observations on the screen share.
+
+16
+01:06:02,983 --> 01:06:05,283
+ The way you are creating is still okay
+
+17
+01:06:05,283 --> 01:06:07,783
+ but the concept on which it's been...
+
+18
+01:06:07,933 --> 01:06:11,033
+ created is not being understandable as
+
+19
+01:06:11,033 --> 01:06:12,583
+ per my understanding of Hanuk.
+
+20
+01:06:13,650 --> 01:06:15,933
+ So I'll hand it over to Hanuk.
+
+21
+01:06:15,933 --> 01:06:17,066
+ Hanuk can explain better
+
+22
+01:06:17,066 --> 01:06:18,366
+ as to what is the issue.
+
+23
+01:06:18,616 --> 01:06:20,750
+ And before that, Hari, can you play that
+
+24
+01:06:20,750 --> 01:06:23,366
+ video for us to understand that the audio
+
+25
+01:06:23,366 --> 01:06:24,699
+ and video are not syncing.
+
+26
+01:06:25,500 --> 01:06:28,566
+ So in one of the slides, as per Hari,
+
+27
+01:06:29,633 --> 01:06:32,550
+ slide 6 audio is coming in slide 7 audio,
+
+28
+01:06:32,550 --> 01:06:33,266
+ something like that.
+
+29
+01:06:34,483 --> 01:06:36,083
+ All right, very good.
+
+30
+01:06:36,383 --> 01:06:40,066
+ Let's try it and see it and try to
+
+31
+01:06:40,066 --> 01:06:43,650
+ understand it because what I did was, if
+
+32
+01:06:43,650 --> 01:06:47,283
+ I share my screen, before we start, I
+
+33
+01:06:47,283 --> 01:06:50,383
+ created a video around this as well.
+
+34
+01:06:51,333 --> 01:06:54,183
+ So you guys should be able to see this.
+
+35
+01:06:54,183 --> 01:06:55,433
+ Can you guys see my screen?
+
+36
+01:06:57,199 --> 01:06:57,616
+ Yes.
+
+37
+01:06:57,933 --> 01:07:02,449
+ So what I tried to do was I tried to edit
+
+38
+01:07:02,449 --> 01:07:06,166
+ it myself so I will be able to see it
+
+39
+01:07:06,166 --> 01:07:10,466
+ myself as well, put myself into the same
+
+40
+01:07:10,466 --> 01:07:13,449
+ shoes with the post-production team.
+
+41
+01:07:13,866 --> 01:07:16,316
+ So what I did was, in
+
+42
+01:07:16,316 --> 01:07:18,766
+ a nutshell, on here,
+
+43
+01:07:19,833 --> 01:07:22,116
+ first of all, what I did was I gave you
+
+44
+01:07:22,116 --> 01:07:24,916
+ guys Google Drive folders for
+
+45
+01:07:24,916 --> 01:07:27,183
+ everything, for the voiceover.
+
+46
+01:07:27,433 --> 01:07:29,116
+ So the voiceover can
+
+47
+01:07:29,116 --> 01:07:31,050
+ be changed at any place.
+
+48
+01:07:31,050 --> 01:07:31,966
+ It is at the bottom.
+
+49
+01:07:32,183 --> 01:07:33,699
+ There is a voiceover.
+
+50
+01:07:34,033 --> 01:07:36,050
+ So the voiceover can be
+
+51
+01:07:36,050 --> 01:07:37,783
+ easily tracked everywhere.
+
+52
+01:07:38,250 --> 01:07:40,733
+ So how can it be tracked the voiceover?
+
+53
+01:07:40,733 --> 01:07:43,616
+ If you guys see the file names, there is
+
+54
+01:07:43,616 --> 01:07:44,783
+ a voiceover file name.
+
+55
+01:07:44,833 --> 01:07:47,066
+ And that voiceover file
+
+56
+01:07:47,066 --> 01:07:48,449
+ name is on Storyboard.
+
+57
+01:07:48,933 --> 01:07:50,166
+ But do not use the
+
+58
+01:07:50,166 --> 01:07:53,133
+ Storyboard to line up the audio.
+
+59
+01:07:53,416 --> 01:07:56,633
+ The audio is in the voiceover audio file.
+
+60
+01:07:57,033 --> 01:07:59,133
+ But how are you going to put the
+
+61
+01:07:59,133 --> 01:08:02,150
+ voiceover audio to the correct slide?
+
+62
+01:08:02,949 --> 01:08:05,500
+ That key lands in the slide.
+
+63
+01:08:05,866 --> 01:08:08,116
+ So all of this combo has at
+
+64
+01:08:08,116 --> 01:08:09,783
+ the bottom a voiceover posted.
+
+65
+01:08:10,683 --> 01:08:12,783
+ So once you look at the voiceover post-
+
+66
+01:08:13,433 --> 01:08:15,433
+ You know that how it's going to land
+
+67
+01:08:15,433 --> 01:08:18,033
+ because I put these voiceovers.
+
+68
+01:08:18,399 --> 01:08:19,583
+ I did not edit them.
+
+69
+01:08:19,816 --> 01:08:23,816
+ I put a Rough voiceover so it will be one
+
+70
+01:08:23,816 --> 01:08:27,050
+ second behind one second after so they
+
+71
+01:08:27,050 --> 01:08:30,183
+ had to be mapped with these voiceovers at
+
+72
+01:08:30,183 --> 01:08:33,166
+ the bottom post-its and I put all these
+
+73
+01:08:33,449 --> 01:08:37,383
+ Screen captures with the number coding on
+
+74
+01:08:37,383 --> 01:08:39,933
+ here So in the combat you should be able
+
+75
+01:08:39,933 --> 01:08:42,649
+ to find it with the number codes and the
+
+76
+01:08:42,649 --> 01:08:45,750
+ number codes are already placed In the
+
+77
+01:08:45,750 --> 01:08:48,533
+ output slides so they are very
+
+78
+01:08:48,533 --> 01:08:50,500
+ straightforward and I put all the
+
+79
+01:08:50,500 --> 01:08:53,783
+ references into one file and created this
+
+80
+01:08:53,783 --> 01:08:56,899
+ into a Video format that could be easily
+
+81
+01:08:56,899 --> 01:09:00,449
+ found if this says scene 5 that it is the
+
+82
+01:09:00,449 --> 01:09:03,550
+ fifth scene In the system, and how do you
+
+83
+01:09:03,550 --> 01:09:04,583
+ place it on timeline?
+
+84
+01:09:05,116 --> 01:09:08,166
+ I put the storyboard as you guys will be
+
+85
+01:09:08,166 --> 01:09:12,166
+ able to listen it and do it easily And
+
+86
+01:09:12,166 --> 01:09:14,666
+ all of these scenes have seen numbers
+
+87
+01:09:15,083 --> 01:09:17,883
+ Inside them so you know which scene you
+
+88
+01:09:17,883 --> 01:09:20,883
+ are at without even looking at combo But
+
+89
+01:09:20,883 --> 01:09:23,383
+ combo is there to be able to support you
+
+90
+01:09:23,383 --> 01:09:26,683
+ I put this into the wind result You will
+
+91
+01:09:26,683 --> 01:09:28,149
+ be able to see the scene
+
+92
+01:09:28,149 --> 01:09:31,333
+ number as for s5 s6 as we
+
+93
+01:09:32,533 --> 01:09:33,750
+ Start off the scene.
+
+94
+01:09:33,750 --> 01:09:36,816
+ This is the rough audio as you guys see
+
+95
+01:09:36,816 --> 01:09:39,500
+ scene is here But there's one second gap
+
+96
+01:09:39,500 --> 01:09:41,750
+ you need to move this to the left hand
+
+97
+01:09:41,750 --> 01:09:44,316
+ side There is one second gap you need to
+
+98
+01:09:44,316 --> 01:09:45,750
+ move this to the left hand side.
+
+99
+01:09:45,750 --> 01:09:48,566
+ I did not cut this I expected the
+
+100
+01:09:48,566 --> 01:09:51,266
+ post-production team to cut it and place
+
+101
+01:09:51,266 --> 01:09:52,316
+ it, but don't forget.
+
+102
+01:09:52,316 --> 01:09:55,833
+ There's also the Posted notes which has
+
+103
+01:09:55,833 --> 01:09:59,866
+ the voiceovers on top of tanda so that in
+
+104
+01:09:59,866 --> 01:10:02,133
+ the editing It should be able to go there
+
+105
+01:10:02,133 --> 01:10:04,233
+ And you are not going to use the
+
+106
+01:10:04,233 --> 01:10:06,883
+ voiceover on the storyboard You are going
+
+107
+01:10:06,883 --> 01:10:09,866
+ to use the voiceover in the module one to
+
+108
+01:10:09,866 --> 01:10:12,266
+ be able to place it properly So there's a
+
+109
+01:10:12,266 --> 01:10:14,500
+ clean voiceover as well
+
+110
+01:10:14,500 --> 01:10:16,983
+ that I recorded in audiosity
+
+111
+01:10:17,833 --> 01:10:18,883
+ you place the footage
+
+112
+01:10:18,883 --> 01:10:20,316
+ for the screen capture.
+
+113
+01:10:20,866 --> 01:10:23,250
+ You know the footage ID and
+
+114
+01:10:23,250 --> 01:10:26,133
+ you know the scene over there.
+
+115
+01:10:26,466 --> 01:10:30,116
+ You are going to meet the storyboard,
+
+116
+01:10:30,816 --> 01:10:33,816
+ place it in the correct place and set the
+
+117
+01:10:33,816 --> 01:10:35,316
+ screen capture over there.
+
+118
+01:10:35,683 --> 01:10:38,233
+ Then you are going to collect the visuals
+
+119
+01:10:38,449 --> 01:10:41,616
+ and do a sanity check because I put the
+
+120
+01:10:41,616 --> 01:10:45,166
+ visuals onto the combo by going into
+
+121
+01:10:45,166 --> 01:10:48,116
+ combo and being able to download it by
+
+122
+01:10:48,116 --> 01:10:51,500
+ right clicking on it and do a download
+
+123
+01:10:51,500 --> 01:10:55,433
+ selection on here in a very easy manner.
+
+124
+01:10:55,649 --> 01:10:56,633
+ So that's going to
+
+125
+01:10:56,633 --> 01:10:59,633
+ help you be able to do it
+
+126
+01:11:00,649 --> 01:11:02,050
+ directly over here.
+
+127
+01:11:02,316 --> 01:11:04,383
+ So there's a voiceover
+
+128
+01:11:04,383 --> 01:11:06,683
+ screen capture over there.
+
+129
+01:11:06,683 --> 01:11:08,949
+ So that will let you be
+
+130
+01:11:08,949 --> 01:11:11,316
+ able to download it as well.
+
+131
+01:11:11,850 --> 01:11:14,000
+ So that is in a nutshell.
+
+132
+01:11:14,583 --> 01:11:17,266
+ Which part is the problematic part for
+
+133
+01:11:17,266 --> 01:11:19,449
+ you, Hanukkah, in here
+
+134
+01:11:19,449 --> 01:11:21,250
+ to be able to not do it?
+
+135
+01:11:25,316 --> 01:11:27,050
+ I'll tell you, see the thing is,
+
+136
+01:11:29,133 --> 01:11:31,633
+ now like once this gets edited, once the
+
+137
+01:11:31,633 --> 01:11:34,483
+ audio is in sync, maybe I might have a
+
+138
+01:11:34,483 --> 01:11:36,783
+ different opinion, but see the thing is
+
+139
+01:11:36,783 --> 01:11:39,533
+ still the problems which I foresee is
+
+140
+01:11:41,216 --> 01:11:41,816
+ whatever you were
+
+141
+01:11:41,816 --> 01:11:43,116
+ mentioning in the narration, right?
+
+142
+01:11:43,933 --> 01:11:45,883
+ And whatever is there in the screen, like
+
+143
+01:11:45,883 --> 01:11:47,683
+ I understand that those things are
+
+144
+01:11:47,683 --> 01:11:49,350
+ relatable because we
+
+145
+01:11:49,350 --> 01:11:51,616
+ have additional information,
+
+146
+01:11:52,899 --> 01:11:55,216
+ not excess information on the screen, but
+
+147
+01:11:55,216 --> 01:11:57,966
+ the narration is talking about some
+
+148
+01:11:57,966 --> 01:12:00,333
+ generic things and it's much more
+
+149
+01:12:00,333 --> 01:12:02,066
+ abstract, not kind of specific.
+
+150
+01:12:02,500 --> 01:12:03,383
+ This is what I felt.
+
+151
+01:12:03,766 --> 01:12:06,750
+ And as I've already said that the
+
+152
+01:12:06,750 --> 01:12:08,233
+ voiceover and demo is,
+
+153
+01:12:09,366 --> 01:12:10,649
+ just a second, let me
+
+154
+01:12:10,649 --> 01:12:13,266
+ complete, maybe you can add after that.
+
+155
+01:12:13,850 --> 01:12:15,266
+ Otherwise I'll lose my train of thought
+
+156
+01:12:15,683 --> 01:12:17,316
+ if that's okay with you.
+
+157
+01:12:17,816 --> 01:12:19,533
+ So as I was saying, the
+
+158
+01:12:19,533 --> 01:12:22,000
+ voiceover and the demo was not.
+
+159
+01:12:22,816 --> 01:12:24,033
+ modern sync, first of all.
+
+160
+01:12:24,183 --> 01:12:26,716
+ So you said that maybe we might have to
+
+161
+01:12:26,716 --> 01:12:28,933
+ adjust it a little bit, then that
+
+162
+01:12:28,933 --> 01:12:29,949
+ particular thing would be solved.
+
+163
+01:12:30,283 --> 01:12:32,583
+ But still, as I've said, the second
+
+164
+01:12:32,583 --> 01:12:36,500
+ problem was that there were a lot of
+
+165
+01:12:36,500 --> 01:12:39,466
+ things on the screen, but I can
+
+166
+01:12:39,466 --> 01:12:41,449
+ understand that from a technical point of
+
+167
+01:12:41,449 --> 01:12:44,116
+ view, maybe as a subject matter expert,
+
+168
+01:12:44,466 --> 01:12:46,350
+ you might find that this is something
+
+169
+01:12:46,350 --> 01:12:48,616
+ which is kind of, these
+
+170
+01:12:48,616 --> 01:12:50,000
+ would be relatable things.
+
+171
+01:12:50,633 --> 01:12:55,883
+ But from a learner's perspective, or when
+
+172
+01:12:55,883 --> 01:12:59,533
+ I look at it things, I cannot relate with
+
+173
+01:12:59,533 --> 01:13:00,250
+ what you are saying.
+
+174
+01:13:00,500 --> 01:13:02,399
+ There are a few things that are there on
+
+175
+01:13:02,399 --> 01:13:04,033
+ the screen, which I can see and what you
+
+176
+01:13:04,033 --> 01:13:05,433
+ are saying, but those
+
+177
+01:13:05,433 --> 01:13:07,649
+ are not in a direct way.
+
+178
+01:13:08,149 --> 01:13:09,133
+ All right, and the
+
+179
+01:13:09,133 --> 01:13:10,816
+ demos, which I see, right?
+
+180
+01:13:10,866 --> 01:13:14,033
+ So the demos also like what I expect is
+
+181
+01:13:14,083 --> 01:13:15,716
+ that the demo should be
+
+182
+01:13:15,716 --> 01:13:17,583
+ for a concrete example.
+
+183
+01:13:18,033 --> 01:13:20,350
+ All right, so and then for a given
+
+184
+01:13:20,350 --> 01:13:23,766
+ concrete example, you would have to kind
+
+185
+01:13:23,766 --> 01:13:25,933
+ of divide the demo into different steps,
+
+186
+01:13:25,933 --> 01:13:27,316
+ like step one, step two, step three.
+
+187
+01:13:27,816 --> 01:13:31,399
+ All right, and then maybe in step one,
+
+188
+01:13:31,399 --> 01:13:33,233
+ you would say that, okay, install this.
+
+189
+01:13:33,666 --> 01:13:35,866
+ All right, maybe there was a step wherein
+
+190
+01:13:35,866 --> 01:13:38,366
+ you go on to GitHub and then over there,
+
+191
+01:13:38,649 --> 01:13:40,083
+ you would have, instead of doing it
+
+192
+01:13:40,083 --> 01:13:42,149
+ locally, you are adding some code spaces,
+
+193
+01:13:42,383 --> 01:13:43,616
+ you are doing it on code spaces.
+
+194
+01:13:43,616 --> 01:13:45,366
+ I do not know, I'm not a technical person
+
+195
+01:13:45,366 --> 01:13:47,083
+ over here to comment on that.
+
+196
+01:13:47,116 --> 01:13:48,583
+ So maybe, so the thing is
+
+197
+01:13:48,583 --> 01:13:50,250
+ you can just take an example,
+
+198
+01:13:51,466 --> 01:13:53,666
+ you can do the demo for an example
+
+199
+01:13:53,666 --> 01:13:55,666
+ scenario, hypothetical scenario or a
+
+200
+01:13:55,666 --> 01:13:57,566
+ hypothetical example, the different steps
+
+201
+01:13:57,566 --> 01:13:59,683
+ involved, and alternatively, you can
+
+202
+01:13:59,683 --> 01:14:01,733
+ mention the different alternative steps,
+
+203
+01:14:01,733 --> 01:14:04,216
+ like you can do this locally as well, but
+
+204
+01:14:04,216 --> 01:14:07,316
+ the focus should be on the example
+
+205
+01:14:07,316 --> 01:14:08,266
+ scenario that you have
+
+206
+01:14:08,266 --> 01:14:09,683
+ taken to meet the objective.
+
+207
+01:14:10,166 --> 01:14:11,316
+ And accordingly, the steps
+
+208
+01:14:11,316 --> 01:14:12,716
+ would have to be broken down.
+
+209
+01:14:12,716 --> 01:14:15,166
+ I'm not expecting you to show the entire
+
+210
+01:14:15,166 --> 01:14:16,983
+ execution of those steps.
+
+211
+01:14:17,483 --> 01:14:20,716
+ You just mentioned the important pointers
+
+212
+01:14:20,983 --> 01:14:24,466
+ or the codes or the steps that the
+
+213
+01:14:24,466 --> 01:14:25,633
+ learner would have to perform
+
+214
+01:14:25,633 --> 01:14:27,783
+ for a given major step, right?
+
+215
+01:14:27,833 --> 01:14:30,399
+ like the first step would be maybe for
+
+216
+01:14:30,399 --> 01:14:31,433
+ installing something.
+
+217
+01:14:31,883 --> 01:14:34,533
+ All right, and then that is where you
+
+218
+01:14:34,533 --> 01:14:37,283
+ show the code for installing, okay, and
+
+219
+01:14:37,283 --> 01:14:38,649
+ this is, I'm just
+
+220
+01:14:38,649 --> 01:14:40,716
+ randomly speaking over here.
+
+221
+01:14:41,033 --> 01:14:43,066
+ I'm not sure if this applies to your demo
+
+222
+01:14:43,066 --> 01:14:45,633
+ or not, but there was a step for
+
+223
+01:14:45,633 --> 01:14:46,649
+ installing installation.
+
+224
+01:14:46,866 --> 01:14:47,616
+ I've seen that.
+
+225
+01:14:48,033 --> 01:14:49,933
+ So you need not to show the entire
+
+226
+01:14:49,933 --> 01:14:50,833
+ process of installation.
+
+227
+01:14:50,833 --> 01:14:53,066
+ You just say that use this code for
+
+228
+01:14:53,066 --> 01:14:55,949
+ installing and then you just skip to that
+
+229
+01:14:55,949 --> 01:14:57,833
+ part where the installation is complete
+
+230
+01:14:58,166 --> 01:14:59,899
+ and then you move on to the next step.
+
+231
+01:14:59,899 --> 01:15:01,616
+ Maybe next step would be kind of maybe
+
+232
+01:15:01,616 --> 01:15:05,316
+ integrating onto the GitHub or doing it
+
+233
+01:15:05,316 --> 01:15:06,683
+ on code spaces or locally.
+
+234
+01:15:06,683 --> 01:15:07,066
+ I'm not sure.
+
+235
+01:15:07,500 --> 01:15:10,783
+ All right, so I want, so at present, it
+
+236
+01:15:10,783 --> 01:15:11,866
+ is very difficult to
+
+237
+01:15:11,866 --> 01:15:13,883
+ understand the flow of the demo.
+
+238
+01:15:13,883 --> 01:15:15,966
+ You know, like what are the steps that
+
+239
+01:15:15,966 --> 01:15:17,783
+ the learner would have to kind of perform
+
+240
+01:15:17,783 --> 01:15:18,583
+ to attain the
+
+241
+01:15:18,583 --> 01:15:19,949
+ objective of the video, right?
+
+242
+01:15:20,283 --> 01:15:21,816
+ Maybe if we are trying to build something
+
+243
+01:15:21,816 --> 01:15:23,750
+ over here, so that building should,
+
+244
+01:15:24,316 --> 01:15:26,683
+ building that particular thing should
+
+245
+01:15:26,683 --> 01:15:29,250
+ involve one, two, three steps, all right?
+
+246
+01:15:29,433 --> 01:15:32,033
+ These steps which would be, which can be
+
+247
+01:15:32,033 --> 01:15:35,116
+ applied for any such example, all right?
+
+248
+01:15:35,366 --> 01:15:36,466
+ Any such example.
+
+249
+01:15:36,466 --> 01:15:37,233
+ So you would have to
+
+250
+01:15:37,233 --> 01:15:38,816
+ take a concrete example.
+
+251
+01:15:38,816 --> 01:15:40,366
+ You would have, your focus should be that
+
+252
+01:15:40,666 --> 01:15:43,583
+ and maybe alternatively, you can mention
+
+253
+01:15:43,583 --> 01:15:45,266
+ few things that can be covered.
+
+254
+01:15:45,816 --> 01:15:49,050
+ So what I felt was this was, there were
+
+255
+01:15:49,050 --> 01:15:51,949
+ portions in the screen shares which felt
+
+256
+01:15:51,949 --> 01:15:53,949
+ more like conceptual portions, all right?
+
+257
+01:15:54,133 --> 01:15:54,816
+ Because there were
+
+258
+01:15:54,816 --> 01:15:56,483
+ generic discussions going on.
+
+259
+01:15:56,816 --> 01:15:57,983
+ You are talking about
+
+260
+01:15:57,983 --> 01:15:59,866
+ generic things, all right?
+
+261
+01:15:59,983 --> 01:16:01,733
+ So those things would have
+
+262
+01:16:01,733 --> 01:16:03,733
+ to be covered in a conceptual,
+
+263
+01:16:04,883 --> 01:16:05,766
+ because okay, these are the
+
+264
+01:16:05,766 --> 01:16:07,116
+ techniques that are involved.
+
+265
+01:16:07,533 --> 01:16:08,050
+ That's fine.
+
+266
+01:16:08,050 --> 01:16:09,433
+ You need not to dig deep into it.
+
+267
+01:16:09,433 --> 01:16:10,933
+ You can tell that, okay, these are the
+
+268
+01:16:10,933 --> 01:16:12,216
+ alternatives that we have.
+
+269
+01:16:12,733 --> 01:16:13,566
+ So that's fine.
+
+270
+01:16:14,266 --> 01:16:17,366
+ And yeah, so this is how I want you to
+
+271
+01:16:17,366 --> 01:16:19,850
+ approach the demo because it's very
+
+272
+01:16:19,850 --> 01:16:20,899
+ difficult to follow at
+
+273
+01:16:20,899 --> 01:16:21,683
+ this particular point.
+
+274
+01:16:21,899 --> 01:16:24,550
+ You can go ahead and add your points.
+
+275
+01:16:25,033 --> 01:16:28,033
+ You talked about only two points.
+
+276
+01:16:28,716 --> 01:16:31,250
+ I'm recording this and I will go over it
+
+277
+01:16:31,250 --> 01:16:32,433
+ to make sure that I understood.
+
+278
+01:16:33,183 --> 01:16:35,466
+ First, you said you are
+
+279
+01:16:35,466 --> 01:16:37,566
+ unable to put the voiceovers.
+
+280
+01:16:38,066 --> 01:16:39,283
+ This is the first part.
+
+281
+01:16:40,483 --> 01:16:41,833
+ The second part you said
+
+282
+01:16:41,833 --> 01:16:43,683
+ you had a flow problem.
+
+283
+01:16:44,550 --> 01:16:45,333
+ Is that correct?
+
+284
+01:16:45,816 --> 01:16:46,033
+ Two points?
+
+285
+01:16:47,066 --> 01:16:47,683
+ Only two.
+
+286
+01:16:48,149 --> 01:16:49,500
+ Let's address the
+
+287
+01:16:49,500 --> 01:16:51,383
+ first one, the voiceovers.
+
+288
+01:16:52,183 --> 01:16:54,283
+ So the voiceovers is
+
+289
+01:16:54,283 --> 01:16:57,366
+ impossible for you not to find.
+
+290
+01:16:58,016 --> 01:16:58,583
+ Impossible.
+
+291
+01:16:59,399 --> 01:17:02,066
+ Because what I'm doing is I put the
+
+292
+01:17:02,066 --> 01:17:04,250
+ voiceovers onto post-its.
+
+293
+01:17:05,050 --> 01:17:09,250
+ And I read the post-its, A1, it starts
+
+294
+01:17:09,250 --> 01:17:13,833
+ here and goes to a transition line.
+
+295
+01:17:14,116 --> 01:17:16,883
+ It says, now let's look at our targets.
+
+296
+01:17:17,500 --> 01:17:19,333
+ If you are able to follow the Kamba,
+
+297
+01:17:19,750 --> 01:17:23,550
+ either on Kamba.com or on the storyboard
+
+298
+01:17:23,550 --> 01:17:27,966
+ video that I gave you, by scene number,
+
+299
+01:17:27,966 --> 01:17:30,483
+ then you will be able to find it.
+
+300
+01:17:30,866 --> 01:17:36,816
+ So the thing is, the post-production team
+
+301
+01:17:36,816 --> 01:17:45,533
+ has S5, S6, all of
+
+302
+01:17:45,533 --> 01:17:47,066
+ them next to each other.
+
+303
+01:17:47,833 --> 01:17:50,550
+ I tried to find it.
+
+304
+01:17:50,550 --> 01:17:51,149
+ I find it.
+
+305
+01:17:51,366 --> 01:17:53,883
+ I'm able to because I read these things
+
+306
+01:17:53,883 --> 01:17:57,550
+ and I put the audio under them, but not
+
+307
+01:17:57,550 --> 01:17:59,399
+ one-to-one, but very,
+
+308
+01:17:59,399 --> 01:18:00,933
+ very close to each other.
+
+309
+01:18:01,449 --> 01:18:03,266
+ There is a cut, there is a start.
+
+310
+01:18:03,583 --> 01:18:05,449
+ There is a cut, there is a start.
+
+311
+01:18:05,883 --> 01:18:07,633
+ There is a cut, there is a start.
+
+312
+01:18:07,633 --> 01:18:10,583
+ They are not 100%, but there
+
+313
+01:18:10,583 --> 01:18:11,783
+ is a cut, there is a start.
+
+314
+01:18:11,816 --> 01:18:15,983
+ So if I take it here and if I play it, I
+
+315
+01:18:15,983 --> 01:18:18,949
+ will be able to hear attack, we apply
+
+316
+01:18:18,949 --> 01:18:20,050
+ perturbation, we
+
+317
+01:18:20,050 --> 01:18:21,366
+ aren't changing the image.
+
+318
+01:18:21,683 --> 01:18:24,533
+ If I hit, I will play, I will hear
+
+319
+01:18:24,533 --> 01:18:26,616
+ visuals, adversarial
+
+320
+01:18:26,616 --> 01:18:28,766
+ samples, they are looking similar.
+
+321
+01:18:29,000 --> 01:18:31,083
+ I'm not going to talk like yourself.
+
+322
+01:18:31,449 --> 01:18:32,866
+ I will talk about one
+
+323
+01:18:32,866 --> 01:18:34,583
+ topic, then go to the other one.
+
+324
+01:18:34,966 --> 01:18:37,250
+ Please answer what is the issue here.
+
+325
+01:18:39,850 --> 01:18:40,666
+ How do you can get?
+
+326
+01:18:41,766 --> 01:18:42,449
+ Yeah, yeah.
+
+327
+01:18:43,000 --> 01:18:43,183
+ Yeah.
+
+328
+01:18:43,183 --> 01:18:43,350
+ Yeah.
+
+329
+01:18:43,350 --> 01:18:45,449
+ So this one, I got it that one.
+
+330
+01:18:45,449 --> 01:18:46,383
+ So we can understand it.
+
+331
+01:18:47,399 --> 01:18:50,066
+ So we can fix this one as you are giving
+
+332
+01:18:50,066 --> 01:18:52,250
+ the audio in that story about itself.
+
+333
+01:18:52,666 --> 01:18:54,666
+ So right now we have the problem is if
+
+334
+01:18:54,666 --> 01:18:57,483
+ you go to slide five, so the audio it is
+
+335
+01:18:57,483 --> 01:18:59,833
+ coming up to slide six, it is coming.
+
+336
+01:19:00,149 --> 01:19:01,066
+ Yeah, then cut it.
+
+337
+01:19:01,550 --> 01:19:02,133
+ Just go to.
+
+338
+01:19:02,533 --> 01:19:03,350
+ Then cut it.
+
+339
+01:19:03,350 --> 01:19:03,550
+ Yeah.
+
+340
+01:19:04,550 --> 01:19:05,616
+ I gave it to you.
+
+341
+01:19:06,149 --> 01:19:06,350
+ Yeah.
+
+342
+01:19:06,383 --> 01:19:06,899
+ Cut it then.
+
+343
+01:19:07,783 --> 01:19:10,466
+ I understand this talks on limitations on
+
+344
+01:19:10,466 --> 01:19:12,733
+ here and this talks on the environment.
+
+345
+01:19:13,050 --> 01:19:18,983
+ This is not a simple cut, but cut it.
+
+346
+01:19:19,266 --> 01:19:20,533
+ I put them over here.
+
+347
+01:19:21,133 --> 01:19:23,166
+ So when I say the environment, we have to
+
+348
+01:19:23,166 --> 01:19:25,766
+ decide you are going to see the images
+
+349
+01:19:25,766 --> 01:19:27,683
+ here and you are going to see
+
+350
+01:19:27,683 --> 01:19:30,399
+ the video and I can try you.
+
+351
+01:19:30,850 --> 01:19:31,033
+ Yeah.
+
+352
+01:19:31,266 --> 01:19:31,466
+ Yeah.
+
+353
+01:19:31,649 --> 01:19:32,933
+ After the slide five, we can make a cut
+
+354
+01:19:32,933 --> 01:19:34,566
+ and we can move the remaining part and
+
+355
+01:19:34,566 --> 01:19:35,983
+ from slide six, we can
+
+356
+01:19:35,983 --> 01:19:36,750
+ match the audio part.
+
+357
+01:19:36,783 --> 01:19:37,399
+ So that is fine.
+
+358
+01:19:37,899 --> 01:19:38,116
+ Yes.
+
+359
+01:19:38,399 --> 01:19:41,000
+ So I gave you again, I can I give you
+
+360
+01:19:41,000 --> 01:19:42,383
+ that and I can share that one.
+
+361
+01:19:42,616 --> 01:19:42,816
+ Yes.
+
+362
+01:19:43,083 --> 01:19:45,883
+ I gave you three, four things on here.
+
+363
+01:19:46,483 --> 01:19:48,766
+ First of all, the voiceover is a
+
+364
+01:19:48,766 --> 01:19:52,500
+ screenshot in an image, a video to place
+
+365
+01:19:52,500 --> 01:19:57,149
+ it over and also extra visuals for you to
+
+366
+01:19:57,149 --> 01:19:59,366
+ go ahead, download and
+
+367
+01:19:59,366 --> 01:20:01,350
+ make more sense out of it.
+
+368
+01:20:01,850 --> 01:20:04,666
+ So you will be able to say, okay, Rufat
+
+369
+01:20:04,666 --> 01:20:07,149
+ is talking about this and I
+
+370
+01:20:07,149 --> 01:20:08,666
+ know what he is talking about.
+
+371
+01:20:09,233 --> 01:20:11,683
+ Maybe I should show this image, show this
+
+372
+01:20:11,683 --> 01:20:14,750
+ one or show this video that you will be
+
+373
+01:20:14,750 --> 01:20:17,083
+ able to do either one of them.
+
+374
+01:20:17,399 --> 01:20:20,566
+ So is the point one clear or this is
+
+375
+01:20:20,566 --> 01:20:22,333
+ still too hard for you
+
+376
+01:20:22,333 --> 01:20:23,966
+ guys to map and take?
+
+377
+01:20:24,866 --> 01:20:26,866
+ See no, no, no, see, see, yeah.
+
+378
+01:20:27,449 --> 01:20:31,066
+ I think the audio part, Hari can fix but
+
+379
+01:20:31,066 --> 01:20:32,966
+ my concern is if you go to the slide one,
+
+380
+01:20:33,383 --> 01:20:34,683
+ I'll give you, I'll tell you the example
+
+381
+01:20:34,683 --> 01:20:35,666
+ of what I'm talking about.
+
+382
+01:20:35,966 --> 01:20:37,266
+ When I say things are not in syncy,
+
+383
+01:20:38,316 --> 01:20:39,366
+ whatever you're mentioning in the
+
+384
+01:20:39,366 --> 01:20:41,533
+ narration, right, it clearly does not
+
+385
+01:20:41,533 --> 01:20:42,783
+ discuss everything that is present.
+
+386
+01:20:42,816 --> 01:20:43,550
+ This isn't on the scale.
+
+387
+01:20:43,883 --> 01:20:44,083
+ Okay.
+
+388
+01:20:44,216 --> 01:20:44,716
+ Of course.
+
+389
+01:20:44,716 --> 01:20:44,983
+ Well, here you
+
+390
+01:20:44,983 --> 01:20:46,316
+ mentioned the objectives, right?
+
+391
+01:20:46,633 --> 01:20:47,133
+ Of course.
+
+392
+01:20:47,916 --> 01:20:48,366
+ Just give me a second.
+
+393
+01:20:48,383 --> 01:20:52,733
+ This is a moot board and a storyboard for
+
+394
+01:20:52,733 --> 01:20:55,983
+ you to show what is up, but
+
+395
+01:20:55,983 --> 01:20:58,683
+ I'm reading the posted notes.
+
+396
+01:20:59,566 --> 01:21:01,183
+ I read the posted notes.
+
+397
+01:21:01,833 --> 01:21:02,566
+ Wait, wait.
+
+398
+01:21:03,033 --> 01:21:06,266
+ I read the posted notes explaining what
+
+399
+01:21:06,266 --> 01:21:09,883
+ is here with a transition line.
+
+400
+01:21:10,383 --> 01:21:12,233
+ So there is always a flow.
+
+401
+01:21:12,783 --> 01:21:15,783
+ Which answers your second question?
+
+402
+01:21:18,933 --> 01:21:20,266
+ Okay, just give me a second.
+
+403
+01:21:20,266 --> 01:21:22,333
+ So over here, you're saying in the
+
+404
+01:21:22,333 --> 01:21:23,783
+ narration, you're saying welcome to the
+
+405
+01:21:23,783 --> 01:21:25,316
+ Evasion Attacks Lab.
+
+406
+01:21:25,500 --> 01:21:26,350
+ Today our objectives
+
+407
+01:21:26,350 --> 01:21:27,816
+ is simple but dangerous.
+
+408
+01:21:28,316 --> 01:21:30,166
+ We are going to break a production ready
+
+409
+01:21:30,166 --> 01:21:31,283
+ AI model using
+
+410
+01:21:31,283 --> 01:21:33,316
+ nothing but math and noise.
+
+411
+01:21:33,316 --> 01:21:35,033
+ So this is there in your voiceover.
+
+412
+01:21:35,533 --> 01:21:37,933
+ But over here on screen, I can say KR1
+
+413
+01:21:37,933 --> 01:21:41,433
+ reproducibility, then KR2.
+
+414
+01:21:41,466 --> 01:21:43,250
+ So this is code clarity.
+
+415
+01:21:43,633 --> 01:21:45,466
+ So these things are not mentioned.
+
+416
+01:21:46,166 --> 01:21:47,983
+ This is not mentioned or this is not
+
+417
+01:21:47,983 --> 01:21:49,316
+ talked about in the narration, the
+
+418
+01:21:49,316 --> 01:21:50,083
+ corresponding narration.
+
+419
+01:21:50,350 --> 01:21:53,050
+ So what we are going to do is, I'm
+
+420
+01:21:53,050 --> 01:21:55,366
+ telling you what we are going to do is
+
+421
+01:21:55,766 --> 01:21:58,966
+ show a big picture of your objective is
+
+422
+01:21:58,966 --> 01:22:00,149
+ simple and dangerous.
+
+423
+01:22:00,716 --> 01:22:03,283
+ Break your production ready model using
+
+424
+01:22:03,283 --> 01:22:04,966
+ nothing but math and noise.
+
+425
+01:22:05,183 --> 01:22:06,933
+ So that's my voiceover.
+
+426
+01:22:07,250 --> 01:22:09,000
+ I'm going to go ahead and
+
+427
+01:22:09,000 --> 01:22:10,500
+ do all these objectives.
+
+428
+01:22:11,000 --> 01:22:11,899
+ I'm not taking
+
+429
+01:22:11,899 --> 01:22:14,216
+ everything from this image.
+
+430
+01:22:14,633 --> 01:22:16,649
+ This image is a storyboard.
+
+431
+01:22:16,649 --> 01:22:19,433
+ You can use it, you might not use it.
+
+432
+01:22:20,283 --> 01:22:22,750
+ So this is a storyboard image.
+
+433
+01:22:23,183 --> 01:22:25,466
+ You can use the math and noise.
+
+434
+01:22:25,933 --> 01:22:29,283
+ You can use the Evasion Attack Labs as a
+
+435
+01:22:29,283 --> 01:22:31,033
+ big image that is coming
+
+436
+01:22:31,033 --> 01:22:33,733
+ on here, but not everything.
+
+437
+01:22:33,733 --> 01:22:35,649
+ You do not have to use everything.
+
+438
+01:22:35,866 --> 01:22:37,116
+ This is a storyboard.
+
+439
+01:22:38,933 --> 01:22:40,949
+ All of these images, it includes.
+
+440
+01:22:40,966 --> 01:22:43,366
+ Once I go here, our first
+
+441
+01:22:43,366 --> 01:22:44,883
+ key is the environmental.
+
+442
+01:22:45,350 --> 01:22:47,783
+ We will deploy a fully reproducible.
+
+443
+01:22:48,050 --> 01:22:51,666
+ Attackers Playbook repository for FGSM,
+
+444
+01:22:51,666 --> 01:22:53,283
+ which is the hello world.
+
+445
+01:22:53,633 --> 01:22:54,833
+ It says the hello world.
+
+446
+01:22:54,833 --> 01:22:56,483
+ This is not going to be used.
+
+447
+01:22:56,866 --> 01:22:58,433
+ What I'm doing is I
+
+448
+01:22:58,433 --> 01:23:00,683
+ created the flow first.
+
+449
+01:23:01,550 --> 01:23:04,616
+ My goal, Honuki, the main
+
+450
+01:23:04,616 --> 01:23:06,216
+ goal is creating the flow.
+
+451
+01:23:06,533 --> 01:23:08,850
+ I created objectives first.
+
+452
+01:23:09,750 --> 01:23:11,683
+ Then I created an environment.
+
+453
+01:23:12,266 --> 01:23:14,683
+ So the person has an environment.
+
+454
+01:23:15,250 --> 01:23:17,449
+ Then I created the user interfaces.
+
+455
+01:23:18,166 --> 01:23:21,083
+ Then I created all the formulas, all the
+
+456
+01:23:21,083 --> 01:23:23,149
+ steps that they are going to follow.
+
+457
+01:23:23,366 --> 01:23:25,116
+ Then I created all the
+
+458
+01:23:25,116 --> 01:23:26,550
+ symbols that are used.
+
+459
+01:23:26,550 --> 01:23:29,583
+ They are using AI to install the symbols.
+
+460
+01:23:29,983 --> 01:23:31,666
+ Then I showed them the errors.
+
+461
+01:23:31,666 --> 01:23:33,000
+ Then I showed them how
+
+462
+01:23:33,000 --> 01:23:34,399
+ they are going to test it.
+
+463
+01:23:34,399 --> 01:23:36,000
+ So there is two flows.
+
+464
+01:23:36,550 --> 01:23:40,050
+ There is one flow inside the narration.
+
+465
+01:23:40,866 --> 01:23:42,350
+ There is the second flow
+
+466
+01:23:42,350 --> 01:23:44,733
+ going through the one slide.
+
+467
+01:23:45,000 --> 01:23:45,649
+ There is the other slide
+
+468
+01:23:45,649 --> 01:23:48,000
+ and there is an overall flow.
+
+469
+01:23:48,366 --> 01:23:49,366
+ Yeah, that is understood.
+
+470
+01:23:50,683 --> 01:23:52,750
+ My concern is only...
+
+471
+01:23:53,716 --> 01:23:54,633
+ That are already
+
+472
+01:23:54,633 --> 01:23:56,633
+ being designed and placed.
+
+473
+01:23:58,433 --> 01:23:59,333
+ See, I understand.
+
+474
+01:23:59,333 --> 01:24:00,949
+ See, there are transitions
+
+475
+01:24:00,949 --> 01:24:02,500
+ from one slide to the other slide.
+
+476
+01:24:02,716 --> 01:24:03,616
+ That is completely there.
+
+477
+01:24:04,066 --> 01:24:05,316
+ I'm not denying that fact.
+
+478
+01:24:05,316 --> 01:24:08,833
+ My concern is like I already said, you
+
+479
+01:24:08,833 --> 01:24:09,899
+ have provided some images.
+
+480
+01:24:10,216 --> 01:24:12,216
+ So the video which I have received is the
+
+481
+01:24:12,216 --> 01:24:15,149
+ final produced video is the video that
+
+482
+01:24:15,149 --> 01:24:16,066
+ contains all these images
+
+483
+01:24:16,066 --> 01:24:17,350
+ along with the voiceover.
+
+484
+01:24:17,933 --> 01:24:19,783
+ And if we include all the information
+
+485
+01:24:19,783 --> 01:24:21,166
+ that you provided in the slides...
+
+486
+01:24:21,816 --> 01:24:22,633
+ Not all the information.
+
+487
+01:24:23,233 --> 01:24:24,983
+ No, no, no, no, no.
+
+488
+01:24:24,983 --> 01:24:26,383
+ I said you guys are going to
+
+489
+01:24:26,383 --> 01:24:27,949
+ do editing post-production.
+
+490
+01:24:28,533 --> 01:24:29,666
+ Not all of the information.
+
+491
+01:24:29,899 --> 01:24:30,500
+ You are not going to
+
+492
+01:24:30,500 --> 01:24:32,783
+ include this title all the time.
+
+493
+01:24:33,283 --> 01:24:34,149
+ You are not going to
+
+494
+01:24:34,149 --> 01:24:36,066
+ include this image all the time.
+
+495
+01:24:36,283 --> 01:24:38,116
+ You are not going to include this
+
+496
+01:24:38,116 --> 01:24:41,266
+ post-node scene number as an editor.
+
+497
+01:24:41,816 --> 01:24:43,399
+ But I can edit it with the
+
+498
+01:24:43,399 --> 01:24:45,449
+ footage that I have provided.
+
+499
+01:24:45,966 --> 01:24:46,899
+ You are going to listen.
+
+500
+01:24:47,333 --> 01:24:50,616
+ You are going to see and then edit
+
+501
+01:24:50,616 --> 01:24:52,783
+ something and create another...
+
+502
+01:24:52,933 --> 01:24:55,500
+ storyline which lines up with audience
+
+503
+01:24:55,500 --> 01:24:58,949
+ such as in here what I say for example
+
+504
+01:24:58,966 --> 01:25:01,649
+ macOS users you are going to show them
+
+505
+01:25:01,649 --> 01:25:04,583
+ MacBook and one M2 chips you are going to
+
+506
+01:25:04,583 --> 01:25:07,466
+ show and one M2 chips often facing
+
+507
+01:25:07,466 --> 01:25:10,233
+ TensorFlow capability you are going to
+
+508
+01:25:10,233 --> 01:25:13,133
+ show TensorFlow I am showing the download
+
+509
+01:25:13,133 --> 01:25:16,050
+ on here might not have the visual studio
+
+510
+01:25:16,050 --> 01:25:19,050
+ code this part is the visual studio code
+
+511
+01:25:19,050 --> 01:25:23,466
+ if you want I can also give those images
+
+512
+01:25:23,466 --> 01:25:27,333
+ on here but I understand that you guys
+
+513
+01:25:27,333 --> 01:25:31,483
+ find this am I correct that's the
+
+514
+01:25:31,483 --> 01:25:35,066
+ challenge basically Rifat that yeah so
+
+515
+01:25:35,066 --> 01:25:37,250
+ basically as in like you are the subject
+
+516
+01:25:37,250 --> 01:25:39,366
+ matter expert the way you know the
+
+517
+01:25:39,366 --> 01:25:43,283
+ content like it we won't be able to
+
+518
+01:25:43,283 --> 01:25:45,683
+ exactly pick up which ones which parts to
+
+519
+01:25:45,683 --> 01:25:48,733
+ use and which parts to not use like will
+
+520
+01:25:48,733 --> 01:25:50,500
+ it be very difficult for you to provide
+
+521
+01:25:50,500 --> 01:25:53,716
+ us the demo because that way we will we
+
+522
+01:25:53,716 --> 01:25:55,333
+ will be able to meet Korsera's
+
+523
+01:25:55,333 --> 01:25:58,216
+ expectation to to use demonstration
+
+524
+01:25:58,350 --> 01:26:02,000
+ instead of images and your work and our
+
+525
+01:26:02,000 --> 01:26:05,233
+ work also I didn't only put images hold
+
+526
+01:26:05,233 --> 01:26:08,550
+ on hold on we are mixing I also put the
+
+527
+01:26:08,550 --> 01:26:12,750
+ videos and I gave you 10 different videos
+
+528
+01:26:12,750 --> 01:26:17,233
+ on here with all the hand zones I gave
+
+529
+01:26:17,233 --> 01:26:19,816
+ you guys the screen captures and the
+
+530
+01:26:19,816 --> 01:26:23,033
+ videos the audience knows what they are
+
+531
+01:26:23,033 --> 01:26:25,766
+ going to do you guys have images sound
+
+532
+01:26:25,766 --> 01:26:31,466
+ videos and the flow on post-production go
+
+533
+01:26:31,466 --> 01:26:35,166
+ ahead sir we are facing the problem here
+
+534
+01:26:35,166 --> 01:26:37,283
+ so if we sound in some slides you have
+
+535
+01:26:37,283 --> 01:26:39,766
+ included images and the videos also so
+
+536
+01:26:39,766 --> 01:26:42,616
+ when it comes to for this audio first we
+
+537
+01:26:42,616 --> 01:26:44,449
+ have to show the image or first we have
+
+538
+01:26:44,449 --> 01:26:47,433
+ to show the video photos so that editors
+
+539
+01:26:47,433 --> 01:26:52,149
+ are facing the that issue so from exactly
+
+540
+01:26:52,149 --> 01:26:55,733
+ we have to show which one anyway first we
+
+541
+01:26:55,733 --> 01:26:56,666
+ have to show the video or
+
+542
+01:26:56,666 --> 01:26:57,733
+ first we have to show the image
+
+543
+01:26:57,816 --> 01:26:59,583
+ This was that doubt we are having.
+
+544
+01:27:00,216 --> 01:27:02,466
+ So do you guys want me to write to you
+
+545
+01:27:02,466 --> 01:27:06,666
+ guys a post-production plan on here, how
+
+546
+01:27:06,666 --> 01:27:08,649
+ you guys are going to edit it?
+
+547
+01:27:09,066 --> 01:27:11,566
+ No, no, that'll even, that'll add one
+
+548
+01:27:11,566 --> 01:27:14,500
+ more layer to, one more layer to the
+
+549
+01:27:14,500 --> 01:27:17,483
+ already, there are too many layers right
+
+550
+01:27:17,483 --> 01:27:19,050
+ now at this screen share.
+
+551
+01:27:19,533 --> 01:27:21,550
+ The best and the easiest and the most
+
+552
+01:27:21,550 --> 01:27:23,983
+ effective way would be, guys, please tell
+
+553
+01:27:23,983 --> 01:27:25,083
+ me if I'm wrong, if you
+
+554
+01:27:25,083 --> 01:27:26,333
+ record the demo for us.
+
+555
+01:27:27,466 --> 01:27:28,850
+ I recorded the demo.
+
+556
+01:27:28,850 --> 01:27:29,716
+ Exactly, of course I love the models.
+
+557
+01:27:29,716 --> 01:27:31,050
+ These are the recorded demos.
+
+558
+01:27:32,149 --> 01:27:34,183
+ These are the recorded demos I gave.
+
+559
+01:27:34,316 --> 01:27:34,949
+ Okay, the first.
+
+560
+01:27:35,766 --> 01:27:40,116
+ Tense screen capture videos and put them
+
+561
+01:27:40,116 --> 01:27:41,350
+ onto the mood board.
+
+562
+01:27:41,350 --> 01:27:44,649
+ But for us to be able to reach here, I'm
+
+563
+01:27:44,649 --> 01:27:46,816
+ talking beforehand, before
+
+564
+01:27:46,816 --> 01:27:48,866
+ this slide, it says environment.
+
+565
+01:27:49,266 --> 01:27:50,116
+ Let's talk about the
+
+566
+01:27:50,116 --> 01:27:51,716
+ environment to run these attacks.
+
+567
+01:27:52,283 --> 01:27:54,883
+ We need a setup that supports a Python
+
+568
+01:27:54,883 --> 01:27:57,083
+ library, such as TensorFlow image
+
+569
+01:27:57,083 --> 01:27:59,833
+ processing without crashing your laptop.
+
+570
+01:28:00,383 --> 01:28:01,616
+ But here is your constraint.
+
+571
+01:28:02,350 --> 01:28:04,733
+ I'm talking about this, showing them the
+
+572
+01:28:04,733 --> 01:28:08,033
+ TensorFlow install, then taking them to
+
+573
+01:28:08,033 --> 01:28:11,883
+ here, local setups, open face, hell-rung
+
+574
+01:28:11,883 --> 01:28:13,949
+ Python versions, missing libraries.
+
+575
+01:28:14,649 --> 01:28:16,649
+ I'm showing them the GitHub code space.
+
+576
+01:28:18,216 --> 01:28:19,983
+ Yeah, yeah, I referred, I'm asking so far
+
+577
+01:28:19,983 --> 01:28:22,216
+ this slide five, if we have to, for this
+
+578
+01:28:22,216 --> 01:28:23,633
+ audio, we have to
+
+579
+01:28:23,633 --> 01:28:25,250
+ show only the video part.
+
+580
+01:28:26,316 --> 01:28:27,783
+ No, video and image.
+
+581
+01:28:27,783 --> 01:28:28,649
+ You have two images also.
+
+582
+01:28:29,000 --> 01:28:30,183
+ No, no, video and image.
+
+583
+01:28:30,216 --> 01:28:31,183
+ So that also we have to show.
+
+584
+01:28:31,183 --> 01:28:32,083
+ We have to show the image.
+
+585
+01:28:32,116 --> 01:28:37,899
+ But is it so that when you are-- Only we
+
+586
+01:28:37,899 --> 01:28:38,949
+ are having the issue.
+
+587
+01:28:39,283 --> 01:28:40,949
+ So where exactly where we have to show
+
+588
+01:28:40,949 --> 01:28:41,866
+ the image and where we
+
+589
+01:28:41,866 --> 01:28:43,033
+ have to show the video.
+
+590
+01:28:43,033 --> 01:28:44,583
+ So that confusion we are having.
+
+591
+01:28:45,750 --> 01:28:49,616
+ If you guys want, I already gave you guys
+
+592
+01:28:49,616 --> 01:28:51,133
+ all the storyboards.
+
+593
+01:28:51,899 --> 01:28:55,533
+ I can also provide the edited version,
+
+594
+01:28:56,733 --> 01:28:59,816
+ post-production version of this video and
+
+595
+01:28:59,816 --> 01:29:02,233
+ show you guys how I edit it.
+
+596
+01:29:02,816 --> 01:29:04,449
+ I can also edit this and
+
+597
+01:29:04,449 --> 01:29:06,500
+ also write the post-production.
+
+598
+01:29:07,050 --> 01:29:09,033
+ Then you can take it and understand,
+
+599
+01:29:09,266 --> 01:29:11,783
+ okay, this is end-to-end where the image
+
+600
+01:29:11,783 --> 01:29:14,283
+ comes in, where the audio comes in.
+
+601
+01:29:14,283 --> 01:29:16,133
+ I can also do that in the
+
+602
+01:29:16,133 --> 01:29:18,550
+ post-production, but I will finish all
+
+603
+01:29:18,550 --> 01:29:19,816
+ the post-production edit.
+
+604
+01:29:22,633 --> 01:29:24,783
+ No, no, actually post-production, our
+
+605
+01:29:24,783 --> 01:29:26,566
+ team can handle, that's not a problem,
+
+606
+01:29:26,933 --> 01:29:29,183
+ but wouldn't it be easier for you to
+
+607
+01:29:29,183 --> 01:29:31,350
+ record the demo than to edit everything?
+
+608
+01:29:31,483 --> 01:29:34,683
+ Swati, I think the issue here is that the
+
+609
+01:29:34,683 --> 01:29:37,216
+ demo is recorded, like those videos that
+
+610
+01:29:37,216 --> 01:29:38,216
+ are embedded are the
+
+611
+01:29:38,216 --> 01:29:39,250
+ hands-on demo, right?
+
+612
+01:29:39,816 --> 01:29:41,899
+ Yes. That are there, that comes in parts.
+
+613
+01:29:42,383 --> 01:29:43,750
+ But there is a part of
+
+614
+01:29:43,750 --> 01:29:47,116
+ voiceover which needs to have
+
+615
+01:29:48,366 --> 01:29:51,000
+ our developed slides, like in the
+
+616
+01:29:51,000 --> 01:29:53,133
+ beginning, like we were talking about Mac
+
+617
+01:29:53,133 --> 01:29:55,583
+ and whatever, then we put up a Mac image
+
+618
+01:29:55,583 --> 01:29:57,683
+ or whatsoever, that part we have to do.
+
+619
+01:29:57,683 --> 01:30:00,183
+ And then for the current slide, there is
+
+620
+01:30:00,183 --> 01:30:02,233
+ a portion of the image that comes first,
+
+621
+01:30:02,466 --> 01:30:03,949
+ then the demo plays, the
+
+622
+01:30:03,949 --> 01:30:04,899
+ image that is attached.
+
+623
+01:30:05,533 --> 01:30:07,316
+ Rifat, am I right on this part?
+
+624
+01:30:08,333 --> 01:30:11,250
+ Yes, but what I'm thinking is right now,
+
+625
+01:30:11,566 --> 01:30:13,783
+ how they are looking at it is without
+
+626
+01:30:13,783 --> 01:30:17,483
+ putting the cognitive part, they just
+
+627
+01:30:17,483 --> 01:30:20,283
+ want to be able to, I also understand,
+
+628
+01:30:20,750 --> 01:30:21,933
+ this is an advanced
+
+629
+01:30:21,933 --> 01:30:24,166
+ course, not an easy course.
+
+630
+01:30:24,649 --> 01:30:27,949
+ So what I can do is, I can use the
+
+631
+01:30:27,949 --> 01:30:31,766
+ footages that I gave you guys, finish one
+
+632
+01:30:31,766 --> 01:30:33,833
+ video's edit, because there is going to
+
+633
+01:30:33,833 --> 01:30:37,866
+ be 10 modules, and show you guys the plan
+
+634
+01:30:37,866 --> 01:30:41,733
+ and how I edited it, and only use the
+
+635
+01:30:41,733 --> 01:30:44,933
+ files that I've given you guys, and also
+
+636
+01:30:44,933 --> 01:30:47,616
+ find MacBook images and do the
+
+637
+01:30:47,616 --> 01:30:51,716
+ placements, and it will be easier for you
+
+638
+01:30:51,716 --> 01:30:54,133
+ guys, which steps I have gone through,
+
+639
+01:30:54,133 --> 01:30:55,283
+ because there is
+
+640
+01:30:55,283 --> 01:30:56,899
+ three stages of the flow.
+
+641
+01:30:57,399 --> 01:31:00,149
+ One flow with the audio, one flow within
+
+642
+01:31:00,149 --> 01:31:04,233
+ all video structure, and one flow with
+
+643
+01:31:04,233 --> 01:31:07,183
+ the artifacts inside the scenes.
+
+644
+01:31:07,816 --> 01:31:10,083
+ I think what you guys are having an issue
+
+645
+01:31:10,083 --> 01:31:13,383
+ is, I did not include the artifacts
+
+646
+01:31:13,383 --> 01:31:15,233
+ inside the scenes flow.
+
+647
+01:31:15,533 --> 01:31:17,683
+ You guys are unable to place them.
+
+648
+01:31:17,966 --> 01:31:19,566
+ Did I understand it correctly?
+
+649
+01:31:19,966 --> 01:31:23,133
+ I gave you guys the title, I gave you
+
+650
+01:31:23,133 --> 01:31:25,783
+ guys the voiceover, I gave you guys the
+
+651
+01:31:25,783 --> 01:31:29,483
+ videos and the images, but I did not give
+
+652
+01:31:29,483 --> 01:31:31,266
+ you guys how it is flowing.
+
+653
+01:31:32,083 --> 01:31:34,933
+ So it is creating a hard time because you
+
+654
+01:31:34,933 --> 01:31:37,050
+ guys are not subject matter experts.
+
+655
+01:31:37,683 --> 01:31:40,833
+ Which one you guys are going to show and
+
+656
+01:31:40,833 --> 01:31:43,449
+ you guys are unable to make the decision
+
+657
+01:31:43,449 --> 01:31:46,233
+ on what to show, what not to show.
+
+658
+01:31:48,250 --> 01:31:50,033
+ Yeah, exactly that is the point.
+
+659
+01:31:50,716 --> 01:31:53,483
+ Now, even if you'll edit one video, when
+
+660
+01:31:53,483 --> 01:31:55,383
+ we come to the next one, how will we
+
+661
+01:31:55,383 --> 01:31:57,466
+ again understand what has to come with?
+
+662
+01:31:58,816 --> 01:31:59,949
+ So the question is how
+
+663
+01:31:59,949 --> 01:32:01,583
+ we as laymen understand.
+
+664
+01:32:02,583 --> 01:32:04,449
+ First of all, once I finish the editing
+
+665
+01:32:04,449 --> 01:32:07,250
+ of this video, I will have two things.
+
+666
+01:32:07,899 --> 01:32:09,149
+ One, editing plan.
+
+667
+01:32:09,683 --> 01:32:11,850
+ The second, an output that
+
+668
+01:32:11,850 --> 01:32:13,550
+ I like that you guys like.
+
+669
+01:32:13,550 --> 01:32:16,000
+ You guys can say, "I like this edit, I
+
+670
+01:32:16,000 --> 01:32:16,933
+ don't like this edit."
+
+671
+01:32:17,366 --> 01:32:20,233
+ But we will also edit the edit plan.
+
+672
+01:32:20,233 --> 01:32:22,949
+ Then you guys will say, "Okay, just give
+
+673
+01:32:22,949 --> 01:32:25,616
+ me the edit plan in the next videos and
+
+674
+01:32:25,616 --> 01:32:27,566
+ we will edit through this."
+
+675
+01:32:27,800 --> 01:32:31,250
+ That edit plan will include artifact by
+
+676
+01:32:31,250 --> 01:32:36,833
+ artifact, meaning this lower third will
+
+677
+01:32:36,833 --> 01:32:40,250
+ come, this image will come, this screen
+
+678
+01:32:40,250 --> 01:32:43,233
+ capture will come, and that output will
+
+679
+01:32:43,233 --> 01:32:46,583
+ be at the output video capture that you
+
+680
+01:32:46,583 --> 01:32:48,250
+ guys will be able to see.
+
+681
+01:32:48,250 --> 01:32:50,983
+ Two outputs, one final video output and
+
+682
+01:32:50,983 --> 01:32:54,033
+ then the planned video output.
+
+683
+01:32:54,550 --> 01:32:57,283
+ So all of them will be in one video.
+
+684
+01:32:58,366 --> 01:33:02,216
+ So, Rifat, then if that is the only
+
+685
+01:33:02,216 --> 01:33:05,233
+ solution, Hano, please correct me if I'm
+
+686
+01:33:05,233 --> 01:33:06,983
+ wrong and Sangya, please
+
+687
+01:33:06,983 --> 01:33:07,833
+ correct me if I'm wrong.
+
+688
+01:33:08,250 --> 01:33:10,216
+ So you don't have to edit exact thing,
+
+689
+01:33:10,466 --> 01:33:11,316
+ just give us a rough
+
+690
+01:33:11,316 --> 01:33:12,783
+ structure because I don't know.
+
+691
+01:33:12,816 --> 01:33:14,166
+ want you to put in a lot of effort
+
+692
+01:33:14,166 --> 01:33:15,116
+ because anyways we are
+
+693
+01:33:15,116 --> 01:33:16,133
+ going to redo it here.
+
+694
+01:33:16,566 --> 01:33:18,399
+ We have professional editors who do it.
+
+695
+01:33:18,783 --> 01:33:20,216
+ So just give us a rough structure in
+
+696
+01:33:20,216 --> 01:33:21,350
+ terms of so that it gives
+
+697
+01:33:21,350 --> 01:33:23,066
+ us clarity what comes where.
+
+698
+01:33:23,666 --> 01:33:24,949
+ I already gave the rough structure.
+
+699
+01:33:24,949 --> 01:33:25,883
+ In a video if you can
+
+700
+01:33:25,883 --> 01:33:26,966
+ give us the rough structure.
+
+701
+01:33:27,466 --> 01:33:29,216
+ I already gave the rough structure.
+
+702
+01:33:29,216 --> 01:33:31,550
+ But since it got very confusing since
+
+703
+01:33:31,550 --> 01:33:33,583
+ they were canvas lights there were a lot
+
+704
+01:33:33,583 --> 01:33:35,750
+ of confusion and mismatch of the audio.
+
+705
+01:33:36,500 --> 01:33:37,683
+ So if that only you
+
+706
+01:33:37,683 --> 01:33:38,716
+ can put it in a video.
+
+707
+01:33:38,716 --> 01:33:39,216
+ No what I will do is.
+
+708
+01:33:39,216 --> 01:33:40,766
+ Please correct me if I'm wrong.
+
+709
+01:33:40,766 --> 01:33:43,783
+ I will edit this on DaVinci Resolve and
+
+710
+01:33:43,783 --> 01:33:46,666
+ record myself while editing it.
+
+711
+01:33:47,433 --> 01:33:48,500
+ So you guys will be
+
+712
+01:33:48,500 --> 01:33:50,966
+ able to see how I edit it.
+
+713
+01:33:51,216 --> 01:33:52,933
+ How I do my selections.
+
+714
+01:33:53,500 --> 01:33:55,816
+ And to end with the plan.
+
+715
+01:33:56,399 --> 01:34:00,266
+ So I will be like the video production
+
+716
+01:34:00,266 --> 01:34:02,649
+ assistant on the editing side.
+
+717
+01:34:02,983 --> 01:34:03,899
+ So it will be easier.
+
+718
+01:34:04,949 --> 01:34:07,983
+ I think if we will see you like somewhere
+
+719
+01:34:07,983 --> 01:34:10,583
+ in the screen on the screen that will be
+
+720
+01:34:10,583 --> 01:34:12,550
+ a little problem because we would want to
+
+721
+01:34:12,550 --> 01:34:14,733
+ have the full HD version of it.
+
+722
+01:34:15,033 --> 01:34:15,750
+ No no I will give two of it.
+
+723
+01:34:15,750 --> 01:34:15,899
+ And then definitely we
+
+724
+01:34:15,899 --> 01:34:17,449
+ will find you that at our end.
+
+725
+01:34:17,449 --> 01:34:18,983
+ I will give one video
+
+726
+01:34:18,983 --> 01:34:22,316
+ output as the edited version.
+
+727
+01:34:22,866 --> 01:34:25,233
+ The second I will give you guys the plan.
+
+728
+01:34:25,616 --> 01:34:28,766
+ The third I will give you guys how I edit
+
+729
+01:34:28,766 --> 01:34:30,633
+ it on DaVinci Resolve.
+
+730
+01:34:33,550 --> 01:34:34,433
+ Is
+
+731
+01:34:37,066 --> 01:34:38,183
+ that all right?
+
+732
+01:34:38,500 --> 01:34:45,449
+ I think Swati is absolutely right.
+
+733
+01:34:45,449 --> 01:34:46,449
+ I think this is causing
+
+734
+01:34:46,449 --> 01:34:47,933
+ too much work for you for us.
+
+735
+01:34:48,716 --> 01:34:50,983
+ And if we calculate the time that we are
+
+736
+01:34:50,983 --> 01:34:54,533
+ taking for the review process itself it's
+
+737
+01:34:54,533 --> 01:34:56,466
+ adding to a lot of time for this course.
+
+738
+01:34:57,033 --> 01:34:59,233
+ So we want to simplify the process rather
+
+739
+01:34:59,233 --> 01:35:01,683
+ than you investing so much time into it.
+
+740
+01:35:02,050 --> 01:35:03,466
+ Because like you said time is money.
+
+741
+01:35:03,949 --> 01:35:05,783
+ Let's do it that way.
+
+742
+01:35:05,783 --> 01:35:07,883
+ So we don't want anybody to invest extra
+
+743
+01:35:07,883 --> 01:35:10,233
+ effort into you know editing then us
+
+744
+01:35:10,233 --> 01:35:12,566
+ viewing it and then going forward to it.
+
+745
+01:35:12,566 --> 01:35:13,149
+ Although that is the
+
+746
+01:35:13,149 --> 01:35:15,050
+ process of learning we'd say.
+
+747
+01:35:15,333 --> 01:35:17,783
+ But as a business model I would say.
+
+748
+01:35:17,816 --> 01:35:19,899
+ that we will have to be a little more
+
+749
+01:35:19,899 --> 01:35:21,899
+ conscious on the time that we're
+
+750
+01:35:21,899 --> 01:35:24,966
+ investing in one video
+
+751
+01:35:24,966 --> 01:35:27,066
+ production of only one screen share.
+
+752
+01:35:28,933 --> 01:35:32,566
+ If the easy way out, if it could be, was
+
+753
+01:35:32,566 --> 01:35:36,500
+ that while, that is my idea of it.
+
+754
+01:35:36,500 --> 01:35:39,399
+ Can you just put, like you put it on the
+
+755
+01:35:39,399 --> 01:35:42,566
+ Canva board, you put every, this thing,
+
+756
+01:35:42,566 --> 01:35:45,116
+ every line of your script and then given
+
+757
+01:35:45,116 --> 01:35:46,966
+ us a video and a photo.
+
+758
+01:35:47,633 --> 01:35:49,250
+ And it's all on one Canva.
+
+759
+01:35:49,250 --> 01:35:50,966
+ So that is what is getting us confused.
+
+760
+01:35:51,366 --> 01:35:52,466
+ I already gave my cover.
+
+761
+01:35:52,466 --> 01:35:53,633
+ So rather than that, can you?
+
+762
+01:35:53,949 --> 01:35:57,566
+ I already gave my cover and voiceover or
+
+763
+01:35:57,566 --> 01:36:00,050
+ post it lost with scene IDs.
+
+764
+01:36:00,466 --> 01:36:02,283
+ And the audio is very
+
+765
+01:36:02,283 --> 01:36:03,533
+ close to the scenes.
+
+766
+01:36:06,250 --> 01:36:08,583
+ So like in one of the, one slide, there
+
+767
+01:36:08,583 --> 01:36:10,483
+ is an audio, there is an image and
+
+768
+01:36:10,483 --> 01:36:12,000
+ there's a voiceover and then there's a
+
+769
+01:36:12,000 --> 01:36:13,066
+ script part of it, right?
+
+770
+01:36:13,566 --> 01:36:15,366
+ Now all of that, where to
+
+771
+01:36:15,366 --> 01:36:16,966
+ put what is the question here?
+
+772
+01:36:17,833 --> 01:36:19,266
+ So to simplify that,
+
+773
+01:36:19,483 --> 01:36:21,050
+ can we have a simple,
+
+774
+01:36:22,866 --> 01:36:27,033
+ breakdown of the sentence that you're
+
+775
+01:36:27,033 --> 01:36:28,233
+ speaking and what image you
+
+776
+01:36:28,233 --> 01:36:30,850
+ want to get in front of it?
+
+777
+01:36:31,133 --> 01:36:31,716
+ Just that much.
+
+778
+01:36:31,716 --> 01:36:32,750
+ All right, you guys want the plan.
+
+779
+01:36:32,899 --> 01:36:33,583
+ With this sentence, you
+
+780
+01:36:33,583 --> 01:36:34,750
+ want this video to come in.
+
+781
+01:36:34,866 --> 01:36:37,766
+ I will create the post production plan.
+
+782
+01:36:38,500 --> 01:36:40,133
+ That post production plan is,
+
+783
+01:36:40,383 --> 01:36:41,733
+ I have done it multiple times.
+
+784
+01:36:42,133 --> 01:36:43,133
+ I will give you guys
+
+785
+01:36:43,133 --> 01:36:44,466
+ the post production plan.
+
+786
+01:36:47,783 --> 01:36:50,983
+ Where image, when the audio comes in, I
+
+787
+01:36:50,983 --> 01:36:52,066
+ will give you guys the
+
+788
+01:36:52,066 --> 01:36:53,083
+ post production plan.
+
+789
+01:36:53,333 --> 01:36:56,366
+ It's not very, very hard because I have
+
+790
+01:36:56,366 --> 01:36:57,716
+ the video, I have the audio.
+
+791
+01:36:58,233 --> 01:37:00,449
+ I will go to chat GPT, create me a post
+
+792
+01:37:00,449 --> 01:37:03,133
+ production plan and put it there so you
+
+793
+01:37:03,133 --> 01:37:06,366
+ guys will be able to use the AI and see
+
+794
+01:37:06,366 --> 01:37:08,750
+ there's a post production plan and the
+
+795
+01:37:08,750 --> 01:37:11,449
+ post production plan will include all the
+
+796
+01:37:11,449 --> 01:37:13,149
+ images, audio that
+
+797
+01:37:13,149 --> 01:37:14,816
+ should be displayed on here.
+
+798
+01:37:14,816 --> 01:37:16,266
+ I can definitely give that, yes.
+
+799
+01:37:17,216 --> 01:37:19,266
+ And it will not take too much of my time.
+
+800
+01:37:19,766 --> 01:37:21,133
+ And I will use the AI to
+
+801
+01:37:21,133 --> 01:37:22,783
+ create the post production.
+
+802
+01:37:22,866 --> 01:37:25,750
+ plan with the existing stuff that we
+
+803
+01:37:25,750 --> 01:37:27,683
+ already have on the scene.
+
+804
+01:37:31,566 --> 01:37:32,983
+ Okay, I just have one.
+
+805
+01:37:33,500 --> 01:37:36,066
+ Yeah, I'll just tell one more thing.
+
+806
+01:37:36,066 --> 01:37:37,866
+ See the thing over here is like if you're
+
+807
+01:37:37,866 --> 01:37:40,666
+ switching in between a lot of images, a
+
+808
+01:37:40,666 --> 01:37:41,866
+ lot of videos in between.
+
+809
+01:37:41,866 --> 01:37:43,216
+ So I see that the
+
+810
+01:37:43,216 --> 01:37:45,233
+ voiceover is not very long.
+
+811
+01:37:45,233 --> 01:37:45,550
+ All right.
+
+812
+01:37:45,550 --> 01:37:47,783
+ The corresponding narration, it's hardly
+
+813
+01:37:47,783 --> 01:37:49,483
+ of two, three lines or so.
+
+814
+01:37:50,050 --> 01:37:51,666
+ Okay, so there is not
+
+815
+01:37:51,666 --> 01:37:53,133
+ enough settlement time.
+
+816
+01:37:54,666 --> 01:37:55,850
+ Just give me a second.
+
+817
+01:37:55,850 --> 01:37:57,683
+ So there is not enough settlement time
+
+818
+01:37:57,683 --> 01:37:59,533
+ for the learner to kind of comprehend of
+
+819
+01:37:59,533 --> 01:38:00,616
+ what comes on the screen.
+
+820
+01:38:01,083 --> 01:38:02,350
+ Like I see there are a
+
+821
+01:38:02,350 --> 01:38:03,766
+ lot of code snippets, right?
+
+822
+01:38:04,250 --> 01:38:05,833
+ So there are a lot of codes involved.
+
+823
+01:38:06,083 --> 01:38:07,966
+ Like if you say that, okay, for visual
+
+824
+01:38:07,966 --> 01:38:08,833
+ studio code, we're
+
+825
+01:38:08,833 --> 01:38:09,983
+ going to show this image.
+
+826
+01:38:10,500 --> 01:38:10,899
+ All right.
+
+827
+01:38:10,899 --> 01:38:11,883
+ So there are a lot of
+
+828
+01:38:11,883 --> 01:38:13,050
+ codes involved in that.
+
+829
+01:38:14,083 --> 01:38:16,250
+ So it would just come and go.
+
+830
+01:38:16,250 --> 01:38:17,716
+ It would not add any learning
+
+831
+01:38:17,716 --> 01:38:18,966
+ value for the learner, right?
+
+832
+01:38:19,333 --> 01:38:21,316
+ So there is not enough time that we are
+
+833
+01:38:21,316 --> 01:38:22,966
+ spending on that image, the different
+
+834
+01:38:22,966 --> 01:38:24,366
+ codes that are written in that.
+
+835
+01:38:24,850 --> 01:38:26,899
+ Like so, like it's very difficult from a
+
+836
+01:38:26,899 --> 01:38:28,166
+ learner's perspective to kind of
+
+837
+01:38:28,166 --> 01:38:30,433
+ understand what is written in that.
+
+838
+01:38:30,666 --> 01:38:31,183
+ Hold on, hold on, hold on.
+
+839
+01:38:31,183 --> 01:38:32,366
+ So that is what I meant
+
+840
+01:38:32,366 --> 01:38:33,716
+ when things are not in secret.
+
+841
+01:38:33,983 --> 01:38:34,750
+ Hold on, okay.
+
+842
+01:38:35,133 --> 01:38:35,733
+ Don't forget.
+
+843
+01:38:36,050 --> 01:38:40,233
+ This is, I compressed this video from,
+
+844
+01:38:41,683 --> 01:38:44,466
+ this is right now at six, seven minutes,
+
+845
+01:38:44,750 --> 01:38:45,983
+ once it's all edited
+
+846
+01:38:45,983 --> 01:38:48,449
+ out, the, what's her name?
+
+847
+01:38:49,000 --> 01:38:51,216
+ The mom met once only three minutes.
+
+848
+01:38:51,766 --> 01:38:54,583
+ This is an advanced course because we are
+
+849
+01:38:54,583 --> 01:38:56,033
+ going to create 10 of them.
+
+850
+01:38:57,366 --> 01:38:58,666
+ We are compressing them.
+
+851
+01:38:59,350 --> 01:39:01,366
+ In the future, I will
+
+852
+01:39:01,366 --> 01:39:03,083
+ even compress it further.
+
+853
+01:39:03,683 --> 01:39:06,166
+ There is right now 40 scenes.
+
+854
+01:39:06,683 --> 01:39:08,233
+ In my future ones, I will
+
+855
+01:39:08,233 --> 01:39:10,983
+ only create 10 scenes, not 40.
+
+856
+01:39:11,850 --> 01:39:14,633
+ This is an advanced level course, but we
+
+857
+01:39:14,633 --> 01:39:17,133
+ are trying to fit into 60 minute
+
+858
+01:39:17,133 --> 01:39:19,316
+ timeline, not six hours timeline.
+
+859
+01:39:20,966 --> 01:39:23,899
+ Do you understand what I mean?
+
+860
+01:39:23,899 --> 01:39:25,683
+ Yeah, so that is what, so
+
+861
+01:39:25,683 --> 01:39:27,183
+ I completely understand.
+
+862
+01:39:27,933 --> 01:39:29,583
+ trying to go fast.
+
+863
+01:39:30,399 --> 01:39:32,866
+ If I shoot this in one go,
+
+864
+01:39:33,383 --> 01:39:35,233
+ it will cost it one hour.
+
+865
+01:39:35,533 --> 01:39:36,833
+ Then the mom mate will say
+
+866
+01:39:36,833 --> 01:39:38,899
+ one video capture one hour.
+
+867
+01:39:39,116 --> 01:39:39,899
+ What are you doing?
+
+868
+01:39:43,050 --> 01:39:43,466
+ Do you understand?
+
+869
+01:39:44,583 --> 01:39:45,550
+ Maybe what we can.
+
+870
+01:39:46,183 --> 01:39:46,783
+ Yeah, I understand.
+
+871
+01:39:47,000 --> 01:39:48,183
+ See, like I'll tell you.
+
+872
+01:39:48,183 --> 01:39:49,733
+ So if you go to them up,
+
+873
+01:39:51,533 --> 01:39:55,383
+ don't forget I speeded up these voice
+
+874
+01:39:55,383 --> 01:39:58,166
+ captures, the screen captures.
+
+875
+01:39:58,666 --> 01:40:00,750
+ They are in 3x, 4x.
+
+876
+01:40:01,500 --> 01:40:04,316
+ Don't forget such as once I go to these
+
+877
+01:40:04,316 --> 01:40:06,766
+ videos, if you play them, you are going
+
+878
+01:40:06,766 --> 01:40:09,550
+ to realize these are running very, very
+
+879
+01:40:09,550 --> 01:40:10,949
+ fast and down below.
+
+880
+01:40:10,949 --> 01:40:12,449
+ If we can't hear you, you're on mute.
+
+881
+01:40:13,050 --> 01:40:17,266
+ Once if you look at these screen
+
+882
+01:40:17,266 --> 01:40:20,633
+ captures, these are in 4x, 3x.
+
+883
+01:40:20,949 --> 01:40:23,683
+ These ones are also going very fast.
+
+884
+01:40:24,066 --> 01:40:26,550
+ Let's just take this as an example.
+
+885
+01:40:26,850 --> 01:40:29,133
+ So let's see the voice over corresponding
+
+886
+01:40:29,250 --> 01:40:30,449
+ to this particular screen.
+
+887
+01:40:30,449 --> 01:40:32,333
+ Let's just review this slide.
+
+888
+01:40:32,666 --> 01:40:34,466
+ I'll tell my observations on this.
+
+889
+01:40:34,833 --> 01:40:36,750
+ Okay, you are saying you could start.
+
+890
+01:40:37,500 --> 01:40:38,383
+ What's the voice over?
+
+891
+01:40:38,816 --> 01:40:43,116
+ It's right up on Python 3 and the
+
+892
+01:40:43,116 --> 01:40:46,500
+ connection status and we are live.
+
+893
+01:40:47,166 --> 01:40:47,899
+ Time to run it.
+
+894
+01:40:48,166 --> 01:40:50,850
+ I'm running it in the background and at
+
+895
+01:40:50,850 --> 01:40:53,716
+ the end I'm going to see the Python 3
+
+896
+01:40:53,716 --> 01:40:55,483
+ online that comes on here.
+
+897
+01:40:56,333 --> 01:40:58,616
+ First of all, we asked the AI, artificial
+
+898
+01:40:58,616 --> 01:41:01,149
+ intelligence, for us to run it.
+
+899
+01:41:01,433 --> 01:41:03,933
+ This is the first thing that comes on.
+
+900
+01:41:03,933 --> 01:41:05,500
+ Then there is this video
+
+901
+01:41:05,500 --> 01:41:07,566
+ that shows Python that runs.
+
+902
+01:41:08,166 --> 01:41:10,316
+ This is the start and this is the end.
+
+903
+01:41:12,166 --> 01:41:14,866
+ And okay, so this is of how much time?
+
+904
+01:41:15,283 --> 01:41:16,166
+ This screen share, this
+
+905
+01:41:16,166 --> 01:41:17,083
+ is of how much duration?
+
+906
+01:41:18,050 --> 01:41:21,983
+ Now see this screen share,
+
+907
+01:41:22,233 --> 01:41:23,083
+ this is of how many seconds?
+
+908
+01:41:23,966 --> 01:41:25,949
+ 16 seconds, 16.7.
+
+909
+01:41:26,366 --> 01:41:26,899
+ This is of screen.
+
+910
+01:41:27,716 --> 01:41:30,500
+ And see the voice over is not enough.
+
+911
+01:41:30,766 --> 01:41:32,783
+ There is a 16 seconds of
+
+912
+01:41:32,983 --> 01:41:35,883
+ and then like you're saying and and and
+
+913
+01:41:35,883 --> 01:41:38,566
+ it's very like if you could pull up the
+
+914
+01:41:38,566 --> 01:41:40,783
+ voiceover corresponding to this which
+
+915
+01:41:40,783 --> 01:41:41,983
+ which you have written.
+
+916
+01:41:44,033 --> 01:41:46,316
+ See your journalist connected your right
+
+917
+01:41:46,316 --> 01:41:48,866
+ up you will be able to see the Python 3
+
+918
+01:41:48,866 --> 01:41:53,166
+ server ensure your kernel is yes and this
+
+919
+01:41:53,166 --> 01:41:55,733
+ is where we show it.
+
+920
+01:41:55,733 --> 01:41:58,399
+ This is going to be shown at the start we
+
+921
+01:41:58,399 --> 01:42:00,633
+ run this you're saying in the top right
+
+922
+01:42:00,633 --> 01:42:02,783
+ in the top right you should see Python
+
+923
+01:42:02,783 --> 01:42:04,933
+ where can I see it on the top right?
+
+924
+01:42:05,666 --> 01:42:07,383
+ It should be here on the point.
+
+925
+01:42:18,433 --> 01:42:19,566
+ Python running here.
+
+926
+01:42:23,283 --> 01:42:25,666
+ It says running type, right corner.
+
+927
+01:42:26,449 --> 01:42:27,116
+ It's on the left.
+
+928
+01:42:27,466 --> 01:42:28,933
+ So left.
+
+929
+01:42:30,283 --> 01:42:33,050
+ OK, so the voiceover says see so see like
+
+930
+01:42:33,050 --> 01:42:34,933
+ like we're just reviewing one slide.
+
+931
+01:42:35,166 --> 01:42:36,966
+ So this is what so then the voiceover
+
+932
+01:42:36,966 --> 01:42:39,350
+ says like as editors they do not know
+
+933
+01:42:39,350 --> 01:42:40,283
+ where actually the
+
+934
+01:42:40,283 --> 01:42:41,383
+ Python program is running.
+
+935
+01:42:41,883 --> 01:42:43,500
+ So the voiceover says the learner would
+
+936
+01:42:43,500 --> 01:42:45,666
+ be looking for where the Python program
+
+937
+01:42:45,666 --> 01:42:47,066
+ is running because the narration says
+
+938
+01:42:47,066 --> 01:42:49,000
+ that on the type top right corner there
+
+939
+01:42:49,000 --> 01:42:50,250
+ is this Python 3 running
+
+940
+01:42:50,250 --> 01:42:51,550
+ like they would not be.
+
+941
+01:42:51,550 --> 01:42:52,633
+ I'm just saying from a.
+
+942
+01:42:56,649 --> 01:42:59,233
+ Editor's job is to
+
+943
+01:42:59,233 --> 01:43:01,783
+ make sure this is usable.
+
+944
+01:43:03,333 --> 01:43:06,483
+ Yes, I understand that editor's job is
+
+945
+01:43:06,483 --> 01:43:10,350
+ thinking and making the best out of it.
+
+946
+01:43:11,050 --> 01:43:12,316
+ Sometimes I read the same
+
+947
+01:43:12,316 --> 01:43:14,383
+ sentence multiple times.
+
+948
+01:43:14,866 --> 01:43:17,750
+ Editor's job is cut the ones that are not
+
+949
+01:43:17,750 --> 01:43:20,583
+ going to get used and only use the one
+
+950
+01:43:20,583 --> 01:43:22,183
+ that is going to be used.
+
+951
+01:43:22,566 --> 01:43:24,500
+ But these are very technical.
+
+952
+01:43:25,166 --> 01:43:26,633
+ They can understand like
+
+953
+01:43:26,633 --> 01:43:29,883
+ what what is that we want to.
+
+954
+01:43:30,133 --> 01:43:31,866
+ There are multiple things on the We want
+
+955
+01:43:31,866 --> 01:43:32,866
+ to have your expertise.
+
+956
+01:43:34,550 --> 01:43:37,216
+ So we delete the right.
+
+957
+01:43:37,833 --> 01:43:40,449
+ Well, but they won't be able to...
+
+958
+01:43:40,933 --> 01:43:42,333
+ No, no, that is easy or post-production.
+
+959
+01:43:42,333 --> 01:43:43,050
+ What if something is deleted which is
+
+960
+01:43:43,050 --> 01:43:44,250
+ very crucial as per you?
+
+961
+01:43:44,766 --> 01:43:46,649
+ That is easy or post-production.
+
+962
+01:43:47,583 --> 01:43:48,983
+ Delete the right keyword,
+
+963
+01:43:50,050 --> 01:43:51,633
+ only use the top keyword.
+
+964
+01:43:51,949 --> 01:43:52,666
+ It is easy.
+
+965
+01:43:53,383 --> 01:43:54,483
+ You use your mind.
+
+966
+01:43:54,483 --> 01:43:55,899
+ But they are not...
+
+967
+01:43:56,883 --> 01:43:59,833
+ My post-production team is not refered.
+
+968
+01:44:00,566 --> 01:44:02,166
+ They are not away from you.
+
+969
+01:44:02,633 --> 01:44:03,433
+ So they won't be able
+
+970
+01:44:03,433 --> 01:44:04,816
+ to know what to delete.
+
+971
+01:44:04,816 --> 01:44:06,283
+ That is the struggle that we are facing.
+
+972
+01:44:07,616 --> 01:44:09,766
+ I think we need to have you on a call
+
+973
+01:44:09,766 --> 01:44:11,166
+ while we are editing.
+
+974
+01:44:11,166 --> 01:44:12,466
+ You know, like what can we take?
+
+975
+01:44:12,850 --> 01:44:14,633
+ Yes, let's edit together.
+
+976
+01:44:15,483 --> 01:44:15,683
+ Okay.
+
+977
+01:44:16,250 --> 01:44:18,449
+ Hanoi, I will connect to you.
+
+978
+01:44:18,933 --> 01:44:20,233
+ We can edit together.
+
+979
+01:44:20,233 --> 01:44:21,083
+ That's also fine.
+
+980
+01:44:21,983 --> 01:44:22,949
+ I can help you edit.
+
+981
+01:44:23,149 --> 01:44:24,183
+ I do not do editing.
+
+982
+01:44:24,449 --> 01:44:26,266
+ Like I just reviewed the final video.
+
+983
+01:44:27,083 --> 01:44:28,783
+ I just reviewed the final video.
+
+984
+01:44:28,783 --> 01:44:31,166
+ So I'm not part of editing, no?
+
+985
+01:44:31,399 --> 01:44:33,133
+ So I'm not involved in that process.
+
+986
+01:44:33,883 --> 01:44:35,500
+ I get the final video for reviewing.
+
+987
+01:44:35,966 --> 01:44:37,666
+ Okay, one last thing, one more thing.
+
+988
+01:44:37,666 --> 01:44:39,866
+ So there is one more line which you said,
+
+989
+01:44:40,183 --> 01:44:42,433
+ "ensure the kernel is connected," right?
+
+990
+01:44:42,933 --> 01:44:44,316
+ So for that, you're saying
+
+991
+01:44:44,316 --> 01:44:46,433
+ there is a 16 seconds of demo.
+
+992
+01:44:47,833 --> 01:44:50,149
+ Now, where is that process?
+
+993
+01:44:50,483 --> 01:44:52,116
+ Like how would the learner ensure?
+
+994
+01:44:53,033 --> 01:44:54,316
+ But you're actually showing...
+
+995
+01:44:54,816 --> 01:44:56,366
+ So I think the narration
+
+996
+01:44:56,366 --> 01:44:57,850
+ should be in a different way.
+
+997
+01:44:58,966 --> 01:45:01,000
+ Maybe see, this is how you
+
+998
+01:45:01,000 --> 01:45:02,616
+ would have to connect the kernel.
+
+999
+01:45:03,133 --> 01:45:05,449
+ You have that 16 seconds of demo.
+
+1000
+01:45:05,833 --> 01:45:06,933
+ Correct me if I'm right or wrong.
+
+1001
+01:45:07,183 --> 01:45:09,000
+ Because see, it's very difficult for the
+
+1002
+01:45:09,000 --> 01:45:10,949
+ learner to comprehend like how are they
+
+1003
+01:45:10,949 --> 01:45:12,000
+ actually connecting the
+
+1004
+01:45:12,000 --> 01:45:14,183
+ kernel, how they should ensure it.
+
+1005
+01:45:14,783 --> 01:45:16,616
+ Unless and until if you have shown it and
+
+1006
+01:45:16,616 --> 01:45:18,750
+ there is a corresponding voiceover to
+
+1007
+01:45:18,750 --> 01:45:19,766
+ that, they will not
+
+1008
+01:45:19,766 --> 01:45:20,666
+ be able to understand.
+
+1009
+01:45:20,899 --> 01:45:21,883
+ So that is what I'm saying.
+
+1010
+01:45:22,466 --> 01:45:22,750
+ So I...
+
+1011
+01:45:23,166 --> 01:45:23,983
+ So this is good though.
+
+1012
+01:45:24,466 --> 01:45:27,816
+ But I will do, if I was your position, I
+
+1013
+01:45:27,816 --> 01:45:30,750
+ will create a three second animation and
+
+1014
+01:45:30,750 --> 01:45:34,666
+ put a kernel connected message on top and
+
+1015
+01:45:34,666 --> 01:45:36,833
+ give it and amplify it.
+
+1016
+01:45:37,083 --> 01:45:39,083
+ So they understand that the kernel
+
+1017
+01:45:39,083 --> 01:45:41,733
+ connection is very, very important.
+
+1018
+01:45:47,149 --> 01:45:48,399
+ Did you hear me?
+
+1019
+01:45:50,750 --> 01:45:51,966
+ Yeah, I heard you.
+
+1020
+01:45:53,100 --> 01:45:54,316
+ Yes, so that's why
+
+1021
+01:45:54,316 --> 01:45:55,516
+ people use the animation.
+
+1022
+01:45:56,333 --> 01:45:58,083
+ But we have a limited budget.
+
+1023
+01:45:58,800 --> 01:46:01,416
+ We have limited time because we cannot
+
+1024
+01:46:01,416 --> 01:46:02,833
+ shoot this for one hour.
+
+1025
+01:46:03,033 --> 01:46:03,899
+ It's a screen capture.
+
+1026
+01:46:04,233 --> 01:46:05,066
+ That's our constraint.
+
+1027
+01:46:05,649 --> 01:46:07,116
+ But we need to have a
+
+1028
+01:46:07,116 --> 01:46:09,366
+ structure that creates this.
+
+1029
+01:46:09,883 --> 01:46:12,800
+ We need to have screen captures and we
+
+1030
+01:46:12,800 --> 01:46:13,583
+ have 10 different
+
+1031
+01:46:13,583 --> 01:46:15,083
+ tools that goes in and out.
+
+1032
+01:46:15,100 --> 01:46:19,333
+ So we use the post-production magic to be
+
+1033
+01:46:19,333 --> 01:46:20,649
+ able to make this work.
+
+1034
+01:46:21,199 --> 01:46:22,333
+ That is the whole game.
+
+1035
+01:46:22,883 --> 01:46:24,716
+ The whole game is we use the
+
+1036
+01:46:24,716 --> 01:46:27,333
+ post-production magic, use the production
+
+1037
+01:46:27,333 --> 01:46:30,783
+ data, stitch it together so the learner
+
+1038
+01:46:30,783 --> 01:46:31,899
+ can understand this.
+
+1039
+01:46:32,300 --> 01:46:34,533
+ I'm not saying the post-production team
+
+1040
+01:46:34,533 --> 01:46:36,533
+ is not telling a story line.
+
+1041
+01:46:36,833 --> 01:46:39,083
+ They are also telling another story line.
+
+1042
+01:46:39,083 --> 01:46:41,633
+ Everybody is telling a story line, but I
+
+1043
+01:46:41,633 --> 01:46:42,816
+ understand you are
+
+1044
+01:46:42,816 --> 01:46:44,083
+ having a hard time doing this.
+
+1045
+01:46:44,100 --> 01:46:46,633
+ I will give you a post-production plan.
+
+1046
+01:46:47,116 --> 01:46:50,116
+ I will produce one and I will record my
+
+1047
+01:46:50,116 --> 01:46:52,383
+ video production steps.
+
+1048
+01:46:52,716 --> 01:46:55,416
+ Then I guess in the post-production plan,
+
+1049
+01:46:55,416 --> 01:46:57,383
+ you will have everything.
+
+1050
+01:46:58,083 --> 01:47:00,833
+ If you are saying, "Rofat, you gave me
+
+1051
+01:47:00,833 --> 01:47:02,066
+ the post-production plan."
+
+1052
+01:47:02,433 --> 01:47:05,100
+ You produced it, but it doesn't work out
+
+1053
+01:47:05,100 --> 01:47:07,033
+ in a way that I expect.
+
+1054
+01:47:07,033 --> 01:47:08,083
+ And it is still not
+
+1055
+01:47:08,083 --> 01:47:10,783
+ understandable by the end users.
+
+1056
+01:47:11,433 --> 01:47:14,783
+ I will fix it again and we will have a
+
+1057
+01:47:14,783 --> 01:47:17,300
+ post-production plan ready for you.
+
+1058
+01:47:17,300 --> 01:47:20,149
+ So it is easier for you to edit this.
+
+1059
+01:47:20,883 --> 01:47:23,183
+ This is where I am at right now from this
+
+1060
+01:47:23,183 --> 01:47:25,100
+ output for this video.
+
+1061
+01:47:25,416 --> 01:47:27,649
+ And I wanted to have this call multiple
+
+1062
+01:47:27,649 --> 01:47:30,750
+ times at MAMet because I understood that
+
+1063
+01:47:30,750 --> 01:47:32,899
+ you guys might have a hard time.
+
+1064
+01:47:33,100 --> 01:47:35,683
+ And I want to help you guys out to make
+
+1065
+01:47:35,683 --> 01:47:38,083
+ sure we are going to do 10 videos like
+
+1066
+01:47:38,083 --> 01:47:40,866
+ this on this advanced level course.
+
+1067
+01:47:41,399 --> 01:47:44,866
+ And this course is going to be taken by
+
+1068
+01:47:44,866 --> 01:47:47,000
+ the audience of OpenAI.
+
+1069
+01:47:47,933 --> 01:47:49,616
+ Invidia the people who write the
+
+1070
+01:47:49,616 --> 01:47:53,266
+ artificial intelligence chips and the
+
+1071
+01:47:53,266 --> 01:47:56,083
+ large language models these Discourses
+
+1072
+01:47:56,083 --> 01:47:59,183
+ for them this course is not for a Python
+
+1073
+01:47:59,183 --> 01:48:01,449
+ developer that will come in and write
+
+1074
+01:48:01,449 --> 01:48:04,149
+ Python We understand this course is how
+
+1075
+01:48:04,149 --> 01:48:06,616
+ they are going to secure those models
+
+1076
+01:48:06,616 --> 01:48:10,333
+ this the trillion for the trillion dollar
+
+1077
+01:48:10,333 --> 01:48:12,966
+ companies this course is not for the
+
+1078
+01:48:13,350 --> 01:48:15,733
+ General audience do you guys understand
+
+1079
+01:48:15,733 --> 01:48:18,433
+ this is an advanced level course how they
+
+1080
+01:48:18,433 --> 01:48:19,750
+ secure their models?
+
+1081
+01:48:22,433 --> 01:48:30,833
+ Is that clear Yeah, exactly highly
+
+1082
+01:48:30,833 --> 01:48:32,966
+ technical like one suggestion instead of
+
+1083
+01:48:32,966 --> 01:48:34,783
+ doing these two three things you can just
+
+1084
+01:48:34,783 --> 01:48:36,816
+ give us a rough structure It could be
+
+1085
+01:48:36,816 --> 01:48:40,550
+ even 10 15 minutes long with the screen
+
+1086
+01:48:40,550 --> 01:48:42,000
+ shares and your voiceover
+
+1087
+01:48:44,699 --> 01:48:46,933
+ And We just we'll fine-tune it visually
+
+1088
+01:48:46,933 --> 01:48:49,166
+ we'll add whichever element is required
+
+1089
+01:48:49,166 --> 01:48:51,350
+ We'll make the those elements will create
+
+1090
+01:48:51,350 --> 01:48:54,233
+ them in after effects or canva or in
+
+1091
+01:48:54,233 --> 01:48:56,550
+ Premiere Pro wherever is needed my team
+
+1092
+01:48:56,550 --> 01:48:59,899
+ will create a Visually like beautify it
+
+1093
+01:48:59,899 --> 01:49:02,316
+ and then like the structure you can give
+
+1094
+01:49:02,316 --> 01:49:04,466
+ us are you guys using the AI?
+
+1095
+01:49:05,500 --> 01:49:07,233
+ Wasting your time and giving us three
+
+1096
+01:49:07,233 --> 01:49:11,083
+ things What I will do is I will go use
+
+1097
+01:49:11,083 --> 01:49:14,149
+ the AI to create a post-production plan
+
+1098
+01:49:14,350 --> 01:49:16,899
+ Read it fix it and give it to you guys I
+
+1099
+01:49:16,899 --> 01:49:19,466
+ will use artificial intelligence to be
+
+1100
+01:49:19,466 --> 01:49:21,366
+ able to create the post-production plan
+
+1101
+01:49:21,366 --> 01:49:24,666
+ and make it sense and Make sure all the
+
+1102
+01:49:24,666 --> 01:49:27,250
+ artifacts that are mentioned there are
+
+1103
+01:49:27,250 --> 01:49:29,366
+ inside these video slides
+
+1104
+01:49:29,366 --> 01:49:30,816
+ and they are in the outputs
+
+1105
+01:49:31,983 --> 01:49:33,149
+ That is what I will do
+
+1106
+01:49:34,683 --> 01:49:37,050
+ So there is no gaps because the AI will
+
+1107
+01:49:37,050 --> 01:49:40,483
+ create a post-production plan and can't
+
+1108
+01:49:40,483 --> 01:49:43,750
+ yeah, absolutely my concern my Son then
+
+1109
+01:49:43,750 --> 01:49:45,183
+ again will go back to what if that
+
+1110
+01:49:45,183 --> 01:49:47,366
+ doesn't work as well and we again will
+
+1111
+01:49:47,366 --> 01:49:50,383
+ come back to the same thing No, no if
+
+1112
+01:49:50,383 --> 01:49:52,533
+ there is a plan and if I already
+
+1113
+01:49:52,933 --> 01:49:56,433
+ the post-production team cannot run away
+
+1114
+01:49:56,433 --> 01:50:00,250
+ because there is the produced video and
+
+1115
+01:50:00,250 --> 01:50:01,850
+ there is the plan and there is the
+
+1116
+01:50:01,850 --> 01:50:04,899
+ footages, input, system and an output.
+
+1117
+01:50:05,116 --> 01:50:05,633
+ Where is the
+
+1118
+01:50:05,633 --> 01:50:07,783
+ post-production team gonna run?
+
+1119
+01:50:07,783 --> 01:50:08,850
+ There is no way to run.
+
+1120
+01:50:10,199 --> 01:50:12,850
+ I use the input, I use the
+
+1121
+01:50:12,850 --> 01:50:14,649
+ plan and I create an output.
+
+1122
+01:50:15,716 --> 01:50:17,233
+ Ali, we want to start on this
+
+1123
+01:50:17,233 --> 01:50:18,550
+ project as soon as possible.
+
+1124
+01:50:19,366 --> 01:50:19,983
+ Yeah, very good.
+
+1125
+01:50:21,266 --> 01:50:24,316
+ I will create your post-production plan
+
+1126
+01:50:24,316 --> 01:50:26,649
+ as soon as possible with the output.
+
+1127
+01:50:28,383 --> 01:50:30,266
+ That's alright, I will create it.
+
+1128
+01:50:30,266 --> 01:50:32,000
+ So you will give us the rough structure?
+
+1129
+01:50:32,000 --> 01:50:35,783
+ No, no, I will give you the final output,
+
+1130
+01:50:36,350 --> 01:50:38,500
+ I will give you the plan and the
+
+1131
+01:50:38,500 --> 01:50:41,716
+ artifacts and show a video how they are
+
+1132
+01:50:41,716 --> 01:50:44,133
+ mapping it and how I produce the output.
+
+1133
+01:50:45,816 --> 01:50:49,466
+ So I will create a course to create a
+
+1134
+01:50:49,466 --> 01:50:52,183
+ post-production video just for this
+
+1135
+01:50:52,183 --> 01:50:54,883
+ course so they can follow up the video
+
+1136
+01:50:54,883 --> 01:50:57,550
+ and while the artifacts are there, if I
+
+1137
+01:50:57,550 --> 01:51:00,666
+ am able to do it post-production, you
+
+1138
+01:51:00,666 --> 01:51:02,949
+ guys should be able to do it as well.
+
+1139
+01:51:04,983 --> 01:51:06,533
+ By watching the video, we
+
+1140
+01:51:06,533 --> 01:51:08,183
+ are creating video courses.
+
+1141
+01:51:08,649 --> 01:51:09,833
+ I will create the video
+
+1142
+01:51:09,833 --> 01:51:11,850
+ course to do post-production.
+
+1143
+01:51:15,300 --> 01:51:16,783
+ And that will work out, right?
+
+1144
+01:51:17,550 --> 01:51:19,449
+ I will give you the input, the artifacts.
+
+1145
+01:51:19,449 --> 01:51:23,783
+ I am a little skeptical because if we get
+
+1146
+01:51:23,783 --> 01:51:25,666
+ too many files again, then there will be
+
+1147
+01:51:25,666 --> 01:51:27,583
+ too much confusion, might as well just
+
+1148
+01:51:27,583 --> 01:51:29,850
+ get one file and we will fine tune it and
+
+1149
+01:51:29,850 --> 01:51:31,466
+ we will do everything and beautify it and
+
+1150
+01:51:31,466 --> 01:51:33,233
+ shorten it and make it as per the script.
+
+1151
+01:51:34,316 --> 01:51:36,783
+ But we should have that file.
+
+1152
+01:51:36,816 --> 01:51:40,149
+ I think Swati, Rifatib, what Swati is
+
+1153
+01:51:40,149 --> 01:51:41,116
+ saying, we can do that, I
+
+1154
+01:51:41,116 --> 01:51:41,983
+ think that will be the best.
+
+1155
+01:51:42,616 --> 01:51:44,766
+ If we get one file with everything and
+
+1156
+01:51:44,766 --> 01:51:46,566
+ then maybe it's 10 minutes long, 15
+
+1157
+01:51:46,566 --> 01:51:47,616
+ minutes long, that's fine.
+
+1158
+01:51:48,183 --> 01:51:52,183
+ We will trim it down as and when based on
+
+1159
+01:51:52,183 --> 01:51:54,033
+ Swati and her team's understanding.
+
+1160
+01:51:54,616 --> 01:51:55,350
+ That will be the
+
+1161
+01:51:55,350 --> 01:51:56,983
+ easiest way of doing this.
+
+1162
+01:51:57,816 --> 01:51:58,683
+ If they gave one file,
+
+1163
+01:51:58,899 --> 01:52:00,316
+ they couldn't trim it out.
+
+1164
+01:52:00,316 --> 01:52:01,050
+ That's the problem.
+
+1165
+01:52:02,250 --> 01:52:02,949
+ No, no, no.
+
+1166
+01:52:02,949 --> 01:52:06,366
+ Not in the form of Kamba or Kanva, but in
+
+1167
+01:52:06,366 --> 01:52:07,783
+ the form of a file only.
+
+1168
+01:52:08,133 --> 01:52:09,866
+ I also gave that as well.
+
+1169
+01:52:10,350 --> 01:52:11,783
+ I also gave that as well.
+
+1170
+01:52:12,183 --> 01:52:14,449
+ There's a storyboard one with the audio
+
+1171
+01:52:14,449 --> 01:52:16,933
+ in it, with everything that is shown.
+
+1172
+01:52:17,233 --> 01:52:17,666
+ That's the thing.
+
+1173
+01:52:18,283 --> 01:52:19,866
+ It's too many files.
+
+1174
+01:52:22,050 --> 01:52:24,750
+ Yes, I will give you one post-production
+
+1175
+01:52:24,750 --> 01:52:26,233
+ output, the final
+
+1176
+01:52:26,233 --> 01:52:28,566
+ video, with no editors used.
+
+1177
+01:52:28,566 --> 01:52:31,183
+ That's all we need, that
+
+1178
+01:52:31,183 --> 01:52:32,566
+ all we request from you.
+
+1179
+01:52:32,816 --> 01:52:34,566
+ Yes, I will give the post-production
+
+1180
+01:52:34,566 --> 01:52:35,716
+ output, the edited
+
+1181
+01:52:35,716 --> 01:52:39,466
+ version, the plan and other stuff.
+
+1182
+01:52:39,466 --> 01:52:41,433
+ You guys will understand this could be
+
+1183
+01:52:41,433 --> 01:52:43,850
+ done by using these footages.
+
+1184
+01:52:44,383 --> 01:52:47,533
+ He gave us the plan and all the steps and
+
+1185
+01:52:47,533 --> 01:52:49,783
+ then go in the behind and think about it.
+
+1186
+01:52:49,833 --> 01:52:52,399
+ This is where I am right now.
+
+1187
+01:52:52,399 --> 01:52:54,983
+ Because if I can show that this is doable
+
+1188
+01:52:54,983 --> 01:52:57,750
+ with the video production, then it will
+
+1189
+01:52:57,750 --> 01:53:00,933
+ be able to say, "Okay, this is doable."
+
+1190
+01:53:00,933 --> 01:53:03,183
+ But our main goal is to make sure that
+
+1191
+01:53:03,183 --> 01:53:06,333
+ what Honoke is saying is also important.
+
+1192
+01:53:06,883 --> 01:53:11,183
+ This is understandable by the learners.
+
+1193
+01:53:12,033 --> 01:53:14,116
+ Once I finish one video, full
+
+1194
+01:53:14,116 --> 01:53:17,783
+ post-production, we are going to say,
+
+1195
+01:53:17,816 --> 01:53:20,983
+ "All right, this can be done.
+
+1196
+01:53:20,983 --> 01:53:21,250
+ This is
+
+1197
+01:53:21,250 --> 01:53:23,500
+ understandable and this is usable."
+
+1198
+01:53:23,883 --> 01:53:28,350
+ I also understand Honoke's points there.
+
+1199
+01:53:28,350 --> 01:53:29,233
+ There are some gaps.
+
+1200
+01:53:29,833 --> 01:53:31,183
+ I will find those gaps.
+
+1201
+01:53:31,183 --> 01:53:33,216
+ I will find those gaps and put them to
+
+1202
+01:53:33,216 --> 01:53:35,033
+ the post-production plan.
+
+1203
+01:53:35,316 --> 01:53:38,399
+ The post-production plan will include all
+
+1204
+01:53:38,399 --> 01:53:39,666
+ those steps as well.
+
+1205
+01:53:40,333 --> 01:53:41,333
+ There is no gap.
+
+1206
+01:53:41,866 --> 01:53:45,283
+ If we are able to confirm the first
+
+1207
+01:53:45,283 --> 01:53:47,266
+ video, if I can do the editing of the
+
+1208
+01:53:47,266 --> 01:53:50,783
+ first video with all of it, then we will
+
+1209
+01:53:50,783 --> 01:53:52,166
+ be able to go ahead and
+
+1210
+01:53:52,166 --> 01:53:53,433
+ do the remaining ones.
+
+1211
+01:53:53,433 --> 01:53:55,350
+ This is where I am right now.
+
+1212
+01:53:55,350 --> 01:53:58,733
+ I need to do at least one video to make
+
+1213
+01:53:58,733 --> 01:54:01,833
+ sure we are at the same place.
+
+1214
+01:54:02,050 --> 01:54:02,783
+ Maybe the...
+
+1215
+01:54:02,816 --> 01:54:05,933
+ number of the video files is overloading
+
+1216
+01:54:05,933 --> 01:54:07,666
+ the team, the instructions,
+
+1217
+01:54:08,266 --> 01:54:10,383
+ but let's see if I can do it.
+
+1218
+01:54:10,683 --> 01:54:13,283
+ If I'm unable to do it, it is not
+
+1219
+01:54:13,283 --> 01:54:17,216
+ acceptable for Hanukkah, for Hari, the
+
+1220
+01:54:17,216 --> 01:54:18,466
+ post-production of
+
+1221
+01:54:18,466 --> 01:54:20,333
+ Sivati to be able to do this.
+
+1222
+01:54:20,333 --> 01:54:23,033
+ But if I can do this post-production, you
+
+1223
+01:54:23,033 --> 01:54:24,899
+ guys should be able to do it as well.
+
+1224
+01:54:26,050 --> 01:54:27,816
+ And if I record all the process,
+
+1225
+01:54:32,816 --> 01:54:33,000
+ okay.
+
+1226
+01:54:33,483 --> 01:54:34,000
+ Yes, yes.
+
+1227
+01:54:34,233 --> 01:54:36,449
+ So while you're addressing these gaps, so
+
+1228
+01:54:36,449 --> 01:54:39,500
+ I just wanted to make a point over here.
+
+1229
+01:54:39,766 --> 01:54:42,283
+ So like, for example, when you say as I
+
+1230
+01:54:42,283 --> 01:54:45,449
+ was giving this example, like ensure that
+
+1231
+01:54:45,449 --> 01:54:46,500
+ the kernel is connected.
+
+1232
+01:54:46,850 --> 01:54:48,583
+ Instead of saying that, ensure the kernel
+
+1233
+01:54:48,583 --> 01:54:50,149
+ is connected because I've seen that
+
+1234
+01:54:50,149 --> 01:54:53,233
+ you've been demonstrating that in that 16
+
+1235
+01:54:53,233 --> 01:54:54,816
+ second video, right?
+
+1236
+01:54:55,216 --> 01:54:56,550
+ So I would suggest you to provide a narration wherein the folks who are with
+
+1237
+01:54:56,550 --> 01:54:58,133
+ you you to provide a narration wherein
+
+1238
+01:54:58,133 --> 01:55:01,449
+ you explain the process of ensuring how
+
+1239
+01:55:01,449 --> 01:55:02,366
+ the kernel is connected.
+
+1240
+01:55:03,083 --> 01:55:04,866
+ Instead of just saying in the narration
+
+1241
+01:55:04,866 --> 01:55:07,383
+ that ensure that it's connected, we are
+
+1242
+01:55:07,383 --> 01:55:10,500
+ actually telling the learner the process
+
+1243
+01:55:10,500 --> 01:55:13,133
+ of connecting the kernel.
+
+1244
+01:55:13,683 --> 01:55:15,449
+ If you understand what
+
+1245
+01:55:15,449 --> 01:55:16,483
+ I'm trying to say over here.
+
+1246
+01:55:16,933 --> 01:55:18,816
+ So the process has to be explained.
+
+1247
+01:55:19,266 --> 01:55:20,750
+ The process has to be explained instead
+
+1248
+01:55:20,750 --> 01:55:23,266
+ of just saying that, make
+
+1249
+01:55:23,266 --> 01:55:24,250
+ sure that this is connected.
+
+1250
+01:55:24,833 --> 01:55:27,283
+ So it makes much more relatable for the
+
+1251
+01:55:27,283 --> 01:55:29,899
+ learner and he would also be able to, he
+
+1252
+01:55:29,899 --> 01:55:31,216
+ or she would be able to understand.
+
+1253
+01:55:31,750 --> 01:55:32,733
+ Hanukkah, do you know
+
+1254
+01:55:32,733 --> 01:55:34,750
+ how I am doing this course?
+
+1255
+01:55:34,983 --> 01:55:38,216
+ I'm really turning on a system to be able
+
+1256
+01:55:38,216 --> 01:55:41,933
+ to do an AI model security for open AI
+
+1257
+01:55:41,933 --> 01:55:43,500
+ for the people who
+
+1258
+01:55:43,500 --> 01:55:45,116
+ generate these AI systems.
+
+1259
+01:55:45,550 --> 01:55:48,383
+ I am turning them on this system.
+
+1260
+01:55:48,716 --> 01:55:51,283
+ There is a working system and there is a
+
+1261
+01:55:51,283 --> 01:55:53,616
+ working code base for them.
+
+1262
+01:55:55,033 --> 01:55:56,783
+ This is a code base
+
+1263
+01:55:56,783 --> 01:55:58,649
+ that is working for them.
+
+1264
+01:55:58,899 --> 01:56:00,149
+ I'm giving them the code.
+
+1265
+01:56:00,750 --> 01:56:01,983
+ I'm giving them how
+
+1266
+01:56:01,983 --> 01:56:03,983
+ it is running on here.
+
+1267
+01:56:04,583 --> 01:56:05,616
+ I'm demonstrating
+
+1268
+01:56:05,616 --> 01:56:07,716
+ something that is already.
+
+1269
+01:56:07,933 --> 01:56:11,266
+ the adversarial evasion lab.
+
+1270
+01:56:11,933 --> 01:56:13,583
+ So they are getting end to
+
+1271
+01:56:13,583 --> 01:56:15,933
+ end from the start to the end.
+
+1272
+01:56:15,933 --> 01:56:18,149
+ But for me to turn it on, I
+
+1273
+01:56:18,149 --> 01:56:19,766
+ go through all these steps.
+
+1274
+01:56:20,383 --> 01:56:21,983
+ I take the screenshots first.
+
+1275
+01:56:22,750 --> 01:56:24,183
+ The screenshots are there.
+
+1276
+01:56:24,649 --> 01:56:25,883
+ The system is working.
+
+1277
+01:56:26,116 --> 01:56:27,149
+ Then what I do it is
+
+1278
+01:56:27,149 --> 01:56:28,850
+ I put the voiceovers.
+
+1279
+01:56:29,550 --> 01:56:30,783
+ I read the voiceovers.
+
+1280
+01:56:30,783 --> 01:56:33,399
+ Then there's always the transition lines.
+
+1281
+01:56:33,649 --> 01:56:37,483
+ And I make sure that I glued the image to
+
+1282
+01:56:37,483 --> 01:56:39,466
+ the audio to make sure
+
+1283
+01:56:39,466 --> 01:56:41,066
+ that while I'm reading it.
+
+1284
+01:56:41,383 --> 01:56:42,866
+ But right now, your problem
+
+1285
+01:56:42,866 --> 01:56:45,433
+ is you are unable to see it.
+
+1286
+01:56:45,899 --> 01:56:47,783
+ So what I will do it is I will add a
+
+1287
+01:56:47,783 --> 01:56:49,583
+ post-production plan so
+
+1288
+01:56:49,583 --> 01:56:51,149
+ you will be able to get it.
+
+1289
+01:56:51,149 --> 01:56:53,033
+ There is one more person in the call.
+
+1290
+01:56:54,350 --> 01:56:55,766
+ I hope we are not going to
+
+1291
+01:56:55,766 --> 01:56:57,266
+ explain it one more time.
+
+1292
+01:56:57,666 --> 01:56:59,616
+ But I will try to do my best.
+
+1293
+01:57:01,133 --> 01:57:01,866
+ Hello, Luma.
+
+1294
+01:57:01,899 --> 01:57:02,616
+ How are you?
+
+1295
+01:57:04,250 --> 01:57:05,783
+ What we are trying to do is-- Oh, hi.
+
+1296
+01:57:06,383 --> 01:57:06,933
+ I found you.
+
+1297
+01:57:07,133 --> 01:57:08,983
+ I shared the-- It's twice the head of
+
+1298
+01:57:08,983 --> 01:57:11,050
+ the-- I shared the post-production plan
+
+1299
+01:57:12,050 --> 01:57:15,183
+ for this screen capture piece for the
+
+1300
+01:57:15,183 --> 01:57:17,000
+ module one and video one.
+
+1301
+01:57:17,000 --> 01:57:19,666
+ And I'm trying to create a template to
+
+1302
+01:57:19,666 --> 01:57:22,500
+ make sure that we can all follow this to
+
+1303
+01:57:22,500 --> 01:57:26,216
+ be able to produce a course for open AI's
+
+1304
+01:57:26,216 --> 01:57:29,183
+ team for them to be able to do a complex
+
+1305
+01:57:29,183 --> 01:57:32,266
+ course on AI though.
+
+1306
+01:57:32,483 --> 01:57:34,683
+ And they have all the necessary code
+
+1307
+01:57:34,683 --> 01:57:36,033
+ pieces to be able to
+
+1308
+01:57:36,033 --> 01:57:38,166
+ run this evasion attack.
+
+1309
+01:57:38,633 --> 01:57:40,433
+ So that's what we are doing.
+
+1310
+01:57:40,850 --> 01:57:43,750
+ And for this, for each scene, what I
+
+1311
+01:57:43,750 --> 01:57:48,566
+ provided is a screenshot, a title, a
+
+1312
+01:57:48,566 --> 01:57:52,683
+ voiceover, a scene number, and the AI
+
+1313
+01:57:52,683 --> 01:57:54,833
+ Gemini notes with the code pieces.
+
+1314
+01:57:55,266 --> 01:57:57,383
+ So the post-production can do it.
+
+1315
+01:57:57,399 --> 01:58:01,366
+ But still, as far as I understood, you
+
+1316
+01:58:01,366 --> 01:58:04,266
+ guys are not using the AI that much to be
+
+1317
+01:58:04,266 --> 01:58:06,433
+ able to create a post-production plan.
+
+1318
+01:58:06,816 --> 01:58:09,866
+ I will create a post-production plan and
+
+1319
+01:58:09,866 --> 01:58:12,783
+ with artificial intelligence, not myself.
+
+1320
+01:58:13,316 --> 01:58:16,233
+ and record it during the process how I
+
+1321
+01:58:16,233 --> 01:58:18,883
+ create the post-production plan then use
+
+1322
+01:58:18,883 --> 01:58:22,283
+ my existing footage as an input and Use
+
+1323
+01:58:22,283 --> 01:58:25,883
+ the AI's plan and then create an output a
+
+1324
+01:58:25,883 --> 01:58:28,566
+ post-production end-to-end and show the
+
+1325
+01:58:28,933 --> 01:58:31,933
+ post-production team of star weaver So
+
+1326
+01:58:31,933 --> 01:58:34,883
+ how you guys can edit one video and I
+
+1327
+01:58:34,883 --> 01:58:37,316
+ will fix the problems and I will see
+
+1328
+01:58:37,483 --> 01:58:40,216
+ Where my gaps are on the post-production
+
+1329
+01:58:40,216 --> 01:58:43,133
+ plan So you guys will be able to give me
+
+1330
+01:58:43,133 --> 01:58:45,983
+ a go ahead for one screen capture Then I
+
+1331
+01:58:45,983 --> 01:58:47,683
+ will go ahead and finish the remaining
+
+1332
+01:58:47,683 --> 01:58:50,350
+ ten screen captures in this style.
+
+1333
+01:58:50,350 --> 01:58:52,816
+ So that is where we are it
+
+1334
+01:58:54,399 --> 01:58:56,399
+ So you're trying to say that you're going
+
+1335
+01:58:56,399 --> 01:59:00,233
+ to record My I mean all the elements
+
+1336
+01:59:00,233 --> 01:59:02,066
+ separately and then you're going to both
+
+1337
+01:59:02,066 --> 01:59:06,116
+ produce that yeah And give you guys a
+
+1338
+01:59:06,116 --> 01:59:09,083
+ plan so you guys can follow up that plan
+
+1339
+01:59:09,083 --> 01:59:12,550
+ This is an advanced level course for open
+
+1340
+01:59:12,550 --> 01:59:15,583
+ AI steam the people who are using
+
+1341
+01:59:15,583 --> 01:59:19,500
+ creating the artificial intelligence This
+
+1342
+01:59:19,500 --> 01:59:23,116
+ course if just shut it will take one hour
+
+1343
+01:59:23,116 --> 01:59:25,666
+ to two hours just for one module There is
+
+1344
+01:59:25,666 --> 01:59:27,033
+ ten different tools
+
+1345
+01:59:27,033 --> 01:59:29,033
+ that comes in in here.
+
+1346
+01:59:29,033 --> 01:59:32,883
+ So I shut it in a style of 16 seconds
+
+1347
+01:59:32,883 --> 01:59:35,983
+ screen captures, but it is Overloading
+
+1348
+01:59:35,983 --> 01:59:39,133
+ the video production team because video
+
+1349
+01:59:39,133 --> 01:59:41,716
+ production team is having a hard time
+
+1350
+01:59:41,716 --> 01:59:44,449
+ then to show the audio Then to show the
+
+1351
+01:59:44,449 --> 01:59:46,750
+ video then to show an animation meant to
+
+1352
+01:59:46,750 --> 01:59:49,966
+ show the presentation For me it is clear
+
+1353
+01:59:49,966 --> 01:59:51,683
+ but for them it is not clear.
+
+1354
+01:59:51,683 --> 01:59:53,283
+ I say top right.
+
+1355
+01:59:53,283 --> 01:59:54,250
+ It's on the top left.
+
+1356
+01:59:54,250 --> 01:59:57,550
+ They are unable to Remove the right
+
+1357
+01:59:57,550 --> 01:59:59,483
+ keyword from the audio.
+
+1358
+02:00:00,183 --> 02:00:03,283
+ They need to say it's on the top I know
+
+1359
+02:00:03,283 --> 02:00:05,433
+ it, but they don't know it and I can also
+
+1360
+02:00:05,433 --> 02:00:07,383
+ relate to them as well though.
+
+1361
+02:00:07,383 --> 02:00:10,166
+ It is not that easy So I will give them
+
+1362
+02:00:10,166 --> 02:00:12,649
+ the post-production plan But what I will
+
+1363
+02:00:12,649 --> 02:00:15,433
+ do is I will go to the AI create a
+
+1364
+02:00:15,433 --> 02:00:17,550
+ post-production plan for each scene
+
+1365
+02:00:18,050 --> 02:00:19,250
+ Put it there for you.
+
+1366
+02:00:19,566 --> 02:00:21,216
+ I will edit it for you.
+
+1367
+02:00:21,216 --> 02:00:23,449
+ So you guys will see the input, the
+
+1368
+02:00:23,449 --> 02:00:24,883
+ footage that I create, the
+
+1369
+02:00:24,883 --> 02:00:26,050
+ post-production plan
+
+1370
+02:00:26,050 --> 02:00:27,816
+ that the AI has created.
+
+1371
+02:00:27,816 --> 02:00:30,083
+ And I will record how I am doing it so
+
+1372
+02:00:30,083 --> 02:00:32,149
+ you guys can do it for the other videos.
+
+1373
+02:00:32,533 --> 02:00:34,816
+ And I will show you guys the output so
+
+1374
+02:00:34,816 --> 02:00:36,783
+ the learner can learn it.
+
+1375
+02:00:36,783 --> 02:00:39,383
+ The learner meaning the open AI audience
+
+1376
+02:00:39,383 --> 02:00:42,350
+ can learn how to secure their own models.
+
+1377
+02:00:42,816 --> 02:00:44,716
+ These are highly technical people.
+
+1378
+02:00:45,250 --> 02:00:47,816
+ They also don't want a one-hour course.
+
+1379
+02:00:48,683 --> 02:00:49,883
+ They want three minute
+
+1380
+02:00:49,883 --> 02:00:51,766
+ video for one screen capture.
+
+1381
+02:00:52,366 --> 02:00:53,383
+ They will be able to
+
+1382
+02:00:53,383 --> 02:00:55,033
+ trigger most of these stuff.
+
+1383
+02:00:56,399 --> 02:00:59,899
+ Because the Starweaver is focused on
+
+1384
+02:00:59,899 --> 02:01:03,233
+ doing the video production, not on the AI
+
+1385
+02:01:03,233 --> 02:01:05,966
+ pieces, but that open AI people are
+
+1386
+02:01:05,966 --> 02:01:07,466
+ focused on the AI pieces.
+
+1387
+02:01:07,816 --> 02:01:09,250
+ When I say code spaces,
+
+1388
+02:01:09,483 --> 02:01:10,833
+ they understand code spaces.
+
+1389
+02:01:11,283 --> 02:01:12,250
+ When I say Gemini,
+
+1390
+02:01:12,483 --> 02:01:13,633
+ they understand Gemini.
+
+1391
+02:01:14,266 --> 02:01:16,683
+ And to speed this process up, I use the
+
+1392
+02:01:16,683 --> 02:01:19,500
+ AI and show the learners how I am turning
+
+1393
+02:01:19,500 --> 02:01:21,399
+ on these systems using
+
+1394
+02:01:21,399 --> 02:01:22,816
+ artificial intelligence.
+
+1395
+02:01:23,483 --> 02:01:25,366
+ So there is lots of AI support.
+
+1396
+02:01:26,250 --> 02:01:28,833
+ This is an AI course.
+
+1397
+02:01:29,050 --> 02:01:31,566
+ We are going to use the AI to be able to
+
+1398
+02:01:31,566 --> 02:01:33,233
+ plan it, to be able to produce
+
+1399
+02:01:33,233 --> 02:01:35,283
+ it, and to be able to post it.
+
+1400
+02:01:35,333 --> 02:01:39,833
+ I know it is a transformational time for
+
+1401
+02:01:39,833 --> 02:01:42,233
+ video production to use artificial
+
+1402
+02:01:42,233 --> 02:01:45,583
+ intelligence as a heads-up display.
+
+1403
+02:01:46,033 --> 02:01:47,899
+ But I will do it to you guys so you guys
+
+1404
+02:01:47,899 --> 02:01:50,233
+ will be able to learn how to do this.
+
+1405
+02:01:50,233 --> 02:01:53,250
+ And I will see where my gaps are in terms
+
+1406
+02:01:53,250 --> 02:01:55,649
+ of the post-production plan.
+
+1407
+02:01:56,133 --> 02:01:58,866
+ And Mamed and Svetyal already said this
+
+1408
+02:01:58,866 --> 02:02:01,366
+ will add one more layer on top.
+
+1409
+02:02:01,866 --> 02:02:06,283
+ But with this rise of the AI, let me tell
+
+1410
+02:02:06,283 --> 02:02:08,183
+ you guys something very important.
+
+1411
+02:02:08,883 --> 02:02:10,583
+ The old jobs are...
+
+1412
+02:02:11,533 --> 02:02:11,949
+ Bye-bye.
+
+1413
+02:02:12,533 --> 02:02:14,616
+ This is the reality.
+
+1414
+02:02:15,233 --> 02:02:16,750
+ There is going to be new jobs.
+
+1415
+02:02:17,166 --> 02:02:20,233
+ If we go back to 100 years ago, there is
+
+1416
+02:02:20,233 --> 02:02:22,399
+ lots of people that are doing the horses.
+
+1417
+02:02:23,116 --> 02:02:25,066
+ Lots of people that are cleaning the
+
+1418
+02:02:25,066 --> 02:02:27,083
+ horse shit all over the streets.
+
+1419
+02:02:27,083 --> 02:02:29,866
+ There are lots of dead horses There was a
+
+1420
+02:02:29,866 --> 02:02:34,350
+ big economy that economy is gone There is
+
+1421
+02:02:34,350 --> 02:02:36,366
+ no more video editors in the future.
+
+1422
+02:02:36,366 --> 02:02:38,866
+ There is no more coders in the future
+
+1423
+02:02:38,866 --> 02:02:41,616
+ There is all these new roles that are
+
+1424
+02:02:41,616 --> 02:02:45,816
+ coming up So we are using the AI and you
+
+1425
+02:02:45,816 --> 02:02:48,533
+ guys are not anymore video editors You
+
+1426
+02:02:48,533 --> 02:02:52,399
+ guys are AI enabled Something else not a
+
+1427
+02:02:52,399 --> 02:02:55,716
+ video editor not even a video editor Not
+
+1428
+02:02:55,716 --> 02:02:58,833
+ even the roles that you guys think so we
+
+1429
+02:02:58,833 --> 02:03:01,883
+ are entering into that kind of a future I
+
+1430
+02:03:01,883 --> 02:03:04,216
+ understand we are at that timeline and it
+
+1431
+02:03:04,216 --> 02:03:07,566
+ is creating an issue for you guys But
+
+1432
+02:03:07,566 --> 02:03:09,616
+ that is the reality and these guys who
+
+1433
+02:03:09,616 --> 02:03:12,183
+ are going to take this course are Driving
+
+1434
+02:03:12,183 --> 02:03:15,316
+ this the open AI people who are going to
+
+1435
+02:03:15,316 --> 02:03:17,816
+ take this course are driving this So it
+
+1436
+02:03:17,816 --> 02:03:19,766
+ is okay for them to get a compressed
+
+1437
+02:03:19,766 --> 02:03:22,149
+ course There I put all these ten
+
+1438
+02:03:22,149 --> 02:03:23,933
+ different tools that they are going to
+
+1439
+02:03:23,933 --> 02:03:27,233
+ use and it is creating an overload in you
+
+1440
+02:03:27,233 --> 02:03:29,033
+ guys I also understand I
+
+1441
+02:03:29,033 --> 02:03:31,316
+ call it Can you do one thing?
+
+1442
+02:03:32,000 --> 02:03:33,133
+ Sorry to interrupt you.
+
+1443
+02:03:33,133 --> 02:03:34,550
+ So if it can we do one thing?
+
+1444
+02:03:34,550 --> 02:03:38,133
+ Can you simplify this process to because
+
+1445
+02:03:38,133 --> 02:03:41,149
+ the I'll tell you You you have worked
+
+1446
+02:03:41,149 --> 02:03:42,766
+ with us and how star
+
+1447
+02:03:42,766 --> 02:03:43,833
+ we were generally works.
+
+1448
+02:03:43,833 --> 02:03:46,350
+ It's very simple We just asked the SMEs
+
+1449
+02:03:46,350 --> 02:03:49,766
+ to create some, you know demo demos using
+
+1450
+02:03:50,333 --> 02:03:55,366
+ screen shares so With audio so only that
+
+1451
+02:03:55,366 --> 02:03:57,350
+ pattern there is another type which is
+
+1452
+02:03:57,350 --> 02:03:59,583
+ which you have already done Which is just
+
+1453
+02:03:59,583 --> 02:04:01,350
+ a talking head where you are talking in
+
+1454
+02:04:01,350 --> 02:04:05,949
+ front of the camera so By any chance we
+
+1455
+02:04:05,949 --> 02:04:08,833
+ can can we simplify this so that you know
+
+1456
+02:04:08,833 --> 02:04:11,500
+ We follow the process that we
+
+1457
+02:04:11,500 --> 02:04:13,399
+ are falling from so many years
+
+1458
+02:04:15,183 --> 02:04:17,050
+ only Only your course.
+
+1459
+02:04:17,050 --> 02:04:18,633
+ I will tell you to be honest only your
+
+1460
+02:04:18,633 --> 02:04:21,066
+ course where we have to work in a
+
+1461
+02:04:21,066 --> 02:04:24,183
+ different manner Yes, because I we want
+
+1462
+02:04:24,183 --> 02:04:26,983
+ you to feel comfortable Mm-hmm
+
+1463
+02:04:28,050 --> 02:04:29,783
+ Get ready, get ready,
+
+1464
+02:04:30,183 --> 02:04:31,683
+ these horses are gonna go.
+
+1465
+02:04:32,166 --> 02:04:35,716
+ What you are telling me, I am using AI to
+
+1466
+02:04:35,716 --> 02:04:37,399
+ create this, and you are
+
+1467
+02:04:37,399 --> 02:04:39,233
+ telling me, why do we have roads?
+
+1468
+02:04:39,500 --> 02:04:40,466
+ Why do we have cars?
+
+1469
+02:04:40,933 --> 02:04:42,399
+ We have nice horses here.
+
+1470
+02:04:42,850 --> 02:04:44,433
+ Why don't we use the horses?
+
+1471
+02:04:45,883 --> 02:04:49,116
+ I feel you should work internally as our
+
+1472
+02:04:49,116 --> 02:04:50,783
+ internal star viewer team.
+
+1473
+02:04:50,833 --> 02:04:55,966
+ But you guys are trying to
+
+1474
+02:04:55,966 --> 02:04:57,983
+ use AI as well in the website.
+
+1475
+02:04:58,883 --> 02:05:01,000
+ There is lots of stuff written about AI.
+
+1476
+02:05:01,500 --> 02:05:02,583
+ Come on, use the AI.
+
+1477
+02:05:03,266 --> 02:05:05,983
+ In production also we use a lot of
+
+1478
+02:05:05,983 --> 02:05:07,066
+ artificial intelligence,
+
+1479
+02:05:07,333 --> 02:05:08,966
+ scripting and everything.
+
+1480
+02:05:09,233 --> 02:05:10,783
+ A lot of it we use it.
+
+1481
+02:05:11,133 --> 02:05:14,633
+ So I will show you guys how to use AI.
+
+1482
+02:05:14,633 --> 02:05:17,050
+ The content, SME is very relevant for us
+
+1483
+02:05:17,050 --> 02:05:20,750
+ and what it comes from, horses, that is a
+
+1484
+02:05:20,750 --> 02:05:21,949
+ very critical part and we
+
+1485
+02:05:21,949 --> 02:05:23,316
+ cannot play around with that.
+
+1486
+02:05:23,483 --> 02:05:24,949
+ The content we receive from you.
+
+1487
+02:05:25,466 --> 02:05:29,583
+ Yes, I will show how I use the AI, how to
+
+1488
+02:05:29,583 --> 02:05:32,766
+ create the post-production plan using the
+
+1489
+02:05:32,766 --> 02:05:35,333
+ existing stuff that I
+
+1490
+02:05:35,333 --> 02:05:36,783
+ have provided to you guys.
+
+1491
+02:05:36,833 --> 02:05:39,166
+ So you guys will be able to see and
+
+1492
+02:05:39,166 --> 02:05:41,066
+ create the video, not just talk.
+
+1493
+02:05:41,449 --> 02:05:42,283
+ Create the video.
+
+1494
+02:05:42,283 --> 02:05:43,266
+ I will show you guys.
+
+1495
+02:05:43,666 --> 02:05:45,183
+ This car can go from
+
+1496
+02:05:45,183 --> 02:05:47,233
+ New York to San Francisco.
+
+1497
+02:05:47,883 --> 02:05:50,766
+ And we don't need a horse to go from New
+
+1498
+02:05:50,766 --> 02:05:51,883
+ York to San Francisco.
+
+1499
+02:05:52,399 --> 02:05:54,000
+ This car goes very fast.
+
+1500
+02:05:54,550 --> 02:05:56,133
+ The AI will be able to
+
+1501
+02:05:56,133 --> 02:05:57,649
+ do the post-production.
+
+1502
+02:05:58,033 --> 02:06:00,283
+ But right now if you think that you need
+
+1503
+02:06:00,283 --> 02:06:02,566
+ a horse, you are trying to put the horse
+
+1504
+02:06:02,566 --> 02:06:05,149
+ inside the car and try to go from New
+
+1505
+02:06:05,149 --> 02:06:05,783
+ York to San Francisco.
+
+1506
+02:06:05,816 --> 02:06:08,000
+ I am not trying to do that.
+
+1507
+02:06:08,000 --> 02:06:10,583
+ I am trying to use the AI to build the
+
+1508
+02:06:10,583 --> 02:06:11,716
+ course and to make
+
+1509
+02:06:11,716 --> 02:06:13,633
+ sure we go from A to B.
+
+1510
+02:06:13,633 --> 02:06:14,750
+ I know it is not easy.
+
+1511
+02:06:14,966 --> 02:06:16,149
+ I know it is a big change.
+
+1512
+02:06:16,566 --> 02:06:18,949
+ It is a big transitional time all over
+
+1513
+02:06:18,949 --> 02:06:20,366
+ the world for everyone.
+
+1514
+02:06:20,649 --> 02:06:23,850
+ Do not forget these courses for OpenAI.
+
+1515
+02:06:24,366 --> 02:06:25,683
+ That is for the audience.
+
+1516
+02:06:25,949 --> 02:06:27,133
+ The title of the courses.
+
+1517
+02:06:27,633 --> 02:06:29,683
+ How do you secure your AI models?
+
+1518
+02:06:30,350 --> 02:06:31,466
+ These courses for them.
+
+1519
+02:06:32,833 --> 02:06:33,866
+ Yeah, so I will tell
+
+1520
+02:06:33,866 --> 02:06:35,233
+ you something, Rifat.
+
+1521
+02:06:35,233 --> 02:06:38,866
+ So what we can do is, you create your
+
+1522
+02:06:38,866 --> 02:06:40,399
+ first piece of screen shares.
+
+1523
+02:06:41,000 --> 02:06:42,250
+ According to your style,
+
+1524
+02:06:42,500 --> 02:06:44,050
+ let's share it with us.
+
+1525
+02:06:44,316 --> 02:06:46,550
+ Let's you, me and Manu connect once again
+
+1526
+02:06:46,550 --> 02:06:50,449
+ and see how things can be, you know, much
+
+1527
+02:06:50,449 --> 02:06:52,333
+ smoother following our process.
+
+1528
+02:06:52,949 --> 02:06:54,133
+ Uma, hold on.
+
+1529
+02:06:54,383 --> 02:06:55,983
+ I created 10 screen shares.
+
+1530
+02:06:56,583 --> 02:06:58,333
+ The screen shares are already created.
+
+1531
+02:06:59,000 --> 02:07:02,766
+ What the team cannot follow it is when
+
+1532
+02:07:02,766 --> 02:07:04,683
+ they are going to put the screen shares.
+
+1533
+02:07:04,933 --> 02:07:05,866
+ That is their problem.
+
+1534
+02:07:06,533 --> 02:07:08,383
+ The screen shares are already there.
+
+1535
+02:07:09,583 --> 02:07:12,750
+ The screen shares are already created.
+
+1536
+02:07:12,750 --> 02:07:13,766
+ Manu, can you share
+
+1537
+02:07:13,766 --> 02:07:15,816
+ some of his screen shares?
+
+1538
+02:07:16,000 --> 02:07:16,866
+ Look, the screen
+
+1539
+02:07:16,866 --> 02:07:18,433
+ shares are already created.
+
+1540
+02:07:18,683 --> 02:07:21,000
+ I think once you start sharing your
+
+1541
+02:07:21,000 --> 02:07:22,066
+ screen, I think you go there.
+
+1542
+02:07:22,283 --> 02:07:24,333
+ The screen shares are already created.
+
+1543
+02:07:25,050 --> 02:07:26,783
+ The images are already there.
+
+1544
+02:07:26,816 --> 02:07:29,000
+ The voiceover is there.
+
+1545
+02:07:29,000 --> 02:07:30,399
+ The screen ID is there.
+
+1546
+02:07:30,399 --> 02:07:31,399
+ They are already there.
+
+1547
+02:07:32,933 --> 02:07:37,233
+ What is not there is the plan to be able
+
+1548
+02:07:37,233 --> 02:07:40,500
+ to place them step by step is not there.
+
+1549
+02:07:41,466 --> 02:07:42,066
+ Thus, I already
+
+1550
+02:07:42,066 --> 02:07:43,466
+ created the screen shares.
+
+1551
+02:07:44,149 --> 02:07:45,716
+ They are already there and
+
+1552
+02:07:45,716 --> 02:07:47,216
+ I already read through them.
+
+1553
+02:07:47,566 --> 02:07:48,283
+ They see this.
+
+1554
+02:07:48,583 --> 02:07:51,366
+ I tell them, be mindful of
+
+1555
+02:07:51,366 --> 02:07:53,216
+ the compute costs, it says.
+
+1556
+02:07:53,966 --> 02:07:56,750
+ While we use free tiers today, training a
+
+1557
+02:07:56,750 --> 02:07:59,383
+ large scale adversarial attacks in real
+
+1558
+02:07:59,399 --> 02:08:01,133
+ worlds gets expensive fast.
+
+1559
+02:08:01,500 --> 02:08:02,683
+ There is an image there
+
+1560
+02:08:02,683 --> 02:08:04,066
+ and it shows the pricing.
+
+1561
+02:08:04,733 --> 02:08:06,899
+ And another option is and there is also
+
+1562
+02:08:06,899 --> 02:08:08,250
+ the transitional light.
+
+1563
+02:08:08,850 --> 02:08:10,466
+ So I gave you guys the images.
+
+1564
+02:08:10,816 --> 02:08:12,266
+ I gave you guys the audio.
+
+1565
+02:08:19,616 --> 02:08:22,816
+ Yes, I gave you guys.
+
+1566
+02:08:23,449 --> 02:08:24,500
+ I'm a bit too loud.
+
+1567
+02:08:24,500 --> 02:08:25,116
+ I'm in a hotel.
+
+1568
+02:08:25,333 --> 02:08:26,816
+ I hope I didn't wake up everyone.
+
+1569
+02:08:28,183 --> 02:08:29,433
+ I gave you guys the images.
+
+1570
+02:08:29,750 --> 02:08:31,149
+ I gave you guys the audio.
+
+1571
+02:08:38,316 --> 02:08:39,816
+ So, sorry, image and
+
+1572
+02:08:39,816 --> 02:08:41,483
+ where to show the video part.
+
+1573
+02:08:41,833 --> 02:08:44,149
+ So that we are facing and in some slides
+
+1574
+02:08:44,149 --> 02:08:46,216
+ we are having three images.
+
+1575
+02:08:47,566 --> 02:08:49,449
+ So in the three images we have to show it
+
+1576
+02:08:49,449 --> 02:08:51,399
+ separately or we have to show it together
+
+1577
+02:08:52,399 --> 02:08:53,783
+ like that we are having that.
+
+1578
+02:08:53,783 --> 02:08:56,683
+ So Hari, do you have this in the slide
+
+1579
+02:08:56,683 --> 02:08:59,399
+ format or what is the output?
+
+1580
+02:09:00,033 --> 02:09:03,883
+ So in Canva there is one Canva entire
+
+1581
+02:09:03,883 --> 02:09:07,550
+ podcast presentation that has embedded
+
+1582
+02:09:07,550 --> 02:09:11,716
+ videos seen by scene, every scene is
+
+1583
+02:09:11,716 --> 02:09:14,399
+ defined, every scene there are images
+
+1584
+02:09:14,399 --> 02:09:15,066
+ like so there are
+
+1585
+02:09:15,066 --> 02:09:16,183
+ three images in one video.
+
+1586
+02:09:16,783 --> 02:09:19,316
+ Now while we have the content for the
+
+1587
+02:09:19,316 --> 02:09:22,000
+ editors what is the problem here like
+
+1588
+02:09:22,000 --> 02:09:23,850
+ Difert also said that because he is the
+
+1589
+02:09:23,850 --> 02:09:26,316
+ expert we as laymen cannot understand
+
+1590
+02:09:26,316 --> 02:09:27,783
+ what comes into well.
+
+1591
+02:09:28,416 --> 02:09:30,383
+ While we have the content we do not know
+
+1592
+02:09:30,383 --> 02:09:32,216
+ how to align it with your view.
+
+1593
+02:09:32,399 --> 02:09:34,033
+ So do we have that audio
+
+1594
+02:09:34,033 --> 02:09:36,350
+ script in the notes or where?
+
+1595
+02:09:37,266 --> 02:09:37,833
+ Inside the video.
+
+1596
+02:09:38,266 --> 02:09:41,033
+ As well from Difert in the notes also but
+
+1597
+02:09:41,033 --> 02:09:44,866
+ the note is suppose a three line and when
+
+1598
+02:09:44,866 --> 02:09:47,633
+ a three line has to have the where does
+
+1599
+02:09:47,633 --> 02:09:49,683
+ it have to have the image then where does
+
+1600
+02:09:49,683 --> 02:09:52,033
+ that screen shape play comes in we need
+
+1601
+02:09:52,033 --> 02:09:53,633
+ to get that in scene.
+
+1602
+02:09:54,216 --> 02:09:57,066
+ Yes so basically I will tell you this if
+
+1603
+02:09:57,066 --> 02:09:59,050
+ Difert if you want to follow this
+
+1604
+02:09:59,050 --> 02:10:04,166
+ approach we call it Stole.
+
+1605
+02:10:06,166 --> 02:10:10,616
+ Types of the other one happen.
+
+1606
+02:10:12,616 --> 02:10:14,266
+ These slides you have rightly placed
+
+1607
+02:10:14,266 --> 02:10:24,399
+ those errors seen on this particular word
+
+1608
+02:10:24,399 --> 02:10:26,866
+ this image should have got whatever there
+
+1609
+02:10:26,866 --> 02:10:29,899
+ is a detail story word has to happen if
+
+1610
+02:10:29,899 --> 02:10:30,883
+ we have to follow this
+
+1611
+02:10:30,883 --> 02:10:32,449
+ approach having too many elements.
+
+1612
+02:10:34,066 --> 02:10:36,750
+ And also Uma we have reviewed couple of
+
+1613
+02:10:36,750 --> 02:10:37,666
+ slides I reviewed it
+
+1614
+02:10:37,666 --> 02:10:39,750
+ with Difert right here.
+
+1615
+02:10:40,333 --> 02:10:42,733
+ So the thing is like.
+
+1616
+02:10:42,816 --> 02:10:44,766
+ If we have multiple videos right these
+
+1617
+02:10:44,766 --> 02:10:49,533
+ are code snippets and the intensive right
+
+1618
+02:10:49,533 --> 02:10:51,500
+ so there are a lot of codes involved if
+
+1619
+02:10:51,500 --> 02:10:53,933
+ we just have so if that particular image
+
+1620
+02:10:53,933 --> 02:11:02,483
+ is shown then then can we turn off the
+
+1621
+02:11:02,483 --> 02:11:04,000
+ cameras maintenance
+
+1622
+02:11:04,000 --> 02:11:05,383
+ connections going down.
+
+1623
+02:11:09,933 --> 02:11:13,566
+ I think I've discussed this thing with
+
+1624
+02:11:13,566 --> 02:11:15,633
+ Rifat as well so the cognitive load is
+
+1625
+02:11:15,633 --> 02:11:16,933
+ something which we'd have to see like for
+
+1626
+02:11:16,933 --> 02:11:20,350
+ example there is a 16 second demo and we
+
+1627
+02:11:20,350 --> 02:11:23,316
+ are trying to show that corresponding to
+
+1628
+02:11:23,316 --> 02:11:26,750
+ a three or four word narration.
+
+1629
+02:11:28,949 --> 02:11:32,033
+ This is something which we'll have to
+
+1630
+02:11:32,033 --> 02:11:34,933
+ have a look into because there needs to
+
+1631
+02:11:34,933 --> 02:11:36,899
+ be enough settlement time for the learner
+
+1632
+02:11:36,899 --> 02:11:39,850
+ to kind of understand what is coming on
+
+1633
+02:11:39,850 --> 02:11:41,566
+ the screen and there needs to be proper
+
+1634
+02:11:41,566 --> 02:11:49,449
+ annotations to that point which the SME
+
+1635
+02:11:49,449 --> 02:11:51,666
+ or Rifat is actually referring to right
+
+1636
+02:11:51,666 --> 02:11:54,149
+ so this is the actual code which Rifat
+
+1637
+02:11:54,149 --> 02:11:55,833
+ was talking about so that needs to be
+
+1638
+02:11:55,833 --> 02:11:58,266
+ kind of annotated or highlighted so those
+
+1639
+02:11:58,266 --> 02:11:59,816
+ things would need to happen when we
+
+1640
+02:11:59,816 --> 02:12:01,983
+ provide a very big image or a code
+
+1641
+02:12:01,983 --> 02:12:04,666
+ snippet right so such things need to be
+
+1642
+02:12:04,666 --> 02:12:07,216
+ there otherwise it would add a lot of
+
+1643
+02:12:07,216 --> 02:12:08,899
+ cognitive load for the learner to kind of
+
+1644
+02:12:08,899 --> 02:12:10,933
+ even understand he or she would not even
+
+1645
+02:12:10,933 --> 02:12:12,866
+ able to understand what has been even
+
+1646
+02:12:12,866 --> 02:12:15,399
+ covered right so because things would
+
+1647
+02:12:15,399 --> 02:12:16,616
+ come and go on the screen.
+
+1648
+02:12:17,149 --> 02:12:22,083
+ Hanukkah this is not a course for
+
+1649
+02:12:22,083 --> 02:12:25,616
+ beginners this is for the course who is
+
+1650
+02:12:25,616 --> 02:12:28,366
+ creating the artificial intelligence they
+
+1651
+02:12:28,366 --> 02:12:31,183
+ will be able to get this much load
+
+1652
+02:12:31,183 --> 02:12:34,649
+ because as we said if I make this in one
+
+1653
+02:12:34,649 --> 02:12:37,500
+ shot this is a one hour two hour video
+
+1654
+02:12:37,500 --> 02:12:41,316
+ for just three minutes those people do
+
+1655
+02:12:41,316 --> 02:12:43,666
+ not have first of all that much of a time
+
+1656
+02:12:43,666 --> 02:12:45,666
+ and they already know when
+
+1657
+02:12:45,666 --> 02:12:47,783
+ I show them the Gemini you.
+
+1658
+02:12:47,983 --> 02:12:52,550
+ or code spaces or Jupyter Labs,
+
+1659
+02:12:53,566 --> 02:12:55,966
+ they already know what is there.
+
+1660
+02:12:56,683 --> 02:12:59,833
+ So this is an advanced level course, 16
+
+1661
+02:12:59,833 --> 02:13:03,850
+ seconds per a screen capture and a three
+
+1662
+02:13:03,850 --> 02:13:06,949
+ second for an image is enough for them.
+
+1663
+02:13:06,949 --> 02:13:08,250
+ I'm just gluing all the
+
+1664
+02:13:08,250 --> 02:13:10,350
+ parts so they can make this work.
+
+1665
+02:13:12,233 --> 02:13:12,983
+ Yeah, so there needs
+
+1666
+02:13:12,983 --> 02:13:14,066
+ to be proper annotation.
+
+1667
+02:13:14,083 --> 02:13:17,716
+ Even though it can be for an advanced
+
+1668
+02:13:17,716 --> 02:13:19,316
+ level learner, that's fine, I understand.
+
+1669
+02:13:19,733 --> 02:13:22,783
+ They might not need things to be
+
+1670
+02:13:22,783 --> 02:13:24,766
+ explained in much more detail, but the
+
+1671
+02:13:24,766 --> 02:13:26,783
+ thing is that there needs to be enough
+
+1672
+02:13:26,783 --> 02:13:30,083
+ settlement time for anyone who views the
+
+1673
+02:13:30,083 --> 02:13:31,566
+ video to kind of
+
+1674
+02:13:31,566 --> 02:13:33,350
+ actually read the things.
+
+1675
+02:13:33,350 --> 02:13:35,483
+ Not anyone, not anyone.
+
+1676
+02:13:35,833 --> 02:13:38,033
+ This is just for the open AI team.
+
+1677
+02:13:38,033 --> 02:13:39,933
+ This is not for everyone.
+
+1678
+02:13:40,250 --> 02:13:42,183
+ Everyone, I completely agree.
+
+1679
+02:13:42,216 --> 02:13:44,949
+ Everyone will not be able to get this,
+
+1680
+02:13:44,949 --> 02:13:47,116
+ such as you go and
+
+1681
+02:13:47,116 --> 02:13:48,850
+ watch a boxing training,
+
+1682
+02:13:51,166 --> 02:13:53,116
+ heavyweight boxer training, you won't be
+
+1683
+02:13:53,116 --> 02:13:55,783
+ able to go to street and the heavyweight
+
+1684
+02:13:55,783 --> 02:13:57,166
+ boxing, somebody will
+
+1685
+02:13:57,166 --> 02:13:58,250
+ beat you up, a boxer.
+
+1686
+02:13:58,816 --> 02:14:01,216
+ This is just for the heavyweight boxer.
+
+1687
+02:14:01,583 --> 02:14:03,083
+ Not for you, not for everyone.
+
+1688
+02:14:05,316 --> 02:14:06,449
+ This is not for everyone.
+
+1689
+02:14:08,133 --> 02:14:09,433
+ But still we need to
+
+1690
+02:14:09,433 --> 02:14:10,566
+ provide proper annotation.
+
+1691
+02:14:10,899 --> 02:14:13,483
+ See, the thing is when client reviews it,
+
+1692
+02:14:13,783 --> 02:14:18,866
+ they are not an expert like you are in
+
+1693
+02:14:18,866 --> 02:14:19,666
+ this particular subject.
+
+1694
+02:14:19,983 --> 02:14:21,833
+ So when they also would review, they
+
+1695
+02:14:21,833 --> 02:14:24,149
+ would understand from this perspective,
+
+1696
+02:14:24,149 --> 02:14:25,816
+ settlement time, cognitive
+
+1697
+02:14:25,816 --> 02:14:27,050
+ load and all those things.
+
+1698
+02:14:27,050 --> 02:14:28,716
+ So these are things which as
+
+1699
+02:14:28,716 --> 02:14:30,566
+ instructional designers, we
+
+1700
+02:14:30,566 --> 02:14:32,399
+ take things into consideration.
+
+1701
+02:14:33,566 --> 02:14:38,383
+ Yes, the cognitive load can be taken, by
+
+1702
+02:14:38,383 --> 02:14:41,333
+ creating animations at
+
+1703
+02:14:41,333 --> 02:14:42,683
+ the correct timeline.
+
+1704
+02:14:42,683 --> 02:14:45,566
+ The more animations that you do, the less
+
+1705
+02:14:45,566 --> 02:14:49,333
+ cognitive load the audience will have.
+
+1706
+02:14:49,716 --> 02:14:51,683
+ So you need to create such
+
+1707
+02:14:51,683 --> 02:14:52,783
+ as one side, (Audio Cuts Out)
+
+1708
+02:14:52,833 --> 02:14:56,233
+ Told you once they say running state of
+
+1709
+02:14:56,233 --> 02:14:58,333
+ the kernel, you need to
+
+1710
+02:14:58,333 --> 02:14:59,750
+ show the kernel animation.
+
+1711
+02:15:00,333 --> 02:15:02,966
+ So you take the cognitive load from the
+
+1712
+02:15:02,966 --> 02:15:05,149
+ text and put it to the animation.
+
+1713
+02:15:05,616 --> 02:15:06,816
+ Yes, you can do that.
+
+1714
+02:15:07,216 --> 02:15:09,333
+ Take the cognitive load from them by
+
+1715
+02:15:09,333 --> 02:15:10,733
+ creating animations at
+
+1716
+02:15:10,733 --> 02:15:12,283
+ the correct time line.
+
+1717
+02:15:12,283 --> 02:15:13,316
+ So I will give that on the
+
+1718
+02:15:13,316 --> 02:15:15,766
+ post-production plan to you as well.
+
+1719
+02:15:18,383 --> 02:15:19,883
+ Yeah, so these were
+
+1720
+02:15:19,883 --> 02:15:21,550
+ some of my observations.
+
+1721
+02:15:22,649 --> 02:15:24,816
+ Yes, let me do one video.
+
+1722
+02:15:24,816 --> 02:15:26,733
+ Let me do one video with the
+
+1723
+02:15:26,733 --> 02:15:28,649
+ post-production output
+
+1724
+02:15:28,966 --> 02:15:32,583
+ and the plan and the input.
+
+1725
+02:15:33,216 --> 02:15:35,816
+ Then if you see that this can be created
+
+1726
+02:15:35,816 --> 02:15:39,566
+ with a plan, with the footages, then your
+
+1727
+02:15:39,566 --> 02:15:41,766
+ questions will be solved.
+
+1728
+02:15:41,766 --> 02:15:42,466
+ Is that correct?
+
+1729
+02:15:43,000 --> 02:15:46,250
+ And I show you how I do it on DaVinci
+
+1730
+02:15:46,250 --> 02:15:48,149
+ Resolve, show all the
+
+1731
+02:15:48,149 --> 02:15:50,483
+ steps and record myself.
+
+1732
+02:15:51,166 --> 02:15:51,983
+ Will that be enough
+
+1733
+02:15:51,983 --> 02:15:53,716
+ or is this not enough?
+
+1734
+02:15:57,233 --> 02:16:00,000
+ I will give you the input, I will give
+
+1735
+02:16:00,000 --> 02:16:01,816
+ you the plan and I will give you the
+
+1736
+02:16:01,816 --> 02:16:04,050
+ output, the final output.
+
+1737
+02:16:07,533 --> 02:16:09,050
+ But Rifat, that is
+
+1738
+02:16:09,050 --> 02:16:10,533
+ going to take time, right?
+
+1739
+02:16:11,216 --> 02:16:13,116
+ So how long will that take?
+
+1740
+02:16:13,533 --> 02:16:15,550
+ I will finish this at
+
+1741
+02:16:15,550 --> 02:16:16,766
+ the end of this weekend.
+
+1742
+02:16:16,766 --> 02:16:17,766
+ I will give it to you guys.
+
+1743
+02:16:19,550 --> 02:16:21,216
+ Oh, only for the question.
+
+1744
+02:16:22,149 --> 02:16:22,350
+ Yeah.
+
+1745
+02:16:23,149 --> 02:16:25,266
+ Because I've already given all the screen
+
+1746
+02:16:25,266 --> 02:16:27,616
+ captures, all the plan, you guys are
+
+1747
+02:16:27,616 --> 02:16:29,316
+ seeing, you guys can't do it.
+
+1748
+02:16:29,316 --> 02:16:32,033
+ I understand, I empathize and I will do
+
+1749
+02:16:32,033 --> 02:16:33,549
+ it one and record the
+
+1750
+02:16:33,549 --> 02:16:34,666
+ training for you guys.
+
+1751
+02:16:35,000 --> 02:16:36,883
+ You guys will take the training and do
+
+1752
+02:16:36,883 --> 02:16:37,733
+ the post-production.
+
+1753
+02:16:41,666 --> 02:16:43,299
+ That's my thought process.
+
+1754
+02:16:43,299 --> 02:16:45,333
+ If you guys are unable to do it, somebody
+
+1755
+02:16:45,333 --> 02:16:47,033
+ says they can do it.
+
+1756
+02:16:47,416 --> 02:16:48,533
+ I will show you guys how
+
+1757
+02:16:48,533 --> 02:16:50,133
+ to do it, use the AI. I
+
+1758
+02:16:50,133 --> 02:16:52,566
+ will use the artificial intelligence,
+
+1759
+02:16:52,933 --> 02:16:54,983
+ create the post-production plan,
+
+1760
+02:16:55,283 --> 02:16:55,950
+ implement that
+
+1761
+02:16:55,950 --> 02:16:57,783
+ post-production plan, show you.
+
+1762
+02:16:57,799 --> 02:16:59,933
+ You guys that this is doable, you guys
+
+1763
+02:16:59,933 --> 02:17:01,033
+ are using the horses.
+
+1764
+02:17:01,783 --> 02:17:03,216
+ I will use the AI, the
+
+1765
+02:17:03,216 --> 02:17:05,350
+ car, to go from A to B.
+
+1766
+02:17:05,666 --> 02:17:06,649
+ Show you guys this
+
+1767
+02:17:06,649 --> 02:17:08,066
+ can be done by the car.
+
+1768
+02:17:08,450 --> 02:17:10,783
+ You guys will become less skeptic and
+
+1769
+02:17:10,783 --> 02:17:13,500
+ say, okay, a car can go from New York to
+
+1770
+02:17:13,500 --> 02:17:15,733
+ San Francisco and I don't need a horse.
+
+1771
+02:17:16,333 --> 02:17:17,466
+ I will show the car.
+
+1772
+02:17:17,866 --> 02:17:18,866
+ The car can move.
+
+1773
+02:17:18,866 --> 02:17:21,883
+ I will use the AI on the post-production
+
+1774
+02:17:21,883 --> 02:17:23,933
+ process for the planning.
+
+1775
+02:17:24,716 --> 02:17:27,183
+ So you guys will be able to say, okay,
+
+1776
+02:17:27,683 --> 02:17:28,966
+ this plan can be followed.
+
+1777
+02:17:29,233 --> 02:17:34,000
+ I can use these footages and create them.
+
+1778
+02:17:34,766 --> 02:17:36,166
+ If all of this is fine.
+
+1779
+02:17:36,450 --> 02:17:39,366
+ So the idea of using AI is to
+
+1780
+02:17:39,366 --> 02:17:41,000
+ work faster and smarter, right?
+
+1781
+02:17:41,500 --> 02:17:44,266
+ So if this is going to delay for another
+
+1782
+02:17:44,266 --> 02:17:45,416
+ two, three months is
+
+1783
+02:17:45,416 --> 02:17:47,083
+ not making sense for us.
+
+1784
+02:17:47,583 --> 02:17:49,433
+ No, no, on this project,
+
+1785
+02:17:49,950 --> 02:17:51,416
+ I never delayed the time.
+
+1786
+02:17:51,600 --> 02:17:52,633
+ You talked to my mates.
+
+1787
+02:17:52,883 --> 02:17:55,033
+ I always gave for
+
+1788
+02:17:55,033 --> 02:17:57,566
+ Sangha before everybody else.
+
+1789
+02:17:57,566 --> 02:17:59,766
+ I always waited for the Starweaver site.
+
+1790
+02:18:00,350 --> 02:18:01,649
+ You guys never ever
+
+1791
+02:18:01,649 --> 02:18:03,233
+ have waited on my site.
+
+1792
+02:18:03,766 --> 02:18:05,783
+ Zero time waited on my site.
+
+1793
+02:18:06,000 --> 02:18:06,416
+ Zero.
+
+1794
+02:18:07,799 --> 02:18:09,683
+ I always gave it to my site.
+
+1795
+02:18:09,683 --> 02:18:10,916
+ It is on your site.
+
+1796
+02:18:11,716 --> 02:18:15,766
+ And I'm also okay to create the guides,
+
+1797
+02:18:16,049 --> 02:18:17,666
+ how you guys are gonna do it.
+
+1798
+02:18:17,883 --> 02:18:19,033
+ It is on your site.
+
+1799
+02:18:19,033 --> 02:18:20,100
+ I'm okay to do that.
+
+1800
+02:18:21,133 --> 02:18:22,549
+ I have no issue doing that.
+
+1801
+02:18:27,033 --> 02:18:29,483
+ I will take my time, create the
+
+1802
+02:18:29,483 --> 02:18:32,433
+ post-production plan, do one video edit
+
+1803
+02:18:32,433 --> 02:18:33,966
+ and can, because it's
+
+1804
+02:18:33,966 --> 02:18:36,549
+ only a six minute video.
+
+1805
+02:18:36,549 --> 02:18:37,799
+ It will take my eight
+
+1806
+02:18:37,799 --> 02:18:39,333
+ hours, my one weekend.
+
+1807
+02:18:39,916 --> 02:18:41,649
+ I will be able to finish it off.
+
+1808
+02:18:41,649 --> 02:18:42,683
+ I still understand.
+
+1809
+02:18:43,183 --> 02:18:45,983
+ It will take eight hours for me to finish
+
+1810
+02:18:46,299 --> 02:18:48,883
+ this post-production because I create
+
+1811
+02:18:48,883 --> 02:18:51,566
+ YouTube videos weekly and it takes around
+
+1812
+02:18:51,566 --> 02:18:54,799
+ eight hours for me to finish all my
+
+1813
+02:18:54,799 --> 02:18:57,250
+ YouTube videos for the post-production.
+
+1814
+02:18:57,466 --> 02:18:59,866
+ I'm not saying it's an easy process, but
+
+1815
+02:18:59,866 --> 02:19:01,466
+ somebody needs to guide you.
+
+1816
+02:19:01,466 --> 02:19:02,783
+ I have already created this.
+
+1817
+02:19:02,933 --> 02:19:05,416
+ much of a guidance I can go ahead and
+
+1818
+02:19:05,416 --> 02:19:07,766
+ complete the remaining and you guys will
+
+1819
+02:19:07,766 --> 02:19:10,299
+ be able to see it and if I have any gaps
+
+1820
+02:19:10,299 --> 02:19:13,500
+ I will fix it in the processes of there
+
+1821
+02:19:13,500 --> 02:19:16,500
+ could be gaps that I have that I'm saying
+
+1822
+02:19:16,500 --> 02:19:19,450
+ there's a car use it but I'm not showing
+
+1823
+02:19:19,450 --> 02:19:22,583
+ the accelerator I'm not showing the wheel
+
+1824
+02:19:22,583 --> 02:19:25,266
+ and it might not make sense if you always
+
+1825
+02:19:25,266 --> 02:19:28,066
+ ridden a horse you have never seen a car
+
+1826
+02:19:28,066 --> 02:19:30,733
+ you have never seen a wheel it might not
+
+1827
+02:19:30,733 --> 02:19:33,149
+ make sense I will show it to you because
+
+1828
+02:19:33,149 --> 02:19:34,416
+ I'm using artificial
+
+1829
+02:19:34,416 --> 02:19:36,049
+ intelligence to be able to do it.
+
+1830
+02:19:36,049 --> 02:19:40,000
+ So let's do one thing what I will do is
+
+1831
+02:19:40,000 --> 02:19:48,233
+ I'll just go through the yeah so what we
+
+1832
+02:19:48,233 --> 02:19:52,000
+ can do is yeah just allow me one minute
+
+1833
+02:19:52,000 --> 02:19:57,100
+ so what we can do so what we can do I
+
+1834
+02:19:57,100 --> 02:20:04,000
+ think somebody's playing somebody's
+
+1835
+02:20:04,000 --> 02:20:04,716
+ playing but there's an
+
+1836
+02:20:04,716 --> 02:20:05,866
+ interruption from Arin.
+
+1837
+02:20:07,600 --> 02:20:11,000
+ Can you check your background?
+
+1838
+02:20:12,100 --> 02:20:14,933
+ Hari wants to add something yes Hari what
+
+1839
+02:20:14,933 --> 02:20:16,866
+ is it that you want to say?
+
+1840
+02:20:17,350 --> 02:20:20,883
+ No for the in that existing storyboard so
+
+1841
+02:20:20,883 --> 02:20:24,483
+ it is possible to add so that image if
+
+1842
+02:20:24,483 --> 02:20:26,149
+ you are showing means just take the audio
+
+1843
+02:20:26,149 --> 02:20:29,866
+ part so from this audio part to this one
+
+1844
+02:20:29,866 --> 02:20:32,299
+ show this image or firstly we have to
+
+1845
+02:20:32,299 --> 02:20:34,216
+ show the video means just make a number
+
+1846
+02:20:34,216 --> 02:20:37,066
+ of that for a firstly we have to show the
+
+1847
+02:20:37,066 --> 02:20:39,100
+ video means make it number one and the
+
+1848
+02:20:39,100 --> 02:20:41,000
+ next we if we have to show the image
+
+1849
+02:20:41,000 --> 02:20:43,649
+ means make it number two and just place
+
+1850
+02:20:43,649 --> 02:20:47,100
+ the audio I will do I think that will be
+
+1851
+02:20:47,100 --> 02:20:50,049
+ easy yes I will have using number code
+
+1852
+02:20:50,049 --> 02:20:52,933
+ them in each scene so you know which one
+
+1853
+02:20:52,933 --> 02:20:55,666
+ comes one two three four five and I will
+
+1854
+02:20:55,666 --> 02:20:58,033
+ put that on my post-production plan and
+
+1855
+02:20:58,033 --> 02:21:01,583
+ guide there I think that will be that
+
+1856
+02:21:01,583 --> 02:21:03,950
+ will be easy so instead of creating a new
+
+1857
+02:21:03,950 --> 02:21:07,216
+ one like I'll share my ones.
+
+1858
+02:21:08,049 --> 02:21:10,466
+ Suppose when I guess you got me screen.
+
+1859
+02:21:11,183 --> 02:21:11,716
+ Yes, I can.
+
+1860
+02:21:12,466 --> 02:21:13,433
+ Yes, I can.
+
+1861
+02:21:13,433 --> 02:21:16,549
+ When it comes to this one slide 5, so we
+
+1862
+02:21:16,549 --> 02:21:17,483
+ have this audio part.
+
+1863
+02:21:17,716 --> 02:21:20,483
+ So for this slide 5, first we have to
+
+1864
+02:21:20,483 --> 02:21:21,549
+ show the video part.
+
+1865
+02:21:21,549 --> 02:21:22,149
+ It means just to
+
+1866
+02:21:22,149 --> 02:21:23,666
+ mention this one audio part.
+
+1867
+02:21:24,033 --> 02:21:26,416
+ So from exactly which audio from which
+
+1868
+02:21:26,416 --> 02:21:28,383
+ were to which one we have to show this
+
+1869
+02:21:28,383 --> 02:21:31,033
+ video and this image is also there.
+
+1870
+02:21:31,299 --> 02:21:33,366
+ So we have to show the image this after
+
+1871
+02:21:33,366 --> 02:21:35,166
+ the video means just to mention it as a
+
+1872
+02:21:35,166 --> 02:21:38,416
+ number 2 and just to copy and paste that
+
+1873
+02:21:38,416 --> 02:21:40,233
+ audio part near to that image.
+
+1874
+02:21:40,866 --> 02:21:43,250
+ We can pick it up that one easily.
+
+1875
+02:21:43,766 --> 02:21:45,833
+ Alright, I will give you the number codes
+
+1876
+02:21:45,833 --> 02:21:49,683
+ and how it's going to get edited out on
+
+1877
+02:21:49,683 --> 02:21:53,683
+ AI generated video production plan and I
+
+1878
+02:21:53,683 --> 02:21:56,633
+ will go over that video production plan
+
+1879
+02:21:56,633 --> 02:21:59,649
+ and execute it and make sure that it is
+
+1880
+02:21:59,649 --> 02:22:02,266
+ usable and you will be able to see the
+
+1881
+02:22:02,299 --> 02:22:03,566
+ output, the numbers,
+
+1882
+02:22:04,000 --> 02:22:05,833
+ the plan and the input.
+
+1883
+02:22:06,133 --> 02:22:08,066
+ So you have everything to be able to
+
+1884
+02:22:08,066 --> 02:22:10,333
+ create one video and give me a go at but
+
+1885
+02:22:10,333 --> 02:22:13,183
+ it will take me this weekend to be able
+
+1886
+02:22:13,183 --> 02:22:15,500
+ to complete it because I'm traveling.
+
+1887
+02:22:15,766 --> 02:22:17,166
+ I'm in a hotel right now.
+
+1888
+02:22:17,166 --> 02:22:19,799
+ I will go back to Cambridge and produce
+
+1889
+02:22:19,799 --> 02:22:22,500
+ it so you will be able to see it.
+
+1890
+02:22:22,799 --> 02:22:25,333
+ And you need to do is
+
+1891
+02:22:25,333 --> 02:22:28,633
+ while I'm working on it.
+
+1892
+02:22:28,633 --> 02:22:30,883
+ Who is the Haruki?
+
+1893
+02:22:30,883 --> 02:22:31,366
+ I will
+
+1894
+02:22:32,933 --> 02:22:34,149
+ Haruki Shannon.
+
+1895
+02:22:34,666 --> 02:22:37,450
+ I will give you the I will give you the
+
+1896
+02:22:37,450 --> 02:22:39,466
+ links during the
+
+1897
+02:22:39,466 --> 02:22:41,549
+ process of how I am doing it.
+
+1898
+02:22:41,866 --> 02:22:44,266
+ So you can give me the feedback while we
+
+1899
+02:22:44,266 --> 02:22:45,266
+ are working together.
+
+1900
+02:22:46,033 --> 02:22:49,133
+ I will give the update to Haruki Shinny
+
+1901
+02:22:49,133 --> 02:22:52,000
+ or I will put this to this channel to
+
+1902
+02:22:52,000 --> 02:22:55,733
+ this chat all the steps on this chat so
+
+1903
+02:22:55,733 --> 02:22:58,983
+ everybody will be able to see what I'm
+
+1904
+02:22:58,983 --> 02:23:01,033
+ doing and how I'm going through so you
+
+1905
+02:23:01,033 --> 02:23:03,966
+ guys will be able to give feedback live.
+
+1906
+02:23:04,333 --> 02:23:05,916
+ I don't know if you guys are working in
+
+1907
+02:23:05,916 --> 02:23:07,466
+ the weekend, but I had
+
+1908
+02:23:07,466 --> 02:23:08,683
+ to do it on the weekend.
+
+1909
+02:23:09,666 --> 02:23:11,783
+ So because I'm working in IBM
+
+1910
+02:23:13,250 --> 02:23:16,133
+ At the moment I would not have the time
+
+1911
+02:23:16,133 --> 02:23:19,733
+ to do it on today till the weekend But I
+
+1912
+02:23:19,733 --> 02:23:22,466
+ will add the plans over there
+
+1913
+02:23:23,750 --> 02:23:27,366
+ Okay, okay, let's do that and a real date
+
+1914
+02:23:27,366 --> 02:23:35,299
+ for that For supporting us
+
+1915
+02:23:35,850 --> 02:23:37,683
+ For now, I know it's not easy.
+
+1916
+02:23:37,683 --> 02:23:39,549
+ It's a very transitional time.
+
+1917
+02:23:39,549 --> 02:23:43,216
+ Let's use the AI I'm using the Gemini 3
+
+1918
+02:23:43,216 --> 02:23:46,916
+ right now to be able to do this And I
+
+1919
+02:23:46,916 --> 02:23:49,000
+ will give all the steps so you guys will
+
+1920
+02:23:49,000 --> 02:23:51,833
+ be able to Trigger all the prompts that
+
+1921
+02:23:51,833 --> 02:23:54,549
+ I'm using to be able to create on your
+
+1922
+02:23:54,549 --> 02:23:56,666
+ site and use it on the other video
+
+1923
+02:23:56,933 --> 02:23:59,466
+ Productions and this is going to speed up
+
+1924
+02:23:59,466 --> 02:24:02,450
+ not only this video but every video that
+
+1925
+02:24:02,450 --> 02:24:03,783
+ the Starweaver creates
+
+1926
+02:24:04,833 --> 02:24:05,916
+ Hopefully this process.
+
+1927
+02:24:05,916 --> 02:24:06,716
+ Okay
+
+1928
+02:24:08,416 --> 02:24:09,266
+ Okay, yeah
+
+1929
+02:24:11,683 --> 02:24:13,383
+ All right, then we are
+
+1930
+02:24:13,383 --> 02:24:14,549
+ going to meet next week.
+
+1931
+02:24:14,549 --> 02:24:15,500
+ I will create the video
+
+1932
+02:24:15,500 --> 02:24:17,666
+ so put all the outputs here
+
+1933
+02:24:18,966 --> 02:24:22,649
+ Yeah, if it's a shared it is with me We
+
+1934
+02:24:22,649 --> 02:24:25,883
+ are kind of we are all from the next From
+
+1935
+02:24:25,883 --> 02:24:28,100
+ the next Monday onwards, but we'll
+
+1936
+02:24:28,100 --> 02:24:29,583
+ schedule something to look at this so
+
+1937
+02:24:29,583 --> 02:24:31,850
+ that it is Continue to you guys have a
+
+1938
+02:24:31,850 --> 02:24:32,466
+ new year's
+
+1939
+02:24:32,466 --> 02:24:34,066
+ celebration right the Christmas.
+
+1940
+02:24:34,066 --> 02:24:36,333
+ Yes Yes, all right.
+
+1941
+02:24:36,333 --> 02:24:36,600
+ Okay.
+
+1942
+02:24:36,600 --> 02:24:37,500
+ I'm a contractor.
+
+1943
+02:24:37,500 --> 02:24:38,966
+ So I'm working in Christmas
+
+1944
+02:24:40,133 --> 02:24:41,166
+ That's all right.
+
+1945
+02:24:41,166 --> 02:24:44,500
+ I will share it with you and share it
+
+1946
+02:24:44,500 --> 02:24:47,066
+ with this meeting chat Is this meeting
+
+1947
+02:24:47,066 --> 02:24:49,166
+ just going to be available or not?
+
+1948
+02:24:49,166 --> 02:24:52,049
+ I don't know but yes I will take a
+
+1949
+02:24:52,049 --> 02:24:55,149
+ screenshot of everyone that joined this
+
+1950
+02:24:55,149 --> 02:24:56,883
+ call So they will be able to
+
+1951
+02:24:56,883 --> 02:24:59,266
+ be free and come in and much.
+
+1952
+02:24:59,266 --> 02:25:01,683
+ I hope the Sangha runaway.
+
+1953
+02:25:01,683 --> 02:25:03,950
+ She's like the Rufattis Yes
+
+1954
+02:25:09,283 --> 02:25:13,133
+ Yes, I've won but she's there all right,
+
+1955
+02:25:13,133 --> 02:25:15,733
+ I will share it as much as I
+
