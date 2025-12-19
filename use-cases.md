@@ -112,9 +112,9 @@ Sarah needs to update the same Kubernetes configuration, but now with AI agent a
 **Agent Solution**: Agents read all relevant communications, tickets, and documentation to provide a complete context summary before any change.
 
 **Impact**: 
-- 80% reduction in time spent on pre-change research
-- 50% reduction in configuration-related incidents
-- Zero self-blame for "missing a message"
+- Significant reduction in time spent on pre-change research
+- Substantial reduction in configuration-related incidents
+- Eliminates self-blame for "missing a message"
 
 ---
 
@@ -128,7 +128,7 @@ Sarah needs to update the same Kubernetes configuration, but now with AI agent a
 - Current priorities and blockers
 
 **Impact**:
-- 60% faster time to first meaningful contribution
+- Dramatically faster time to first meaningful contribution
 - Reduced anxiety for new hires
 - Better knowledge retention
 
@@ -144,7 +144,7 @@ Sarah needs to update the same Kubernetes configuration, but now with AI agent a
 - Key stakeholders to involve
 
 **Impact**:
-- 40% faster mean time to resolution (MTTR)
+- Faster mean time to resolution (MTTR)
 - More confident incident response
 - Better post-incident learning
 
@@ -160,7 +160,7 @@ Sarah needs to update the same Kubernetes configuration, but now with AI agent a
 - Translating team-specific jargon
 
 **Impact**:
-- 70% reduction in "I didn't know about that" situations
+- Substantial reduction in "I didn't know about that" situations
 - Improved cross-team trust
 - Faster project delivery
 
@@ -176,7 +176,7 @@ Sarah needs to update the same Kubernetes configuration, but now with AI agent a
 - Trade-off analysis based on team context
 
 **Impact**:
-- 90% reduction in decision research time
+- Dramatic reduction in decision research time
 - Better-informed decisions
 - Clear decision audit trails
 
@@ -279,10 +279,10 @@ AI agents can:
 
 ## 🔗 Related Resources
 
-- [Post-Production Planning Overview](README.md)
-- [Mitigation Strategies for Cognitive Overload](mitigation-dunningkruger.md)
-- [Valley of Despair: Managing Learning Curves](valley-of-despair.md)
-- [Feedback Bias in Complex Systems](feedback-bias-overestimate-ability.md)
+- [Post-Production Planning Overview](README.md) - How AI agents are applied to video production workflows
+- [Mitigation Strategies for Course Production](mitigation-dunningkruger.md) - Producer's guide to quality standards
+- [Valley of Despair: Video Editor's Journey](valley-of-despair.md) - Understanding the learning curve in editing
+- [Feedback Bias and Overestimating Ability](feedback-bias-overestimate-ability.md) - The Dunning-Kruger effect in production
 
 ---
 
