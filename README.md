@@ -21,6 +21,7 @@ This project represents a shift from traditional editing methods ("horses") to A
 ## 📁 Repository Structure
 
 - **README.md** - Project overview and documentation (this file)
+- **use-cases.md** - Enterprise use cases for AI agent adoption
 - **references.md** - Links to external resources (Canva designs, agents)
 - **18_dec_meeting_summary.md** - Rewritten meeting narrative with emojis
 - **18_dec_meeting_output.md** - Formal meeting summary with action items
@@ -73,6 +74,17 @@ This workflow is designed for creating **heavyweight technical courses** for adv
 - Senior AI/ML engineers
 
 The content is high-density and fast-paced, assuming advanced technical knowledge from learners.
+
+## 🤖 AI Agent Use Cases
+
+This project demonstrates broader applications of AI agents in enterprise environments. See [use-cases.md](use-cases.md) for detailed scenarios on how AI agents help enterprises move from blame culture to empowerment culture by:
+
+- **Reading and Processing**: Agents monitor all team communications and documentation
+- **Contextual Understanding**: Agents understand dependencies and relationships
+- **Human Enablement**: Agents prepare summaries so humans can make confident decisions
+- **Configuration Management**: Making complex changes becomes accessible and safe
+
+In an ever-changing complex world, AI agents transform impossible tasks (like reading all team messages before making a configuration change) into manageable workflows where agents assist humans rather than expecting superhuman capabilities.
 
 ## 🔗 External Resources
 
