@@ -21,12 +21,19 @@ This project represents a shift from traditional editing methods ("horses") to A
 ## 📁 Repository Structure
 
 - **README.md** - Project overview and documentation (this file)
-- **references.md** - Links to external resources (Canva designs, agents)
-- **18_dec_meeting_summary.md** - Rewritten meeting narrative with emojis
-- **18_dec_meeting_output.md** - Formal meeting summary with action items
-- **18_dec_Feedback_call_raw.md** - Raw transcript of feedback call
-- **16dec-meeting.srt** - Meeting subtitle file
-- **Editor_Guidence_WhatsApp Video 2025-12-16 at 06.33.56.mp4** - Video guidance for editors
+- **1_Real/** - Objectives and OKRs
+  - [18_dec_meeting_summary.md](1_Real/18_dec_meeting_summary.md) - Rewritten meeting narrative
+  - [18_dec_meeting_output.md](1_Real/18_dec_meeting_output.md) - Formal meeting summary
+- **2_Environment/** - Roadmap and use cases
+  - [roadmap-for-editors.md](2_Environment/roadmap-for-editors.md)
+  - [18_dec_Feedback_call_raw.md](2_Environment/18_dec_Feedback_call_raw.md)
+- **3_UI/** - Knowledge base user interfaces (Currently empty)
+- **4_Formula/** - Guides, best practices, and instructions
+  - [references.md](4_Formula/references.md)
+  - [Editor_Guidence_WhatsApp_Video.mp4](4_Formula/Editor_Guidence_WhatsApp_Video.mp4)
+- **5_Symbols/** - Core source code (Currently empty)
+- **6_Semblance/** - Error logs and solutions (Currently empty)
+- **7_Testing/** - Validation (Currently empty)
 
 ## 🔑 Key Challenges Addressed
 
@@ -76,7 +83,7 @@ The content is high-density and fast-paced, assuming advanced technical knowledg
 
 ## 🔗 External Resources
 
-See [references.md](references.md) for links to:
+See [references.md](4_Formula/references.md) for links to:
 - Initial guide (Canva)
 - Storyboard design (Canva)
 - Post-Production Agent (Gemini)
@@ -84,9 +91,9 @@ See [references.md](references.md) for links to:
 ## 📊 Meeting Documentation
 
 Detailed meeting notes and summaries are available in:
-- [18_dec_meeting_summary.md](18_dec_meeting_summary.md) - Narrative rewrite
-- [18_dec_meeting_output.md](18_dec_meeting_output.md) - Formal summary
-- [18_dec_Feedback_call_raw.md](18_dec_Feedback_call_raw.md) - Raw transcript
+- [1_Real/18_dec_meeting_summary.md](1_Real/18_dec_meeting_summary.md) - Narrative rewrite
+- [1_Real/18_dec_meeting_output.md](1_Real/18_dec_meeting_output.md) - Formal summary
+- [2_Environment/18_dec_Feedback_call_raw.md](2_Environment/18_dec_Feedback_call_raw.md) - Raw transcript
 
 ## 🚀 Getting Started
 
