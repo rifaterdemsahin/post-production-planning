@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Production Workflows</title>
+    <link rel="stylesheet" href="6_Symbols/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Landing page specific overrides */
+        .landing-header {
+            margin-top: 10vh;
+            margin-bottom: 4rem;
+        }
+
+        .role-selection {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            padding: 0 2rem;
+        }
+
+        .role-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            width: 300px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .role-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .role-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 243, 255, 0.2);
+        }
+
+        .role-card:hover::before {
+            opacity: 1;
+        }
+
+        .role-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            transition: color 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .role-card:hover .role-icon {
+            color: var(--accent-primary);
+        }
+
+        .role-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .role-desc {
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .role-card.producer:hover {
+            border-color: var(--accent-secondary);
+        }
+
+        .role-card.producer:hover .role-icon {
+            color: var(--accent-secondary);
+        }
+
+        .role-card.producer::before {
+            background: radial-gradient(circle at center, rgba(189, 0, 255, 0.1) 0%, transparent 70%);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="landing-header">
+        <h1>Post-Production Planning</h1>
+        <p class="subtitle">Select your workflow to begin</p>
+    </header>
+
+    <div class="role-selection">
+        <a href="6_Symbols/producer_flow.html" class="role-card producer">
+            <div class="role-icon"><i class="fa-solid fa-clapperboard"></i></div>
+            <h2 class="role-title">Producer</h2>
+            <p class="role-desc">Strategic overview from planning to data wrangling.</p>
+        </a>
+
+        <a href="6_Symbols/editor_flow.html" class="role-card editor">
+            <div class="role-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <h2 class="role-title">Editor</h2>
+            <p class="role-desc">Creative execution from ingest to final delivery.</p>
+        </a>
+    </div>
+
+</body>
+
+</html>
