@@ -424,13 +424,17 @@
                         if (part.inlineData) {
                             // Render Image
                             const imgSrc = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+                            const filename = getArtifactFilename(id, 'Image') + '.png';
                             htmlOutput += `
                                 <div class="mb-4">
                                     <img src="${imgSrc}" class="w-full h-auto rounded mb-2 border border-gray-700">
-                                    <a href="${imgSrc}" download="generated_artifact_${id}.png" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-bold hover:underline">
+                                    <a href="${imgSrc}" download="${filename}" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-bold hover:underline">
                                         📥 Download Image
                                     </a>
                                 </div>`;
+                            
+                            // Auto Download
+                            triggerAutoDownload(imgSrc, filename);
                         } else if (part.text) {
                             // Render Text
                             htmlOutput += `<p class="mb-2 text-gray-300 border-l-2 border-purple-500 pl-2">${part.text}</p>`;
@@ -542,13 +546,17 @@
                         if (part.inlineData) {
                             // Render Audio Player
                             const audioSrc = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+                            const filename = getArtifactFilename(id, 'Audio') + '.mp3';
                             htmlOutput += `
                                 <div class="mb-4">
                                     <audio controls src="${audioSrc}" class="w-full mb-2 bg-gray-800 rounded"></audio>
-                                    <a href="${audioSrc}" download="generated_audio_${id}.mp3" class="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 text-xs font-bold hover:underline">
+                                    <a href="${audioSrc}" download="${filename}" class="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 text-xs font-bold hover:underline">
                                         📥 Download Audio
                                     </a>
                                 </div>`;
+                            
+                            // Auto Download
+                            triggerAutoDownload(audioSrc, filename);
                         }
                     });
                 }
@@ -659,6 +667,7 @@
                 if (videoUri) {
                     // The video URI is a GCS-like link containing the key if passed correctly, but let's append key just in case
                     const fetchVideoUrl = `${videoUri}&key=${apiKey}`;
+                    const filename = getArtifactFilename(id, 'Video') + '.mp4';
                     
                     const videoHtml = `
                         <div class="mb-4">
@@ -667,7 +676,7 @@
                                 <source src="${fetchVideoUrl}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
-                            <a href="${fetchVideoUrl}" download="veo_generated_${id}.mp4" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-bold hover:underline">
+                            <a href="${fetchVideoUrl}" download="${filename}" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-bold hover:underline">
                                 📥 Download MP4
                             </a>
                         </div>
@@ -677,6 +686,9 @@
                     container.classList.remove('hidden');
                     status.innerText = "✅ Done";
                     status.className = "text-xs text-green-500";
+
+                    // Auto Download
+                    triggerAutoDownload(fetchVideoUrl, filename);
 
                 }
 
@@ -693,7 +705,37 @@
         }
 
         // ==========================================
-        // 5. EXPORT & DOWNLOAD
+        // 5. HELPER FUNCTIONS
+        // ==========================================
+        
+        function getArtifactFilename(uniqueId, type) {
+            // uniqueId format: "s{sceneIndex}_l{lineIndex}"
+            const parts = uniqueId.match(/s(\d+)_l(\d+)/);
+            if (!parts) return `artifact_${Date.now()}`;
+
+            const sceneIndex = parseInt(parts[1]);
+            const lineIndex = parseInt(parts[2]);
+            
+            const sceneTitle = scenes[sceneIndex].title.replace(/[^a-zA-Z0-9]/g, '_');
+            const lineId = scenes[sceneIndex].lines[lineIndex].id;
+            
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}`;
+            
+            return `${sceneTitle}_Line${lineId}_${type}_${dateStr}`;
+        }
+
+        function triggerAutoDownload(url, filename) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // ==========================================
+        // 6. EXPORT & DOWNLOAD
         // ==========================================
         function downloadYAML() {
             if (scenes.length === 0) {
