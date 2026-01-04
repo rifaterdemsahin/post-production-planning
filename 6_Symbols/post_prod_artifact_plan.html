@@ -107,25 +107,55 @@
                             
                             <!-- Prompt Controls -->
                             <div class="mb-3">
-                                <div class="flex justify-between items-center mb-1 gap-2">
-                                    <select id="type-${uniqueId}" onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})" 
-                                            class="bg-gray-900 text-xs text-white border border-gray-600 rounded px-2 py-1 focus:outline-none focus:border-blue-500 flex-grow">
-                                        <option value="image" selected>🖼️ Image</option>
-                                        <option value="graphic">📊 Graphic</option>
-                                        <option value="music">🎵 Music</option>
-                                        <option value="animation">🎬 Animation</option>
-                                        <option value="overlay_text">📝 Overlay Text</option>
-                                        <option value="sound_effect">🔊 Sound Effect</option>
-                                    </select>
+                                <div class="flex flex-wrap gap-x-3 gap-y-2 mb-2">
+                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
+                                        <input type="radio" name="type-${uniqueId}" value="image" checked 
+                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
+                                            class="form-radio text-blue-500 h-3 w-3">
+                                        <span class="ml-1.5 text-xs">🖼️ Image</span>
+                                    </label>
+                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
+                                        <input type="radio" name="type-${uniqueId}" value="graphic" 
+                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
+                                            class="form-radio text-blue-500 h-3 w-3">
+                                        <span class="ml-1.5 text-xs">📊 Graphic</span>
+                                    </label>
+                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
+                                        <input type="radio" name="type-${uniqueId}" value="music" 
+                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
+                                            class="form-radio text-blue-500 h-3 w-3">
+                                        <span class="ml-1.5 text-xs">🎵 Music</span>
+                                    </label>
+                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
+                                        <input type="radio" name="type-${uniqueId}" value="animation" 
+                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
+                                            class="form-radio text-blue-500 h-3 w-3">
+                                        <span class="ml-1.5 text-xs">🎬 Animation</span>
+                                    </label>
+                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
+                                        <input type="radio" name="type-${uniqueId}" value="overlay_text" 
+                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
+                                            class="form-radio text-blue-500 h-3 w-3">
+                                        <span class="ml-1.5 text-xs">📝 Text</span>
+                                    </label>
+                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
+                                        <input type="radio" name="type-${uniqueId}" value="sound_effect" 
+                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
+                                            class="form-radio text-blue-500 h-3 w-3">
+                                        <span class="ml-1.5 text-xs">🔊 SFX</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="relative">
+                                    <textarea id="text-${uniqueId}" rows="3" 
+                                            class="w-full bg-gray-900 text-green-400 font-mono text-xs p-2 rounded border border-gray-700 focus:outline-none focus:border-green-500 resize-none pr-8"
+                                            readonly>${currentPrompt}</textarea>
                                     <button onclick="copyToClipboard('${uniqueId}')" 
-                                            class="bg-gray-700 hover:bg-gray-600 text-xs text-white px-2 py-1 rounded transition flex items-center gap-1"
+                                            class="absolute top-2 right-2 text-gray-500 hover:text-white transition"
                                             title="Copy to Clipboard">
-                                        📋 <span id="copy-text-${uniqueId}">Copy</span>
+                                        <span id="copy-text-${uniqueId}" class="text-lg">📋</span>
                                     </button>
                                 </div>
-                                <textarea id="text-${uniqueId}" rows="3" 
-                                          class="w-full bg-gray-900 text-green-400 font-mono text-xs p-2 rounded border border-gray-700 focus:outline-none focus:border-green-500 resize-none"
-                                          readonly>${currentPrompt}</textarea>
                             </div>
                             
                             <div class="flex justify-between items-center mt-2">
@@ -154,9 +184,12 @@
         // ==========================================
         
         function updatePromptDisplay(uniqueId, sceneIndex, lineIndex) {
-            const typeSelect = document.getElementById(`type-${uniqueId}`);
+            // Find the checked radio button
+            const selectedRadio = document.querySelector(`input[name="type-${uniqueId}"]:checked`);
+            if (!selectedRadio) return;
+            
+            const selectedType = selectedRadio.value;
             const textArea = document.getElementById(`text-${uniqueId}`);
-            const selectedType = typeSelect.value;
             
             const promptContent = scenes[sceneIndex].lines[lineIndex].prompts[selectedType] || "";
             textArea.value = promptContent;
