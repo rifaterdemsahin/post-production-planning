@@ -20,7 +20,7 @@
     <div class="max-w-7xl mx-auto mb-8 flex justify-between items-center bg-gray-900 p-4 rounded-lg shadow-lg">
         <div>
             <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400">
-                🍌 Gemini Nanabanana Creator
+                🍌 Gemini Scene Creator
             </h1>
             <p class="text-sm text-gray-400">Post-Production Asset Generator</p>
         </div>
@@ -151,7 +151,7 @@
                                             class="form-radio text-blue-500 h-3 w-3">
                                         <div class="ml-1.5 flex flex-col">
                                             <span class="text-xs font-bold">🎵 Music</span>
-                                            <span class="text-[9px] text-gray-500">gemini-2.0-flash</span>
+                                            <span class="text-[9px] text-yellow-400">gemini-2.5-pro-preview-tts</span>
                                         </div>
                                     </label>
                                     <label class="inline-flex items-center cursor-pointer hover:text-white transition">
@@ -160,7 +160,7 @@
                                             class="form-radio text-blue-500 h-3 w-3">
                                         <div class="ml-1.5 flex flex-col">
                                             <span class="text-xs font-bold">🎬 Animation</span>
-                                            <span class="text-[9px] text-gray-500">gemini-2.0-flash</span>
+                                            <span class="text-[9px] text-blue-400">veo-2.0-generate-001</span>
                                         </div>
                                     </label>
                                     <label class="inline-flex items-center cursor-pointer hover:text-white transition">
@@ -178,7 +178,7 @@
                                             class="form-radio text-blue-500 h-3 w-3">
                                         <div class="ml-1.5 flex flex-col">
                                             <span class="text-xs font-bold">🔊 SFX</span>
-                                            <span class="text-[9px] text-gray-500">gemini-2.0-flash</span>
+                                            <span class="text-[9px] text-yellow-400">gemini-2.5-pro-preview-tts</span>
                                         </div>
                                     </label>
                                 </div>
@@ -273,6 +273,10 @@
 
             if (type === 'image' || type === 'graphic') {
                 generateMultimodalContent(uniqueId, promptText);
+            } else if (type === 'animation') {
+                generateVideoContent(uniqueId, promptText);
+            } else if (type === 'music' || type === 'sound_effect') {
+                generateAudioContent(uniqueId, promptText);
             } else {
                 generateContent(uniqueId, promptText);
             }
@@ -444,6 +448,236 @@
                     status.className = "text-xs text-green-500";
                 } else {
                     throw new Error("No content generated.");
+                }
+
+            } catch (error) {
+                console.error(error);
+                logDebug('ERROR', error.message, error);
+                status.innerText = "❌ Failed";
+                status.className = "text-xs text-red-500";
+                container.innerHTML = `<span class="text-red-400">Error: ${error.message}</span>`;
+                container.classList.remove('hidden');
+            } finally {
+                loader.style.display = "none";
+            }
+        }
+
+        // 4c. Audio Generation
+        async function generateAudioContent(id, prompt) {
+            const apiKey = document.getElementById('apiKey').value;
+            if (!apiKey) {
+                alert("⚠️ Please paste your Google API Key at the top first.");
+                return;
+            }
+
+            const loader = document.getElementById(`loader-${id}`);
+            const status = document.getElementById(`status-${id}`);
+            const container = document.getElementById(`result-container-${id}`);
+
+            loader.style.display = "block";
+            status.innerText = "Composing...";
+            status.className = "text-xs text-yellow-400";
+            container.classList.add('hidden');
+
+            const modelId = "gemini-2.5-pro-preview-tts";
+            // Use generateContent for simplicity; assuming it supports the audio output same as stream
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`;
+
+            const payload = {
+                contents: [
+                    {
+                        role: "user",
+                        parts: [{ text: prompt }]
+                    }
+                ],
+                generationConfig: {
+                    responseModalities: ["audio"],
+                    temperature: 1,
+                    speech_config: {
+                        multi_speaker_voice_config: {
+                            speaker_voice_configs: [
+                                {
+                                    speaker: "Speaker 1",
+                                    voice_config: {
+                                        prebuilt_voice_config: {
+                                            voice_name: "Zephyr"
+                                        }
+                                    }
+                                },
+                                {
+                                    speaker: "Speaker 2",
+                                    voice_config: {
+                                        prebuilt_voice_config: {
+                                            voice_name: "Puck"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            };
+
+            logDebug('REQ', 'Sending Audio Request', { url, payload });
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                const requestId = response.headers.get('x-goog-request-id');
+                const logUrl = requestId ? `https://aistudio.google.com/logs/${requestId}` : "https://aistudio.google.com/logs";
+                
+                logDebug('RES', `Response (${response.status})`, data);
+
+                if (!response.ok) throw new Error(data.error?.message || `API Error: ${response.status}`);
+
+                let htmlOutput = "";
+                
+                if (data.candidates?.[0]?.content?.parts) {
+                    data.candidates[0].content.parts.forEach(part => {
+                        if (part.inlineData) {
+                            // Render Audio Player
+                            const audioSrc = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+                            htmlOutput += `
+                                <div class="mb-4">
+                                    <audio controls src="${audioSrc}" class="w-full mb-2 bg-gray-800 rounded"></audio>
+                                    <a href="${audioSrc}" download="generated_audio_${id}.mp3" class="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 text-xs font-bold hover:underline">
+                                        📥 Download Audio
+                                    </a>
+                                </div>`;
+                        }
+                    });
+                }
+
+                if (htmlOutput) {
+                    const logLink = `<div class="mt-4 pt-2 border-t border-gray-700"><a href="${logUrl}" target="_blank" class="text-xs text-gray-500 hover:text-blue-400">View Logs ↗</a></div>`;
+                    container.innerHTML = htmlOutput + logLink;
+                    container.classList.remove('hidden');
+                    status.innerText = "✅ Done";
+                    status.className = "text-xs text-green-500";
+                } else {
+                    throw new Error("No audio content generated.");
+                }
+
+            } catch (error) {
+                console.error(error);
+                logDebug('ERROR', error.message, error);
+                status.innerText = "❌ Failed";
+                status.className = "text-xs text-red-500";
+                container.innerHTML = `<span class="text-red-400">Error: ${error.message}</span>`;
+                container.classList.remove('hidden');
+            } finally {
+                loader.style.display = "none";
+            }
+        }
+
+        // 4d. Video Generation (Veo 2.0)
+        async function generateVideoContent(id, prompt) {
+            const apiKey = document.getElementById('apiKey').value;
+            if (!apiKey) {
+                alert("⚠️ Please paste your Google API Key at the top first.");
+                return;
+            }
+
+            const loader = document.getElementById(`loader-${id}`);
+            const status = document.getElementById(`status-${id}`);
+            const container = document.getElementById(`result-container-${id}`);
+
+            loader.style.display = "block";
+            status.innerText = "Generating Video... (This may take a minute)";
+            status.className = "text-xs text-blue-400";
+            container.classList.add('hidden');
+
+            const modelId = "veo-2.0-generate-001";
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:predictLongRunning`;
+
+            const payload = {
+                instances: [{ prompt: prompt }],
+                parameters: {
+                    aspectRatio: "16:9",
+                    sampleCount: 1,
+                    durationSeconds: 8,
+                    personGeneration: "ALLOW_ALL"
+                }
+            };
+
+            logDebug('REQ', 'Sending Video Request', { url, payload });
+
+            try {
+                // 1. Start Operation
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                logDebug('RES', `Initial Response (${response.status})`, data);
+
+                if (!response.ok) throw new Error(data.error?.message || `API Error: ${response.status}`);
+
+                let opName = data.name; // Format: projects/.../locations/.../operations/...
+                if (!opName) throw new Error("No operation name returned.");
+
+                // 2. Poll Operation
+                status.innerText = "Rendering Video...";
+                let videoUri = null;
+                
+                while (true) {
+                    await new Promise(resolve => setTimeout(resolve, 5000)); // Poll every 5 seconds
+                    
+                    const pollUrl = `https://generativelanguage.googleapis.com/v1beta/${opName}`;
+                    const pollResponse = await fetch(pollUrl, {
+                         headers: { 'X-goog-api-key': apiKey }
+                    });
+                    const pollData = await pollResponse.json();
+                    
+                    logDebug('POLL', 'Checking Status', pollData);
+
+                    if (pollData.done) {
+                        if (pollData.error) {
+                            throw new Error(pollData.error.message || "Video generation failed during processing.");
+                        }
+                        
+                        // Extract Video URI
+                        // Structure: response.generateVideoResponse.generatedSamples[0].video.uri
+                        const samples = pollData.response?.generateVideoResponse?.generatedSamples;
+                        if (samples && samples.length > 0 && samples[0].video?.uri) {
+                            videoUri = samples[0].video.uri;
+                        } else {
+                            throw new Error("Operation done but no video URI found.");
+                        }
+                        break; 
+                    }
+                }
+
+                // 3. Display Result
+                if (videoUri) {
+                    // The video URI is a GCS-like link containing the key if passed correctly, but let's append key just in case
+                    const fetchVideoUrl = `${videoUri}&key=${apiKey}`;
+                    
+                    const videoHtml = `
+                        <div class="mb-4">
+                            <p class="text-xs text-green-400 mb-2">✅ Video Generated Successfully</p>
+                            <video controls width="100%" class="rounded border border-gray-700 mb-2">
+                                <source src="${fetchVideoUrl}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <a href="${fetchVideoUrl}" download="veo_generated_${id}.mp4" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-bold hover:underline">
+                                📥 Download MP4
+                            </a>
+                        </div>
+                    `;
+                    
+                    container.innerHTML = videoHtml;
+                    container.classList.remove('hidden');
+                    status.innerText = "✅ Done";
+                    status.className = "text-xs text-green-500";
+
                 }
 
             } catch (error) {
