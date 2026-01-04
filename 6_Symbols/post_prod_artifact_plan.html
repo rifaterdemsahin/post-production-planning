@@ -94,6 +94,9 @@
 
                 scene.lines.forEach((line, lineIndex) => {
                     const uniqueId = `s${sceneIndex}_l${lineIndex}`;
+                    // Default to image prompt
+                    const currentPrompt = line.prompts ? line.prompts.image : "";
+
                     html += `
                         <div class="bg-gray-800 p-4 rounded relative">
                             <div class="flex justify-between text-xs text-gray-400 mb-2">
@@ -101,12 +104,32 @@
                                 <span>Line ${line.id}</span>
                             </div>
                             <p class="text-sm italic text-gray-300 mb-3 line-clamp-2">"${line.script}"</p>
-                            <div class="bg-gray-900 p-2 rounded text-xs text-green-400 font-mono mb-3 border border-gray-700">
-                                PROMPT: ${line.prompt}
+                            
+                            <!-- Prompt Controls -->
+                            <div class="mb-3">
+                                <div class="flex justify-between items-center mb-1 gap-2">
+                                    <select id="type-${uniqueId}" onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})" 
+                                            class="bg-gray-900 text-xs text-white border border-gray-600 rounded px-2 py-1 focus:outline-none focus:border-blue-500 flex-grow">
+                                        <option value="image" selected>🖼️ Image</option>
+                                        <option value="graphic">📊 Graphic</option>
+                                        <option value="music">🎵 Music</option>
+                                        <option value="animation">🎬 Animation</option>
+                                        <option value="overlay_text">📝 Overlay Text</option>
+                                        <option value="sound_effect">🔊 Sound Effect</option>
+                                    </select>
+                                    <button onclick="copyToClipboard('${uniqueId}')" 
+                                            class="bg-gray-700 hover:bg-gray-600 text-xs text-white px-2 py-1 rounded transition flex items-center gap-1"
+                                            title="Copy to Clipboard">
+                                        📋 <span id="copy-text-${uniqueId}">Copy</span>
+                                    </button>
+                                </div>
+                                <textarea id="text-${uniqueId}" rows="3" 
+                                          class="w-full bg-gray-900 text-green-400 font-mono text-xs p-2 rounded border border-gray-700 focus:outline-none focus:border-green-500 resize-none"
+                                          readonly>${currentPrompt}</textarea>
                             </div>
                             
                             <div class="flex justify-between items-center mt-2">
-                                <button onclick="generateImage('${uniqueId}', \`${line.prompt.replace(/"/g, '&quot;')}\`)" 
+                                <button onclick="handleGenerate('${uniqueId}')" 
                                     class="btn-gen text-white px-4 py-1.5 rounded text-sm font-semibold hover:opacity-90 flex items-center gap-2">
                                     <span>Generate Artifact</span>
                                     <div id="loader-${uniqueId}" class="loader"></div>
@@ -127,7 +150,43 @@
         }
 
         // ==========================================
-        // 3. API CALL LOGIC (Google Imagen)
+        // 3. UI INTERACTIONS
+        // ==========================================
+        
+        function updatePromptDisplay(uniqueId, sceneIndex, lineIndex) {
+            const typeSelect = document.getElementById(`type-${uniqueId}`);
+            const textArea = document.getElementById(`text-${uniqueId}`);
+            const selectedType = typeSelect.value;
+            
+            const promptContent = scenes[sceneIndex].lines[lineIndex].prompts[selectedType] || "";
+            textArea.value = promptContent;
+        }
+
+        function copyToClipboard(uniqueId) {
+            const textArea = document.getElementById(`text-${uniqueId}`);
+            const copyTextSpan = document.getElementById(`copy-text-${uniqueId}`);
+            
+            textArea.select();
+            textArea.setSelectionRange(0, 99999); // For mobile devices
+            
+            navigator.clipboard.writeText(textArea.value).then(() => {
+                const originalText = copyTextSpan.innerText;
+                copyTextSpan.innerText = "Copied!";
+                setTimeout(() => {
+                    copyTextSpan.innerText = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+
+        function handleGenerate(uniqueId) {
+            const promptText = document.getElementById(`text-${uniqueId}`).value;
+            generateImage(uniqueId, promptText);
+        }
+
+        // ==========================================
+        // 4. API CALL LOGIC (Google Imagen)
         // ==========================================
         async function generateImage(id, prompt) {
             const apiKey = document.getElementById('apiKey').value;
@@ -148,8 +207,6 @@
 
             try {
                 // Endpoint for Imagen 3 via Vertex AI / Gemini API
-                // Note: The specific endpoint URL depends on the public beta availability. 
-                // We use the standard generative language endpoint for prediction.
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key=${apiKey}`;
 
                 const response = await fetch(url, {
@@ -197,19 +254,23 @@
         }
 
         // ==========================================
-        // 4. CSV DOWNLOADER
+        // 5. CSV DOWNLOADER
         // ==========================================
         function downloadCSV() {
             if (scenes.length === 0) {
                 alert("No data loaded to download.");
                 return;
             }
-            let csv = "Scene,Line,Timecode,Prompt\n";
+            // Add columns for all new prompt types
+            let csv = "Scene,Line,Timecode,Detailed Script,Prompt Image,Prompt Graphic,Prompt Music,Prompt Animation,Prompt Overlay Text,Prompt Sound Effect\n";
+            
             scenes.forEach(scene => {
                 scene.lines.forEach(line => {
-                    // Escape quotes for CSV
-                    const safePrompt = line.prompt.replace(/"/g, '""');
-                    csv += `"${scene.id}","${line.id}","${line.time}","${safePrompt}"\n`;
+                    const p = line.prompts || {};
+                    // Escape quotes for CSV for all fields
+                    const safe = (text) => text ? `"${text.replace(/"/g, '""')}"` : '""';
+                    
+                    csv += `"${scene.id}", "${line.id}", "${line.time}", ${safe(line.script)}, ${safe(p.image)}, ${safe(p.graphic)}, ${safe(p.music)}, ${safe(p.animation)}, ${safe(p.overlay_text)}, ${safe(p.sound_effect)}\n`;
                 });
             });
 
