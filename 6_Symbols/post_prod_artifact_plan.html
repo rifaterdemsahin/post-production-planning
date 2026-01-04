@@ -131,37 +131,55 @@
                                         <input type="radio" name="type-${uniqueId}" value="image" checked 
                                             onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
                                             class="form-radio text-blue-500 h-3 w-3">
-                                        <span class="ml-1.5 text-xs">🖼️ Image</span>
+                                        <div class="ml-1.5 flex flex-col">
+                                            <span class="text-xs font-bold">🖼️ Image</span>
+                                            <span class="text-[9px] text-blue-400">gemini-3-pro-image-preview</span>
+                                        </div>
                                     </label>
                                     <label class="inline-flex items-center cursor-pointer hover:text-white transition">
                                         <input type="radio" name="type-${uniqueId}" value="graphic" 
                                             onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
                                             class="form-radio text-blue-500 h-3 w-3">
-                                        <span class="ml-1.5 text-xs">📊 Graphic</span>
+                                        <div class="ml-1.5 flex flex-col">
+                                            <span class="text-xs font-bold">📊 Graphic</span>
+                                            <span class="text-[9px] text-blue-400">gemini-3-pro-image-preview</span>
+                                        </div>
                                     </label>
                                     <label class="inline-flex items-center cursor-pointer hover:text-white transition">
                                         <input type="radio" name="type-${uniqueId}" value="music" 
                                             onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
                                             class="form-radio text-blue-500 h-3 w-3">
-                                        <span class="ml-1.5 text-xs">🎵 Music</span>
+                                        <div class="ml-1.5 flex flex-col">
+                                            <span class="text-xs font-bold">🎵 Music</span>
+                                            <span class="text-[9px] text-gray-500">gemini-2.0-flash</span>
+                                        </div>
                                     </label>
                                     <label class="inline-flex items-center cursor-pointer hover:text-white transition">
                                         <input type="radio" name="type-${uniqueId}" value="animation" 
                                             onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
                                             class="form-radio text-blue-500 h-3 w-3">
-                                        <span class="ml-1.5 text-xs">🎬 Animation</span>
+                                        <div class="ml-1.5 flex flex-col">
+                                            <span class="text-xs font-bold">🎬 Animation</span>
+                                            <span class="text-[9px] text-gray-500">gemini-2.0-flash</span>
+                                        </div>
                                     </label>
                                     <label class="inline-flex items-center cursor-pointer hover:text-white transition">
                                         <input type="radio" name="type-${uniqueId}" value="overlay_text" 
                                             onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
                                             class="form-radio text-blue-500 h-3 w-3">
-                                        <span class="ml-1.5 text-xs">📝 Text</span>
+                                        <div class="ml-1.5 flex flex-col">
+                                            <span class="text-xs font-bold">📝 Text</span>
+                                            <span class="text-[9px] text-gray-500">gemini-2.0-flash</span>
+                                        </div>
                                     </label>
                                     <label class="inline-flex items-center cursor-pointer hover:text-white transition">
                                         <input type="radio" name="type-${uniqueId}" value="sound_effect" 
                                             onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
                                             class="form-radio text-blue-500 h-3 w-3">
-                                        <span class="ml-1.5 text-xs">🔊 SFX</span>
+                                        <div class="ml-1.5 flex flex-col">
+                                            <span class="text-xs font-bold">🔊 SFX</span>
+                                            <span class="text-[9px] text-gray-500">gemini-2.0-flash</span>
+                                        </div>
                                     </label>
                                 </div>
                                 
@@ -360,9 +378,8 @@
             status.className = "text-xs text-purple-400";
             container.classList.add('hidden');
 
-            // Using gemini-2.0-flash as it supports the features requested.
-            // Note: Use 'gemini-3-pro-image-preview' if specifically available/enabled on your key.
-            const modelId = "gemini-2.0-flash"; 
+            // Using gemini-3-pro-image-preview for high-quality image generation
+            const modelId = "gemini-3-pro-image-preview";
             const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`;
 
             const payload = {
@@ -375,8 +392,7 @@
                 generationConfig: {
                     responseModalities: ["IMAGE", "TEXT"],
                     imageConfig: { image_size: "1K" }
-                },
-                tools: [{ googleSearch: {} }] // Enabled as per request
+                }
             };
 
             logDebug('REQ', 'Sending Multimodal Request', { url, payload });
