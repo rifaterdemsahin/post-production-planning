@@ -342,7 +342,9 @@
                 if (!response.ok) throw new Error(data.error?.message || `API Error: ${response.status}`);
                 
                 if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
-                    container.innerText = data.candidates[0].content.parts[0].text;
+                    const text = data.candidates[0].content.parts[0].text;
+                    const logLink = '<div class="mt-4 pt-2 border-t border-gray-700"><a href="https://aistudio.google.com/logs/eLZaaeqLHrSlvdIP7eyI6AM" target="_blank" class="text-xs text-gray-500 hover:text-blue-400">View Logs ↗</a></div>';
+                    container.innerHTML = `<div class="whitespace-pre-wrap">${text}</div>${logLink}`;
                     container.classList.remove('hidden');
                     status.innerText = "✅ Done";
                     status.className = "text-xs text-green-500";
@@ -431,7 +433,8 @@
                 }
 
                 if (htmlOutput) {
-                    container.innerHTML = htmlOutput;
+                    const logLink = '<div class="mt-4 pt-2 border-t border-gray-700"><a href="https://aistudio.google.com/logs/eLZaaeqLHrSlvdIP7eyI6AM" target="_blank" class="text-xs text-gray-500 hover:text-blue-400">View Logs ↗</a></div>';
+                    container.innerHTML = htmlOutput + logLink;
                     container.classList.remove('hidden');
                     status.innerText = "✅ Done";
                     status.className = "text-xs text-green-500";
