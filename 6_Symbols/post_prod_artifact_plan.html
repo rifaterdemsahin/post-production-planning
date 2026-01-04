@@ -187,6 +187,11 @@
                                     <textarea id="text-${uniqueId}" rows="3" 
                                             class="w-full bg-gray-900 text-green-400 font-mono text-xs p-2 rounded border border-gray-700 focus:outline-none focus:border-green-500 resize-none pr-8"
                                             oninput="handleTextChange('${uniqueId}', ${sceneIndex}, ${lineIndex})">${currentPrompt}</textarea>
+                                    <button onclick="downloadYAML()" 
+                                            class="absolute top-2 right-10 text-gray-500 hover:text-white transition"
+                                            title="Save Updates to YAML">
+                                        <span class="text-lg">💾</span>
+                                    </button>
                                     <button onclick="copyToClipboard('${uniqueId}')" 
                                             class="absolute top-2 right-2 text-gray-500 hover:text-white transition"
                                             title="Copy to Clipboard">
