@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Nanabanana Production Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #121212; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .scene-card { background-color: #1e1e1e; border: 1px solid #333; transition: all 0.3s ease; }
+        .scene-card:hover { border-color: #555; }
+        .btn-gen { background: linear-gradient(90deg, #4285F4, #34A853); }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: none; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="p-6">
+
+    <div class="max-w-7xl mx-auto mb-8 flex justify-between items-center bg-gray-900 p-4 rounded-lg shadow-lg">
+        <div>
+            <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400">
+                🍌 Gemini Nanabanana Creator
+            </h1>
+            <p class="text-sm text-gray-400">Post-Production Asset Generator</p>
+        </div>
+        <div class="flex gap-4 items-center">
+            <input type="password" id="apiKey" placeholder="Paste Google API Key Here" 
+                   class="bg-gray-800 border border-gray-600 text-white p-2 rounded w-64 focus:outline-none focus:border-blue-500">
+            <button onclick="downloadCSV()" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm transition">
+                📥 Download CSV Plan
+            </button>
+        </div>
+    </div>
+
+    <div id="app" class="max-w-7xl mx-auto grid grid-cols-1 gap-6">
+        </div>
+
+    <script>
+        // ==========================================
+        // 1. THE DATA
+        // ==========================================
+        const scenes = [
+            {
+                id: "SCENE 01", title: "The New Age", color: "border-l-4 border-blue-500",
+                lines: [
+                    { id: "1", time: "0:00", script: "Alright, let's dive right in...", prompt: "Cinematic medium shot of a confident tech presenter in a modern, dimly lit studio with dynamic blue and orange rim lighting, shallow depth of field, 8k resolution, high production value" },
+                    { id: "2", time: "0:04", script: "...surviving and thriving in this new age...", prompt: "A chaotic but artistic collage of glowing holographic news headlines about Artificial Intelligence and Tech market shifts, cyberpunk aesthetic, motion blur, floating in dark void" },
+                    { id: "3", time: "0:08", script: "...make your head spin.", prompt: "First person POV shot of a modern office environment spinning rapidly with heavy radial motion blur, dizzying effect, photographic realism" },
+                    { id: "4", time: "0:12", script: "The old rules broken.", prompt: "Close up of an ancient leather-bound book labeled 'The Old Rules' disintegrating into golden dust particles against a pitch black background, dramatic lighting" }
+                ]
+            },
+            {
+                id: "SCENE 02", title: "The Avalanche", color: "border-l-4 border-green-500",
+                lines: [
+                    { id: "1", time: "0:00", script: "Skills gap...", prompt: "Surreal minimalist 3D render of a business person climbing a white ladder that abruptly ends in the middle of a cloudy sky, infinite drop below, conceptual art" },
+                    { id: "2", time: "0:04", script: "Are you ready?", prompt: "Wide shot of a tiny human silhouette standing on a cliff edge facing a massive towering wall of digital purple and green storm clouds made of binary code, epic scale" },
+                    { id: "3", time: "0:08", script: "AI Avalanche...", prompt: "Photorealistic majesty of a snow-capped mountain peak, perfectly calm blue sky, sharp details, national geographic style" },
+                    { id: "4", time: "0:12", script: "Terrifying force...", prompt: "Action shot of a massive snow avalanche beginning to crumble down the mountain face, debris flying, terrifying power, white and gray palette" }
+                ]
+            },
+            {
+                id: "SCENE 03", title: "The Force", color: "border-l-4 border-orange-500",
+                lines: [
+                    { id: "1", time: "0:00", script: "Not gentle snow...", prompt: "Macro photography of a single intricate snowflake suspended in mid-air, crystallizing, sharp focus, blue mood lighting" },
+                    { id: "2", time: "0:04", script: "Reshaping ground...", prompt: "The asphalt ground cracking open to reveal a glowing blue wireframe grid underneath, 3D render, mixture of reality and digital simulation" },
+                    { id: "3", time: "0:08", script: "Traditional resume...", prompt: "A single sheet of paper resume floating helplessly in a dark stormy void, spotlight on the paper, crumpled edges, dramatic" },
+                    { id: "4", time: "0:12", script: "Buried...", prompt: "POV of being buried under snow, white out, light fading from the top, claustrophobic atmosphere" }
+                ]
+            },
+            {
+                id: "SCENE 04", title: "Seismic Shift", color: "border-l-4 border-red-500",
+                lines: [
+                    { id: "1", time: "0:00", script: "Seismic shift...", prompt: "Close up of a seismograph needle scribbling violently in red ink on paper, panic atmosphere, gritty texture" },
+                    { id: "2", time: "0:04", script: "Bare minimum...", prompt: "A timelapse composite showing a shiny gold medal rapidly oxidizing and turning into rusted iron, centered composition, black background" },
+                    { id: "3", time: "0:08", script: "Complex problems...", prompt: "A futuristic mechanical puzzle cube glowing with complex mathematical formulas, floating in zero gravity, intricate details" },
+                    { id: "4", time: "0:12", script: "New thinking...", prompt: "Medical illustration style of a human brain made entirely of glowing fiber optic cables and digital nodes, cyan and magenta lighting" }
+                ]
+            },
+            // ... (You can add the rest of the 16 scenes here following this pattern) ...
+        ];
+
+        // ==========================================
+        // 2. RENDER UI
+        // ==========================================
+        const app = document.getElementById('app');
+
+        scenes.forEach((scene, sceneIndex) => {
+            const sceneContainer = document.createElement('div');
+            sceneContainer.className = `scene-card p-6 rounded-lg ${scene.color}`;
+            
+            let html = `
+                <div class="flex justify-between items-end mb-4 border-b border-gray-700 pb-2">
+                    <h2 class="text-xl font-bold text-white">${scene.id}: ${scene.title}</h2>
+                    <span class="text-xs text-gray-500">4 Lines</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            `;
+
+            scene.lines.forEach((line, lineIndex) => {
+                const uniqueId = `s${sceneIndex}_l${lineIndex}`;
+                html += `
+                    <div class="bg-gray-800 p-4 rounded relative">
+                        <div class="flex justify-between text-xs text-gray-400 mb-2">
+                            <span>⏱️ ${line.time}</span>
+                            <span>Line ${line.id}</span>
+                        </div>
+                        <p class="text-sm italic text-gray-300 mb-3 line-clamp-2">"${line.script}"</p>
+                        <div class="bg-gray-900 p-2 rounded text-xs text-green-400 font-mono mb-3 border border-gray-700">
+                            PROMPT: ${line.prompt}
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-2">
+                            <button onclick="generateImage('${uniqueId}', \`${line.prompt.replace(/"/g, '&quot;')}\`)" 
+                                class="btn-gen text-white px-4 py-1.5 rounded text-sm font-semibold hover:opacity-90 flex items-center gap-2">
+                                <span>Generate Artifact</span>
+                                <div id="loader-${uniqueId}" class="loader"></div>
+                            </button>
+                            <span id="status-${uniqueId}" class="text-xs text-gray-500"></span>
+                        </div>
+                        
+                        <div id="img-container-${uniqueId}" class="mt-4 hidden min-h-[150px] bg-black rounded flex items-center justify-center overflow-hidden border border-gray-600">
+                            </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            sceneContainer.innerHTML = html;
+            app.appendChild(sceneContainer);
+        });
+
+        // ==========================================
+        // 3. API CALL LOGIC (Google Imagen)
+        // ==========================================
+        async function generateImage(id, prompt) {
+            const apiKey = document.getElementById('apiKey').value;
+            if (!apiKey) {
+                alert("⚠️ Please paste your Google API Key at the top first.");
+                return;
+            }
+
+            const loader = document.getElementById(`loader-${id}`);
+            const status = document.getElementById(`status-${id}`);
+            const container = document.getElementById(`img-container-${id}`);
+
+            // UI State: Loading
+            loader.style.display = "block";
+            status.innerText = "Generating...";
+            status.className = "text-xs text-blue-400";
+            container.classList.add('hidden');
+
+            try {
+                // Endpoint for Imagen 3 via Vertex AI / Gemini API
+                // Note: The specific endpoint URL depends on the public beta availability. 
+                // We use the standard generative language endpoint for prediction.
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key=${apiKey}`;
+
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        instances: [
+                            { prompt: prompt }
+                        ],
+                        parameters: {
+                            sampleCount: 1,
+                            aspectRatio: "16:9"
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.error?.message || "API Error");
+                }
+
+                const data = await response.json();
+                
+                // Parse Prediction (Base64)
+                if (data.predictions && data.predictions[0] && data.predictions[0].bytesBase64Encoded) {
+                    const base64 = data.predictions[0].bytesBase64Encoded;
+                    container.innerHTML = `<img src="data:image/png;base64,${base64}" class="w-full h-auto hover:scale-105 transition duration-500" alt="Generated Artifact">`;
+                    container.classList.remove('hidden');
+                    status.innerText = "✅ Done";
+                    status.className = "text-xs text-green-500";
+                } else {
+                    throw new Error("No image data returned.");
+                }
+
+            } catch (error) {
+                console.error(error);
+                status.innerText = "❌ Failed";
+                status.className = "text-xs text-red-500";
+                alert(`Generation Failed: ${error.message}\n\nNote: Your API Key must have access to Imagen 3.`);
+            } finally {
+                loader.style.display = "none";
+            }
+        }
+
+        // ==========================================
+        // 4. CSV DOWNLOADER
+        // ==========================================
+        function downloadCSV() {
+            let csv = "Scene,Line,Timecode,Prompt\n";
+            scenes.forEach(scene => {
+                scene.lines.forEach(line => {
+                    // Escape quotes for CSV
+                    const safePrompt = line.prompt.replace(/"/g, '""');
+                    csv += `"${scene.id}","${line.id}","${line.time}","${safePrompt}"\n`;
+                });
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('hidden', '');
+            a.setAttribute('href', url);
+            a.setAttribute('download', 'nanabanana_prompts.csv');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
