@@ -11,18 +11,18 @@ scenes:
         script: Alright, let's dive right in. Today, we're looking at a pretty powerful framework...
         prompts:
           image: Cinematic medium shot of a confident tech presenter in a modern, dimly lit studio with dynamic blue and orange rim lighting, shallow depth of field, 8k resolution, high production value
-          graphic: Sleek, modern lower third appearing with 'John Doe - Future Tech Analyst' in neon blue
+          graphic: ''
           music: Low, pulsing synth pad establishing a serious but curious tone, 120 BPM
           animation: Subtle slow zoom in on the presenter's face to build intimacy
           motion_graphics: Create a cinematic title card in Canva with the text 'THE NEW AGE' using a futuristic sans-serif font, glowing neon blue outline, set against a dark, high-tech abstract background
           sound_effect: Subtle high-tech whoosh sound on transition
         verified_prompts:
-          image: false
+          image: true
           graphic: false
           music: false
           animation: false
           motion_graphics: false
-          sound_effect: false
+          sound_effect: true
       - id: '2'
         time: '0:04'
         script: ...for, well, surviving and thriving in this new age of AI. If you're in the tech world...
