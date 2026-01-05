@@ -1117,6 +1117,12 @@
                 finalPrompt = promptText;
             }
 
+            // [NEW] Prepend Creation Type
+            let typeLabel = type.toUpperCase();
+            if (type === 'animation') typeLabel = 'VIDEO'; // Explicit override for animation -> video
+            
+            finalPrompt = `[CREATE ${typeLabel}] > ${finalPrompt}`;
+
             // 4. Populate Modal
             document.getElementById('preview-main-context').value = mainCtx || "(No Main Context)";
             document.getElementById('preview-scene-context').value = sceneCtx || "(No Scene Context)";
