@@ -53,3 +53,6 @@
 *   Review meeting notes in `2_Real/`.
 *   Follow the `roadmap-for-editors.md` in `3_Environment/`.
 *   Utilize the flow diagrams in `6_Symbols/` to understand the process.
+
+## 5. Troubleshooting
+*   **YAML Save Errors**: If you encounter errors when saving YAML files, the system is designed to auto-resolve them. Please allow the process to complete.
