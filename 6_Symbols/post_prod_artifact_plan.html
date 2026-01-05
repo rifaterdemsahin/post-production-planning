@@ -69,9 +69,12 @@
             </div>
         </div>
         <div class="flex gap-4 items-center">
-            <input type="password" id="apiKey" placeholder="Paste Google API Key Here" 
-                   oninput="saveApiKey(this.value)"
-                   class="bg-gray-800 border border-gray-600 text-white p-2 rounded w-64 focus:outline-none focus:border-blue-500 transition-colors">
+            <div class="relative">
+                <input type="password" id="apiKey" placeholder="Paste Google API Key Here" 
+                       oninput="debouncedSaveApiKey(this.value)"
+                       class="bg-gray-800 border border-gray-600 text-white p-2 rounded w-64 focus:outline-none focus:border-blue-500 transition-colors pr-8">
+                <span id="api-status-icon" class="absolute right-2 top-2.5 text-xs select-none" title="API Key Status"></span>
+            </div>
             
             <button onclick="handleOpenFile()" class="bg-[#2ecc71] hover:bg-[#27ae60] text-gray-900 px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-bold border border-[#27ae60]">
                 📂 Open YAML
@@ -364,6 +367,7 @@
             const savedKey = localStorage.getItem('google_api_key');
             if (savedKey) {
                 document.getElementById('apiKey').value = savedKey;
+                verifyApiKey(savedKey);
             }
 
             // Scroll Listener for "Scroll to Top"
@@ -429,8 +433,51 @@
              renderScenes();
         }
 
+        let apiKeyDebounceTimer;
+        function debouncedSaveApiKey(key) {
+            clearTimeout(apiKeyDebounceTimer);
+            saveApiKey(key); // Save immediately to local storage
+            
+            // Debounce verification
+            const icon = document.getElementById('api-status-icon');
+            icon.innerText = "⏳";
+            
+            apiKeyDebounceTimer = setTimeout(() => {
+                verifyApiKey(key);
+            }, 800);
+        }
+
         function saveApiKey(key) {
             localStorage.setItem('google_api_key', key);
+        }
+
+        async function verifyApiKey(key) {
+            const icon = document.getElementById('api-status-icon');
+            const input = document.getElementById('apiKey');
+            
+            if (!key) {
+                icon.innerText = "";
+                input.classList.remove('border-green-500', 'border-red-500');
+                return;
+            }
+
+            try {
+                // Lightweight call to list models to verify key
+                const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${key}&pageSize=1`;
+                const response = await fetch(url);
+                
+                if (response.ok) {
+                    icon.innerText = "✅";
+                    input.classList.add('border-green-500');
+                    input.classList.remove('border-red-500');
+                } else {
+                    throw new Error("Invalid Key");
+                }
+            } catch (e) {
+                icon.innerText = "❌";
+                input.classList.add('border-red-500');
+                input.classList.remove('border-green-500');
+            }
         }
         
         function handleMainContextChange(value) {
