@@ -131,34 +131,62 @@
 
     <!-- Stats Modal -->
     <div id="stats-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4 modal-overlay">
-        <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-md p-6 border border-gray-700 relative">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-2xl p-6 border border-gray-700 relative max-h-[90vh] overflow-y-auto">
              <button onclick="closeStatsModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">✕</button>
              <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">📊 Project Statistics</h3>
              
-             <div class="grid grid-cols-2 gap-4">
+             <!-- General Stats -->
+             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <div class="bg-gray-800 p-4 rounded-lg text-center border border-gray-700">
-                    <div class="text-3xl font-bold text-blue-400" id="stat-scenes">0</div>
-                    <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Scenes</div>
+                    <div class="text-2xl font-bold text-blue-400" id="stat-scenes">0</div>
+                    <div class="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Scenes</div>
                 </div>
                 <div class="bg-gray-800 p-4 rounded-lg text-center border border-gray-700">
-                    <div class="text-3xl font-bold text-green-400" id="stat-lines">0</div>
-                    <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Total Lines</div>
+                    <div class="text-2xl font-bold text-green-400" id="stat-lines">0</div>
+                    <div class="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Lines</div>
                 </div>
                 <div class="bg-gray-800 p-4 rounded-lg text-center border border-gray-700">
-                    <div class="text-3xl font-bold text-purple-400" id="stat-prompts">0</div>
-                    <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Total Prompts</div>
+                    <div class="text-2xl font-bold text-purple-400" id="stat-prompts">0</div>
+                    <div class="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Prompts</div>
                 </div>
                 <div class="bg-gray-800 p-4 rounded-lg text-center border border-gray-700">
-                    <div class="text-xl font-bold text-yellow-400 flex items-center justify-center h-[36px]" id="stat-duration">00:00</div>
-                    <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Est. Duration</div>
+                    <div class="text-2xl font-bold text-yellow-400" id="stat-duration">00:00</div>
+                    <div class="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Duration</div>
                 </div>
                 <div class="bg-gray-800 p-4 rounded-lg text-center border border-gray-700">
-                    <div class="text-3xl font-bold text-orange-400" id="stat-words">0</div>
-                    <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Total Words</div>
+                    <div class="text-2xl font-bold text-orange-400" id="stat-words">0</div>
+                    <div class="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Words</div>
                 </div>
                 <div class="bg-gray-800 p-4 rounded-lg text-center border border-gray-700">
-                    <div class="text-3xl font-bold text-indigo-400" id="stat-sentences">0</div>
-                    <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Total Sentences</div>
+                    <div class="text-2xl font-bold text-indigo-400" id="stat-sentences">0</div>
+                    <div class="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Sentences</div>
+                </div>
+             </div>
+
+             <!-- Verified Stats Section -->
+             <div class="border-t border-gray-800 pt-6">
+                <h4 class="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider">✅ Verification Progress</h4>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                     <div class="bg-gray-800/60 p-3 rounded border border-gray-700/50 flex flex-col items-center">
+                         <span class="text-xl font-bold text-green-400" id="stat-verified-total">0</span>
+                         <span class="text-[10px] text-gray-500 uppercase">Total Verified</span>
+                     </div>
+                     <div class="bg-gray-800/60 p-3 rounded border border-gray-700/50 flex flex-col items-center">
+                         <span class="text-xl font-bold text-blue-400" id="stat-verified-context">0</span>
+                         <span class="text-[10px] text-gray-500 uppercase">Contexts</span>
+                     </div>
+                     <div class="bg-gray-800/60 p-3 rounded border border-gray-700/50 flex flex-col items-center">
+                         <span class="text-xl font-bold text-orange-400" id="stat-verified-transition">0</span>
+                         <span class="text-[10px] text-gray-500 uppercase">Transitions</span>
+                     </div>
+                </div>
+
+                <div class="bg-black/30 rounded-lg p-4 border border-gray-800">
+                    <h5 class="text-xs font-bold text-gray-500 mb-3">VERIFIED PROMPTS BY TYPE</h5>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-y-3 gap-x-6 text-xs" id="verified-breakdown">
+                        <!-- Populated by JS -->
+                    </div>
                 </div>
              </div>
              
@@ -665,8 +693,25 @@
             let totalSeconds = 0;
             let totalWords = 0;
             let totalSentences = 0;
+            
+            // Verification Stats
+            let verifiedContexts = 0;
+            let verifiedTransitions = 0;
+            let totalVerifiedPrompts = 0;
+            let verifiedByType = {
+                image: 0,
+                graphic: 0,
+                music: 0,
+                animation: 0,
+                motion_graphics: 0,
+                sound_effect: 0
+            };
 
             scenes.forEach(scene => {
+                // Scene Verification
+                if (scene.verified_context) verifiedContexts++;
+                if (scene.verified_transition) verifiedTransitions++;
+                
                 if (scene.lines) {
                     totalLines += scene.lines.length;
                     scene.lines.forEach(line => {
@@ -677,6 +722,18 @@
                              });
                          }
                          
+                         // Count Verification
+                         if(line.verified_prompts) {
+                             Object.entries(line.verified_prompts).forEach(([type, isVerified]) => {
+                                 if(isVerified) {
+                                     totalVerifiedPrompts++;
+                                     if(verifiedByType[type] !== undefined) {
+                                         verifiedByType[type]++;
+                                     }
+                                 }
+                             });
+                         }
+
                          if (line.script) {
                              const scriptText = line.script.trim();
                              if (scriptText) {
@@ -705,12 +762,40 @@
             
             const timeString = `${hours > 0 ? String(hours).padStart(2, '0') + ':' : ''}${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
+            // Update General Stats
             document.getElementById('stat-scenes').innerText = totalScenes;
             document.getElementById('stat-lines').innerText = totalLines;
             document.getElementById('stat-prompts').innerText = totalPrompts;
             document.getElementById('stat-duration').innerText = timeString;
             document.getElementById('stat-words').innerText = totalWords;
             document.getElementById('stat-sentences').innerText = totalSentences;
+
+            // Update Verified Stats
+            document.getElementById('stat-verified-total').innerText = totalVerifiedPrompts;
+            document.getElementById('stat-verified-context').innerText = verifiedContexts;
+            document.getElementById('stat-verified-transition').innerText = verifiedTransitions;
+
+            const breakdownContainer = document.getElementById('verified-breakdown');
+            breakdownContainer.innerHTML = '';
+            
+            const typeLabels = {
+                image: 'Image',
+                graphic: 'Graphic',
+                music: 'Music',
+                animation: 'Animation',
+                motion_graphics: 'Motion Gfx',
+                sound_effect: 'SFX'
+            };
+
+            for (const [type, count] of Object.entries(verifiedByType)) {
+                const div = document.createElement('div');
+                div.className = "flex justify-between items-center border-b border-gray-700 pb-1";
+                div.innerHTML = `
+                    <span class="text-gray-400">${typeLabels[type] || type}</span>
+                    <span class="font-mono text-white font-bold">${count}</span>
+                `;
+                breakdownContainer.appendChild(div);
+            }
 
             document.getElementById('stats-modal').classList.remove('hidden');
         }
