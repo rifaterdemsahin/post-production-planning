@@ -13,11 +13,32 @@
         .btn-gen { background: linear-gradient(90deg, #4285F4, #34A853); }
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: none; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Prompts Tab Styling */
+        /* Removed @apply rules to avoid lint errors and runtime issues with CDN */
+        
+        /* Scroll to Top */
+        #scroll-top-btn {
+            position: fixed;
+            bottom: 60px; /* Above debug panel */
+            right: 20px;
+            background-color: #3b82f6;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 40;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        #scroll-top-btn:hover { transform: translateY(-2px); background-color: #2563eb; }
     </style>
 </head>
 <body class="p-6">
 
-    <div class="max-w-7xl mx-auto mb-8 flex justify-between items-center bg-gray-900 p-4 rounded-lg shadow-lg">
+    <!-- Sticky Header -->
+    <div class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur shadow-lg mb-8 flex justify-between items-center p-4 rounded-b-lg border-b border-gray-800 -mx-6 px-10 -mt-6 pt-6">
         <div>
             <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400">
                 🍌 Gemini Scene Creator
@@ -26,7 +47,8 @@
         </div>
         <div class="flex gap-4 items-center">
             <input type="password" id="apiKey" placeholder="Paste Google API Key Here" 
-                   class="bg-gray-800 border border-gray-600 text-white p-2 rounded w-64 focus:outline-none focus:border-blue-500">
+                   oninput="saveApiKey(this.value)"
+                   class="bg-gray-800 border border-gray-600 text-white p-2 rounded w-64 focus:outline-none focus:border-blue-500 transition-colors">
             <button onclick="downloadYAML()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-semibold border border-blue-400">
                 💾 Save YAML
             </button>
@@ -36,11 +58,16 @@
         </div>
     </div>
 
-    <div id="app" class="max-w-7xl mx-auto grid grid-cols-1 gap-6">
+    <!-- Scroll To Top Button -->
+    <button id="scroll-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Scroll to Top">
+        ⬆️
+    </button>
+
+    <div id="app" class="max-w-7xl mx-auto grid grid-cols-1 gap-6 pb-20">
         </div>
 
     <!-- Debug Console -->
-    <div class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-700 shadow-2xl transition-transform duration-300 transform translate-y-[calc(100%-40px)]" id="debug-panel">
+    <div class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-700 shadow-2xl transition-transform duration-300 transform translate-y-[calc(100%-40px)] z-50" id="debug-panel">
         <div class="flex justify-between items-center bg-gray-800 p-2 cursor-pointer hover:bg-gray-700" onclick="toggleDebug()">
             <div class="flex items-center gap-4">
                 <h3 class="text-sm font-bold text-gray-300 ml-4">🐞 Debug Console</h3>
@@ -74,6 +101,24 @@
         let scenes = []; // Global variable to hold data after loading
 
         async function initApp() {
+            // Restore API Key
+            const savedKey = localStorage.getItem('google_api_key');
+            if (savedKey) {
+                document.getElementById('apiKey').value = savedKey;
+            }
+
+            // Scroll Listener for "Scroll to Top"
+            window.onscroll = function() {
+                const btn = document.getElementById("scroll-top-btn");
+                if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                    btn.style.display = "block";
+                    setTimeout(() => btn.style.opacity = "1", 10);
+                } else {
+                    btn.style.opacity = "0";
+                    setTimeout(() => btn.style.display = "none", 300);
+                }
+            };
+
             try {
                 // Fetch the YAML file
                 const response = await fetch('scenes.yaml');
@@ -104,165 +149,179 @@
             }
         }
 
+        function saveApiKey(key) {
+            localStorage.setItem('google_api_key', key);
+        }
+
         // ==========================================
         // 2. RENDER UI
         // ==========================================
+        
+        function renderTabButton(uniqueId, type, label, isActive = false) {
+            const baseClasses = "px-3 py-2 text-xs font-bold transition-colors cursor-pointer border-b-2";
+            const activeClasses = "text-blue-400 border-blue-400";
+            const inactiveClasses = "text-gray-400 border-transparent hover:text-gray-200";
+
+            return `
+                <button type="button" 
+                        id="tab-${uniqueId}-${type}" 
+                        class="${baseClasses} ${isActive ? activeClasses : inactiveClasses}" 
+                        onclick="switchTab('${uniqueId}', '${type}')">
+                    ${label}
+                </button>
+            `;
+        }
+
         function renderScenes() {
             const app = document.getElementById('app');
             app.innerHTML = ''; // Clear loading state if any
 
             scenes.forEach((scene, sceneIndex) => {
                 const sceneContainer = document.createElement('div');
-                sceneContainer.className = `scene-card p-6 rounded-lg ${scene.color}`;
+                sceneContainer.className = `scene-card rounded-lg ${scene.color} overflow-hidden`;
                 
                 let html = `
-                    <div class="flex justify-between items-end mb-4 border-b border-gray-700 pb-2">
-                        <h2 class="text-xl font-bold text-white">${scene.id}: ${scene.title}</h2>
-                        <span class="text-xs text-gray-500">${scene.lines.length} Lines</span>
+                    <div class="flex justify-between items-center p-4 bg-[#252525] cursor-pointer hover:bg-[#2a2a2a] transition border-b border-gray-700" 
+                         onclick="toggleScene(${sceneIndex})">
+                        <div class="flex items-center gap-3">
+                            <span id="chevron-${sceneIndex}" class="transform transition-transform rotate-0 text-gray-400">▼</span>
+                            <h2 class="text-xl font-bold text-white">${scene.id}: ${scene.title}</h2>
+                        </div>
+                        <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">${scene.lines.length} Lines</span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    
+                    <div id="scene-content-${sceneIndex}" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 transition-all duration-300">
                 `;
 
                 scene.lines.forEach((line, lineIndex) => {
                     const uniqueId = `s${sceneIndex}_l${lineIndex}`;
-                    // Default to image prompt
+                    // Default to image prompt for initial display, but we'll use tabs now
                     const currentPrompt = line.prompts ? line.prompts.image : "";
 
                     html += `
-                        <div class="bg-gray-800 p-4 rounded relative">
+                        <div class="bg-gray-900/50 p-4 rounded border border-gray-800 relative group hover:border-gray-600 transition-colors">
                             <div class="flex justify-between text-xs text-gray-400 mb-2">
-                                <span>⏱️ ${line.time}</span>
-                                <span>Line ${line.id}</span>
+                                <span class="bg-gray-800 px-2 py-0.5 rounded text-gray-300">⏱️ ${line.time}</span>
+                                <span class="font-mono">Line ${line.id}</span>
                             </div>
-                            <p class="text-sm italic text-gray-300 mb-3 line-clamp-2">"${line.script}"</p>
+                            <p class="text-sm italic text-gray-300 mb-4 line-clamp-2 pl-2 border-l-2 border-gray-700">"${line.script}"</p>
                             
-                            <!-- Prompt Controls -->
+                            <!-- Prompt Controls (Tabs) -->
                             <div class="mb-3">
-                                <div class="flex flex-wrap gap-x-3 gap-y-2 mb-2">
-                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
-                                        <input type="radio" name="type-${uniqueId}" value="image" checked 
-                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
-                                            class="form-radio text-blue-500 h-3 w-3">
-                                        <div class="ml-1.5 flex flex-col">
-                                            <span class="text-xs font-bold">🖼️ Image</span>
-                                            <span class="text-[9px] text-blue-400">gemini-3-pro-image-preview</span>
-                                        </div>
-                                    </label>
-                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
-                                        <input type="radio" name="type-${uniqueId}" value="graphic" 
-                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
-                                            class="form-radio text-blue-500 h-3 w-3">
-                                        <div class="ml-1.5 flex flex-col">
-                                            <span class="text-xs font-bold">📊 Graphic</span>
-                                            <span class="text-[9px] text-blue-400">gemini-3-pro-image-preview</span>
-                                        </div>
-                                    </label>
-                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
-                                        <input type="radio" name="type-${uniqueId}" value="music" 
-                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
-                                            class="form-radio text-blue-500 h-3 w-3">
-                                        <div class="ml-1.5 flex flex-col">
-                                            <span class="text-xs font-bold">🎵 Music</span>
-                                            <span class="text-[9px] text-yellow-400">gemini-2.5-pro-preview-tts</span>
-                                        </div>
-                                    </label>
-                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
-                                        <input type="radio" name="type-${uniqueId}" value="animation" 
-                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
-                                            class="form-radio text-blue-500 h-3 w-3">
-                                        <div class="ml-1.5 flex flex-col">
-                                            <span class="text-xs font-bold">🎬 Animation</span>
-                                            <span class="text-[9px] text-blue-400">veo-2.0-generate-001</span>
-                                        </div>
-                                    </label>
-                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
-                                        <input type="radio" name="type-${uniqueId}" value="overlay_text" 
-                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
-                                            class="form-radio text-blue-500 h-3 w-3">
-                                        <div class="ml-1.5 flex flex-col">
-                                            <span class="text-xs font-bold">📝 Text</span>
-                                            <span class="text-[9px] text-gray-500">gemini-2.0-flash</span>
-                                        </div>
-                                    </label>
-                                    <label class="inline-flex items-center cursor-pointer hover:text-white transition">
-                                        <input type="radio" name="type-${uniqueId}" value="sound_effect" 
-                                            onchange="updatePromptDisplay('${uniqueId}', ${sceneIndex}, ${lineIndex})"
-                                            class="form-radio text-blue-500 h-3 w-3">
-                                        <div class="ml-1.5 flex flex-col">
-                                            <span class="text-xs font-bold">🔊 SFX</span>
-                                            <span class="text-[9px] text-yellow-400">gemini-2.5-pro-preview-tts</span>
-                                        </div>
-                                    </label>
+                                <div class="flex border-b border-gray-700 mb-2 space-x-1 overflow-x-auto no-scrollbar">
+                                    ${renderTabButton(uniqueId, 'image', '🖼️ Image', true)}
+                                    ${renderTabButton(uniqueId, 'graphic', '📊 Graphic')}
+                                    ${renderTabButton(uniqueId, 'music', '🎵 Music')}
+                                    ${renderTabButton(uniqueId, 'animation', '🎬 Animation')}
+                                    ${renderTabButton(uniqueId, 'overlay_text', '📝 Text')}
+                                    ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX')}
                                 </div>
                                 
                                 <div class="relative">
                                     <textarea id="text-${uniqueId}" rows="3" 
-                                            class="w-full bg-gray-900 text-green-400 font-mono text-xs p-2 rounded border border-gray-700 focus:outline-none focus:border-green-500 resize-none pr-8"
+                                            class="w-full bg-black/30 text-green-400 font-mono text-sm p-3 rounded border border-gray-700 focus:outline-none focus:border-green-500 resize-none pr-8 transition-colors"
+                                            placeholder="Enter prompt here..."
+                                            data-current-type="image"
                                             oninput="handleTextChange('${uniqueId}', ${sceneIndex}, ${lineIndex})">${currentPrompt}</textarea>
+                                            
                                     <button onclick="downloadYAML()" 
-                                            class="absolute top-2 right-10 text-gray-500 hover:text-white transition"
+                                            class="absolute top-2 right-10 text-gray-600 hover:text-white transition opacity-0 group-hover:opacity-100"
                                             title="Save Updates to YAML">
                                         <span class="text-lg">💾</span>
                                     </button>
                                     <button onclick="copyToClipboard('${uniqueId}')" 
-                                            class="absolute top-2 right-2 text-gray-500 hover:text-white transition"
+                                            class="absolute top-2 right-2 text-gray-600 hover:text-white transition opacity-0 group-hover:opacity-100"
                                             title="Copy to Clipboard">
                                         <span id="copy-text-${uniqueId}" class="text-lg">📋</span>
                                     </button>
                                 </div>
                             </div>
                             
-                            <div class="flex justify-between items-center mt-2">
+                            <div class="flex justify-between items-center mt-3 pt-3 border-t border-gray-800">
                                 <button onclick="handleGenerate('${uniqueId}')" 
-                                    class="btn-gen text-white px-4 py-1.5 rounded text-sm font-semibold hover:opacity-90 flex items-center gap-2">
-                                    <span>Generate Artifact</span>
+                                    class="btn-gen text-white px-5 py-1.5 rounded shadow-lg shadow-blue-900/20 text-xs font-bold hover:brightness-110 flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95">
+                                    <span>⚡ Generate Artifact</span>
                                     <div id="loader-${uniqueId}" class="loader"></div>
                                 </button>
-                                <span id="status-${uniqueId}" class="text-xs text-gray-500"></span>
+                                <span id="status-${uniqueId}" class="text-xs font-mono"></span>
                             </div>
                             
-                            <div id="result-container-${uniqueId}" class="mt-4 hidden p-3 bg-black rounded border border-gray-600 text-xs text-gray-300 font-mono overflow-auto max-h-[300px] whitespace-pre-wrap">
-                                </div>
+                            <div id="result-container-${uniqueId}" class="mt-4 hidden p-3 bg-black rounded border border-gray-700 text-xs text-gray-300 font-mono overflow-auto max-h-[300px] whitespace-pre-wrap shadow-inner">
+                            </div>
                         </div>
                     `;
                 });
 
-                html += `</div>`;
+                html += `</div></div>`; // Close scene-content and scene-card
                 sceneContainer.innerHTML = html;
                 app.appendChild(sceneContainer);
             });
         }
 
-            // ==========================================
+        // ==========================================
         // 3. UI INTERACTIONS
         // ==========================================
         
+        function toggleScene(index) {
+            const content = document.getElementById(`scene-content-${index}`);
+            const chevron = document.getElementById(`chevron-${index}`);
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                chevron.classList.remove('-rotate-90');
+                chevron.classList.add('rotate-0');
+            } else {
+                content.classList.add('hidden');
+                chevron.classList.remove('rotate-0');
+                chevron.classList.add('-rotate-90');
+            }
+        }
+
+        function switchTab(uniqueId, type) {
+            const activeClasses = ['text-blue-400', 'border-blue-400'];
+            const inactiveClasses = ['text-gray-400', 'border-transparent', 'hover:text-gray-200'];
+
+            // Update UI Tabs
+            const buttons = document.querySelectorAll(`[id^="tab-${uniqueId}-"]`);
+            buttons.forEach(btn => {
+                btn.classList.remove(...activeClasses);
+                btn.classList.add(...inactiveClasses);
+            });
+            const activeBtn = document.getElementById(`tab-${uniqueId}-${type}`);
+            activeBtn.classList.remove(...inactiveClasses);
+            activeBtn.classList.add(...activeClasses);
+
+            // Update Textarea
+            // uniqueId format: s{sceneIndex}_l{lineIndex}
+            const parts = uniqueId.split('_'); 
+            // parts[0] is s{sceneIndex}, parts[1] is l{lineIndex}
+            const sceneIndex = parseInt(parts[0].substring(1));
+            const lineIndex = parseInt(parts[1].substring(1));
+            
+            const textArea = document.getElementById(`text-${uniqueId}`);
+            
+            // Get content from data model
+            // Ensure prompts object exists
+            if (!scenes[sceneIndex].lines[lineIndex].prompts) {
+                scenes[sceneIndex].lines[lineIndex].prompts = {};
+            }
+            const promptContent = scenes[sceneIndex].lines[lineIndex].prompts[type] || "";
+            textArea.value = promptContent;
+            
+            // Update data attribute for handleTextChange
+            textArea.setAttribute('data-current-type', type);
+        }
+
         function handleTextChange(uniqueId, sceneIndex, lineIndex) {
             const textArea = document.getElementById(`text-${uniqueId}`);
-            const selectedRadio = document.querySelector(`input[name="type-${uniqueId}"]:checked`);
+            const type = textArea.getAttribute('data-current-type');
             
-            if (!selectedRadio) return;
-            const type = selectedRadio.value;
-
-            // Ensure prompt object exists
             if (!scenes[sceneIndex].lines[lineIndex].prompts) {
                 scenes[sceneIndex].lines[lineIndex].prompts = {};
             }
             
             // Update Data Model
             scenes[sceneIndex].lines[lineIndex].prompts[type] = textArea.value;
-        }
-
-        function updatePromptDisplay(uniqueId, sceneIndex, lineIndex) {
-            // Find the checked radio button
-            const selectedRadio = document.querySelector(`input[name="type-${uniqueId}"]:checked`);
-            if (!selectedRadio) return;
-            
-            const selectedType = selectedRadio.value;
-            const textArea = document.getElementById(`text-${uniqueId}`);
-            
-            const promptContent = scenes[sceneIndex].lines[lineIndex].prompts[selectedType] || "";
-            textArea.value = promptContent;
         }
 
         function copyToClipboard(uniqueId) {
@@ -284,9 +343,10 @@
         }
 
         function handleGenerate(uniqueId) {
-            const promptText = document.getElementById(`text-${uniqueId}`).value;
-            const selectedRadio = document.querySelector(`input[name="type-${uniqueId}"]:checked`);
-            const type = selectedRadio ? selectedRadio.value : 'text';
+            const textArea = document.getElementById(`text-${uniqueId}`);
+            // Default to 'image' if not set (should be set by default in HTML)
+            const type = textArea.getAttribute('data-current-type') || 'image'; 
+            const promptText = textArea.value;
 
             if (type === 'image' || type === 'graphic') {
                 generateMultimodalContent(uniqueId, promptText);
