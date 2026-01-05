@@ -40,6 +40,26 @@
 </head>
 <body class="p-6">
 
+    <!-- Local Audio Preview -->
+    <div id="audio-player-container" class="mb-4 bg-gray-900 border-b border-gray-800">
+        <div class="flex justify-between items-center p-2 bg-gray-800/50 px-6">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-gray-400">� Local Voiceover Preview</span>
+            </div>
+            <button onclick="toggleAudioPlayer()" id="audio-toggle-btn" class="text-xs text-gray-400 hover:text-white transition">
+                ▼ Collapse
+            </button>
+        </div>
+        <div id="audio-player-content" class="transition-all duration-300 overflow-hidden bg-black/30">
+            <div class="p-4 flex justify-center">
+                <audio controls class="w-full max-w-3xl">
+                    <source src="proccesed_voiceover.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+
     <!-- Sticky Header -->
     <div class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur shadow-lg mb-8 flex justify-between items-center p-4 rounded-b-lg border-b border-gray-800 -mx-6 px-10 -mt-6 pt-6">
         <div>
@@ -798,21 +818,38 @@
 
         function logDebug(type, title, data) {
             const logContainer = document.getElementById('debug-log');
-            const time = new Date().toLocaleTimeString();
-            const color = type === 'ERROR' ? 'text-red-400' : (type === 'REQ' ? 'text-blue-400' : 'text-green-400');
-            
             const entry = document.createElement('div');
-            entry.className = "border-b border-gray-800 pb-2 mb-2";
+            entry.className = `border-l-2 ${type === 'INFO' ? 'border-blue-500' : type === 'ERROR' ? 'border-red-500' : 'border-yellow-500'} pl-2 mb-2`;
             entry.innerHTML = `
-                <div class="flex gap-2 font-bold mb-1">
-                    <span class="text-gray-500">[${time}]</span>
-                    <span class="${color}">${type}</span>
-                    <span class="text-white">${title}</span>
+                <div class="flex justify-between">
+                    <span class="font-bold text-gray-400">${type}</span>
+                    <span class="text-gray-600">${new Date().toLocaleTimeString()}</span>
                 </div>
-                <div class="text-gray-400 whitespace-pre-wrap pl-4">${JSON.stringify(data, null, 2)}</div>
+                <div class="font-bold text-white">${title}</div>
+                <div class="break-all whitespace-pre-wrap">${typeof data === 'string' ? data : JSON.stringify(data, null, 2)}</div>
             `;
             logContainer.prepend(entry);
         }
+
+        function toggleAudioPlayer() {
+            const content = document.getElementById('audio-player-content');
+            const btn = document.getElementById('audio-toggle-btn');
+            
+            if (content.style.maxHeight === '0px') {
+                content.style.maxHeight = '150px'; // Approx height for padding + audio player
+                btn.innerText = '▼ Collapse';
+            } else {
+                content.style.maxHeight = '0px';
+                btn.innerText = '▶ Expand';
+            }
+        }
+        
+        // Initialize state
+        document.addEventListener('DOMContentLoaded', () => {
+             const content = document.getElementById('audio-player-content');
+             if(content) content.style.maxHeight = '150px';
+        });
+
 
         // ==========================================
         // 4. API CALL LOGIC
