@@ -64,6 +64,10 @@
                 📜 View Script
             </button>
             
+            <button onclick="openStatsModal()" class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-semibold border border-teal-400">
+                📊 Stats
+            </button>
+            
             <button onclick="saveChanges()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-semibold border border-blue-400">
                 💾 Save YAML
             </button>
@@ -94,6 +98,37 @@
             <div class="p-0 overflow-hidden flex-1 relative">
                 <textarea id="full-script-content" class="w-full h-full bg-[#1e1e1e] text-gray-300 font-mono text-sm p-4 resize-none focus:outline-none" readonly></textarea>
             </div>
+        </div>
+    </div>
+
+    <!-- Stats Modal -->
+    <div id="stats-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-md p-6 border border-gray-700 relative">
+             <button onclick="closeStatsModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">✕</button>
+             <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">📊 Project Statistics</h3>
+             
+             <div class="grid grid-cols-2 gap-4">
+                <div class="bg-gray-800 p-4 rounded-lg text-center border border-gray-700">
+                    <div class="text-3xl font-bold text-blue-400" id="stat-scenes">0</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Scenes</div>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg text-center border border-gray-700">
+                    <div class="text-3xl font-bold text-green-400" id="stat-lines">0</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Total Lines</div>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg text-center border border-gray-700">
+                    <div class="text-3xl font-bold text-purple-400" id="stat-prompts">0</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Total Prompts</div>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg text-center border border-gray-700">
+                    <div class="text-xl font-bold text-yellow-400 flex items-center justify-center h-[36px]" id="stat-duration">00:00</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider mt-1">Est. Duration</div>
+                </div>
+             </div>
+             
+             <div class="mt-6 pt-4 border-t border-gray-800 text-xs text-gray-500 text-center">
+                Based on current loaded project data.
+             </div>
         </div>
     </div>
 
@@ -396,6 +431,52 @@
             const originalText = btn.innerText;
             btn.innerText = "✅ Copied!";
             setTimeout(() => btn.innerText = originalText, 2000);
+        }
+
+        function openStatsModal() {
+            let totalScenes = scenes.length;
+            let totalLines = 0;
+            let totalPrompts = 0;
+            let totalSeconds = 0;
+
+            scenes.forEach(scene => {
+                if (scene.lines) {
+                    totalLines += scene.lines.length;
+                    scene.lines.forEach(line => {
+                         // Count prompts
+                         if(line.prompts) {
+                             Object.values(line.prompts).forEach(val => {
+                                 if(val && val.trim() !== "") totalPrompts++;
+                             });
+                         }
+                         
+                         // Calculate duration: 2 words = 1 second
+                         if (line.script) {
+                             const wordCount = line.script.trim().split(/\s+/).length;
+                             totalSeconds += wordCount / 2;
+                         }
+                    });
+                }
+            });
+
+            // Format Duration
+            totalSeconds = Math.ceil(totalSeconds);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            
+            const timeString = `${hours > 0 ? String(hours).padStart(2, '0') + ':' : ''}${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+            document.getElementById('stat-scenes').innerText = totalScenes;
+            document.getElementById('stat-lines').innerText = totalLines;
+            document.getElementById('stat-prompts').innerText = totalPrompts;
+            document.getElementById('stat-duration').innerText = timeString;
+
+            document.getElementById('stats-modal').classList.remove('hidden');
+        }
+
+        function closeStatsModal() {
+            document.getElementById('stats-modal').classList.add('hidden');
         }
         
         function toggleScene(index) {
