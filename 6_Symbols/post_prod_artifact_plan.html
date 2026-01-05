@@ -33,6 +33,9 @@
             transition: opacity 0.3s, transform 0.3s;
         }
         #scroll-top-btn:hover { transform: translateY(-2px); background-color: #2563eb; }
+        
+        /* Modal Overlay */
+        .modal-overlay { background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); }
     </style>
 </head>
 <body class="p-6">
@@ -57,6 +60,10 @@
                 📂 Open YAML
             </button>
             
+            <button onclick="openScriptModal()" class="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-semibold border border-purple-400">
+                📜 View Script
+            </button>
+            
             <button onclick="saveChanges()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-semibold border border-blue-400">
                 💾 Save YAML
             </button>
@@ -73,6 +80,22 @@
 
     <div id="app" class="max-w-7xl mx-auto grid grid-cols-1 gap-6 pb-20">
         </div>
+
+    <!-- Script View Modal -->
+    <div id="script-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-[95vw] h-[90vh] flex flex-col border border-gray-700">
+            <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-gray-800/50 rounded-t-lg">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">📜 Full Script</h3>
+                <div class="flex gap-2">
+                    <button onclick="copyScriptToClipboard(this)" class="text-xs bg-blue-900 text-blue-200 px-3 py-1 rounded hover:bg-blue-800 transition">📋 Copy All</button>
+                    <button onclick="closeScriptModal()" class="text-gray-400 hover:text-white transition">✕</button>
+                </div>
+            </div>
+            <div class="p-0 overflow-hidden flex-1 relative">
+                <textarea id="full-script-content" class="w-full h-full bg-[#1e1e1e] text-gray-300 font-mono text-sm p-4 resize-none focus:outline-none" readonly></textarea>
+            </div>
+        </div>
+    </div>
 
     <!-- Debug Console -->
     <div class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-700 shadow-2xl transition-transform duration-300 transform translate-y-[calc(100%-40px)] z-50" id="debug-panel">
@@ -341,6 +364,40 @@
             scenes[sceneIndex].context = textArea.value;
         }
 
+        function openScriptModal() {
+            const modal = document.getElementById('script-modal');
+            const textarea = document.getElementById('full-script-content');
+            
+            let fullScript = "";
+            
+            scenes.forEach(scene => {
+                fullScript += `### ${scene.id}: ${scene.title}\n`;
+                if(scene.lines) {
+                    scene.lines.forEach(line => {
+                        fullScript += `[${line.time}] ${line.script}\n`;
+                    });
+                }
+                fullScript += `\n`; // Add spacing between scenes
+            });
+            
+            textarea.value = fullScript;
+            modal.classList.remove('hidden');
+        }
+
+        function closeScriptModal() {
+            document.getElementById('script-modal').classList.add('hidden');
+        }
+
+        function copyScriptToClipboard(btn) {
+            const textarea = document.getElementById('full-script-content');
+            textarea.select();
+            document.execCommand('copy'); 
+            
+            const originalText = btn.innerText;
+            btn.innerText = "✅ Copied!";
+            setTimeout(() => btn.innerText = originalText, 2000);
+        }
+        
         function toggleScene(index) {
             const content = document.getElementById(`scene-content-${index}`);
             const chevron = document.getElementById(`chevron-${index}`);
