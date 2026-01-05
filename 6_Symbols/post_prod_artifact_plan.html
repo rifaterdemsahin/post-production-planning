@@ -38,30 +38,27 @@
         .modal-overlay { background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); }
     </style>
 </head>
-<body class="p-6">
+<body class="p-6 pt-10">
 
     <!-- Local Audio Preview -->
-    <div id="audio-player-container" class="mb-4 bg-gray-900 border-b border-gray-800">
-        <div class="flex justify-between items-center p-2 bg-gray-800/50 px-6">
-            <div class="flex items-center gap-2">
-                <span class="text-xs font-bold text-gray-400">� Local Voiceover Preview</span>
-            </div>
-            <button onclick="toggleAudioPlayer()" id="audio-toggle-btn" class="text-xs text-gray-400 hover:text-white transition">
-                ▼ Collapse
+    <!-- Local Audio Preview (Fixed Top) -->
+    <div id="audio-player-container" class="fixed top-0 left-0 w-full z-[100] bg-[#111] border-b border-[#333] h-10 flex items-center px-4 transition-all duration-300">
+        <div class="flex items-center gap-3 w-full max-w-7xl mx-auto">
+            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider shrink-0">🔊 Voiceover</span>
+            
+            <audio controls class="h-6 w-full max-w-xl opacity-80 hover:opacity-100 transition-opacity">
+                <source src="proccesed_voiceover.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+             <button onclick="toggleAudioPlayer()" id="audio-toggle-btn" class="ml-auto text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest hidden">
+                Hide
             </button>
-        </div>
-        <div id="audio-player-content" class="transition-all duration-300 overflow-hidden bg-black/30">
-            <div class="p-4 flex justify-center">
-                <audio controls class="w-full max-w-3xl">
-                    <source src="proccesed_voiceover.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
         </div>
     </div>
 
     <!-- Sticky Header -->
-    <div class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur shadow-lg mb-8 flex justify-between items-center p-4 rounded-b-lg border-b border-gray-800 -mx-6 px-10 -mt-6 pt-6">
+    <div class="sticky top-10 z-50 bg-gray-900/95 backdrop-blur shadow-lg mb-8 flex justify-between items-center p-4 rounded-b-lg border-b border-gray-800 -mx-6 px-10 -mt-6 pt-6">
         <div>
             <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400">
                 🍌 Gemini Scene Creator
@@ -852,22 +849,13 @@
         }
 
         function toggleAudioPlayer() {
-            const content = document.getElementById('audio-player-content');
-            const btn = document.getElementById('audio-toggle-btn');
-            
-            if (content.style.maxHeight === '0px') {
-                content.style.maxHeight = '150px'; // Approx height for padding + audio player
-                btn.innerText = '▼ Collapse';
-            } else {
-                content.style.maxHeight = '0px';
-                btn.innerText = '▶ Expand';
-            }
+            // Feature disabled in new minimal design
+            console.log("Audio player toggle disabled");
         }
         
         // Initialize state
         document.addEventListener('DOMContentLoaded', () => {
-             const content = document.getElementById('audio-player-content');
-             if(content) content.style.maxHeight = '150px';
+             // No initialization needed for fixed player
         });
 
 
