@@ -1,8 +1,10 @@
+main_context: ""
 scenes:
   - id: "SCENE 01"
     title: "The New Age"
     color: "border-l-4 border-blue-500"
     context: "This scene introduces the urgency of AI adoption. The tone is serious but exciting."
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -48,6 +50,7 @@ scenes:
     title: "Avalanche"
     color: "border-l-4 border-green-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -93,6 +96,7 @@ scenes:
     title: "Reshaping"
     color: "border-l-4 border-orange-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -138,6 +142,7 @@ scenes:
     title: "Complex"
     color: "border-l-4 border-red-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -183,6 +188,7 @@ scenes:
     title: "The Wizard"
     color: "border-l-4 border-purple-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -228,6 +234,7 @@ scenes:
     title: "Hunting"
     color: "border-l-4 border-indigo-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -273,6 +280,7 @@ scenes:
     title: "Protocol"
     color: "border-l-4 border-cyan-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -318,6 +326,7 @@ scenes:
     title: "Process"
     color: "border-l-4 border-teal-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -363,6 +372,7 @@ scenes:
     title: "Assess"
     color: "border-l-4 border-lime-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -408,6 +418,7 @@ scenes:
     title: "Train"
     color: "border-l-4 border-emerald-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -453,6 +464,7 @@ scenes:
     title: "Workshop"
     color: "border-l-4 border-amber-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -498,6 +510,7 @@ scenes:
     title: "Workforce"
     color: "border-l-4 border-yellow-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -543,6 +556,7 @@ scenes:
     title: "X-Factor"
     color: "border-l-4 border-rose-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -588,6 +602,7 @@ scenes:
     title: "Rigid"
     color: "border-l-4 border-pink-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -633,6 +648,7 @@ scenes:
     title: "Proof"
     color: "border-l-4 border-fuchsia-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"
@@ -678,6 +694,7 @@ scenes:
     title: "Action"
     color: "border-l-4 border-violet-500"
     context: ""
+    transition: ""
     lines:
       - id: "1"
         time: "0:00"

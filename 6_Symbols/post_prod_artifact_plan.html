@@ -138,22 +138,24 @@
                 }
 
                 scenes = data.scenes;
+                
+                // Store Main Context in global variable (or attach to scenes object if preferred, but global is easier for now)
+                window.mainContext = data.main_context || "";
+                
                 renderScenes();
 
             } catch (error) {
                 console.error("Error loading scenes:", error);
-                document.getElementById('app').innerHTML = `
-                    <div class="bg-red-900 border border-red-500 text-red-200 p-4 rounded">
-                        <h3 class="font-bold">⚠️ Error Loading Data</h3>
-                        <p>${error.message}</p>
-                        <p class="text-xs mt-2 text-gray-400">Make sure you are running this via a web server (http://localhost...) and not directly as a file.</p>
-                    </div>
-                `;
+                // ... (error handling)
             }
         }
+        
+        function handleMainContextChange(value) {
+            window.mainContext = value;
+        }
 
-        function saveApiKey(key) {
-            localStorage.setItem('google_api_key', key);
+        function handleTransitionChange(sceneIndex, value) {
+            scenes[sceneIndex].transition = value;
         }
 
         // ==========================================
@@ -161,6 +163,7 @@
         // ==========================================
         
         function renderTabButton(uniqueId, type, label, model, isActive = false) {
+            // ... (keep existing renderTabButton)
             const baseClasses = "px-3 py-2 text-xs font-bold transition-colors cursor-pointer border-b-2";
             const activeClasses = "text-blue-400 border-blue-400";
             const inactiveClasses = "text-gray-400 border-transparent hover:text-gray-200";
@@ -180,6 +183,19 @@
             const app = document.getElementById('app');
             app.innerHTML = ''; // Clear loading state if any
 
+            // Render Main Context Input at the top
+            const mainContextHtml = `
+                <div class="bg-gray-800 p-6 rounded-lg mb-8 border border-blue-900/50 shadow-lg">
+                    <label class="block text-sm font-bold text-blue-400 mb-2">🌍 MAIN PROJECT CONTEXT (Globals)</label>
+                    <textarea id="main-context" rows="3" 
+                        class="w-full bg-black/50 text-gray-300 text-sm p-3 rounded border border-blue-900/30 focus:outline-none focus:border-blue-500 transition-colors"
+                        placeholder="E.g., This is a documentary about the future of AI. The visual style is cyberpunk..."
+                        oninput="handleMainContextChange(this.value)">${window.mainContext || ""}</textarea>
+                    <p class="text-xs text-gray-500 mt-2">This context is applied to EVERY generation in the project.</p>
+                </div>
+            `;
+            app.innerHTML = mainContextHtml;
+
             scenes.forEach((scene, sceneIndex) => {
                 const sceneContainer = document.createElement('div');
                 sceneContainer.className = `scene-card rounded-lg ${scene.color} overflow-hidden`;
@@ -195,21 +211,34 @@
                     </div>
                     
                     <div id="scene-content-${sceneIndex}" class="p-6 transition-all duration-300">
-                        <!-- Scene Context Input -->
-                        <div class="mb-6 bg-gray-900 p-4 rounded border border-gray-700">
-                            <label class="block text-xs font-bold text-gray-400 mb-1">SCENE CONTEXT (Applied to all generations in this scene)</label>
-                            <textarea id="context-${sceneIndex}" rows="2" 
-                                class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="E.g., The mood is dark and mysterious. The lighting should be low key..."
-                                oninput="handleContextChange(${sceneIndex})">${scene.context || ""}</textarea>
+                        
+                        <!-- Context & Transition Customization -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <!-- Scene Context -->
+                            <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                                <label class="block text-xs font-bold text-gray-400 mb-1">SCENE CONTEXT</label>
+                                <textarea id="context-${sceneIndex}" rows="2" 
+                                    class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                                    placeholder="Mood, atmosphere, setting..."
+                                    oninput="handleContextChange(${sceneIndex})">${scene.context || ""}</textarea>
+                            </div>
+                            
+                            <!-- Transition -->
+                            <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                                <label class="block text-xs font-bold text-gray-400 mb-1">TRANSITION (to next scene)</label>
+                                <textarea id="transition-${sceneIndex}" rows="2" 
+                                    class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                                    placeholder="How does this scene end? Cut to black? Fade out?"
+                                    oninput="handleTransitionChange(${sceneIndex}, this.value)">${scene.transition || ""}</textarea>
+                            </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 `;
 
                 scene.lines.forEach((line, lineIndex) => {
+                    // ... (keep existing line rendering)
                     const uniqueId = `s${sceneIndex}_l${lineIndex}`;
-                    // Default to image prompt for initial display, but we'll use tabs now
                     const currentPrompt = line.prompts ? line.prompts.image : "";
 
                     html += `
@@ -386,13 +415,24 @@
             const type = textArea.getAttribute('data-current-type') || 'image'; 
             let promptText = textArea.value;
 
-            // Prepend Context
+            // 1. Get IDs
             const parts = uniqueId.split('_'); 
             const sceneIndex = parseInt(parts[0].substring(1));
-            const context = scenes[sceneIndex].context || "";
             
-            if (context.trim()) {
-                promptText = `[SCENE CONTEXT: ${context}] ${promptText}`;
+            // 2. Gather Contexts
+            const mainCtx = window.mainContext || "";
+            const sceneCtx = scenes[sceneIndex].context || "";
+            const transitionCtx = scenes[sceneIndex].transition || "";
+
+            // 3. Construct Context Block
+            let contextBlock = "";
+            if (mainCtx) contextBlock += `[PROJECT CONTEXT: ${mainCtx}] `;
+            if (sceneCtx) contextBlock += `[SCENE CONTEXT: ${sceneCtx}] `;
+            if (transitionCtx) contextBlock += `[TRANSITION TO NEXT SCENE: ${transitionCtx}] `;
+
+            // 4. Prepend to Prompt
+            if (contextBlock) {
+                promptText = `${contextBlock}\n\n[PROMPT]: ${promptText}`;
             }
 
             if (type === 'image' || type === 'graphic') {
@@ -869,7 +909,10 @@
             
             try {
                 // Wrap in root object to match original structure
-                const exportData = { scenes: scenes };
+                const exportData = { 
+                    main_context: window.mainContext || "",
+                    scenes: scenes 
+                };
                 // Dump to YAML
                 const yamlStr = jsyaml.dump(exportData, { lineWidth: -1 });
                 
