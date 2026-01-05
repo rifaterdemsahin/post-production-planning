@@ -341,6 +341,7 @@
              
              scenes = data.scenes;
              window.mainContext = data.main_context || "";
+             window.verifiedMainContext = data.verified_main_context || false;
              renderScenes();
         }
 
@@ -350,6 +351,18 @@
         
         function handleMainContextChange(value) {
             window.mainContext = value;
+        }
+
+        function handleMainContextVerify(checked) {
+            window.verifiedMainContext = checked;
+        }
+
+        function handleSceneContextVerify(sceneIndex, checked) {
+            scenes[sceneIndex].verified_context = checked;
+        }
+
+        function handleTransitionVerify(sceneIndex, checked) {
+            scenes[sceneIndex].verified_transition = checked;
         }
 
         function handleTransitionChange(sceneIndex, value) {
@@ -383,8 +396,17 @@
 
             // Render Main Context Input at the top
             const mainContextHtml = `
-                <div class="bg-gray-800 p-6 rounded-lg mb-8 border border-blue-900/50 shadow-lg">
-                    <label class="block text-sm font-bold text-blue-400 mb-2">🌍 MAIN PROJECT CONTEXT (Globals)</label>
+                <div class="bg-gray-800 p-6 rounded-lg mb-8 border border-blue-900/50 shadow-lg relative">
+                    <div class="flex justify-between items-center mb-2">
+                         <label class="block text-sm font-bold text-blue-400">🌍 MAIN PROJECT CONTEXT (Globals)</label>
+                         <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="verify-main-context" 
+                                onchange="handleMainContextVerify(this.checked)" 
+                                ${window.verifiedMainContext ? 'checked' : ''}
+                                class="rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-0">
+                            <span class="text-xs text-blue-300">Verified for Bulk</span>
+                        </label>
+                    </div>
                     <textarea id="main-context" rows="3" 
                         class="w-full bg-black/50 text-gray-300 text-sm p-3 rounded border border-blue-900/30 focus:outline-none focus:border-blue-500 transition-colors"
                         placeholder="E.g., This is a documentary about the future of AI. The visual style is cyberpunk..."
@@ -413,8 +435,17 @@
                         <!-- Context & Transition Customization -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             <!-- Scene Context -->
-                            <div class="bg-gray-900 p-4 rounded border border-gray-700">
-                                <label class="block text-xs font-bold text-gray-400 mb-1">SCENE CONTEXT</label>
+                            <div class="bg-gray-900 p-4 rounded border border-gray-700 relative">
+                                <div class="flex justify-between items-center mb-1">
+                                    <label class="block text-xs font-bold text-gray-400">SCENE CONTEXT</label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" id="verify-context-${sceneIndex}" 
+                                            onchange="handleSceneContextVerify(${sceneIndex}, this.checked)" 
+                                            ${scene.verified_context ? 'checked' : ''}
+                                            class="rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-0 scale-75">
+                                        <span class="text-[10px] text-gray-400">Verified</span>
+                                    </label>
+                                </div>
                                 <textarea id="context-${sceneIndex}" rows="2" 
                                     class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
                                     placeholder="Mood, atmosphere, setting..."
@@ -422,8 +453,17 @@
                             </div>
                             
                             <!-- Transition -->
-                            <div class="bg-gray-900 p-4 rounded border border-gray-700">
-                                <label class="block text-xs font-bold text-gray-400 mb-1">TRANSITION (to next scene)</label>
+                            <div class="bg-gray-900 p-4 rounded border border-gray-700 relative">
+                                <div class="flex justify-between items-center mb-1">
+                                    <label class="block text-xs font-bold text-gray-400">TRANSITION (to next scene)</label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" id="verify-transition-${sceneIndex}" 
+                                            onchange="handleTransitionVerify(${sceneIndex}, this.checked)" 
+                                            ${scene.verified_transition ? 'checked' : ''}
+                                            class="rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-0 scale-75">
+                                        <span class="text-[10px] text-gray-400">Verified</span>
+                                    </label>
+                                </div>
                                 <textarea id="transition-${sceneIndex}" rows="2" 
                                     class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
                                     placeholder="How does this scene end? Cut to black? Fade out?"
@@ -1301,6 +1341,7 @@
                 // Wrap in root object to match original structure
                 const exportData = { 
                     main_context: window.mainContext || "",
+                    verified_main_context: window.verifiedMainContext || false,
                     scenes: scenes 
                 };
                 // Dump to YAML
@@ -1424,6 +1465,7 @@
                 // 1. Prepare YAML Content
                 const exportData = { 
                     main_context: window.mainContext || "",
+                    verified_main_context: window.verifiedMainContext || false,
                     scenes: scenes 
                 };
                 const yamlStr = jsyaml.dump(exportData, { lineWidth: -1 });
