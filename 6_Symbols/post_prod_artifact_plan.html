@@ -297,7 +297,12 @@
 
                 <!-- Final Prompt Preview -->
                 <div class="bg-gray-800 p-4 rounded border border-gray-700">
-                    <label class="block text-xs font-bold text-green-400 mb-1">✨ Final Combined Prompt (What the AI sees)</label>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="block text-xs font-bold text-green-400">✨ Final Combined Prompt (What the AI sees)</label>
+                        <button onclick="enhancePrompt()" id="enhance-btn" class="text-[10px] bg-purple-900/50 text-purple-300 px-2 py-0.5 rounded border border-purple-700/50 hover:bg-purple-800 transition flex items-center gap-1">
+                            ✨ Enhance
+                        </button>
+                    </div>
                     <textarea id="preview-final-prompt" readonly class="w-full h-40 bg-black/50 text-green-300 font-mono text-xs p-3 rounded border border-gray-600 resize-none focus:outline-none"></textarea>
                 </div>
             </div>
@@ -1489,6 +1494,69 @@
                 container.classList.remove('hidden');
             } finally {
                 loader.style.display = "none";
+            }
+        }
+
+
+
+        // 4e. Enhance Prompt
+        async function enhancePrompt() {
+             const apiKey = document.getElementById('apiKey').value;
+            if (!apiKey) {
+                alert("⚠️ Please paste your Google API Key at the top first.");
+                return;
+            }
+
+            const promptBox = document.getElementById('preview-final-prompt');
+            const originalPrompt = promptBox.value;
+            if (!originalPrompt) return;
+
+            const btn = document.getElementById('enhance-btn');
+            const originalBtnText = btn.innerHTML;
+            
+            btn.innerHTML = "✨ Enhancing...";
+            btn.disabled = true;
+
+            const modelId = "gemini-2.0-flash";
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`;
+            
+            const systemInstruction = "Enhance the following prompt to be more descriptive, detailed, and optimized for generative AI models (image/video/audio). Maintain the original intent, style matches, and specific details. Output ONLY the enhanced prompt, no markdown or explanations.";
+
+            const payload = {
+                contents: [{
+                    role: "user",
+                    parts: [{ text: `SYSTEM: ${systemInstruction}\n\nPROMPT TO ENHANCE: ${originalPrompt}` }]
+                }]
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                
+                if (!response.ok) throw new Error(data.error?.message || `API Error: ${response.status}`);
+
+                if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    const enhancedText = data.candidates[0].content.parts[0].text.trim();
+                    promptBox.value = enhancedText;
+                    
+                    // Flash effect to show update
+                    promptBox.classList.add('bg-purple-900/30');
+                    setTimeout(() => promptBox.classList.remove('bg-purple-900/30'), 500);
+                } else {
+                    throw new Error("No content generated");
+                }
+
+            } catch (error) {
+                console.error("Enhance failed:", error);
+                alert(`Enhance failed: ${error.message}`);
+            } finally {
+                btn.innerHTML = originalBtnText;
+                btn.disabled = false;
             }
         }
 
