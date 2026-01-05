@@ -98,6 +98,9 @@
             <button onclick="downloadCSV()" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm transition shadow-sm border border-gray-600">
                 📥 Download CSV
             </button>
+            <button onclick="toggleFullScreen()" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm transition shadow-sm border border-gray-600" title="Toggle Full Screen">
+                ⛶
+            </button>
         </div>
     </div>
 
@@ -440,6 +443,18 @@
 
         function handleTransitionChange(sceneIndex, value) {
             scenes[sceneIndex].transition = value;
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
         }
 
         // ==========================================
