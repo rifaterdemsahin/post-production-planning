@@ -144,6 +144,43 @@
         </div>
     </div>
 
+    <!-- GitHub Config Modal -->
+    <div id="github-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-md p-6 border border-gray-700 relative">
+             <button onclick="closeGithubModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">✕</button>
+             <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">🐱 GitHub Integration</h3>
+             
+             <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">GitHub Username / Owner</label>
+                    <input type="text" id="gh-owner" placeholder="e.g. rifaterdemsahin" class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">Repository Name</label>
+                    <input type="text" id="gh-repo" placeholder="e.g. post-production-planning" class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">File Path</label>
+                    <input type="text" id="gh-path" placeholder="e.g. 6_Symbols/scenes.yaml" class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">Branch</label>
+                    <input type="text" id="gh-branch" placeholder="main" value="main" class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">Personal Access Token (PAT)</label>
+                    <input type="password" id="gh-token" placeholder="ghp_..." class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500">
+                    <p class="text-[10px] text-gray-500 mt-1">Token must have 'repo' scope. Stored locally in browser.</p>
+                </div>
+             </div>
+             
+             <div class="mt-6 flex justify-end gap-3">
+                 <button onclick="closeGithubModal()" class="px-4 py-2 text-sm text-gray-400 hover:text-white transition">Cancel</button>
+                 <button onclick="saveGithubConfig()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm font-bold transition">Save Configuration</button>
+             </div>
+        </div>
+    </div>
+
     <!-- Debug Console -->
     <div class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-700 shadow-2xl transition-transform duration-300 transform translate-y-[calc(100%-40px)] z-50" id="debug-panel">
         <div class="flex justify-between items-center bg-gray-800 p-2 cursor-pointer hover:bg-gray-700" onclick="toggleDebug()">
@@ -1171,6 +1208,147 @@
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+        }
+
+        // ==========================================
+        // 7. GITHUB API INTEGRATION
+        // ==========================================
+
+        function checkGithubConfig() {
+            const config = localStorage.getItem('github_config');
+            return config ? JSON.parse(config) : null;
+        }
+
+        function openGithubModal() {
+            const config = checkGithubConfig();
+            if (config) {
+                document.getElementById('gh-owner').value = config.owner || 'rifaterdemsahin';
+                document.getElementById('gh-repo').value = config.repo || 'post-production-planning';
+                document.getElementById('gh-path').value = config.path || '6_Symbols/scenes.yaml';
+                document.getElementById('gh-branch').value = config.branch || 'main';
+                document.getElementById('gh-token').value = config.token || '';
+            } else {
+                // Defaults
+                document.getElementById('gh-owner').value = 'rifaterdemsahin';
+                document.getElementById('gh-repo').value = 'post-production-planning';
+                document.getElementById('gh-path').value = '6_Symbols/scenes.yaml';
+                document.getElementById('gh-branch').value = 'main';
+            }
+            document.getElementById('github-modal').classList.remove('hidden');
+        }
+
+        function closeGithubModal() {
+            document.getElementById('github-modal').classList.add('hidden');
+        }
+
+        function saveGithubConfig() {
+            const owner = document.getElementById('gh-owner').value.trim();
+            const repo = document.getElementById('gh-repo').value.trim();
+            const path = document.getElementById('gh-path').value.trim();
+            const branch = document.getElementById('gh-branch').value.trim() || 'main';
+            const token = document.getElementById('gh-token').value.trim();
+
+            if (!owner || !repo || !path || !token) {
+                alert("Please fill in all GitHub configuration fields.");
+                return;
+            }
+
+            const config = { owner, repo, path, branch, token };
+            localStorage.setItem('github_config', JSON.stringify(config));
+            closeGithubModal();
+            
+            alert("Configuration saved! You can now use the 'Save YAML' button.");
+        }
+
+        async function saveChanges() {
+            const config = checkGithubConfig();
+            if (!config) {
+                openGithubModal();
+                return;
+            }
+
+            const confirmSave = confirm(`Save changes to ${config.owner}/${config.repo}/${config.path}?`);
+            if (!confirmSave) return;
+
+            const btn = document.querySelector('button[onclick="saveChanges()"]');
+            const originalText = btn ? btn.innerText : "💾 Save YAML";
+            if (btn) {
+                btn.innerText = "⏳ Saving...";
+                btn.disabled = true;
+            }
+
+            try {
+                // 1. Prepare YAML Content
+                const exportData = { 
+                    main_context: window.mainContext || "",
+                    scenes: scenes 
+                };
+                const yamlStr = jsyaml.dump(exportData, { lineWidth: -1 });
+                // Robust Base64 encoding for UTF-8 content
+                const contentBase64 = btoa(unescape(encodeURIComponent(yamlStr))); 
+
+                // 2. Get current file SHA (needed for update)
+                const apiUrl = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.branch}`;
+                
+                logDebug('REQ', 'Getting File SHA', { url: apiUrl });
+                
+                const getRes = await fetch(apiUrl, {
+                    headers: {
+                        'Authorization': `token ${config.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+
+                if (!getRes.ok && getRes.status !== 404) {
+                    throw new Error(`Failed to fetch file info: ${getRes.status} ${getRes.statusText}`);
+                }
+
+                let sha = null;
+                if (getRes.ok) {
+                    const getData = await getRes.json();
+                    sha = getData.sha;
+                }
+
+                // 3. Update File
+                const putBody = {
+                    message: `Update scenes.yaml via Gemini Scene Creator - ${new Date().toLocaleString()}`,
+                    content: contentBase64,
+                    branch: config.branch
+                };
+                if (sha) putBody.sha = sha;
+
+                logDebug('REQ', 'Updating File', { url: apiUrl, sha: sha });
+
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${config.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(putBody)
+                });
+
+                if (!putRes.ok) {
+                    const errData = await putRes.json();
+                    throw new Error(errData.message || `Save failed: ${putRes.status}`);
+                }
+
+                const putData = await putRes.json();
+                logDebug('RES', 'File Saved', putData);
+                
+                alert("✅ Successfully saved to GitHub!");
+                
+            } catch (error) {
+                console.error('GitHub Save Error:', error);
+                logDebug('ERROR', 'GitHub Save Failed', error.message);
+                alert(`❌ Failed to save: ${error.message}`);
+            } finally {
+                if (btn) {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }
+            }
         }
 
         // Initialize App
