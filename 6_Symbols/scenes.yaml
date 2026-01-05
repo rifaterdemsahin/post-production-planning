@@ -14,7 +14,7 @@ scenes:
           graphic: "Sleek, modern lower third appearing with 'John Doe - Future Tech Analyst' in neon blue"
           music: "Low, pulsing synth pad establishing a serious but curious tone, 120 BPM"
           animation: "Subtle slow zoom in on the presenter's face to build intimacy"
-          motion_graphics: "Create a modern, neon-style motion graphic in Canva with the text 'Create a cinematic title card in Canva with the text 'THE NEW AGE' using a futuristic sans-serif font, glowing neon blue outline, set against a dark, high-tech abstract background' using a futuristic font"
+          motion_graphics: "Create a cinematic title card in Canva with the text 'THE NEW AGE' using a futuristic sans-serif font, glowing neon blue outline, set against a dark, high-tech abstract background"
           sound_effect: "Subtle high-tech whoosh sound on transition"
       - id: "2"
         time: "0:04"
