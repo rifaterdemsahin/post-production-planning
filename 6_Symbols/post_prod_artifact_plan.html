@@ -360,7 +360,7 @@
                                     ${renderTabButton(uniqueId, 'graphic', '📊 Graphic', 'gemini-3-pro-image-preview')}
                                     ${renderTabButton(uniqueId, 'music', '🎵 Music', 'gemini-2.5-pro-preview-tts')}
                                     ${renderTabButton(uniqueId, 'animation', '🎬 Animation', 'veo-2.0-generate-001')}
-                                    ${renderTabButton(uniqueId, 'overlay_text', '✨ Motion Graphics', 'gemini-2.0-flash')}
+                                    ${renderTabButton(uniqueId, 'motion_graphics', '✨ Motion Graphics', 'gemini-2.0-flash')}
                                     ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'gemini-2.5-pro-preview-tts')}
                                 </div>
                                 
@@ -1150,7 +1150,7 @@
                 return;
             }
             // Add columns for all new prompt types
-            let csv = "Scene,Line,Timecode,Detailed Script,Prompt Image,Prompt Graphic,Prompt Music,Prompt Animation,Prompt Overlay Text,Prompt Sound Effect\n";
+            let csv = "Scene,Line,Timecode,Detailed Script,Prompt Image,Prompt Graphic,Prompt Music,Prompt Animation,Prompt Motion Graphics,Prompt Sound Effect\n";
             
             scenes.forEach(scene => {
                 scene.lines.forEach(line => {
@@ -1158,7 +1158,7 @@
                     // Escape quotes for CSV for all fields
                     const safe = (text) => text ? `"${text.replace(/"/g, '""')}"` : '""';
                     
-                    csv += `"${scene.id}", "${line.id}", "${line.time}", ${safe(line.script)}, ${safe(p.image)}, ${safe(p.graphic)}, ${safe(p.music)}, ${safe(p.animation)}, ${safe(p.overlay_text)}, ${safe(p.sound_effect)}\n`;
+                    csv += `"${scene.id}", "${line.id}", "${line.time}", ${safe(line.script)}, ${safe(p.image)}, ${safe(p.graphic)}, ${safe(p.music)}, ${safe(p.animation)}, ${safe(p.motion_graphics)}, ${safe(p.sound_effect)}\n`;
                 });
             });
 
