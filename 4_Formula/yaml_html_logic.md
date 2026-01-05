@@ -72,3 +72,23 @@ When "Save YAML" is clicked:
     -   **Note**: The individual scene properties (`verified_context`, `verified_transition`) are already inside the `scenes` array objects because JavaScript objects are passed by reference and updated live by the handlers.
 2.  **Serialization**: `jsyaml.dump()` converts the object back to a YAML string.
 3.  **Transport**: The Base64-encoded string is sent to the GitHub API via `PUT` request.
+
+---
+
+## 3. Workflow Goals & Sanity Check
+
+### Workflow Goals
+The goal of this system is to streamline the post-production process for high-value documentary videos.
+- **Multimodal Planning**: Defining Image, Graphic, Music, Animation, and Sound Effects for every single line of script *before* generation.
+- **Verification First**: Using the "Verified for Bulk" toggles ensures that contexts and prompts are reviewed and locked in. This prevents wasting API credits or render time on unrefined ideas.
+- **Bulk Generation**: Once verified, the YAML serves as a machine-readable instruction set for automated generation tools (e.g., Gemini Scene Creator), producing consistent assets at scale.
+
+### Sanity Check
+- **Data Integrity**: The `scenes` array in memory is a direct reference to the UI. Changes are immediate. The `saveChanges()` function dumps the *entire* state back to YAML, ensuring no "partial saves" where some prompt updates are lost.
+- **Context Propagation**: The `main_context` is applied globally, while `scene.context` allows for local overrides or specific mood setting, ensuring coherent video generation.
+- **Verification Logic**: The system now explicitly tracks verification for:
+    - Main Context (Global)
+    - Scene Context (Local)
+    - Transitions (Flow)
+    - Individual Prompts (Asset Details)
+    *If a field is marked `verified: true`, it signals to the generation pipeline that it is safe to process.*
