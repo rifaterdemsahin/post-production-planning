@@ -235,6 +235,51 @@
         </div>
     </div>
 
+    <!-- Context Preview Modal -->
+    <div id="context-preview-modal" class="fixed inset-0 z-[90] hidden flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-4xl p-6 border border-gray-700 relative flex flex-col max-h-[90vh]">
+            <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-2">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">🔍 Context Preview</h3>
+                <button onclick="closeContextModal()" class="text-gray-400 hover:text-white transition">✕</button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto pr-2 space-y-4">
+                
+                <!-- Contexts Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Main Context -->
+                    <div class="bg-gray-800 p-3 rounded border border-gray-700">
+                        <label class="block text-xs font-bold text-blue-400 mb-1">🌍 Project Context</label>
+                        <textarea id="preview-main-context" readonly class="w-full h-24 bg-black/30 text-gray-400 text-xs p-2 rounded border border-gray-700 resize-none focus:outline-none"></textarea>
+                    </div>
+                    <!-- Scene Context -->
+                    <div class="bg-gray-800 p-3 rounded border border-gray-700">
+                        <label class="block text-xs font-bold text-purple-400 mb-1">🎬 Scene Context</label>
+                        <textarea id="preview-scene-context" readonly class="w-full h-24 bg-black/30 text-gray-400 text-xs p-2 rounded border border-gray-700 resize-none focus:outline-none"></textarea>
+                    </div>
+                    <!-- Transition Context -->
+                    <div class="bg-gray-800 p-3 rounded border border-gray-700">
+                        <label class="block text-xs font-bold text-orange-400 mb-1">➡️ Transition</label>
+                        <textarea id="preview-transition-context" readonly class="w-full h-24 bg-black/30 text-gray-400 text-xs p-2 rounded border border-gray-700 resize-none focus:outline-none"></textarea>
+                    </div>
+                </div>
+
+                <!-- Final Prompt Preview -->
+                <div class="bg-gray-800 p-4 rounded border border-gray-700">
+                    <label class="block text-xs font-bold text-green-400 mb-1">✨ Final Combined Prompt (What the AI sees)</label>
+                    <textarea id="preview-final-prompt" readonly class="w-full h-40 bg-black/50 text-green-300 font-mono text-xs p-3 rounded border border-gray-600 resize-none focus:outline-none"></textarea>
+                </div>
+            </div>
+            
+            <div class="mt-6 flex justify-end gap-3 pt-4 border-t border-gray-800">
+                <button onclick="closeContextModal()" class="px-4 py-2 text-sm text-gray-400 hover:text-white transition">Cancel</button>
+                <button onclick="confirmGeneration()" id="confirm-gen-btn" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold transition flex items-center gap-2 shadow-lg shadow-blue-900/30">
+                    <span>⚡ Confirm & Execute</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Debug Console -->
     <div class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-700 shadow-2xl transition-transform duration-300 transform translate-y-[calc(100%-40px)] z-50" id="debug-panel">
         <div class="flex justify-between items-center bg-gray-800 p-2 cursor-pointer hover:bg-gray-700" onclick="toggleDebug()">
@@ -831,9 +876,15 @@
             }
         }
 
-        function handleGenerate(uniqueId) {
+        // ==========================================
+        // 3.5 CONTEXT MODAL LOGIC
+        // ==========================================
+        
+        let pendingGeneration = null;
+
+        function openContextModal(uniqueId) {
             const textArea = document.getElementById(`text-${uniqueId}`);
-            // Default to 'image' if not set (should be set by default in HTML)
+            // Default to 'image' if not set
             const type = textArea.getAttribute('data-current-type') || 'image'; 
             let promptText = textArea.value;
 
@@ -848,24 +899,59 @@
 
             // 3. Construct Context Block
             let contextBlock = "";
-            if (mainCtx) contextBlock += `[PROJECT CONTEXT: ${mainCtx}] `;
-            if (sceneCtx) contextBlock += `[SCENE CONTEXT: ${sceneCtx}] `;
-            if (transitionCtx) contextBlock += `[TRANSITION TO NEXT SCENE: ${transitionCtx}] `;
+            let finalPrompt = "";
+            
+            if (mainCtx) contextBlock += `[PROJECT CONTEXT: ${mainCtx}]\n`;
+            if (sceneCtx) contextBlock += `[SCENE CONTEXT: ${sceneCtx}]\n`;
+            if (transitionCtx) contextBlock += `[TRANSITION TO NEXT SCENE: ${transitionCtx}]\n`;
 
-            // 4. Prepend to Prompt
             if (contextBlock) {
-                promptText = `${contextBlock}\n\n[PROMPT]: ${promptText}`;
+                finalPrompt = `${contextBlock.trim()}\n\n[PROMPT]: ${promptText}`;
+            } else {
+                finalPrompt = promptText;
             }
+
+            // 4. Populate Modal
+            document.getElementById('preview-main-context').value = mainCtx || "(No Main Context)";
+            document.getElementById('preview-scene-context').value = sceneCtx || "(No Scene Context)";
+            document.getElementById('preview-transition-context').value = transitionCtx || "(No Transition)";
+            document.getElementById('preview-final-prompt').value = finalPrompt;
+
+            // 5. Store State
+            pendingGeneration = {
+                uniqueId: uniqueId,
+                finalPrompt: finalPrompt,
+                type: type
+            };
+
+            // 6. Show Modal
+            document.getElementById('context-preview-modal').classList.remove('hidden');
+        }
+
+        function closeContextModal() {
+            document.getElementById('context-preview-modal').classList.add('hidden');
+            pendingGeneration = null;
+        }
+
+        function confirmGeneration() {
+            if (!pendingGeneration) return;
+            
+            const { uniqueId, finalPrompt, type } = pendingGeneration;
+            closeContextModal();
 
             if (type === 'image' || type === 'graphic') {
-                generateMultimodalContent(uniqueId, promptText);
+                generateMultimodalContent(uniqueId, finalPrompt);
             } else if (type === 'animation') {
-                generateVideoContent(uniqueId, promptText);
+                generateVideoContent(uniqueId, finalPrompt);
             } else if (type === 'music' || type === 'sound_effect') {
-                generateAudioContent(uniqueId, promptText);
+                generateAudioContent(uniqueId, finalPrompt);
             } else {
-                generateContent(uniqueId, promptText);
+                generateContent(uniqueId, finalPrompt);
             }
+        }
+
+        function handleGenerate(uniqueId) {
+            openContextModal(uniqueId);
         }
 
         function toggleDebug() {
