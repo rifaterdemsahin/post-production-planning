@@ -90,7 +90,11 @@
         <div class="bg-gray-900 rounded-lg shadow-2xl w-[95vw] h-[90vh] flex flex-col border border-gray-700">
             <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-gray-800/50 rounded-t-lg">
                 <h3 class="text-lg font-bold text-white flex items-center gap-2">📜 Full Script</h3>
-                <div class="flex gap-2">
+                <div class="flex gap-2 items-center">
+                    <label class="flex items-center gap-2 text-xs text-gray-400 mr-4 cursor-pointer hover:text-white">
+                        <input type="checkbox" id="clean-script-toggle" onchange="renderScriptContent()" class="rounded bg-gray-800 border-gray-600 text-blue-500 focus:ring-0">
+                        Please Clean Script
+                    </label>
                     <button onclick="copyScriptToClipboard(this)" class="text-xs bg-blue-900 text-blue-200 px-3 py-1 rounded hover:bg-blue-800 transition">📋 Copy All</button>
                     <button onclick="closeScriptModal()" class="text-gray-400 hover:text-white transition">✕</button>
                 </div>
@@ -401,22 +405,36 @@
 
         function openScriptModal() {
             const modal = document.getElementById('script-modal');
+            modal.classList.remove('hidden');
+            renderScriptContent();
+        }
+
+        function renderScriptContent() {
             const textarea = document.getElementById('full-script-content');
+            const isClean = document.getElementById('clean-script-toggle').checked;
             
             let fullScript = "";
             
             scenes.forEach(scene => {
-                fullScript += `### ${scene.id}: ${scene.title}\n`;
+                if (!isClean) {
+                    fullScript += `### ${scene.id}: ${scene.title}\n`;
+                }
+                
                 if(scene.lines) {
                     scene.lines.forEach(line => {
-                        fullScript += `[${line.time}] ${line.script}\n`;
+                        if (isClean) {
+                            // Clean view: Just the script
+                            if (line.script) fullScript += `${line.script}\n`;
+                        } else {
+                            // Full view: Timecode + Script
+                            fullScript += `[${line.time}] ${line.script}\n`;
+                        }
                     });
                 }
                 fullScript += `\n`; // Add spacing between scenes
             });
             
             textarea.value = fullScript;
-            modal.classList.remove('hidden');
         }
 
         function closeScriptModal() {
