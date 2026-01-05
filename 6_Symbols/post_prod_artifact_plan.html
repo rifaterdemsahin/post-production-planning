@@ -1104,24 +1104,7 @@
             const transitionCtx = scenes[sceneIndex].transition || "";
 
             // 3. Construct Context Block
-            let contextBlock = "";
-            let finalPrompt = "";
-            
-            if (mainCtx) contextBlock += `[PROJECT CONTEXT: ${mainCtx}]\n`;
-            if (sceneCtx) contextBlock += `[SCENE CONTEXT: ${sceneCtx}]\n`;
-            if (transitionCtx) contextBlock += `[TRANSITION TO NEXT SCENE: ${transitionCtx}]\n`;
-
-            if (contextBlock) {
-                finalPrompt = `${contextBlock.trim()}\n\n[PROMPT]: ${promptText}`;
-            } else {
-                finalPrompt = promptText;
-            }
-
-            // [NEW] Prepend Creation Type
-            let typeLabel = type.toUpperCase();
-            if (type === 'animation') typeLabel = 'VIDEO'; // Explicit override for animation -> video
-            
-            finalPrompt = `[CREATE ${typeLabel}] > ${finalPrompt}`;
+            const finalPrompt = constructFullPrompt(sceneIndex, promptText, type);
 
             // 4. Populate Modal
             document.getElementById('preview-main-context').value = mainCtx || "(No Main Context)";
@@ -1619,7 +1602,18 @@
             const modelId = "gemini-2.0-flash";
             const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`;
             
-            const systemInstruction = "Enhance the following prompt to be more descriptive, detailed, and optimized for generative AI models (image/video/audio). Maintain the original intent, style matches, and specific details. Output ONLY the enhanced prompt, no markdown or explanations.";
+            const type = pendingGeneration ? pendingGeneration.type : "general";
+            let typeInstruction = "";
+            
+            if (['image', 'graphic', 'texture'].includes(type)) {
+                typeInstruction = "Focus on visual details, lighting, composition, artistic style, and mood. describe the scene vividly.";
+            } else if (['animation', 'video', 'transition'].includes(type)) {
+                typeInstruction = "Focus on movement, camera angles, pacing, physics, and temporal progression. Describe the action and flow.";
+            } else if (['music', 'sound_effect', 'voice_over'].includes(type)) {
+                typeInstruction = "Focus on audio characteristics, instrumentation, tempo, mood, texture, and sound quality. Describe the auditory experience.";
+            }
+
+            const systemInstruction = `Enhance the following prompt to be more descriptive, detailed, and optimized for creating a ${type.toUpperCase()}. ${typeInstruction} Maintain the original intent, style matches, and specific details. output ONLY the enhanced prompt content.`;
 
             const payload = {
                 contents: [{
@@ -1659,9 +1653,36 @@
             }
         }
 
-        // ==========================================
         // 5. HELPER FUNCTIONS
         // ==========================================
+
+        function constructFullPrompt(sceneIndex, promptText, type) {
+            // 2. Gather Contexts
+            const mainCtx = window.mainContext || "";
+            const sceneCtx = scenes[sceneIndex].context || "";
+            const transitionCtx = scenes[sceneIndex].transition || "";
+
+            // 3. Construct Context Block
+            let contextBlock = "";
+            let finalPrompt = "";
+            
+            if (mainCtx) contextBlock += `[PROJECT CONTEXT: ${mainCtx}]\n`;
+            if (sceneCtx) contextBlock += `[SCENE CONTEXT: ${sceneCtx}]\n`;
+            if (transitionCtx) contextBlock += `[TRANSITION TO NEXT SCENE: ${transitionCtx}]\n`;
+
+            if (contextBlock) {
+                finalPrompt = `${contextBlock.trim()}\n\n[PROMPT]: ${promptText}`;
+            } else {
+                finalPrompt = promptText;
+            }
+
+            // Prepend Creation Type
+            let typeLabel = (type || "").toUpperCase();
+            if (type === 'animation') typeLabel = 'VIDEO'; 
+            
+            finalPrompt = `[CREATE ${typeLabel}] > ${finalPrompt}`;
+            return finalPrompt;
+        }
         
         function getArtifactFilename(uniqueId, type) {
             // uniqueId format: "s{sceneIndex}_l{lineIndex}"
@@ -1917,10 +1938,15 @@
                          if(v[type]) {
                              count++;
                              // Add to preview list
+                             
+                             // Get scene index and prompt text for preview construction
+                             const promptText = line.prompts ? line.prompts[type] : "";
+                             const fullPrompt = constructFullPrompt(sIdx, promptText, type);
+
                              const li = document.createElement('li');
                              li.innerHTML = `
-                                <div class="flex justify-between items-center bg-gray-900/50 p-1 rounded hover:bg-gray-700 transition">
-                                    <span class="text-gray-300">${scene.id} Line ${line.id}</span>
+                                <div class="flex justify-between items-center bg-gray-900/50 p-1 rounded hover:bg-gray-700 transition" title="${fullPrompt.replace(/"/g, '&quot;')}">
+                                    <span class="text-gray-300 cursor-help border-b border-dotted border-gray-600">${scene.id} Line ${line.id}</span>
                                     <span class="text-[10px] text-blue-300 border border-blue-900 px-1 rounded">${type}</span>
                                 </div>
                              `;
@@ -2004,22 +2030,8 @@
                     const parts = task.uniqueId.split('_'); 
                     const sceneIndex = parseInt(parts[0].substring(1));
                     
-                    // 2. Gather Contexts
-                    const mainCtx = window.mainContext || "";
-                    const sceneCtx = scenes[sceneIndex].context || "";
-                    const transitionCtx = scenes[sceneIndex].transition || "";
-
-                    // 3. Construct Context Block
-                    let contextBlock = "";
-                    if (mainCtx) contextBlock += `[PROJECT CONTEXT: ${mainCtx}] `;
-                    if (sceneCtx) contextBlock += `[SCENE CONTEXT: ${sceneCtx}] `;
-                    if (transitionCtx) contextBlock += `[TRANSITION TO NEXT SCENE: ${transitionCtx}] `;
-
-                    // 4. Prepend to Prompt
-                    let finalPrompt = task.prompt;
-                    if (contextBlock) {
-                        finalPrompt = `${contextBlock}\n\n[PROMPT]: ${finalPrompt}`;
-                    }
+                    // 3. Construct Context Block using Helper
+                    const finalPrompt = constructFullPrompt(sceneIndex, task.prompt, task.type);
 
                     // Call specific generation function
                     // Note: These functions update the main UI. 
