@@ -59,6 +59,10 @@
             <button onclick="handleOpenFile()" class="bg-[#2ecc71] hover:bg-[#27ae60] text-gray-900 px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-bold border border-[#27ae60]">
                 📂 Open YAML
             </button>
+
+            <button onclick="openBulkGenModal()" class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-bold border border-rose-400 flex items-center gap-2">
+                ⚡ Bulk Generate
+            </button>
             
             <button onclick="openScriptModal()" class="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-semibold border border-purple-400">
                 📜 View Script
@@ -180,6 +184,36 @@
              <div class="mt-6 flex justify-end gap-3">
                  <button onclick="closeGithubModal()" class="px-4 py-2 text-sm text-gray-400 hover:text-white transition">Cancel</button>
                  <button onclick="saveGithubConfig()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm font-bold transition">Save Configuration</button>
+             </div>
+        </div>
+    </div>
+
+    <!-- Bulk Generation Progress Modal -->
+    <div id="bulk-progress-modal" class="fixed inset-0 z-[80] hidden flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-2xl p-6 border border-gray-700 relative flex flex-col max-h-[90vh]">
+             <div class="flex justify-between items-center mb-4">
+                 <h3 class="text-xl font-bold text-white flex items-center gap-2">⚡ Bulk Generation</h3>
+                 <button onclick="closeBulkGenModal()" id="bulk-close-btn" class="text-gray-400 hover:text-white transition">✕</button>
+             </div>
+
+             <div class="mb-6">
+                 <div class="flex justify-between text-xs text-gray-400 mb-1">
+                     <span id="bulk-status-text">Ready to start...</span>
+                     <span id="bulk-percentage">0%</span>
+                 </div>
+                 <div class="w-full bg-gray-800 rounded-full h-2.5 overflow-hidden">
+                     <div id="bulk-progress-bar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-2.5 rounded-full" style="width: 0%"></div>
+                 </div>
+             </div>
+
+             <div class="flex-1 overflow-auto bg-black/50 rounded border border-gray-800 p-4 font-mono text-xs mb-4" id="bulk-log-container">
+                 <div class="text-gray-500 italic">Logs will appear here...</div>
+             </div>
+             
+             <div class="flex justify-end gap-3 mt-auto">
+                 <button onclick="startBulkGeneration()" id="bulk-start-btn" class="bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded text-sm font-bold transition flex items-center gap-2">
+                    <span>🚀 Start Generation</span>
+                 </button>
              </div>
         </div>
     </div>
@@ -405,6 +439,18 @@
                                     ${renderTabButton(uniqueId, 'animation', '🎬 Animation', 'veo-2.0-generate-001')}
                                     ${renderTabButton(uniqueId, 'motion_graphics', '✨ Motion Graphics', 'gemini-2.0-flash')}
                                     ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'gemini-2.5-pro-preview-tts')}
+                                </div>
+                                
+                                <div class="flex items-center gap-2 mb-2 px-1">
+                                    <label class="flex items-center gap-2 cursor-pointer group-verify">
+                                        <div class="relative">
+                                            <input type="checkbox" id="verify-${uniqueId}" 
+                                                onchange="handleVerifyChange('${uniqueId}', ${sceneIndex}, ${lineIndex})" 
+                                                class="peer sr-only">
+                                            <div class="w-9 h-5 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                                        </div>
+                                        <span class="text-xs font-bold text-gray-500 peer-checked:text-green-400 transition-colors" id="verify-label-${uniqueId}">Verified for Bulk</span>
+                                    </label>
                                 </div>
                                 
                                 <div class="relative">
@@ -633,6 +679,49 @@
             
             // Update data attribute for handleTextChange
             textArea.setAttribute('data-current-type', type);
+
+            // Update Verified Toggle
+            updateVerifiedToggleOnly(uniqueId, sceneIndex, lineIndex, type);
+        }
+
+        function updateVerifiedToggleOnly(uniqueId, sceneIndex, lineIndex, type) {
+            const verifyCheckbox = document.getElementById(`verify-${uniqueId}`);
+            const verifyLabel = document.getElementById(`verify-label-${uniqueId}`);
+            
+            // Check data model
+            const verifiedMap = scenes[sceneIndex].lines[lineIndex].verified_prompts || {};
+            const isVerified = verifiedMap[type] === true;
+            
+            verifyCheckbox.checked = isVerified;
+            if (isVerified) {
+                verifyLabel.innerText = "Verified for Bulk ✅";
+                verifyLabel.classList.add('text-green-400');
+            } else {
+                verifyLabel.innerText = "Verify for Bulk";
+                verifyLabel.classList.remove('text-green-400');
+            }
+        }
+
+        function handleVerifyChange(uniqueId, sceneIndex, lineIndex) {
+            const checkbox = document.getElementById(`verify-${uniqueId}`);
+            const textArea = document.getElementById(`text-${uniqueId}`);
+            const type = textArea.getAttribute('data-current-type');
+            
+            if (!scenes[sceneIndex].lines[lineIndex].verified_prompts) {
+                scenes[sceneIndex].lines[lineIndex].verified_prompts = {};
+            }
+            
+            scenes[sceneIndex].lines[lineIndex].verified_prompts[type] = checkbox.checked;
+            
+            // Update label immediately
+             const verifyLabel = document.getElementById(`verify-label-${uniqueId}`);
+             if (checkbox.checked) {
+                verifyLabel.innerText = "Verified for Bulk ✅";
+                verifyLabel.classList.add('text-green-400');
+            } else {
+                verifyLabel.innerText = "Verify for Bulk";
+                verifyLabel.classList.remove('text-green-400');
+            }
         }
 
         function handleTextChange(uniqueId, sceneIndex, lineIndex) {
@@ -1198,10 +1287,13 @@
             scenes.forEach(scene => {
                 scene.lines.forEach(line => {
                     const p = line.prompts || {};
+                    const v = line.verified_prompts || {};
                     // Escape quotes for CSV for all fields
                     const safe = (text) => text ? `"${text.replace(/"/g, '""')}"` : '""';
+                    // Helper for verification status
+                    const isV = (type) => v[type] ? " (Verified)" : "";
                     
-                    csv += `"${scene.id}", "${line.id}", "${line.time}", ${safe(line.script)}, ${safe(p.image)}, ${safe(p.graphic)}, ${safe(p.music)}, ${safe(p.animation)}, ${safe(p.motion_graphics)}, ${safe(p.sound_effect)}\n`;
+                    csv += `"${scene.id}", "${line.id}", "${line.time}", ${safe(line.script)}, ${safe(p.image + isV('image'))}, ${safe(p.graphic + isV('graphic'))}, ${safe(p.music + isV('music'))}, ${safe(p.animation + isV('animation'))}, ${safe(p.motion_graphics + isV('motion_graphics'))}, ${safe(p.sound_effect + isV('sound_effect'))}\n`;
                 });
             });
 
@@ -1355,6 +1447,154 @@
                     btn.disabled = false;
                 }
             }
+        }
+
+        // ==========================================
+        // 8. BULK GENERATION LOGIC
+        // ==========================================
+        
+        const bulkLogContainer = document.getElementById('bulk-log-container');
+        let isBulkGenerating = false;
+
+        function openBulkGenModal() {
+            // Check for verified items
+            let count = 0;
+            scenes.forEach(scene => {
+                scene.lines.forEach(line => {
+                    const v = line.verified_prompts || {};
+                    Object.values(v).forEach(val => { if(val) count++; });
+                });
+            });
+
+            document.getElementById('bulk-progress-modal').classList.remove('hidden');
+            document.getElementById('bulk-status-text').innerText = `Found ${count} verified items ready to process.`;
+            document.getElementById('bulk-percentage').innerText = "0%";
+            document.getElementById('bulk-progress-bar').style.width = "0%";
+            bulkLogContainer.innerHTML = `<div class="text-gray-500 italic">Logs will appear here...</div>`;
+            document.getElementById('bulk-start-btn').disabled = count === 0;
+            if (count === 0) {
+                 bulkLogHtml("⚠️ No verified prompts found. Mark prompts as 'Verified' first.", "text-yellow-500");
+            }
+        }
+
+        function closeBulkGenModal() {
+            if (isBulkGenerating) {
+                if(!confirm("Generation is in progress. Are you sure you want to close?")) return;
+            }
+            document.getElementById('bulk-progress-modal').classList.add('hidden');
+        }
+
+        async function startBulkGeneration() {
+            if (isBulkGenerating) return;
+            isBulkGenerating = true;
+            const btn = document.getElementById('bulk-start-btn');
+            btn.disabled = true;
+            btn.innerText = "⏳ Processing...";
+            
+            bulkLogContainer.innerHTML = ""; // Clear logs
+            
+            // Collect Tasks
+            const tasks = [];
+            scenes.forEach((scene, sIdx) => {
+                scene.lines.forEach((line, lIdx) => {
+                    const v = line.verified_prompts || {};
+                    Object.keys(v).forEach(type => {
+                        if (v[type]) {
+                            tasks.push({
+                                uniqueId: `s${sIdx}_l${lIdx}`,
+                                type: type,
+                                sceneId: scene.id,
+                                lineId: line.id,
+                                prompt: line.prompts ? line.prompts[type] : ""
+                            });
+                        }
+                    });
+                });
+            });
+
+            const total = tasks.length;
+            if (total === 0) {
+                isBulkGenerating = false;
+                btn.disabled = false;
+                btn.innerText = "🚀 Start Generation";
+                return;
+            }
+
+            for (let i = 0; i < total; i++) {
+                const task = tasks[i];
+                const progress = Math.round(((i) / total) * 100);
+                updateBulkProgress(progress, `Processing ${i+1}/${total}: ${task.sceneId} Line ${task.lineId} (${task.type})`);
+                
+                bulkLogHtml(`[${i+1}/${total}] Starting: ${task.sceneId} Line ${task.lineId} - ${task.type}...`, "text-blue-400");
+                
+                try {
+                    // Context Construction (Reuse existing logic or call handleGenerate logic)
+                     // 1. Get IDs
+                    const parts = task.uniqueId.split('_'); 
+                    const sceneIndex = parseInt(parts[0].substring(1));
+                    
+                    // 2. Gather Contexts
+                    const mainCtx = window.mainContext || "";
+                    const sceneCtx = scenes[sceneIndex].context || "";
+                    const transitionCtx = scenes[sceneIndex].transition || "";
+
+                    // 3. Construct Context Block
+                    let contextBlock = "";
+                    if (mainCtx) contextBlock += `[PROJECT CONTEXT: ${mainCtx}] `;
+                    if (sceneCtx) contextBlock += `[SCENE CONTEXT: ${sceneCtx}] `;
+                    if (transitionCtx) contextBlock += `[TRANSITION TO NEXT SCENE: ${transitionCtx}] `;
+
+                    // 4. Prepend to Prompt
+                    let finalPrompt = task.prompt;
+                    if (contextBlock) {
+                        finalPrompt = `${contextBlock}\n\n[PROMPT]: ${finalPrompt}`;
+                    }
+
+                    // Call specific generation function
+                    // Note: These functions update the main UI. 
+                    // We might want to scroll to them or just let them update silently in background.
+                    if (task.type === 'image' || task.type === 'graphic') {
+                        await generateMultimodalContent(task.uniqueId, finalPrompt);
+                    } else if (task.type === 'animation') {
+                        // Video generation is long-running. 
+                        // For bulk, strictly sequential video gen might be too slow, but let's stick to it for safety.
+                        await generateVideoContent(task.uniqueId, finalPrompt);
+                    } else if (task.type === 'music' || task.type === 'sound_effect') {
+                        await generateAudioContent(task.uniqueId, finalPrompt);
+                    } else {
+                        await generateContent(task.uniqueId, finalPrompt);
+                    }
+                    
+                    bulkLogHtml(`✅ Completed: ${task.sceneId} Line ${task.lineId}`, "text-green-500");
+
+                } catch (err) {
+                    console.error(err);
+                    bulkLogHtml(`❌ Failed: ${task.sceneId} Line ${task.lineId} - ${err.message}`, "text-red-500");
+                }
+                
+                // Small delay to prevent rate limits
+                await new Promise(r => setTimeout(r, 2000));
+            }
+
+            updateBulkProgress(100, "All tasks completed!");
+            isBulkGenerating = false;
+            btn.innerText = "✅ Done";
+            btn.classList.remove('bg-green-600', 'hover:bg-green-500');
+            btn.classList.add('bg-gray-600', 'cursor-not-allowed');
+        }
+
+        function updateBulkProgress(pct, text) {
+            document.getElementById('bulk-progress-bar').style.width = `${pct}%`;
+            document.getElementById('bulk-percentage').innerText = `${pct}%`;
+            document.getElementById('bulk-status-text').innerText = text;
+        }
+
+        function bulkLogHtml(msg, colorClass = "text-gray-300") {
+            const div = document.createElement('div');
+            div.className = `mb-1 ${colorClass}`;
+            div.innerText = msg;
+            bulkLogContainer.appendChild(div);
+            bulkLogContainer.scrollTop = bulkLogContainer.scrollHeight;
         }
 
         // Initialize App
