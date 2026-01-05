@@ -194,7 +194,17 @@
                         <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">${scene.lines.length} Lines</span>
                     </div>
                     
-                    <div id="scene-content-${sceneIndex}" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 transition-all duration-300">
+                    <div id="scene-content-${sceneIndex}" class="p-6 transition-all duration-300">
+                        <!-- Scene Context Input -->
+                        <div class="mb-6 bg-gray-900 p-4 rounded border border-gray-700">
+                            <label class="block text-xs font-bold text-gray-400 mb-1">SCENE CONTEXT (Applied to all generations in this scene)</label>
+                            <textarea id="context-${sceneIndex}" rows="2" 
+                                class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                                placeholder="E.g., The mood is dark and mysterious. The lighting should be low key..."
+                                oninput="handleContextChange(${sceneIndex})">${scene.context || ""}</textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 `;
 
                 scene.lines.forEach((line, lineIndex) => {
@@ -256,7 +266,7 @@
                     `;
                 });
 
-                html += `</div></div>`; // Close scene-content and scene-card
+                html += `</div></div></div>`; // Close grid, scene-content, and scene-card
                 sceneContainer.innerHTML = html;
                 app.appendChild(sceneContainer);
             });
@@ -266,6 +276,11 @@
         // 3. UI INTERACTIONS
         // ==========================================
         
+        function handleContextChange(sceneIndex) {
+            const textArea = document.getElementById(`context-${sceneIndex}`);
+            scenes[sceneIndex].context = textArea.value;
+        }
+
         function toggleScene(index) {
             const content = document.getElementById(`scene-content-${index}`);
             const chevron = document.getElementById(`chevron-${index}`);
@@ -369,7 +384,16 @@
             const textArea = document.getElementById(`text-${uniqueId}`);
             // Default to 'image' if not set (should be set by default in HTML)
             const type = textArea.getAttribute('data-current-type') || 'image'; 
-            const promptText = textArea.value;
+            let promptText = textArea.value;
+
+            // Prepend Context
+            const parts = uniqueId.split('_'); 
+            const sceneIndex = parseInt(parts[0].substring(1));
+            const context = scenes[sceneIndex].context || "";
+            
+            if (context.trim()) {
+                promptText = `[SCENE CONTEXT: ${context}] ${promptText}`;
+            }
 
             if (type === 'image' || type === 'graphic') {
                 generateMultimodalContent(uniqueId, promptText);
