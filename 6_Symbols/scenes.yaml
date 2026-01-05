@@ -13,7 +13,7 @@ scenes:
           image: Cinematic medium shot of a confident tech presenter in a modern, dimly lit studio with dynamic blue and orange rim lighting, shallow depth of field, 8k resolution, high production value
           graphic: ''
           music: Low, pulsing synth pad establishing a serious but curious tone, 120 BPM
-          animation: Subtle slow zoom in on the presenter's face to build intimacy
+          animation: ''
           motion_graphics: Create a cinematic title card in Canva with the text 'THE NEW AGE' using a futuristic sans-serif font, glowing neon blue outline, set against a dark, high-tech abstract background
           sound_effect: Subtle high-tech whoosh sound on transition
         verified_prompts:
