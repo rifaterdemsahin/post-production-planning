@@ -52,7 +52,12 @@
             <input type="password" id="apiKey" placeholder="Paste Google API Key Here" 
                    oninput="saveApiKey(this.value)"
                    class="bg-gray-800 border border-gray-600 text-white p-2 rounded w-64 focus:outline-none focus:border-blue-500 transition-colors">
-            <button onclick="downloadYAML()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-semibold border border-blue-400">
+            
+            <button onclick="handleOpenFile()" class="bg-[#2ecc71] hover:bg-[#27ae60] text-gray-900 px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-bold border border-[#27ae60]">
+                📂 Open YAML
+            </button>
+            
+            <button onclick="saveChanges()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm transition mr-2 shadow-sm font-semibold border border-blue-400">
                 💾 Save YAML
             </button>
             <button onclick="downloadCSV()" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm transition shadow-sm border border-gray-600">
@@ -123,31 +128,57 @@
             };
 
             try {
-                // Fetch the YAML file
-                const response = await fetch('scenes.yaml');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const yamlText = await response.text();
-                
-                // Parse YAML using js-yaml
-                const data = jsyaml.load(yamlText);
-                
-                if (!data || !data.scenes) {
-                    throw new Error("Invalid YAML format: 'scenes' key missing");
-                }
-
-                scenes = data.scenes;
-                
-                // Store Main Context in global variable (or attach to scenes object if preferred, but global is easier for now)
-                window.mainContext = data.main_context || "";
-                
-                renderScenes();
-
+                // Fetch the YAML file (Default load)
+                await loadYAMLFromURL('scenes.yaml');
             } catch (error) {
                 console.error("Error loading scenes:", error);
-                // ... (error handling)
+                 // ... error handling
             }
+        }
+
+        async function loadYAMLFromURL(url) {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const yamlText = await response.text();
+            parseAndLoadData(yamlText);
+        }
+
+        async function handleOpenFile() {
+            try {
+                const [handle] = await window.showOpenFilePicker({
+                    types: [{
+                        description: 'YAML Files',
+                        accept: { 'text/yaml': ['.yaml', '.yml'] },
+                    }],
+                    multiple: false
+                });
+                
+                fileHandle = handle;
+                const file = await fileHandle.getFile();
+                const yamlText = await file.text();
+                parseAndLoadData(yamlText);
+
+                // Update UI to show we are in "Edit Mode"
+                const notificationEl = document.getElementById('header-notification');
+                notificationEl.innerText = `📂 Editing: ${file.name}`;
+                notificationEl.classList.remove('opacity-0');
+                
+            } catch (err) {
+                console.error('User cancelled or API not supported', err);
+            }
+        }
+
+        function parseAndLoadData(yamlText) {
+             const data = jsyaml.load(yamlText);
+             if (!data || !data.scenes) throw new Error("Invalid YAML format");
+             
+             scenes = data.scenes;
+             window.mainContext = data.main_context || "";
+             renderScenes();
+        }
+
+        function saveApiKey(key) {
+            localStorage.setItem('google_api_key', key);
         }
         
         function handleMainContextChange(value) {
