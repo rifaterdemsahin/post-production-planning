@@ -260,6 +260,14 @@
                  <button onclick="closeBulkGenModal()" id="bulk-close-btn" class="text-gray-400 hover:text-white transition">✕</button>
              </div>
 
+             <!-- Bulk Preview List -->
+             <div class="mb-4 bg-gray-800 rounded border border-gray-700 p-2 max-h-32 overflow-y-auto hidden" id="bulk-preview-container">
+                 <h4 class="text-xs font-bold text-gray-400 mb-2 uppercase tracking-wider sticky top-0 bg-gray-800 pb-1 border-b border-gray-700">Generation Queue</h4>
+                 <ul class="space-y-1 text-xs text-gray-300 font-mono" id="bulk-preview-list">
+                    <!-- Populated by JS -->
+                 </ul>
+             </div>
+
              <div class="mb-6">
                  <div class="flex justify-between text-xs text-gray-400 mb-1">
                      <span id="bulk-status-text">Ready to start...</span>
@@ -1893,12 +1901,35 @@
         function openBulkGenModal() {
             // Check for verified items
             let count = 0;
-            scenes.forEach(scene => {
-                scene.lines.forEach(line => {
+            const previewList = document.getElementById('bulk-preview-list');
+            previewList.innerHTML = '';
+            
+            scenes.forEach((scene, sIdx) => {
+                scene.lines.forEach((line, lIdx) => {
                     const v = line.verified_prompts || {};
-                    Object.values(v).forEach(val => { if(val) count++; });
+                    Object.keys(v).forEach(type => {
+                         if(v[type]) {
+                             count++;
+                             // Add to preview list
+                             const li = document.createElement('li');
+                             li.innerHTML = `
+                                <div class="flex justify-between items-center bg-gray-900/50 p-1 rounded hover:bg-gray-700 transition">
+                                    <span class="text-gray-300">${scene.id} Line ${line.id}</span>
+                                    <span class="text-[10px] text-blue-300 border border-blue-900 px-1 rounded">${type}</span>
+                                </div>
+                             `;
+                             previewList.appendChild(li);
+                         }
+                    });
                 });
             });
+
+            const previewContainer = document.getElementById('bulk-preview-container');
+            if (count > 0) {
+                previewContainer.classList.remove('hidden');
+            } else {
+                previewContainer.classList.add('hidden');
+            }
 
             document.getElementById('bulk-progress-modal').classList.remove('hidden');
             document.getElementById('bulk-status-text').innerText = `Found ${count} verified items ready to process.`;
