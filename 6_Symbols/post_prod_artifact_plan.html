@@ -43,7 +43,10 @@
             <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400">
                 🍌 Gemini Scene Creator
             </h1>
-            <p class="text-sm text-gray-400">Post-Production Asset Generator</p>
+            <div class="flex items-center gap-3">
+                <p class="text-sm text-gray-400">Post-Production Asset Generator</p>
+                <span id="header-notification" class="text-xs font-mono text-blue-300 bg-blue-900/30 px-2 py-0.5 rounded opacity-0 transition-opacity duration-300"></span>
+            </div>
         </div>
         <div class="flex gap-4 items-center">
             <input type="password" id="apiKey" placeholder="Paste Google API Key Here" 
@@ -157,7 +160,7 @@
         // 2. RENDER UI
         // ==========================================
         
-        function renderTabButton(uniqueId, type, label, isActive = false) {
+        function renderTabButton(uniqueId, type, label, model, isActive = false) {
             const baseClasses = "px-3 py-2 text-xs font-bold transition-colors cursor-pointer border-b-2";
             const activeClasses = "text-blue-400 border-blue-400";
             const inactiveClasses = "text-gray-400 border-transparent hover:text-gray-200";
@@ -166,6 +169,7 @@
                 <button type="button" 
                         id="tab-${uniqueId}-${type}" 
                         class="${baseClasses} ${isActive ? activeClasses : inactiveClasses}" 
+                        data-model="${model}"
                         onclick="switchTab('${uniqueId}', '${type}')">
                     ${label}
                 </button>
@@ -209,12 +213,12 @@
                             <!-- Prompt Controls (Tabs) -->
                             <div class="mb-3">
                                 <div class="flex border-b border-gray-700 mb-2 space-x-1 overflow-x-auto no-scrollbar">
-                                    ${renderTabButton(uniqueId, 'image', '🖼️ Image', true)}
-                                    ${renderTabButton(uniqueId, 'graphic', '📊 Graphic')}
-                                    ${renderTabButton(uniqueId, 'music', '🎵 Music')}
-                                    ${renderTabButton(uniqueId, 'animation', '🎬 Animation')}
-                                    ${renderTabButton(uniqueId, 'overlay_text', '📝 Text')}
-                                    ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX')}
+                                    ${renderTabButton(uniqueId, 'image', '🖼️ Image', 'gemini-3-pro-image-preview', true)}
+                                    ${renderTabButton(uniqueId, 'graphic', '📊 Graphic', 'gemini-3-pro-image-preview')}
+                                    ${renderTabButton(uniqueId, 'music', '🎵 Music', 'gemini-2.5-pro-preview-tts')}
+                                    ${renderTabButton(uniqueId, 'animation', '🎬 Animation', 'veo-2.0-generate-001')}
+                                    ${renderTabButton(uniqueId, 'overlay_text', '📝 Text', 'gemini-2.0-flash')}
+                                    ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'gemini-2.5-pro-preview-tts')}
                                 </div>
                                 
                                 <div class="relative">
@@ -276,6 +280,9 @@
                 chevron.classList.add('-rotate-90');
             }
         }
+        
+        // Timer for notification
+        let notifyTimeout;
 
         function switchTab(uniqueId, type) {
             const activeClasses = ['text-blue-400', 'border-blue-400'];
@@ -290,6 +297,22 @@
             const activeBtn = document.getElementById(`tab-${uniqueId}-${type}`);
             activeBtn.classList.remove(...inactiveClasses);
             activeBtn.classList.add(...activeClasses);
+            
+            // Notification in Header
+            const modelName = activeBtn.getAttribute('data-model');
+            const notificationEl = document.getElementById('header-notification');
+            if (modelName && notificationEl) {
+                notificationEl.innerText = `Using Model: ${modelName}`;
+                notificationEl.classList.remove('opacity-0');
+                
+                // Clear previous timeout if exists
+                if (notifyTimeout) clearTimeout(notifyTimeout);
+                
+                // Hide after 3 seconds
+                notifyTimeout = setTimeout(() => {
+                    notificationEl.classList.add('opacity-0');
+                }, 3000);
+            }
 
             // Update Textarea
             // uniqueId format: s{sceneIndex}_l{lineIndex}
