@@ -1203,13 +1203,8 @@
             editEl.classList.add('hidden');
             
             // 3. Trigger Save to GitHub
-            // passing true to saveChanges to indicate this is an auto-save/background save if needed, 
-            // but for now we'll just call it directly. 
-            // We might want to change saveChanges to accept a "silent" flag or similar.
-            
-            // For better UX during "Save & Sync", let's show a toast or change the button state temporarily before switching?
-            // Actually saveChanges() puts the main button in "Saving..." state which is visible global feedback.
-            await saveChanges();
+            // skipConfirm = true for smoother UX
+            await saveChanges(true);
         }
 
         function openScriptModal() {
