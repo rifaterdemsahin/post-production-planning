@@ -42,43 +42,38 @@
 
     <!-- Local Audio Preview -->
     <!-- Local Audio Preview (Fixed Top) -->
-    <div id="audio-player-container" class="fixed top-0 left-0 w-full z-[100] bg-[#111] border-b border-[#333] h-10 flex items-center px-4 transition-all duration-300">
-        <div class="flex items-center gap-3 w-full max-w-7xl mx-auto">
-            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider shrink-0">🔊 Voiceover</span>
-            
-            <audio controls class="h-6 w-full max-w-xl opacity-80 hover:opacity-100 transition-opacity">
-                <source src="proccesed_voiceover.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-
-             <button onclick="toggleAudioPlayer()" id="audio-toggle-btn" class="ml-auto text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest hidden">
-                Hide
-            </button>
-        </div>
-    </div>
-
-    <!-- Sticky Header (Compact) -->
-    <div class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur shadow-lg mb-4 flex justify-between items-center px-6 py-3 border-b border-gray-800">
+    <!-- Sticky Header (Merged & Compact) -->
+    <div class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur shadow-lg mb-2 flex justify-between items-center px-4 py-2 border-b border-gray-800">
         <div class="flex items-center gap-4">
-            <h1 class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400">
+             <!-- Audio Control (Mini) -->
+            <div class="flex items-center gap-2 bg-gray-800 rounded-full px-2 py-1 border border-gray-700">
+                <span class="text-[10px] font-bold text-gray-400">🔊</span>
+                <audio controls class="h-4 w-24 opacity-80 hover:opacity-100 transition-opacity">
+                    <source src="proccesed_voiceover.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            
+            <h1 class="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400 hidden md:block">
                 🍌 Gemini Scene Creator
             </h1>
-            <span id="header-notification" class="text-xs font-mono text-blue-300 bg-blue-900/30 px-2 py-0.5 rounded opacity-0 transition-opacity duration-300"></span>
         </div>
-        <div class="flex gap-4 items-center">
+
+        <div class="flex gap-3 items-center">
+             <span id="header-notification" class="text-[10px] font-mono text-blue-300 bg-blue-900/30 px-2 py-0.5 rounded opacity-0 transition-opacity duration-300"></span>
+             
              <div class="relative flex items-center">
                 <!-- Input State -->
                 <div id="api-key-input-container" class="relative">
-                    <input type="password" id="apiKey" placeholder="Paste Google API Key Here" 
+                    <input type="password" id="apiKey" placeholder="Google API Key" 
                         oninput="debouncedSaveApiKey(this.value)"
-                        class="bg-gray-800 border border-gray-600 text-white p-1.5 text-xs rounded w-48 focus:outline-none focus:border-blue-500 transition-colors pr-8">
-                    <span id="api-status-icon" class="absolute right-2 top-1.5 text-xs select-none" title="API Key Status"></span>
+                        class="bg-gray-800 border border-gray-600 text-white p-1 text-[10px] rounded w-32 focus:outline-none focus:border-blue-500 transition-colors pr-6">
+                    <span id="api-status-icon" class="absolute right-1 top-1 text-[10px] select-none" title="API Key Status"></span>
                 </div>
                 
                 <!-- Verified State -->
-                <div id="api-key-verified" class="hidden flex items-center gap-2 bg-gray-800/50 border border-green-900/50 px-2 py-1.5 rounded">
-                    <span class="text-xs font-bold text-green-400 flex items-center gap-1">
-                        ✅ Key Verified
+                <div id="api-key-verified" class="hidden flex items-center gap-2 bg-gray-800/50 border border-green-900/50 px-2 py-1 rounded">
+                    <span class="text-[10px] font-bold text-green-400 flex items-center gap-1">
+                        ✅
                     </span>
                     <button onclick="resetApiKey()" class="text-[10px] text-gray-500 hover:text-white underline">
                         Change
@@ -96,36 +91,47 @@
     <div id="app" class="max-w-7xl mx-auto grid grid-cols-1 gap-6 pb-24">
     </div>
 
-    <!-- Bottom Action Bar -->
-    <div class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-700 p-3 z-50 flex justify-center gap-3 shadow-2xl">
-         <button onclick="handleOpenFile()" class="bg-[#2ecc71] hover:bg-[#27ae60] text-gray-900 px-3 py-1.5 rounded text-xs transition shadow-sm font-bold border border-[#27ae60]">
-            📂 Open YAML
-        </button>
+    <!-- Bottom Action Bar (One Line) -->
+    <div class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-700 px-4 py-2 z-50 flex justify-between items-center shadow-2xl h-12">
+        <!-- LEFT: Links & Tools -->
+        <div class="flex items-center gap-3 overflow-x-auto no-scrollbar">
+             <!-- External Links (Icons) -->
+            <a href="https://github.com/rifaterdemsahin/post-production-planning" target="_blank" class="text-gray-500 hover:text-white" title="GitHub">
+                <svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+            </a>
+            <div class="h-4 w-px bg-gray-700"></div>
 
-        <button onclick="openBulkGenModal()" class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white px-3 py-1.5 rounded text-xs transition shadow-sm font-bold border border-rose-400 flex items-center gap-2">
-            ⚡ Bulk Generate
-        </button>
-        
-        <button onclick="openScriptModal()" class="bg-purple-600 hover:bg-purple-500 text-white px-3 py-1.5 rounded text-xs transition shadow-sm font-semibold border border-purple-400">
-            📜 View Script
-        </button>
-        
-        <button onclick="openStatsModal()" class="bg-teal-600 hover:bg-teal-500 text-white px-3 py-1.5 rounded text-xs transition shadow-sm font-semibold border border-teal-400">
-            📊 Stats
-        </button>
-        
-        <button onclick="saveChanges()" title="saves to github via api and , vs code should use continous fetch to get it" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-xs transition shadow-sm font-semibold border border-blue-400 flex items-center gap-2">
-            <svg height="12" width="12" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-            </svg>
-            Save YAML
-        </button>
-        <button onclick="downloadCSV()" class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1.5 rounded text-xs transition shadow-sm border border-gray-600">
-            📥 CSV
-        </button>
-        <button onclick="toggleFullScreen()" class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1.5 rounded text-xs transition shadow-sm border border-gray-600" title="Toggle Full Screen">
-            ⛶
-        </button>
+            <button onclick="handleOpenFile()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
+                📂 Open
+            </button>
+             <button onclick="openScriptModal()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
+                📜 Script
+            </button>
+            <button onclick="openStatsModal()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
+                📊 Stats
+            </button>
+            <button onclick="downloadCSV()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
+                📥 CSV
+            </button>
+            <button onclick="toggleFullScreen()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
+                ⛶ Full
+            </button>
+            <button onclick="toggleDebug()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
+                🐞 Debug
+            </button>
+        </div>
+
+        <!-- RIGHT: Primary Actions -->
+        <div class="flex items-center gap-2">
+            <button onclick="saveChanges()" title="Save to GitHub" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded text-xs transition shadow-sm font-semibold border border-blue-400 flex items-center gap-1">
+                <svg height="10" width="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                Save
+            </button>
+
+            <button onclick="openBulkGenModal()" class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white px-3 py-1 rounded text-xs transition shadow-sm font-bold border border-rose-400 flex items-center gap-1">
+                ⚡ Bulk
+            </button>
+        </div>
     </div>
 
     <!-- Script View Modal -->
@@ -340,39 +346,14 @@
         </div>
     </div>
 
-    <!-- Debug Console -->
-    <div class="fixed bottom-[52px] left-0 w-full bg-gray-900 border-t border-gray-700 shadow-2xl transition-transform duration-300 transform translate-y-[calc(100%-40px)] z-40" id="debug-panel">
-        <div class="flex justify-between items-center bg-gray-800 p-2 cursor-pointer hover:bg-gray-700" onclick="toggleDebug()">
-            <div class="flex items-center gap-4">
-                <h3 class="text-sm font-bold text-gray-300 ml-4">🐞 Debug Console</h3>
-                <a href="https://github.com/rifaterdemsahin/post-production-planning" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1" onclick="event.stopPropagation();">
-                    GitHub ↗
-                </a>
-                <a href="https://rifaterdemsahin.github.io/post-production-planning/6_Symbols/post_prod_artifact_plan.html" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1" onclick="event.stopPropagation();">
-                    Online Site ↗
-                </a>
-                <a href="https://www.canva.com/design/DAG9X8J94Kc/ttnyFm_7g3Ui82JcGGansw/edit" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1" onclick="event.stopPropagation();">
-                    Canva Artifacts Plan ↗
-                </a>
-                <a href="https://colab.research.google.com/drive/1iiHKtdTCYEJaCmotfWvAl1ibzjxGUIA7#scrollTo=5VpwTg37ceUv" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1" onclick="event.stopPropagation();">
-                    Google Colab ↗
-                </a>
-                <a href="https://aistudio.google.com/prompts/new_video?model=veo-2.0-generate-001" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1" onclick="event.stopPropagation();">
-                    Video Generate ↗
-                </a>
-                <a href="https://elevenlabs.io/app/studio/cDqlKR7mlOEBz8NkxFOq?chapterId=Z9VTXC83hgFBlPECOLrX" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1" onclick="event.stopPropagation();">
-                    ElevenLabs ↗
-                </a>
-                <a href="https://aistudio.google.com/logs" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1" onclick="event.stopPropagation();">
-                    Open AI Studio Logs ↗
-                </a>
-                <a href="https://github.com/settings/personal-access-tokens" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1" onclick="event.stopPropagation();">
-                    GitHub Tokens ↗
-                </a>
-            </div>
-            <span class="text-xs text-gray-500 mr-4">Click to Toggle</span>
-        </div>
-        <div id="debug-log" class="h-64 overflow-y-auto p-4 font-mono text-xs bg-black text-green-500 space-y-2">
+    <!-- Debug Console (Without Toggle in top bar, toggle is in bottom bar) -->
+    <div class="fixed bottom-[48px] left-0 w-full bg-gray-900 border-t border-gray-700 shadow-2xl transition-transform duration-300 transform translate-y-[calc(100%)] z-40" id="debug-panel">
+         <!-- Links inside Debug Panel simplified as they are now in bottom bar, keeping log only -->
+         <div class="bg-gray-800 p-1 flex justify-between items-center">
+             <h3 class="text-xs font-bold text-gray-300 ml-2">🐞 Debug Log</h3>
+             <button onclick="toggleDebug()" class="text-gray-400 hover:text-white px-2">✕</button>
+         </div>
+        <div id="debug-log" class="h-48 overflow-y-auto p-4 font-mono text-xs bg-black text-green-500 space-y-2">
             <div class="text-gray-500 italic">-- Debug logs will appear here --</div>
         </div>
     </div>
@@ -616,55 +597,56 @@
             const app = document.getElementById('app');
             app.innerHTML = ''; // Clear loading state if any
 
-            // Render Main Context Input at the top (Collapsible)
-            const mainContextHtml = `
-                <div class="bg-gray-800 rounded-lg mb-8 border border-blue-900/50 shadow-lg relative overflow-hidden">
-                    <div class="flex justify-between items-center p-4 bg-gray-800 cursor-pointer hover:bg-gray-700 transition" onclick="toggleMainContext()">
-                        <div class="flex items-center gap-2">
-                             <span id="main-context-arrow" class="text-gray-400 transform transition-transform ${isMainContextCollapsed ? '' : 'rotate-90'}">▶</span>
-                             <label class="block text-sm font-bold text-blue-400 cursor-pointer">🌍 MAIN PROJECT CONTEXT (Globals)</label>
-                        </div>
-                        <label class="flex items-center gap-2 cursor-pointer" onclick="event.stopPropagation()">
-                            <input type="checkbox" id="verify-main-context" 
-                                onchange="handleMainContextVerify(this.checked)" 
-                                ${window.verifiedMainContext ? 'checked' : ''}
-                                class="rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-0">
-                            <span class="text-xs text-blue-300">Verified for Bulk</span>
-                        </label>
-                    </div>
-                    
-                    <div id="main-context-content" class="${isMainContextCollapsed ? 'hidden' : ''} p-4 border-t border-gray-700">
-                        <textarea id="main-context" rows="3" 
-                            class="w-full bg-black/50 text-gray-300 text-sm p-3 rounded border border-blue-900/30 focus:outline-none focus:border-blue-500 transition-colors"
-                            placeholder="E.g., This is a documentary about the future of AI. The visual style is cyberpunk..."
-                            oninput="handleMainContextChange(this.value)">${window.mainContext || ""}</textarea>
-                        <p class="text-xs text-gray-500 mt-2">This context is applied to EVERY generation in the project.</p>
-                    </div>
-                </div>
-            `;
-            app.innerHTML = mainContextHtml;
-
             if (scenes.length === 0) return;
 
-             // Navigation Controls
+             // Navigation Controls (Moved to Top)
             const navigationHtml = `
-                <div class="flex justify-between items-center mb-4 bg-gray-900 p-3 rounded-lg border border-gray-700">
+                <div class="flex justify-between items-center mb-2 bg-gray-900 p-2 rounded border border-gray-700">
                     <button onclick="prevScene()" ${currentSceneIndex === 0 ? 'disabled' : ''} 
-                        class="px-4 py-2 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-white font-bold transition flex items-center gap-2">
-                        ⬅️ Previous Scene
+                        class="px-3 py-1 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-white text-xs font-bold transition flex items-center gap-2">
+                        ⬅️ Prev
                     </button>
-                    <span class="text-lg font-bold text-gray-300">
-                        Scene ${currentSceneIndex + 1} of ${scenes.length}
+                    <span class="text-sm font-bold text-gray-300">
+                        Scene ${currentSceneIndex + 1} / ${scenes.length}
                     </span>
                     <button onclick="nextScene()" ${currentSceneIndex === scenes.length - 1 ? 'disabled' : ''} 
-                        class="px-4 py-2 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-white font-bold transition flex items-center gap-2">
-                        Next Scene ➡️
+                        class="px-3 py-1 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-white text-xs font-bold transition flex items-center gap-2">
+                        Next ➡️
                     </button>
                 </div>
             `;
             const navDiv = document.createElement('div');
             navDiv.innerHTML = navigationHtml;
             app.appendChild(navDiv);
+
+            // Render Main Context Input (Collapsible)
+            const mainContextHtml = `
+                <div class="bg-gray-800 rounded mb-4 border border-blue-900/50 shadow-lg relative overflow-hidden">
+                    <div class="flex justify-between items-center p-2 bg-gray-800 cursor-pointer hover:bg-gray-700 transition" onclick="toggleMainContext()">
+                        <div class="flex items-center gap-2">
+                             <span id="main-context-arrow" class="text-gray-400 transform transition-transform ${isMainContextCollapsed ? '' : 'rotate-90'} text-xs">▶</span>
+                             <label class="block text-xs font-bold text-blue-400 cursor-pointer">🌍 MAIN PROJECT CONTEXT (Globals)</label>
+                        </div>
+                        <label class="flex items-center gap-2 cursor-pointer" onclick="event.stopPropagation()">
+                            <input type="checkbox" id="verify-main-context" 
+                                onchange="handleMainContextVerify(this.checked)" 
+                                ${window.verifiedMainContext ? 'checked' : ''}
+                                class="rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-0 scale-75">
+                            <span class="text-[10px] text-blue-300">Verified</span>
+                        </label>
+                    </div>
+                    
+                    <div id="main-context-content" class="${isMainContextCollapsed ? 'hidden' : ''} p-2 border-t border-gray-700">
+                        <textarea id="main-context" rows="2" 
+                            class="w-full bg-black/50 text-gray-300 text-xs p-2 rounded border border-blue-900/30 focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                            placeholder="Project context..."
+                            oninput="handleMainContextChange(this.value)">${window.mainContext || ""}</textarea>
+                    </div>
+                </div>
+            `;
+            const mainContextDiv = document.createElement('div');
+            mainContextDiv.innerHTML = mainContextHtml;
+            app.appendChild(mainContextDiv);
 
             const scene = scenes[currentSceneIndex];
             const sceneIndex = currentSceneIndex;
