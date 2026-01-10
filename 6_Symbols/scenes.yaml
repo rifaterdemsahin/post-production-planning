@@ -1098,7 +1098,7 @@ scenes:
           sound_effect: false
       - id: '4'
         time: '0:12'
-        script: It's a factory. It is a repeatable process that cranks out real results.
+        script: It is a repeatable process that cranks out real results for delivery pilots.
         prompts:
           image: A high-tech automated factory floor with conveyor belts producing shiny finished software boxes
           graphic: Conveyor belt moving
