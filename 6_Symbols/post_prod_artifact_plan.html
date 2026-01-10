@@ -372,17 +372,17 @@
                     <!-- Main Context -->
                     <div class="bg-gray-800 p-3 rounded border border-gray-700">
                         <label class="block text-xs font-bold text-blue-400 mb-1">🌍 Project Context</label>
-                        <textarea id="preview-main-context" readonly class="w-full h-24 bg-black/30 text-gray-400 text-xs p-2 rounded border border-gray-700 resize-none focus:outline-none"></textarea>
+                        <textarea id="preview-main-context" class="w-full h-24 bg-black/30 text-gray-400 text-xs p-2 rounded border border-gray-700 resize-none focus:outline-none"></textarea>
                     </div>
                     <!-- Scene Context -->
                     <div class="bg-gray-800 p-3 rounded border border-gray-700">
                         <label class="block text-xs font-bold text-purple-400 mb-1">🎬 Scene Context</label>
-                        <textarea id="preview-scene-context" readonly class="w-full h-24 bg-black/30 text-gray-400 text-xs p-2 rounded border border-gray-700 resize-none focus:outline-none"></textarea>
+                        <textarea id="preview-scene-context" class="w-full h-24 bg-black/30 text-gray-400 text-xs p-2 rounded border border-gray-700 resize-none focus:outline-none"></textarea>
                     </div>
                     <!-- Transition Context -->
                     <div class="bg-gray-800 p-3 rounded border border-gray-700">
                         <label class="block text-xs font-bold text-orange-400 mb-1">➡️ Transition</label>
-                        <textarea id="preview-transition-context" readonly class="w-full h-24 bg-black/30 text-gray-400 text-xs p-2 rounded border border-gray-700 resize-none focus:outline-none"></textarea>
+                        <textarea id="preview-transition-context" class="w-full h-24 bg-black/30 text-gray-400 text-xs p-2 rounded border border-gray-700 resize-none focus:outline-none"></textarea>
                     </div>
                 </div>
 
@@ -394,7 +394,7 @@
                             ✨ Enhance
                         </button>
                     </div>
-                    <textarea id="preview-final-prompt" readonly class="w-full h-40 bg-black/50 text-green-300 font-mono text-xs p-3 rounded border border-gray-600 resize-none focus:outline-none"></textarea>
+                    <textarea id="preview-final-prompt" class="w-full h-40 bg-black/50 text-green-300 font-mono text-xs p-3 rounded border border-gray-600 resize-none focus:outline-none"></textarea>
                 </div>
             </div>
             
@@ -1411,7 +1411,10 @@
         function confirmGeneration() {
             if (!pendingGeneration) return;
             
-            const { uniqueId, finalPrompt, type, action } = pendingGeneration;
+            const { uniqueId, type, action } = pendingGeneration;
+            
+            // Read the final prompt directly from the textarea to allow for manual edits
+            const finalPrompt = document.getElementById('preview-final-prompt').value;
             closeContextModal();
 
             if (type === 'image' || type === 'graphic') {
