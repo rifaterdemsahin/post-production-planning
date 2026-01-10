@@ -654,7 +654,7 @@ scenes:
           sound_effect: false
       - id: '4'
         time: '0:12'
-        script: The goal is to find the real problems before you try to fix anything.
+        script: The goal is to have the skills for end to end delivery where you fix anything that comes along your way.
         prompts:
           image: X-ray vision view revealing a crack in a structural beam hidden behind a wall
           graphic: Targeting circle locking onto the crack
