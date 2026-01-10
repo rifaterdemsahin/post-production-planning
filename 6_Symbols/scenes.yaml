@@ -415,7 +415,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: You don't need a better raincoat. You need a vehicle.
+        script: You don't need a better raincoat. You need a vehicle which needs a delivery pilot.
         prompts:
           image: Side profile of a flimsy yellow raincoat tearing in the wind versus a sleek armored all-terrain vehicle chassis, comparison shot
           graphic: 'Icon transform effect: Raincoat -> Tank'
