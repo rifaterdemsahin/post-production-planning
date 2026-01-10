@@ -1061,9 +1061,12 @@
                                         <!-- Edit Mode -->
                                         <div id="script-edit-${uniqueId}" class="hidden mt-1">
                                             <textarea id="script-input-${uniqueId}" rows="3" class="w-full bg-black/50 text-white p-2 text-sm rounded border border-blue-500 focus:outline-none mb-2 font-mono">${line.script}</textarea>
-                                            <div class="flex justify-end gap-2">
-                                                <button onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-xs text-gray-400 hover:text-white px-2 py-1">Cancel</button>
-                                                <button onclick="saveScriptUpdate('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded font-bold">Save & Sync</button>
+                                            <div class="flex justify-between items-center gap-2">
+                                                <button id="regen-btn-${uniqueId}" onclick="regenerateScript('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-xs bg-purple-900/50 hover:bg-purple-800 text-purple-300 px-2 py-1 rounded border border-purple-700/50 transition">✨ Regenerate</button>
+                                                <div class="flex gap-2">
+                                                    <button onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-xs text-gray-400 hover:text-white px-2 py-1">Cancel</button>
+                                                    <button onclick="saveScriptUpdate('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded font-bold">Save & Sync</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1229,6 +1232,84 @@
             // skipConfirm = true for smoother UX
             await saveChanges(true);
         }
+
+        async function regenerateScript(uniqueId, sceneIndex, lineIndex) {
+            const apiKey = document.getElementById('apiKey').value;
+            if (!apiKey) {
+                alert("⚠️ Please paste your Google API Key at the top first.");
+                return;
+            }
+
+            const inputEl = document.getElementById(`script-input-${uniqueId}`);
+            const originalScript = inputEl.value;
+            if (!originalScript) return;
+
+            const btn = document.getElementById(`regen-btn-${uniqueId}`);
+            const originalBtnText = btn.innerHTML;
+            
+            btn.innerHTML = "✨ ...";
+            btn.disabled = true;
+
+            // Construct Prompt
+            const sceneCtx = scenes[sceneIndex].context || "";
+            const mainCtx = window.mainContext || "";
+            
+            const systemInstruction = "You are a professional script writer/editor. Your task is to rewrite the provided voiceover line to be more engaging, clear, and impactful, while maintaining the original meaning and intended mood. Output ONLY the improved script line, no explanations. Do not include quotes.";
+            
+            const contextBlock = `
+            Project Context: ${mainCtx}
+            Scene Context: ${sceneCtx}
+            `;
+
+            const userPrompt = `
+            ${contextBlock}
+            
+            Original Line: "${originalScript}"
+            
+            Improved Line:
+            `;
+
+            const modelId = "gemini-2.0-flash";
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`;
+
+            const payload = {
+                contents: [{
+                    role: "user",
+                    parts: [{ text: `SYSTEM: ${systemInstruction}\n\nUSER PROMPT: ${userPrompt}` }]
+                }]
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                
+                if (!response.ok) throw new Error(data.error?.message || `API Error: ${response.status}`);
+
+                if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    const newText = data.candidates[0].content.parts[0].text.trim();
+                    inputEl.value = newText;
+                    
+                    // Visual feedback
+                    inputEl.classList.add('border-green-500');
+                    setTimeout(() => inputEl.classList.remove('border-green-500'), 1000);
+                } else {
+                    throw new Error("No content generated");
+                }
+
+            } catch (error) {
+                console.error("Regenerate failed:", error);
+                alert(`Regeneration failed: ${error.message}`);
+            } finally {
+                btn.innerHTML = originalBtnText;
+                btn.disabled = false;
+            }
+        }
+
 
         function openScriptModal() {
             const modal = document.getElementById('script-modal');
