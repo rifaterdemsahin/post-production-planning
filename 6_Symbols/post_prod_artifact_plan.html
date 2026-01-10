@@ -951,8 +951,8 @@
                                     </button>
                                     <button onclick="handleGenerate('${uniqueId}', 'upload')" 
                                         class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-1.5 rounded shadow-lg shadow-indigo-900/20 text-xs font-bold hover:brightness-110 flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95 ml-2"
-                                        title="Generate and Upload to Google Drive (Save As)">
-                                        <span>☁️ Generate & Upload</span>
+                                        title="Generate, Download, and then Upload to Drive">
+                                        <span>☁️ Upload</span>
                                     </button>
                                     <span id="status-${uniqueId}" class="text-xs font-mono"></span>
                                 </div>
@@ -2034,42 +2034,18 @@
         
         async function uploadArtifact(src, filename) {
              try {
-                // Check if showSaveFilePicker is supported (Chrome/Edge/Opera)
-                if (window.showSaveFilePicker) {
-                    const opts = {
-                        suggestedName: filename,
-                        types: []
-                    };
-                    
-                    if (filename.endsWith('.png')) {
-                        opts.types.push({ description: 'PNG Image', accept: { 'image/png': ['.png'] } });
-                    } else if (filename.endsWith('.mp3')) {
-                        opts.types.push({ description: 'MP3 Audio', accept: { 'audio/mpeg': ['.mp3'] } });
-                    } else if (filename.endsWith('.mp4')) {
-                        opts.types.push({ description: 'MP4 Video', accept: { 'video/mp4': ['.mp4'] } });
-                    }
-                    
-                    const handle = await window.showSaveFilePicker(opts);
-                    const writable = await handle.createWritable();
-                    
-                    // Fetch blob (whether src is DataURI or URL)
-                    const response = await fetch(src);
-                    const blob = await response.blob();
-                    
-                    await writable.write(blob);
-                    await writable.close();
-                    
-                    // Optional: Notification?
-                } else {
-                    // Fallback for Firefox/Safari etc
-                    triggerAutoDownload(src, filename);
-                    alert("Your browser does not support direct 'Save As'. The file has been downloaded to your default folder. Please move it to Google Drive.");
-                }
+                // Force Download
+                triggerAutoDownload(src, filename);
+                
+                // Open Drive Folder
+                window.open('https://drive.google.com/drive/folders/1E_ctpNSyieC_fr2xowbg_RfXZDVWbgzJ', '_blank');
+
+                // Alert User
+                alert(`File '${filename}' has been downloaded.\n\nPlease upload it to the Google Drive folder that just opened.`);
+
             } catch (err) {
-                if (err.name !== 'AbortError') {
-                    console.error("Save cancelled or failed", err);
-                    alert("Failed to save: " + err.message);
-                }
+                console.error("Upload workflow failed", err);
+                alert("Failed to process upload workflow: " + err.message);
             }
         }
 
