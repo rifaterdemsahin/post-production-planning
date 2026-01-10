@@ -825,7 +825,7 @@ scenes:
     lines:
       - id: '1'
         time: '0:00'
-        script: So after you go through this, what's the end result? What does the ATW protocol create?
+        script: So after you go through this, what's the end result? What does the ASC protocol create?
         prompts:
           image: A silhouette of a person standing at the top of the mountain peak from earlier, looking out over the landscape
           graphic: Question mark dissolving into a checkmark
