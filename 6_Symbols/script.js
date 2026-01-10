@@ -5,6 +5,7 @@
         let projectVersion = 1;
         let lastUpdated = "";
         let currentSceneIndex = 0;
+        let currentSelectedLineIndex = 0; // Track selected line within the scene
 
 
         function updateURL(index) {
@@ -454,9 +455,94 @@
             `;
         }
 
+        function selectLine(sceneIndex, lineIndex) {
+            currentSelectedLineIndex = lineIndex;
+            
+            // 1. Visual Update (Toggle Classes) using DOM to avoid full re-render
+            const allLines = document.querySelectorAll('.line-item-card');
+            allLines.forEach(el => {
+                el.classList.remove('border-blue-500', 'ring-1', 'ring-blue-500', 'bg-gray-800');
+                el.classList.add('border-gray-800', 'bg-gray-900/50');
+            });
+
+            const selectedEl = document.getElementById(`line-card-s${sceneIndex}_l${lineIndex}`);
+            if (selectedEl) {
+                selectedEl.classList.remove('border-gray-800', 'bg-gray-900/50');
+                selectedEl.classList.add('border-blue-500', 'ring-1', 'ring-blue-500', 'bg-gray-800');
+            }
+
+            // 2. Render Sidebar for this line
+            renderSidebar(sceneIndex, lineIndex);
+        }
+
+        function renderSidebar(sceneIndex, lineIndex) {
+            const container = document.getElementById('floating-assets-container');
+            if (!container) return;
+
+            const scene = scenes[sceneIndex];
+            if (!scene || !scene.lines || !scene.lines[lineIndex]) {
+                 container.innerHTML = '<div class="text-gray-500 text-xs italic p-2">No line selected</div>';
+                 return;
+            }
+
+            const line = scene.lines[lineIndex];
+            let html = `<h3 class="text-xs font-bold text-gray-400 mb-2 uppercase sticky top-0 bg-gray-900 pb-2 border-b border-gray-800 z-10 w-full">Line ${line.id} Assets</h3>`;
+
+            if (line.uploaded_assets && Object.keys(line.uploaded_assets).length > 0) {
+                 Object.entries(line.uploaded_assets).forEach(([type, asset]) => {
+                    if (!asset || !asset.url) return;
+                    
+                    let embedUrl = asset.url;
+                    const isDrive = asset.url.includes('drive.google.com');
+                    if (isDrive && asset.url.includes('/view')) {
+                        const idMatch = asset.url.match(/\/file\/d\/([^\/]+)/);
+                        if (idMatch && idMatch[1]) {
+                            embedUrl = `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
+                        }
+                    }
+
+                    let contentHtml = '';
+                    const typeLower = type.toLowerCase();
+                    
+                    const isImage = /\.(jpg|jpeg|png|webp|gif)$/i.test(asset.filename) || typeLower === 'image';
+                    const isAudio = /\.(mp3|wav|ogg)$/i.test(asset.filename) || typeLower === 'music' || typeLower === 'sound_effect';
+                    const isVideo = /\.(mp4|webm)$/i.test(asset.filename) || typeLower === 'animation';
+                    
+                    if (isImage) {
+                        contentHtml = `<img src="${embedUrl}" class="w-full h-auto rounded border border-gray-700 mt-1" alt="${type}" loading="lazy" onerror="this.style.display='none';">`;
+                    } else if (isAudio) {
+                        contentHtml = `<audio controls src="${embedUrl}" class="w-full h-8 mt-1"></audio>`;
+                    } else if (isVideo) {
+                        contentHtml = `<video controls src="${embedUrl}" class="w-full h-auto rounded border border-gray-700 mt-1"></video>`;
+                    } else {
+                        contentHtml = `<div class="p-2 bg-gray-800 rounded mt-1 text-center border border-gray-700">📄 File Preview</div>`;
+                    }
+
+                    html += `
+                        <div class="bg-gray-900/50 p-2 rounded border border-gray-800 relative group hover:border-gray-600 transition-colors mb-2">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[10px] uppercase text-blue-300 font-bold">${type}</span>
+                                <a href="${asset.url}" target="_blank" class="text-gray-500 hover:text-white" title="Open in new tab">↗</a>
+                            </div>
+                            ${contentHtml}
+                            <div class="mt-1">
+                                <span class="text-[9px] text-gray-500 truncate block" title="${asset.filename}">${asset.filename}</span>
+                            </div>
+                        </div>
+                    `;
+                 });
+            } else {
+                html += '<div class="text-gray-600 text-xs italic p-2 text-center">No assets for this line</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
         function renderScenes() {
             const app = document.getElementById('app');
             app.innerHTML = ''; // Clear loading state if any
+            
+            // Sidebar is now rendered via selectLine() called at the end
 
             if (scenes.length === 0) {
                  document.getElementById('nav-scene-indicator').innerText = "-- / --";
@@ -566,9 +652,14 @@
                 const duration = parseDuration(line.time);
                 currentSceneTime += duration; // Accumulate for next line
 
+                const isSelected = (lineIndex === currentSelectedLineIndex);
+                const activeWrapperClass = isSelected ? "border-blue-500 ring-1 ring-blue-500 bg-gray-800" : "border-gray-800 bg-gray-900/50";
+
                 html += `
-                    <div class="bg-gray-900/50 p-2 rounded border border-gray-800 relative group hover:border-gray-600 transition-colors">
-                    <div class="flex justify-between items-start cursor-pointer p-2" onclick="toggleSection('line-tools-${uniqueId}', 'line-arrow-${uniqueId}')">
+                    <div id="line-card-${uniqueId}" 
+                         class="line-item-card p-2 rounded border relative group hover:border-gray-600 transition-colors ${activeWrapperClass}"
+                         onclick="selectLine(${sceneIndex}, ${lineIndex})">
+                    <div class="flex justify-between items-start cursor-pointer p-2" onclick="event.stopPropagation(); toggleSection('line-tools-${uniqueId}', 'line-arrow-${uniqueId}'); selectLine(${sceneIndex}, ${lineIndex})">
                             <div class="flex gap-3 flex-1">
                                 <span id="line-arrow-${uniqueId}" class="text-gray-500 transform transition-transform text-[10px] mt-1">▶</span>
                                 <div class="flex-1">
@@ -603,64 +694,43 @@
                                 </div>
                             </div>
 
-                            <!-- Uploaded Assets (Right Hand Side) -->
-                            <div class="w-1/3 min-w-[250px] ml-4 pl-4 border-l border-gray-800 text-xs">
-                                <span class="font-bold text-gray-500 block mb-2 text-[10px] uppercase tracking-wider">Uploaded Assets</span>
+                            <!-- Uploaded Assets (Right Hand Side - Compact Links) -->
+                            <div class="w-1/4 min-w-[150px] ml-4 pl-4 border-l border-gray-800 text-xs text-right">
+                                <span class="font-bold text-gray-500 block mb-2 text-[10px] uppercase tracking-wider">Assets</span>
                                 ${(() => {
                                     if (line.uploaded_assets && Object.keys(line.uploaded_assets).length > 0) {
                                         return Object.entries(line.uploaded_assets).map(([type, asset]) => {
                                             if (!asset || !asset.url) return '';
                                             
-                                            // Helper to process URL for embedding
-                                            let embedUrl = asset.url;
-                                            const isDrive = asset.url.includes('drive.google.com');
-                                            if (isDrive && asset.url.includes('/view')) {
-                                                // Try to convert Drive View URL to Direct/Preview URL
-                                                // Pattern: /file/d/ID/view -> /uc?export=view&id=ID
-                                                const idMatch = asset.url.match(/\/file\/d\/([^\/]+)/);
-                                                if (idMatch && idMatch[1]) {
-                                                     embedUrl = `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
-                                                }
-                                            }
-
-                                            let contentHtml = '';
-                                            const typeLower = type.toLowerCase();
+                                            const typeIcons = {
+                                                'image': '🖼️',
+                                                'music': '🎵',
+                                                'sound_effect': '🔊',
+                                                'animation': '🎬',
+                                                'graphic': '📊',
+                                                'motion_graphics': '✨'
+                                            };
+                                            const icon = typeIcons[type.toLowerCase()] || '📄';
                                             
-                                            // Check extensions functionality
-                                            const isImage = /\.(jpg|jpeg|png|webp|gif)$/i.test(asset.filename) || typeLower === 'image';
-                                            const isAudio = /\.(mp3|wav|ogg)$/i.test(asset.filename) || typeLower === 'music' || typeLower === 'sound_effect';
-                                            const isVideo = /\.(mp4|webm)$/i.test(asset.filename) || typeLower === 'animation';
-
-                                            if (isImage) {
-                                                contentHtml = `<img src="${embedUrl}" class="w-full h-auto rounded border border-gray-700 mt-1" alt="${type}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                                               <a href="${asset.url}" target="_blank" class="hidden text-blue-400 underline mt-1">Image Link (Preview Failed)</a>`;
-                                            } else if (isAudio) {
-                                                contentHtml = `<audio controls src="${embedUrl}" class="w-full h-8 mt-1"></audio>`;
-                                            } else if (isVideo) {
-                                                contentHtml = `<video controls src="${embedUrl}" class="w-full h-auto rounded border border-gray-700 mt-1"></video>`;
-                                            } else {
-                                                contentHtml = `<div class="p-2 bg-gray-800 rounded mt-1 text-center">📄 File</div>`;
-                                            }
-
                                             return `
-                                                <div class="bg-gray-900/50 p-2 rounded border border-gray-800 relative group hover:border-gray-600 transition-colors mb-2">
-                                                    <div class="flex justify-between items-center mb-1">
-                                                        <span class="text-[10px] uppercase text-blue-300 font-bold">${type}</span>
-                                                        <a href="${asset.url}" target="_blank" class="text-gray-500 hover:text-white" title="Open in new tab">↗</a>
-                                                    </div>
-                                                    ${contentHtml}
-                                                    <div class="mt-1">
-                                                        <span class="text-[9px] text-gray-500 truncate block" title="${asset.filename}">${asset.filename}</span>
-                                                    </div>
+                                                <div class="mb-1">
+                                                    <a href="${asset.url}" target="_blank" class="text-blue-400 hover:text-white hover:underline truncate inline-flex items-center gap-1" title="${asset.filename}">
+                                                       <span>${icon}</span>
+                                                       <span class="truncate max-w-[100px]">${type} ↗</span>
+                                                    </a>
                                                 </div>
                                             `;
                                         }).join('');
                                     } else {
-                                        return '<span class="text-gray-600 italic text-[10px]">No assets uploaded</span>';
+                                        return '<span class="text-gray-700 italic text-[10px]">-</span>';
                                     }
                                 })()}
                             </div>
                         </div>
+                            
+                        <!-- Generate Sidebar Content -->
+                        <!-- Logic Moved to renderSidebar() -->
+                        <!-- Sidebar update triggered by selectLine() -->
                             
                             <!-- Prompt Controls (Collapsible) -->
                             <div id="line-tools-${uniqueId}" class="hidden mt-2 pt-2 border-t border-gray-800 px-2">
@@ -771,6 +841,17 @@
 
                 // Append Main Context at the BOTTOM
                 app.appendChild(mainContextDiv);
+                
+                // Initial Sidebar Render
+                if (scenes.length > 0 && scenes[currentSceneIndex].lines.length > 0) {
+                     // Ensure valid index
+                     if(currentSelectedLineIndex >= scenes[currentSceneIndex].lines.length) {
+                         currentSelectedLineIndex = 0;
+                     }
+                     renderSidebar(currentSceneIndex, currentSelectedLineIndex);
+                } else {
+                    document.getElementById('floating-assets-container').innerHTML = '';
+                }
         }
 
         // ==========================================
