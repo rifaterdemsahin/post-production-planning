@@ -751,7 +751,7 @@ scenes:
     lines:
       - id: '1'
         time: '0:00'
-        script: And this quote brings us to the heart of the protocol. The workshop.
+        script: And this quote brings us to the heart of the protocol. The simulation for ai transformation.
         prompts:
           image: A high-tech garage workshop, sparks flying, welding torches, atmosphere of creation
           graphic: 'Text ''STEP 3: WORKSHOP'' stamped on screen'
