@@ -324,7 +324,7 @@ scenes:
           sound_effect: false
       - id: '2'
         time: '0:04'
-        script: On one side, you have the old world coder. You know the type. Their skill is super specific.
+        script: On one side, you have the old world professional. You know the type. Their skill is super specific.coder/tester/devops..etc
         prompts:
           image: Cinematic shot of a coder hunching over a bulky retro beige computer terminal in a grey cubicle, Matrix green code reflection, claustrophobic atmosphere
           graphic: A single narrow vertical bar representing 'Deep Skill' in a chart
