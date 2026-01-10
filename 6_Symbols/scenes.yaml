@@ -455,7 +455,7 @@ scenes:
     lines:
       - id: '1'
         time: '0:00'
-        script: And that vehicle, well, it has a name. And here it is, the ATW protocol.
+        script: And that vehicle, well, it has a name. And here it is, the ASC protocol.
         prompts:
           image: The vehicle license plate zooming in, reading 'ATW-PROTO', metallic texture, lens flare
           graphic: Text 'ATW PROTOCOL' appearing in bold metallic 3D letters
