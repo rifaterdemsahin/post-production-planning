@@ -176,6 +176,7 @@
                         <a href="https://aistudio.google.com/logs" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">📝 AI Studio Logs ↗</a>
                         <a href="https://github.com/settings/tokens" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">🔑 GitHub Tokens ↗</a>
                         <a href="https://console.cloud.google.com/auth/clients/create?project=gen-lang-client-0369583419" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">☁️ GCloud Console ↗</a>
+                        <a href="https://github.com/rifaterdemsahin/post-production-planning/blob/main/.github/workflows/static.yml" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">🚀 configure deployments ↗</a>
                     </div>
 
                 </div>
@@ -3124,7 +3125,8 @@
             real: [
                 { title: "Meeting Output (18 Dec)", path: "../2_Real/18_dec_meeting_output.md" },
                 { title: "Meeting Summary (18 Dec)", path: "../2_Real/18_dec_meeting_summary.md" },
-                { title: "Read Me", path: "../2_Real/README.md" }
+                { title: "Read Me", path: "../2_Real/README.md" },
+                { title: "Scene Plan (JPEG)", path: "../2_Real/Scene_post_production_Plan.jpeg" }
             ],
             environment: [
                 { title: "Feedback Call Raw", path: "../3_Environment/18_dec_Feedback_call_raw.md" },
@@ -3133,7 +3135,12 @@
                 { title: "Read Me", path: "../3_Environment/README.md" }
             ],
             ui: [
-                { title: "Read Me", path: "../4_UI/README.md" }
+                { title: "Read Me", path: "../4_UI/README.md" },
+                { title: "Plan Post Prod (JPEG)", path: "../4_UI/Plan_post_production_2025-12-19 at 16.35.12.jpeg" },
+                { title: "Captions Image 1 (JPEG)", path: "../4_UI/captions_Image 2025-12-19 at 17.37.54.jpeg" },
+                { title: "Captions Image 2 (JPEG)", path: "../4_UI/captions_Image 2025-12-19 at 17.51.53.jpeg" },
+                { title: "Gemini API Client (PNG)", path: "../4_UI/gemini_api_client_create.png" },
+                { title: "Gemini Logs (PNG)", path: "../4_UI/gemini_logs.png" }
             ],
             formulas: [
                 { title: "Scenes Formula", path: "../5_Formula/scenes_formula.md" },
@@ -3157,6 +3164,9 @@
 
         function getEmojiForDoc(title) {
             const lower = title.toLowerCase();
+            // Images
+            if (lower.includes('jpeg') || lower.includes('jpg') || lower.includes('png') || lower.includes('gif')) return '🖼️';
+            
             if (lower.includes('read me')) return '📖';
             if (lower.includes('meeting')) return '🤝';
             if (lower.includes('feedback')) return '💭';
@@ -3179,14 +3189,14 @@
                 const list = document.getElementById(`menu-list-${key}`);
                 if (!list) return;
 
-                // Sort
+                // Sort (Folders first maybe? For now A-Z)
                 items.sort((a, b) => a.title.localeCompare(b.title));
                 
                 // Populate
                 list.innerHTML = '';
                 // wrapper for scrolling if needed
                 const scrollWrapper = document.createElement('div');
-                scrollWrapper.className = "p-2 space-y-1 max-h-60 overflow-y-auto";
+                scrollWrapper.className = "p-2 space-y-1 max-h-80 overflow-y-auto";
                 
                 items.forEach(item => {
                     const emoji = getEmojiForDoc(item.title);
@@ -3246,23 +3256,36 @@
             contentEl.innerHTML = '<div class="flex items-center justify-center p-8"><div class="loader" style="display:block"></div></div>';
             modal.classList.remove('hidden');
             
-            try {
-                const response = await fetch(path);
-                if (!response.ok) throw new Error(`HTTP ${response.status} - Not Found`);
-                const text = await response.text();
-                contentEl.innerHTML = marked.parse(text);
-                contentEl.parentElement.scrollTop = 0;
-            } catch (error) {
-                console.error("Doc load error:", error);
-                contentEl.innerHTML = `
-                    <div class="bg-red-900/30 border border-red-800 rounded p-4 text-center">
-                        <h4 class="text-red-400 font-bold mb-2">Failed to load content</h4>
-                        <p class="text-xs text-red-300 mb-2">${error.message}</p>
-                        <div class="mt-4 text-[10px] font-mono bg-black/50 p-2 rounded text-left overflow-auto">
-                            Path: ${path}
-                        </div>
+            // Check if Image
+            const lowerPath = path.toLowerCase();
+            const isImage = lowerPath.endsWith('.png') || lowerPath.endsWith('.jpg') || lowerPath.endsWith('.jpeg') || lowerPath.endsWith('.gif') || lowerPath.endsWith('.webp');
+
+            if (isImage) {
+                 contentEl.innerHTML = `
+                    <div class="flex flex-col items-center">
+                        <img src="${path}" alt="${title}" class="max-w-full h-auto rounded border border-gray-700 shadow-lg mb-4">
+                        <a href="${path}" download class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded">Download Image</a>
                     </div>
-                `;
+                 `;
+            } else {
+                try {
+                    const response = await fetch(path);
+                    if (!response.ok) throw new Error(`HTTP ${response.status} - Not Found`);
+                    const text = await response.text();
+                    contentEl.innerHTML = marked.parse(text);
+                    contentEl.parentElement.scrollTop = 0;
+                } catch (error) {
+                    console.error("Doc load error:", error);
+                    contentEl.innerHTML = `
+                        <div class="bg-red-900/30 border border-red-800 rounded p-4 text-center">
+                            <h4 class="text-red-400 font-bold mb-2">Failed to load content</h4>
+                            <p class="text-xs text-red-300 mb-2">${error.message}</p>
+                            <div class="mt-4 text-[10px] font-mono bg-black/50 p-2 rounded text-left overflow-auto">
+                                Path: ${path}
+                            </div>
+                        </div>
+                    `;
+                }
             }
         }
 
