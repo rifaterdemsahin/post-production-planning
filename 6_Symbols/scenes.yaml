@@ -933,7 +933,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: They can bridge the gap between, say, DevOps and machine learning, or security and product.
+        script: They can bridge the gap between delivering bespoke application using vibe programming.
         prompts:
           image: A digital bridge connecting two floating islands, one labeled 'DevOps', one 'ML'
           graphic: Bridge constructing itself rapidly
