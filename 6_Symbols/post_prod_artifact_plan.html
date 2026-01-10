@@ -120,6 +120,9 @@
                         <button onclick="handleOpenFile()" class="w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
                             📂 Open YAML
                         </button>
+                        <button onclick="openYamlModal()" class="w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
+                            📄 View YAML
+                        </button>
                         <button onclick="openScriptModal()" class="w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
                             📜 View Script
                         </button>
@@ -148,7 +151,7 @@
                 </button>
                 <div id="links-menu" class="absolute bottom-full left-0 mb-3 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 origin-bottom-left z-50">
                     <div class="p-2 space-y-1">
-                        <a href="https://drive.google.com/drive/folders/1E_ctpNSyieC_fr2xowbg_RfXZDVWbgzJ?usp=sharing" target="_blank" class="block w-full text-left text-xs text-green-400 hover:bg-gray-700 hover:text-green-300 px-2 py-1 rounded relative z-50 font-bold">📂 Google Drive ↗</a>
+                        <a href="https://drive.google.com/drive/folders/1E_ctpNSyieC_fr2xowbg_RfXZDVWbgzJ" target="_blank" class="block w-full text-left text-xs text-green-400 hover:bg-gray-700 hover:text-green-300 px-2 py-1 rounded relative z-50 font-bold">📂 Google Drive ↗</a>
                         <a href="https://github.com/rifaterdemsahin/post-production-planning" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">GitHub ↗</a>
                         <a href="#" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Online Site ↗</a>
                         <a href="https://www.canva.com/" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Canva Artifacts Plan ↗</a>
@@ -192,6 +195,22 @@
             </div>
             <div class="p-0 overflow-hidden flex-1 relative">
                 <textarea id="full-script-content" class="w-full h-full bg-[#1e1e1e] text-gray-300 font-mono text-sm p-4 resize-none focus:outline-none" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- YAML View Modal -->
+    <div id="yaml-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-[95vw] h-[90vh] flex flex-col border border-gray-700">
+            <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-gray-800/50 rounded-t-lg">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">📄 YAML Content</h3>
+                <div class="flex gap-2 items-center">
+                    <button onclick="copyYamlToClipboard(this)" class="text-xs bg-blue-900 text-blue-200 px-3 py-1 rounded hover:bg-blue-800 transition">📋 Copy All</button>
+                    <button onclick="closeYamlModal()" class="text-gray-400 hover:text-white transition">✕</button>
+                </div>
+            </div>
+            <div class="p-0 overflow-hidden flex-1 relative">
+                <textarea id="full-yaml-content" class="w-full h-full bg-[#1e1e1e] text-green-300 font-mono text-sm p-4 resize-none focus:outline-none" readonly></textarea>
             </div>
         </div>
     </div>
@@ -1020,6 +1039,44 @@
 
         function copyScriptToClipboard(btn) {
             const textarea = document.getElementById('full-script-content');
+            textarea.select();
+            document.execCommand('copy'); 
+            
+            const originalText = btn.innerText;
+            btn.innerText = "✅ Copied!";
+            setTimeout(() => btn.innerText = originalText, 2000);
+        }
+
+        function openYamlModal() {
+            const modal = document.getElementById('yaml-modal');
+            modal.classList.remove('hidden');
+            renderYamlContent();
+        }
+
+        function renderYamlContent() {
+            const textarea = document.getElementById('full-yaml-content');
+            try {
+                // Reconstruct the full object structure
+                const data = {
+                    main_context: window.mainContext,
+                    verified_main_context: window.verifiedMainContext,
+                    scenes: scenes
+                };
+                // Dump to YAML
+                const yamlString = jsyaml.dump(data, { indent: 2, lineWidth: -1 });
+                textarea.value = yamlString;
+            } catch (e) {
+                console.error("YAML Dump Error:", e);
+                textarea.value = "Error generating YAML: " + e.message;
+            }
+        }
+
+        function closeYamlModal() {
+            document.getElementById('yaml-modal').classList.add('hidden');
+        }
+
+        function copyYamlToClipboard(btn) {
+            const textarea = document.getElementById('full-yaml-content');
             textarea.select();
             document.execCommand('copy'); 
             
