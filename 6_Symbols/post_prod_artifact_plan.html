@@ -426,6 +426,21 @@
         </div>
     </div>
 
+    <!-- Generic Progress Modal -->
+    <div id="generic-progress-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-sm p-6 border border-gray-700 relative text-center">
+             <div id="gpm-icon" class="text-4xl mb-4 animate-pulse">⏳</div>
+             <h3 id="gpm-title" class="text-xl font-bold text-white mb-2">Processing...</h3>
+             <p id="gpm-message" class="text-sm text-gray-400 mb-6 font-mono">Please wait.</p>
+             
+             <div id="gpm-details" class="text-xs text-red-400 bg-red-900/20 p-2 rounded mb-4 hidden font-mono text-left overflow-auto max-h-32 border border-red-900/50 break-words"></div>
+
+             <button id="gpm-close-btn" onclick="closeGenericProgressModal()" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-bold transition w-full hidden border border-gray-600">
+                 Close
+             </button>
+        </div>
+    </div>
+
     <!-- Bulk Generation Progress Modal -->
     <div id="bulk-progress-modal" class="fixed inset-0 z-[80] hidden flex items-center justify-center p-4 modal-overlay">
         <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-2xl p-6 border border-gray-700 relative flex flex-col max-h-[90vh]">
@@ -2681,6 +2696,57 @@
             alert("Configuration saved! You can now use the 'Save YAML' button.");
         }
 
+        // ==========================================
+        // 7.5 GENERIC PROGRESS MODAL
+        // ==========================================
+        
+        function showProgressModal(title, message, icon="⏳") {
+            document.getElementById('gpm-title').innerText = title;
+            document.getElementById('gpm-message').innerText = message;
+            document.getElementById('gpm-icon').innerText = icon;
+            document.getElementById('gpm-icon').classList.add('animate-pulse');
+            document.getElementById('gpm-details').classList.add('hidden');
+            document.getElementById('gpm-close-btn').classList.add('hidden');
+            document.getElementById('generic-progress-modal').classList.remove('hidden');
+        }
+
+        function updateProgressModal(title, message, icon) {
+            if(title) document.getElementById('gpm-title').innerText = title;
+            if(message) document.getElementById('gpm-message').innerText = message;
+            if(icon) document.getElementById('gpm-icon').innerText = icon;
+        }
+
+        function showProgressError(message, details) {
+            document.getElementById('gpm-title').innerText = "Error";
+            document.getElementById('gpm-icon').innerText = "❌";
+            document.getElementById('gpm-icon').classList.remove('animate-pulse');
+            document.getElementById('gpm-message').innerText = message;
+            
+            const detEl = document.getElementById('gpm-details');
+            if (details) {
+                detEl.innerText = details;
+                detEl.classList.remove('hidden');
+            }
+            document.getElementById('gpm-close-btn').classList.remove('hidden');
+        }
+
+        function showProgressSuccess(message) {
+             document.getElementById('gpm-title').innerText = "Success";
+             document.getElementById('gpm-icon').innerText = "✅";
+             document.getElementById('gpm-icon').classList.remove('animate-pulse');
+             document.getElementById('gpm-message').innerText = message;
+             document.getElementById('gpm-close-btn').classList.remove('hidden');
+             
+             // Auto close after 2 seconds for smooth UX
+             setTimeout(() => {
+                 closeGenericProgressModal();
+             }, 2000);
+        }
+
+        function closeGenericProgressModal() {
+            document.getElementById('generic-progress-modal').classList.add('hidden');
+        }
+
         async function saveChanges(skipConfirm = false) {
             const config = checkGithubConfig();
             if (!config) {
@@ -2693,6 +2759,9 @@
                 if (!confirmSave) return;
             }
 
+            // Show Modal
+            showProgressModal("Saving to GitHub", "Connecting to repository...");
+
             const btn = document.querySelector('button[onclick="saveChanges()"]');
             const originalText = btn ? btn.innerText : "💾 Save YAML";
             if (btn) {
@@ -2702,6 +2771,7 @@
 
             try {
                 // 1. Prepare YAML Content
+                updateProgressModal(null, "Generating YAML...");
                 const exportData = { 
                     main_context: window.mainContext || "",
                     verified_main_context: window.verifiedMainContext || false,
@@ -2712,6 +2782,7 @@
                 const contentBase64 = btoa(unescape(encodeURIComponent(yamlStr))); 
 
                 // 2. Get current file SHA (needed for update)
+                updateProgressModal(null, "Fetching file info...");
                 const apiUrl = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.branch}`;
                 
                 logDebug('REQ', 'Getting File SHA', { url: apiUrl });
@@ -2734,6 +2805,7 @@
                 }
 
                 // 3. Update File
+                updateProgressModal(null, "Uploading new content...");
                 const putBody = {
                     message: `Update scenes.yaml via Gemini Scene Creator - ${String(new Date().getHours()).padStart(2, '0')}:${String(new Date().getMinutes()).padStart(2, '0')}`,
                     content: contentBase64,
@@ -2761,12 +2833,12 @@
                 const putData = await putRes.json();
                 logDebug('RES', 'File Saved', putData);
                 
-                alert("✅ Successfully saved to GitHub!");
+                showProgressSuccess("Successfully saved to GitHub!");
                 
             } catch (error) {
                 console.error('GitHub Save Error:', error);
                 logDebug('ERROR', 'GitHub Save Failed', error.message);
-                alert(`❌ Failed to save: ${error.message}`);
+                showProgressError("Failed to save", error.message);
             } finally {
                 if (btn) {
                     btn.innerText = originalText;
