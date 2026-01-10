@@ -1024,7 +1024,7 @@ scenes:
           sound_effect: false
       - id: '4'
         time: '0:12'
-        script: The X-shaped builder is adaptable. Creating solutions an I-shaped expert would never think of.
+        script: The X-shaped professional is adaptable. Creating solutions an I-shaped expert would never think of.
         prompts:
           image: The X-shape structure flexing and morphing like liquid metal to fit through a complex maze
           graphic: Fluid simulation flowing around obstacles
