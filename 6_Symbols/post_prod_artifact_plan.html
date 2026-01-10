@@ -382,6 +382,23 @@
         // 1. DATA LOADING & INITIALIZATION
         // ==========================================
         let scenes = []; // Global variable to hold data after loading
+        let currentSceneIndex = 0;
+
+        function nextScene() {
+            if (currentSceneIndex < scenes.length - 1) {
+                currentSceneIndex++;
+                renderScenes();
+                document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function prevScene() {
+            if (currentSceneIndex > 0) {
+                currentSceneIndex--;
+                renderScenes();
+                document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
 
         async function initApp() {
             // Restore API Key
@@ -605,9 +622,33 @@
             `;
             app.innerHTML = mainContextHtml;
 
-            scenes.forEach((scene, sceneIndex) => {
-                const sceneContainer = document.createElement('div');
-                sceneContainer.className = `scene-card rounded-lg ${scene.color} overflow-hidden`;
+            if (scenes.length === 0) return;
+
+             // Navigation Controls
+            const navigationHtml = `
+                <div class="flex justify-between items-center mb-4 bg-gray-900 p-3 rounded-lg border border-gray-700">
+                    <button onclick="prevScene()" ${currentSceneIndex === 0 ? 'disabled' : ''} 
+                        class="px-4 py-2 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-white font-bold transition flex items-center gap-2">
+                        ⬅️ Previous Scene
+                    </button>
+                    <span class="text-lg font-bold text-gray-300">
+                        Scene ${currentSceneIndex + 1} of ${scenes.length}
+                    </span>
+                    <button onclick="nextScene()" ${currentSceneIndex === scenes.length - 1 ? 'disabled' : ''} 
+                        class="px-4 py-2 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-white font-bold transition flex items-center gap-2">
+                        Next Scene ➡️
+                    </button>
+                </div>
+            `;
+            const navDiv = document.createElement('div');
+            navDiv.innerHTML = navigationHtml;
+            app.appendChild(navDiv);
+
+            const scene = scenes[currentSceneIndex];
+            const sceneIndex = currentSceneIndex;
+            
+            const sceneContainer = document.createElement('div');
+            sceneContainer.className = `scene-card rounded-lg ${scene.color} overflow-hidden`;
                 
                 let html = `
                     <div class="flex justify-between items-center p-4 bg-[#252525] cursor-pointer hover:bg-[#2a2a2a] transition border-b border-gray-700" 
@@ -747,7 +788,6 @@
                 html += `</div></div>`; // Close scene-content and scene-card
                 sceneContainer.innerHTML = html;
                 app.appendChild(sceneContainer);
-            });
         }
 
         // ==========================================
