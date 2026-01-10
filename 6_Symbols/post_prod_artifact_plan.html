@@ -181,14 +181,65 @@
 
         </div>
 
-        <!-- CENTER: Formulas Menu -->
-        <div class="relative group mx-auto">
-             <button onclick="toggleFormulasMenu()" id="formulas-menu-btn" class="text-purple-300 hover:text-white text-xs font-bold flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded border border-purple-900/50 transition">
-                <span>🧪 Formulas</span>
-                <span class="text-[10px]">▼</span>
-            </button>
-            <div id="formulas-menu" class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-64 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 origin-bottom z-50">
-                <div class="p-2 space-y-1 max-h-80 overflow-y-auto" id="formulas-list">
+        <!-- CENTER: Documentation Menus -->
+        <div class="flex items-center gap-1 mx-auto overflow-x-auto no-scrollbar max-w-2xl px-2">
+            
+            <!-- REAL -->
+            <div class="relative group">
+                <button onclick="toggleDocMenu('real')" id="menu-btn-real" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-gray-600/50 transition whitespace-nowrap">
+                    <span>🌍 Real</span> <span class="text-[8px]">▼</span>
+                </button>
+                <div id="menu-list-real" class="absolute bottom-full left-0 mb-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- ENVIRONMENT -->
+            <div class="relative group">
+                <button onclick="toggleDocMenu('environment')" id="menu-btn-environment" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-gray-600/50 transition whitespace-nowrap">
+                    <span>🏠 Env</span> <span class="text-[8px]">▼</span>
+                </button>
+                <div id="menu-list-environment" class="absolute bottom-full left-0 mb-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- UI -->
+            <div class="relative group">
+                <button onclick="toggleDocMenu('ui')" id="menu-btn-ui" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-gray-600/50 transition whitespace-nowrap">
+                    <span>🎨 UI</span> <span class="text-[8px]">▼</span>
+                </button>
+                <div id="menu-list-ui" class="absolute bottom-full left-0 mb-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- FORMULAS -->
+            <div class="relative group">
+                 <button onclick="toggleDocMenu('formulas')" id="menu-btn-formulas" class="text-purple-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-purple-900/50 transition whitespace-nowrap">
+                    <span>🧪 Formula</span> <span class="text-[8px]">▼</span>
+                </button>
+                <div id="menu-list-formulas" class="absolute bottom-full left-0 mb-2 w-56 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- SEMBLANCE -->
+            <div class="relative group">
+                <button onclick="toggleDocMenu('semblance')" id="menu-btn-semblance" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-gray-600/50 transition whitespace-nowrap">
+                    <span>🎭 Semblance</span> <span class="text-[8px]">▼</span>
+                </button>
+                <div id="menu-list-semblance" class="absolute bottom-full left-0 mb-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- TEST -->
+            <div class="relative group">
+                <button onclick="toggleDocMenu('test')" id="menu-btn-test" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-gray-600/50 transition whitespace-nowrap">
+                    <span>🧪 Test</span> <span class="text-[8px]">▼</span>
+                </button>
+                <div id="menu-list-test" class="absolute bottom-full left-0 mb-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
                     <!-- Populated by JS -->
                 </div>
             </div>
@@ -772,15 +823,18 @@
                 }
             }
 
-            // Close Formulas Menu
-            const formulasMenu = document.getElementById('formulas-menu');
-            const formulasBtn = document.getElementById('formulas-menu-btn');
-            if (formulasMenu && !formulasMenu.classList.contains('hidden')) {
-                if (!formulasMenu.contains(event.target) && !formulasBtn.contains(event.target)) {
-                    formulasMenu.classList.add('hidden');
-                    formulasMenu.classList.remove('flex');
+            // Close Doc Menus
+            const docKeys = ['real', 'environment', 'ui', 'formulas', 'semblance', 'test'];
+            docKeys.forEach(key => {
+                const m = document.getElementById(`menu-list-${key}`);
+                const b = document.getElementById(`menu-btn-${key}`);
+                if (m && !m.classList.contains('hidden')) {
+                    if (!m.contains(event.target) && !b.contains(event.target)) {
+                         m.classList.add('hidden');
+                         m.classList.remove('flex');
+                    }
                 }
-            }
+            });
         });
 
 
@@ -2818,67 +2872,130 @@
         }
 
         // ==========================================
-        // 1.5 FORMULAS LOGIC
+        // 1.5 DOCUMENTATION MENUS LOGIC
         // ==========================================
-        const formulas = [
-            { title: "Scenes Formula", path: "../5_Formula/scenes_formula.md" },
-            { title: "YAML HTML Logic", path: "../4_Formula/yaml_html_logic.md" },
-            { title: "YAML Hosting Workflow", path: "../4_Formula/yaml_hosting_workflow.md" },
-            { title: "Google OAuth Setup", path: "../4_Formula/google_oauth_setup.md" },
-            { title: "Sanity Check", path: "../5_Formula/sanity_check_post_prod_plan.md" },
-            { title: "Feedback Bias", path: "../5_Formula/feedback-bias-overestimate-ability.md" },
-            { title: "Dunning-Kruger Mitigation", path: "../5_Formula/mitigation-dunningkruger.md" },
-            { title: "Valley of Despair", path: "../5_Formula/valley-of-despair.md" },
-            { title: "References", path: "../5_Formula/references.md" }
-        ];
+        
+        const docData = {
+            real: [
+                { title: "Meeting Output (18 Dec)", path: "../2_Real/18_dec_meeting_output.md" },
+                { title: "Meeting Summary (18 Dec)", path: "../2_Real/18_dec_meeting_summary.md" },
+                { title: "Read Me", path: "../2_Real/README.md" }
+            ],
+            environment: [
+                { title: "Feedback Call Raw", path: "../3_Environment/18_dec_Feedback_call_raw.md" },
+                { title: "Roadmap for Editors", path: "../3_Environment/roadmap-for-editors.md" },
+                { title: "Read Me", path: "../3_Environment/README.md" }
+            ],
+            ui: [
+                { title: "Read Me", path: "../4_UI/README.md" }
+            ],
+            formulas: [
+                { title: "Scenes Formula", path: "../5_Formula/scenes_formula.md" },
+                { title: "YAML HTML Logic", path: "../4_Formula/yaml_html_logic.md" },
+                { title: "YAML Hosting Workflow", path: "../4_Formula/yaml_hosting_workflow.md" },
+                { title: "Google OAuth Setup", path: "../4_Formula/google_oauth_setup.md" },
+                { title: "Sanity Check", path: "../5_Formula/sanity_check_post_prod_plan.md" },
+                { title: "Feedback Bias", path: "../5_Formula/feedback-bias-overestimate-ability.md" },
+                { title: "Dunning-Kruger Mitigation", path: "../5_Formula/mitigation-dunningkruger.md" },
+                { title: "Valley of Despair", path: "../5_Formula/valley-of-despair.md" },
+                { title: "References", path: "../5_Formula/references.md" }
+            ],
+            semblance: [
+                { title: "Read Me", path: "../7_Semblance/README.md" }
+            ],
+            test: [
+                { title: "Read Me", path: "../8_Test/README.md" }
+            ]
+        };
 
-        function getFormulaEmoji(title) {
+        function getEmojiForDoc(title) {
             const lower = title.toLowerCase();
+            if (lower.includes('read me')) return '📖';
+            if (lower.includes('meeting')) return '🤝';
+            if (lower.includes('feedback')) return '💭';
+            if (lower.includes('roadmap')) return '🗺️';
+            
+            // Formula specific
             if (lower.includes('scene')) return '🎬';
             if (lower.includes('yaml')) return '⚙️';
             if (lower.includes('oauth') || lower.includes('setup')) return '🔐';
             if (lower.includes('sanity')) return '✅';
             if (lower.includes('bias') || lower.includes('despair') || lower.includes('dunning')) return '🧠';
             if (lower.includes('reference')) return '📚';
+            
             return '📄';
         }
 
-        function initFormulas() {
-            const list = document.getElementById('formulas-list');
-            if(!list) return;
-            
-            // Sort A-Z
-            formulas.sort((a, b) => a.title.localeCompare(b.title));
+        function initDocumentationMenus() {
+            Object.keys(docData).forEach(key => {
+                const items = docData[key];
+                const list = document.getElementById(`menu-list-${key}`);
+                if (!list) return;
 
-            list.innerHTML = ''; // Clear existing
-            
-            formulas.forEach(f => {
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left text-xs text-purple-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50 truncate transition border-b border-purple-900/20";
-                const emoji = getFormulaEmoji(f.title);
-                btn.innerHTML = `<span class="opacity-70">${emoji}</span> <span>${f.title}</span>`;
-                btn.onclick = () => openFormulaModal(f.path, f.title);
-                list.appendChild(btn);
+                // Sort
+                items.sort((a, b) => a.title.localeCompare(b.title));
+                
+                // Populate
+                list.innerHTML = '';
+                // wrapper for scrolling if needed
+                const scrollWrapper = document.createElement('div');
+                scrollWrapper.className = "p-2 space-y-1 max-h-60 overflow-y-auto";
+                
+                items.forEach(item => {
+                    const emoji = getEmojiForDoc(item.title);
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50 truncate transition border-b border-gray-700/50";
+                    btn.innerHTML = `<span class="opacity-70">${emoji}</span> <span>${item.title}</span>`;
+                    btn.onclick = () => openDocModal(item.path, item.title);
+                    scrollWrapper.appendChild(btn);
+                });
+                
+                list.appendChild(scrollWrapper);
             });
         }
 
-        async function openFormulaModal(path, title) {
+        function toggleDocMenu(key) {
+            // Close all others
+            const allKeys = ['actions-menu', 'links-menu', ...Object.keys(docData).map(k => `menu-list-${k}`)];
+            
+            // Current list ID
+            const currentListId = `menu-list-${key}`;
+            
+            allKeys.forEach(id => {
+               if (id !== currentListId) {
+                   const el = document.getElementById(id);
+                   if (el) {
+                       el.classList.add('hidden');
+                       el.classList.remove('flex');
+                   }
+               } 
+            });
+
+            // Toggle current
+            const menu = document.getElementById(currentListId);
+            if (menu) {
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('flex');
+            }
+        }
+        
+        // Reused Modal Logic (renamed slightly for clarity but keeping ID same)
+        async function openDocModal(path, title) {
             const modal = document.getElementById('formula-modal');
             const titleEl = document.getElementById('formula-modal-title');
             const contentEl = document.getElementById('formula-content');
             
-            // Add Copy Path Button to Title Area
-            // We'll replace the title content with title + button
+            // Add Copy Path Button
+            const emoji = getEmojiForDoc(title);
             titleEl.innerHTML = `
                 <span class="flex items-center gap-2">
-                    ${getFormulaEmoji(title)} ${title}
+                    ${emoji} ${title}
                 </span>
                 <button onclick="copyFormulaPath('${path}', this)" class="ml-4 text-[10px] bg-gray-700 hover:bg-gray-600 text-gray-300 px-2 py-1 rounded border border-gray-600 flex items-center gap-1 transition">
                     📋 Copy Path
                 </button>
             `;
             
-            // Reset content
             contentEl.innerHTML = '<div class="flex items-center justify-center p-8"><div class="loader" style="display:block"></div></div>';
             modal.classList.remove('hidden');
             
@@ -2886,19 +3003,14 @@
                 const response = await fetch(path);
                 if (!response.ok) throw new Error(`HTTP ${response.status} - Not Found`);
                 const text = await response.text();
-                // Render MD
                 contentEl.innerHTML = marked.parse(text);
-                
-                // Add scroll to top of content
                 contentEl.parentElement.scrollTop = 0;
-
             } catch (error) {
-                console.error("Formula load error:", error);
+                console.error("Doc load error:", error);
                 contentEl.innerHTML = `
                     <div class="bg-red-900/30 border border-red-800 rounded p-4 text-center">
-                        <h4 class="text-red-400 font-bold mb-2">Failed to load formula</h4>
+                        <h4 class="text-red-400 font-bold mb-2">Failed to load content</h4>
                         <p class="text-xs text-red-300 mb-2">${error.message}</p>
-                        <p class="text-[10px] text-gray-500">Ensure this file is served via HTTP/HTTPS or allow local file access.</p>
                         <div class="mt-4 text-[10px] font-mono bg-black/50 p-2 rounded text-left overflow-auto">
                             Path: ${path}
                         </div>
@@ -2906,6 +3018,11 @@
                 `;
             }
         }
+
+        // Keeping these helpers compatible or redundant
+        function openFormulaModal(path, title) { openDocModal(path, title); } 
+
+        // ... existing Sort/Emoji logic replaced above ...
 
         function copyFormulaPath(path, btn) {
             navigator.clipboard.writeText(path).then(() => {
@@ -2926,27 +3043,14 @@
         function closeFormulaModal() {
              document.getElementById('formula-modal').classList.add('hidden');
         }
+        
+        // Removed toggleFormulasMenu as it is replaced by toggleDocMenu
 
-        function toggleFormulasMenu() {
-            const menu = document.getElementById('formulas-menu');
-            const otherMenus = ['actions-menu', 'links-menu'];
-            
-            otherMenus.forEach(id => {
-                const m = document.getElementById(id);
-                if(m) {
-                    m.classList.add('hidden');
-                    m.classList.remove('flex');
-                }
-            });
-
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
-        }
 
         // Initialize App
         window.addEventListener('DOMContentLoaded', () => {
             initApp();
-            initFormulas();
+            initDocumentationMenus();
         });
     </script>
 </body>
