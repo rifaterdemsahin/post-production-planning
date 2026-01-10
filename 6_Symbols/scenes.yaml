@@ -1081,7 +1081,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: That number tells you everything. ATW isn't just a slide deck with ideas.
+        script: Even this video got generated using agent. Delivery Pilots are real and the ASC isn't just a slide deck of ideas.
         prompts:
           image: A PowerPoint presentation file being thrown into a trash can
           graphic: Trash can lid closing
