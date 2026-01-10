@@ -152,14 +152,14 @@
                 <div id="links-menu" class="absolute bottom-full left-0 mb-3 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 origin-bottom-left z-50">
                     <div class="p-2 space-y-1">
                         <a href="https://drive.google.com/drive/folders/1E_ctpNSyieC_fr2xowbg_RfXZDVWbgzJ" target="_blank" class="block w-full text-left text-xs text-green-400 hover:bg-gray-700 hover:text-green-300 px-2 py-1 rounded relative z-50 font-bold">📂 Google Drive ↗</a>
-                        <a href="https://github.com/rifaterdemsahin/post-production-planning" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">GitHub ↗</a>
-                        <a href="#" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Online Site ↗</a>
-                        <a href="https://www.canva.com/" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Canva Artifacts Plan ↗</a>
-                        <a href="https://colab.google/" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Google Colab ↗</a>
-                        <a href="#" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Video Generate ↗</a>
-                        <a href="https://elevenlabs.io/" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">ElevenLabs ↗</a>
-                        <a href="https://aistudio.google.com/logs" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">AI Studio Logs ↗</a>
-                        <a href="https://github.com/settings/tokens" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">GitHub Tokens ↗</a>
+                        <a href="https://github.com/rifaterdemsahin/post-production-planning" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">🐙 GitHub ↗</a>
+                        <a href="#" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">🌍 Online Site ↗</a>
+                        <a href="https://www.canva.com/" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">🎨 Canva Artifacts Plan ↗</a>
+                        <a href="https://colab.google/" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">🔬 Google Colab ↗</a>
+                        <a href="#" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">🎥 Video Generate ↗</a>
+                        <a href="https://elevenlabs.io/" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">🗣️ ElevenLabs ↗</a>
+                        <a href="https://aistudio.google.com/logs" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">📝 AI Studio Logs ↗</a>
+                        <a href="https://github.com/settings/tokens" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">🔑 GitHub Tokens ↗</a>
                     </div>
                 </div>
             </div>
@@ -529,6 +529,7 @@
              scenes = data.scenes;
              window.mainContext = data.main_context || "";
              window.verifiedMainContext = data.verified_main_context || false;
+             window.projectTitle = data.title || "";
              renderScenes();
         }
 
@@ -857,7 +858,7 @@
                 `;
 
             scene.lines.forEach((line, lineIndex) => {
-                const uniqueId = `scene-${sceneIndex}-line-${lineIndex}`;
+                const uniqueId = `s${sceneIndex}_l${lineIndex}`;
                 const currentPrompt = line.prompts ? line.prompts.image : "";
                 
                 // Calculate Timeline Position
@@ -2046,10 +2047,13 @@
             const sceneTitle = scenes[sceneIndex].title.replace(/[^a-zA-Z0-9]/g, '_');
             const lineId = scenes[sceneIndex].lines[lineIndex].id;
             
+            // Clean Project Title
+            const projTitle = (window.projectTitle || "Project").replace(/[^a-zA-Z0-9]/g, '_');
+            
             const now = new Date();
             const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}`;
             
-            return `${sceneTitle}_Line${lineId}_${type}_${dateStr}`;
+            return `${projTitle}_${sceneTitle}_Line${lineId}_${type}_${dateStr}`;
         }
 
         function updateVideoName(sceneIndex, lineIndex, filename) {
