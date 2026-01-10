@@ -590,6 +590,8 @@
         // 1. DATA LOADING & INITIALIZATION
         // ==========================================
         let scenes = []; // Global variable to hold data after loading
+        let projectVersion = 1;
+        let lastUpdated = "";
         let currentSceneIndex = 0;
 
 
@@ -726,6 +728,8 @@
              window.mainContext = data.main_context || "";
              window.verifiedMainContext = data.verified_main_context || false;
              window.projectTitle = data.title || "";
+             projectVersion = data.version || 1;
+             lastUpdated = data.last_updated || new Date().toISOString();
 
              // Check URL for initial scene
              const urlParams = new URLSearchParams(window.location.search);
@@ -2410,6 +2414,11 @@
             if (type === 'animation') typeLabel = 'VIDEO'; 
             
             finalPrompt = `[CREATE ${typeLabel}] > ${finalPrompt}`;
+
+            if (type === 'motion_graphics') {
+                 finalPrompt += " (Note: This prompt is generated for Canva)";
+            }
+
             return finalPrompt;
         }
         
@@ -2746,11 +2755,17 @@
             }
             
             try {
+                // Increment Version & Update Date
+                projectVersion = (parseInt(projectVersion) || 0) + 1;
+                lastUpdated = new Date().toISOString();
+
                 // Wrap in root object to match original structure
                 const exportData = { 
                     title: window.projectTitle || "",
                     main_context: window.mainContext || "",
                     verified_main_context: window.verifiedMainContext || false,
+                    version: projectVersion,
+                    last_updated: lastUpdated,
                     scenes: scenes 
                 };
                 // Dump to YAML
@@ -2942,10 +2957,17 @@
             try {
                 // 1. Prepare YAML Content
                 updateProgressModal(null, "Generating YAML...");
+                
+                // Increment Version & Update Date
+                projectVersion = (parseInt(projectVersion) || 0) + 1;
+                lastUpdated = new Date().toISOString();
+
                 const exportData = { 
                     title: window.projectTitle || "",
                     main_context: window.mainContext || "",
                     verified_main_context: window.verifiedMainContext || false,
+                    version: projectVersion,
+                    last_updated: lastUpdated,
                     scenes: scenes 
                 };
                 const yamlStr = jsyaml.dump(exportData, { lineWidth: -1 });
