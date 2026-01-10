@@ -785,7 +785,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: All the diagnostics, all the upgrades, they are designed for this one moment.
+        script: All the diagnostics, all the setups and tools, they are designed for this one moment.
         prompts:
           image: Close up of a driver's gloved hand hovering over a big red 'IGNITION' button
           graphic: Pulse ring emanating from the button
