@@ -677,7 +677,7 @@ scenes:
     lines:
       - id: '1'
         time: '0:00'
-        script: Okay, so once you know what's broken, you move to step two, train.
+        script: Okay, so once you know what's broken, you move to step two, is the simulate an environment for building it.
         prompts:
           image: A futuristic training dojo simulation room, white grid, minimalist, awaiting input
           graphic: 'Text ''STEP 2: TRAIN'' entering screen'
