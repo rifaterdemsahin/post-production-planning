@@ -1255,11 +1255,19 @@
                                 </div>
                                 
                                 <div class="flex justify-between items-center mt-3 pt-3 border-t border-gray-800">
-                                    <button onclick="handleGenerate('${uniqueId}')" 
-                                        class="btn-gen text-white px-5 py-1.5 rounded shadow-lg shadow-blue-900/20 text-xs font-bold hover:brightness-110 flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95">
-                                        <span>⚡ Generate Artifact</span>
-                                        <div id="loader-${uniqueId}" class="loader"></div>
-                                    </button>
+                                    <div class="flex gap-2">
+                                        <button onclick="handleGenerate('${uniqueId}')" 
+                                            class="btn-gen text-white px-5 py-1.5 rounded shadow-lg shadow-blue-900/20 text-xs font-bold hover:brightness-110 flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95">
+                                            <span>⚡ Generate Artifact</span>
+                                            <div id="loader-${uniqueId}" class="loader"></div>
+                                        </button>
+                                        
+                                        <button onclick="estimateCost('${uniqueId}')" 
+                                            class="text-green-400 border border-green-800 bg-green-900/10 px-3 py-1.5 rounded text-xs font-bold hover:bg-green-900/30 transition-all"
+                                            title="Estimate Cost for this generation">
+                                            💰 Est. Cost
+                                        </button>
+                                    </div>
 
                                     <span id="status-${uniqueId}" class="text-xs font-mono"></span>
                                 </div>
@@ -1970,6 +1978,60 @@
             } finally {
                 loader.style.display = "none";
             }
+        }
+
+        // 4e. Cost Estimation
+        function estimateCost(uniqueId) {
+            const textArea = document.getElementById(`text-${uniqueId}`);
+            const type = textArea.getAttribute('data-current-type') || 'image';
+            const prompt = textArea.value;
+            const status = document.getElementById(`status-${uniqueId}`);
+            
+            let cost = 0;
+            let unit = "USD";
+            let reason = "";
+
+            // Estimates based on standard pricing (approximate)
+            switch(type) {
+                case 'image':
+                case 'graphic':
+                    // Gemini 3 Pro Image: ~$0.04 per image
+                    cost = 0.04; 
+                    reason = "Std. Image Gen";
+                    break;
+                case 'animation':
+                    // Veo 2.0: ~$2.00 per video (est)
+                    cost = 2.00; 
+                    reason = "Video Generation";
+                    break;
+                case 'music':
+                case 'sound_effect':
+                    // Audio: ~$0.02 est
+                    cost = 0.02;
+                    reason = "Audio Gen";
+                    break;
+                case 'motion_graphics':
+                     // Flash: negligible for text, but let's assume complex prompt
+                     cost = 0.001;
+                     reason = "Text/Code Gen";
+                     break;
+                default:
+                    // Text (Flash): ~$0.10 / 1M tokens. 
+                    // Assume 1k tokens combined in/out = $0.0001
+                    cost = 0.0001; 
+                    reason = "Text Gen";
+                    break;
+            }
+
+            // Display
+            status.innerHTML = `<span class="text-green-400 font-bold" title="${reason}">~${cost < 0.01 ? '<$0.01' : '$' + cost.toFixed(2)}</span>`;
+            
+            // Revert after 3s
+            setTimeout(() => {
+                if (status.innerText.includes('$')) {
+                    status.innerText = "";
+                }
+            }, 3000);
         }
 
         // 4b. Multimodal (Image) Generation
