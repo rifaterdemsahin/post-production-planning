@@ -1172,7 +1172,7 @@ scenes:
           sound_effect: false
       - id: '4'
         time: '0:12'
-        script: Are you building a vehicle to carry you through the wild terrain ahead?
+        script: If interested on getting certified as an enterprise feel free to contact and start your ai transformation.
         prompts:
           image: Final epic shot of the ATW vehicle parked on a mountain peak at sunset, looking out at a new world
           graphic: Text 'BUILD YOUR VEHICLE' fading in
