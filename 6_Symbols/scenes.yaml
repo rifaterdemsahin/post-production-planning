@@ -580,7 +580,7 @@ scenes:
           sound_effect: false
       - id: '4'
         time: '0:12'
-        script: And finally, you put it all together and hit the road and certify the pilots.
+        script: And finally, you put it all together and hit the road and certify the pilots for their delivery.
         prompts:
           image: The vehicle speeding off into a neon horizon, leaving a light trail, sense of speed and completion
           graphic: Checkered flag icon waving
