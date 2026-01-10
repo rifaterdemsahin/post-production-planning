@@ -637,7 +637,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: We're talking your team's security, your company's culture, your CI CD pipelines...
+        script: We're talking your ability to delivery using ai agents, not just talking to your team mates and expecting them to code and test for you.
         prompts:
           image: 'Triptych layout: A padlock (Security), a team high-fiving (Culture), and an infinite loop symbol (CI/CD)'
           graphic: Labels appearing under each image
@@ -654,7 +654,7 @@ scenes:
           sound_effect: false
       - id: '4'
         time: '0:12'
-        script: The goal is to find the real problems before you try to fix anything.
+        script: The goal is to have the skills assessment for end to end delivery where you fix anything that comes along your way.
         prompts:
           image: X-ray vision view revealing a crack in a structural beam hidden behind a wall
           graphic: Targeting circle locking onto the crack
@@ -677,7 +677,7 @@ scenes:
     lines:
       - id: '1'
         time: '0:00'
-        script: Okay, so once you know what's broken, you move to step two, train.
+        script: Okay, so once you know what's broken, you move to step two, is the simulate an environment for building it.
         prompts:
           image: A futuristic training dojo simulation room, white grid, minimalist, awaiting input
           graphic: 'Text ''STEP 2: TRAIN'' entering screen'
@@ -711,7 +711,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: Sticking with that vehicle metaphor, if diagnostics found a weakness in security...
+        script: Sticking with that vehicle metaphor, you build this at real time while checking other team members doing something similar.
         prompts:
           image: The vehicle from before, highlighting the doors with a weak red shield
           graphic: Shield icon flashing red
