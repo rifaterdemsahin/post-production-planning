@@ -437,9 +437,14 @@
              
              <div id="gpm-details" class="text-xs text-red-400 bg-red-900/20 p-2 rounded mb-4 hidden font-mono text-left overflow-auto max-h-32 border border-red-900/50 break-words"></div>
 
-             <button id="gpm-close-btn" onclick="closeGenericProgressModal()" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-bold transition w-full hidden border border-gray-600">
-                 Close
-             </button>
+             <div class="flex gap-2 w-full mt-4">
+                 <button id="gpm-action-btn" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm font-bold transition flex-1 hidden shadow-lg">
+                     Fix Settings
+                 </button>
+                 <button id="gpm-close-btn" onclick="closeGenericProgressModal()" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-bold transition flex-1 hidden border border-gray-600">
+                     Close
+                 </button>
+             </div>
         </div>
     </div>
 
@@ -2718,7 +2723,7 @@
             if(icon) document.getElementById('gpm-icon').innerText = icon;
         }
 
-        function showProgressError(message, details) {
+        function showProgressError(message, details, actionLabel, actionCallback) {
             document.getElementById('gpm-title').innerText = "Error";
             document.getElementById('gpm-icon').innerText = "❌";
             document.getElementById('gpm-icon').classList.remove('animate-pulse');
@@ -2729,6 +2734,19 @@
                 detEl.innerText = details;
                 detEl.classList.remove('hidden');
             }
+
+            const actionBtn = document.getElementById('gpm-action-btn');
+            if (actionLabel && actionCallback) {
+                actionBtn.innerText = actionLabel;
+                actionBtn.onclick = () => {
+                    closeGenericProgressModal();
+                    actionCallback();
+                };
+                actionBtn.classList.remove('hidden');
+            } else {
+                actionBtn.classList.add('hidden');
+            }
+
             document.getElementById('gpm-close-btn').classList.remove('hidden');
         }
 
@@ -2840,7 +2858,12 @@
             } catch (error) {
                 console.error('GitHub Save Error:', error);
                 logDebug('ERROR', 'GitHub Save Failed', error.message);
-                showProgressError("Failed to save", error.message);
+                
+                if (error.message.includes('401')) {
+                     showProgressError("Authentication Failed", "Your GitHub token is invalid or expired (401).", "Update Settings", openGithubModal);
+                } else {
+                     showProgressError("Failed to save", error.message);
+                }
             } finally {
                 if (btn) {
                     btn.innerText = originalText;
@@ -3024,6 +3047,7 @@
             environment: [
                 { title: "Feedback Call Raw", path: "../3_Environment/18_dec_Feedback_call_raw.md" },
                 { title: "Roadmap for Editors", path: "../3_Environment/roadmap-for-editors.md" },
+                { title: "Google Drive Info", path: "../3_Environment/google_drive.md" },
                 { title: "Read Me", path: "../3_Environment/README.md" }
             ],
             ui: [
@@ -3038,7 +3062,8 @@
                 { title: "Feedback Bias", path: "../5_Formula/feedback-bias-overestimate-ability.md" },
                 { title: "Dunning-Kruger Mitigation", path: "../5_Formula/mitigation-dunningkruger.md" },
                 { title: "Valley of Despair", path: "../5_Formula/valley-of-despair.md" },
-                { title: "References", path: "../5_Formula/references.md" }
+                { title: "References", path: "../5_Formula/references.md" },
+                { title: "Read Me (Formulas)", path: "../5_Formula/README.md" }
             ],
             semblance: [
                 { title: "Read Me", path: "../7_Semblance/README.md" }
