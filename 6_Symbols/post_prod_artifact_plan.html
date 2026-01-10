@@ -672,6 +672,23 @@
         });
 
         // ==========================================
+        // TIMELINE HELPERS
+        // ==========================================
+        function parseDuration(timeStr) {
+            if (!timeStr) return 0;
+            // Remove 's' and parse float
+            const cleanStr = timeStr.toString().toLowerCase().replace('s', '').trim();
+            const val = parseFloat(cleanStr);
+            return isNaN(val) ? 0 : val;
+        }
+
+        function formatTimelineTime(totalSeconds) {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = Math.floor(totalSeconds % 60);
+            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        // ==========================================
         // 2. RENDER UI
         // ==========================================
         
@@ -707,6 +724,16 @@
             document.getElementById('nav-scene-indicator').innerText = `Scene ${currentSceneIndex + 1} / ${scenes.length}`;
             document.getElementById('nav-btn-prev').disabled = (currentSceneIndex === 0);
             document.getElementById('nav-btn-next').disabled = (currentSceneIndex === scenes.length - 1);
+            
+            // Calculate Start Time for Current Scene
+            let currentSceneTime = 0;
+            for(let i=0; i < currentSceneIndex; i++) {
+                if(scenes[i].lines) {
+                    scenes[i].lines.forEach(l => {
+                        currentSceneTime += parseDuration(l.time);
+                    });
+                }
+            }
 
             // Render Main Context Input (Collapsible) - MOVED DOWN
             // This is now appended later
@@ -785,25 +812,32 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 `;
 
-                scene.lines.forEach((line, lineIndex) => {
-                    // ... (keep existing line rendering)
-                    const uniqueId = `s${sceneIndex}_l${lineIndex}`;
-                    const currentPrompt = line.prompts ? line.prompts.image : "";
+            scene.lines.forEach((line, lineIndex) => {
+                const uniqueId = `scene-${sceneIndex}-line-${lineIndex}`;
+                const currentPrompt = line.prompts ? line.prompts.image : "";
+                
+                // Calculate Timeline Position
+                const startTime = formatTimelineTime(currentSceneTime);
+                const duration = parseDuration(line.time);
+                currentSceneTime += duration; // Accumulate for next line
 
-                    html += `
-                        <div class="bg-gray-900/50 p-2 rounded border border-gray-800 relative group hover:border-gray-600 transition-colors">
-                            <div class="flex justify-between items-start cursor-pointer p-2" onclick="toggleSection('line-tools-${uniqueId}', 'line-arrow-${uniqueId}')">
-                                <div class="flex gap-3 w-full">
-                                    <span id="line-arrow-${uniqueId}" class="text-gray-500 transform transition-transform text-[10px] mt-1">▶</span>
-                                    <div class="flex-1">
-                                        <div class="flex justify-between text-xs text-gray-400 mb-1">
+                html += `
+                    <div class="bg-gray-900/50 p-2 rounded border border-gray-800 relative group hover:border-gray-600 transition-colors">
+                        <div class="flex justify-between items-start cursor-pointer p-2" onclick="toggleSection('line-tools-${uniqueId}', 'line-arrow-${uniqueId}')">
+                            <div class="flex gap-3 w-full">
+                                <span id="line-arrow-${uniqueId}" class="text-gray-500 transform transition-transform text-[10px] mt-1">▶</span>
+                                <div class="flex-1">
+                                    <div class="flex justify-between text-xs text-gray-400 mb-1">
+                                        <div class="flex items-center gap-2">
                                             <span class="bg-gray-800 px-2 py-0.5 rounded text-gray-300">⏱️ ${line.time}</span>
-                                            <span class="font-mono">Line ${line.id}</span>
+                                            <span class="bg-blue-900/40 px-2 py-0.5 rounded text-blue-300 font-mono text-[10px]" title="Estimated Timeline Start">▶ ${startTime}</span>
                                         </div>
-                                        <p class="text-sm italic text-gray-300 line-clamp-2 pl-2 border-l-2 border-gray-700 hover:text-white transition-colors">"${line.script}"</p>
+                                        <span class="font-mono">Line ${line.id}</span>
                                     </div>
+                                    <p class="text-sm italic text-gray-300 line-clamp-2 pl-2 border-l-2 border-gray-700 hover:text-white transition-colors">"${line.script}"</p>
                                 </div>
                             </div>
+                        </div>
                             
                             <!-- Prompt Controls (Collapsible) -->
                             <div id="line-tools-${uniqueId}" class="hidden mt-2 pt-2 border-t border-gray-800 px-2">
