@@ -876,7 +876,7 @@ scenes:
           sound_effect: false
       - id: '4'
         time: '0:12'
-        script: And the ideal professional for this new world is called the X-shaped builder.
+        script: And the ideal professional for this new world is called the X-shaped professional.
         prompts:
           image: A glowing letter 'X' formed by two crossing laser beams in a dark room
           graphic: The letter X rotating 3D
