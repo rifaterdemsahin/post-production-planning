@@ -728,7 +728,7 @@ scenes:
           sound_effect: false
       - id: '4'
         time: '0:12'
-        script: ...you install ML SecOps tires. If ops are shaky, you add an AI ops suspension.
+        script: ...you define what your objective is and the environment the imaginary world that you are going to create while iterating on it.
         prompts:
           image: Robotic arms bolting on rugged, glowing armored tires and heavy duty springs onto the vehicle
           graphic: Stats bar for 'Defense' and 'Stability' increasing
