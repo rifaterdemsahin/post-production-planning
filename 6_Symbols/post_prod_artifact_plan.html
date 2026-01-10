@@ -416,18 +416,21 @@
 
         let isMainContextCollapsed = true;
 
-        function toggleMainContext() {
-            isMainContextCollapsed = !isMainContextCollapsed;
-            const content = document.getElementById('main-context-content');
-            const arrow = document.getElementById('main-context-arrow');
+        function toggleSection(contentId, arrowId) {
+            const content = document.getElementById(contentId);
+            const arrow = document.getElementById(arrowId);
             
-            if (isMainContextCollapsed) {
-                content.classList.add('hidden');
-                arrow.classList.remove('rotate-90');
-            } else {
+            if (content.classList.contains('hidden')) {
                 content.classList.remove('hidden');
-                arrow.classList.add('rotate-90');
+                if(arrow) arrow.classList.add('rotate-90');
+            } else {
+                content.classList.add('hidden');
+                if(arrow) arrow.classList.remove('rotate-90');
             }
+        }
+
+        function toggleMainContext() {
+            toggleSection('main-context-content', 'main-context-arrow');
         }
 
         function prevScene() {
@@ -754,11 +757,15 @@
                     <div id="scene-content-${sceneIndex}" class="p-6 transition-all duration-300">
                         
                         <!-- Scene Context -->
-                        <div class="mb-6">
-                            <div class="bg-gray-900 p-4 rounded border border-gray-700 relative">
-                                <div class="flex justify-between items-center mb-1">
-                                    <label class="block text-xs font-bold text-gray-400">SCENE CONTEXT</label>
-                                    <label class="flex items-center gap-2 cursor-pointer">
+                        <div class="mb-4">
+                            <div class="bg-gray-900 rounded border border-gray-700 relative overflow-hidden">
+                                <div class="flex justify-between items-center p-3 bg-gray-800 cursor-pointer hover:bg-gray-750 transition" 
+                                     onclick="toggleSection('scene-context-content-${sceneIndex}', 'scene-context-arrow-${sceneIndex}')">
+                                    <div class="flex items-center gap-2">
+                                        <span id="scene-context-arrow-${sceneIndex}" class="text-gray-400 transform transition-transform text-xs">▶</span>
+                                        <label class="block text-xs font-bold text-gray-400 cursor-pointer">SCENE CONTEXT</label>
+                                    </div>
+                                    <label class="flex items-center gap-2 cursor-pointer" onclick="event.stopPropagation()">
                                         <input type="checkbox" id="verify-context-${sceneIndex}" 
                                             onchange="handleSceneContextVerify(${sceneIndex}, this.checked)" 
                                             ${scene.verified_context ? 'checked' : ''}
@@ -766,10 +773,12 @@
                                         <span class="text-[10px] text-gray-400">Verified</span>
                                     </label>
                                 </div>
-                                <textarea id="context-${sceneIndex}" rows="2" 
-                                    class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
-                                    placeholder="Mood, atmosphere, setting..."
-                                    oninput="handleContextChange(${sceneIndex})">${scene.context || ""}</textarea>
+                                <div id="scene-context-content-${sceneIndex}" class="hidden p-2 border-t border-gray-700">
+                                    <textarea id="context-${sceneIndex}" rows="2" 
+                                        class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                                        placeholder="Mood, atmosphere, setting..."
+                                        oninput="handleContextChange(${sceneIndex})">${scene.context || ""}</textarea>
+                                </div>
                             </div>
                         </div>
 
@@ -782,73 +791,81 @@
                     const currentPrompt = line.prompts ? line.prompts.image : "";
 
                     html += `
-                        <div class="bg-gray-900/50 p-4 rounded border border-gray-800 relative group hover:border-gray-600 transition-colors">
-                            <div class="flex justify-between text-xs text-gray-400 mb-2">
-                                <span class="bg-gray-800 px-2 py-0.5 rounded text-gray-300">⏱️ ${line.time}</span>
-                                <span class="font-mono">Line ${line.id}</span>
-                            </div>
-                            <p class="text-sm italic text-gray-300 mb-4 line-clamp-2 pl-2 border-l-2 border-gray-700">"${line.script}"</p>
-                            
-                            <!-- Prompt Controls (Tabs) -->
-                            <div class="mb-3">
-                                <div class="flex border-b border-gray-700 mb-2 space-x-1 overflow-x-auto no-scrollbar">
-                                    ${renderTabButton(uniqueId, 'image', '🖼️ Image', 'gemini-3-pro-image-preview', true)}
-                                    ${renderTabButton(uniqueId, 'graphic', '📊 Graphic', 'gemini-3-pro-image-preview')}
-                                    ${renderTabButton(uniqueId, 'music', '🎵 Music', 'gemini-2.5-pro-preview-tts')}
-                                    ${renderTabButton(uniqueId, 'animation', '🎬 Animation', 'veo-2.0-generate-001')}
-                                    ${renderTabButton(uniqueId, 'motion_graphics', '✨ Motion Graphics', 'gemini-2.0-flash')}
-                                    ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'gemini-2.5-pro-preview-tts')}
-                                </div>
-                                
-                                <div class="flex items-center gap-2 mb-2 px-1">
-                                    <label class="flex items-center gap-2 cursor-pointer group-verify">
-                                        <div class="relative">
-                                            <input type="checkbox" id="verify-${uniqueId}" 
-                                                onchange="handleVerifyChange('${uniqueId}', ${sceneIndex}, ${lineIndex})" 
-                                                class="peer sr-only">
-                                            <div class="w-9 h-5 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="bg-gray-900/50 p-2 rounded border border-gray-800 relative group hover:border-gray-600 transition-colors">
+                            <div class="flex justify-between items-start cursor-pointer p-2" onclick="toggleSection('line-tools-${uniqueId}', 'line-arrow-${uniqueId}')">
+                                <div class="flex gap-3 w-full">
+                                    <span id="line-arrow-${uniqueId}" class="text-gray-500 transform transition-transform text-[10px] mt-1">▶</span>
+                                    <div class="flex-1">
+                                        <div class="flex justify-between text-xs text-gray-400 mb-1">
+                                            <span class="bg-gray-800 px-2 py-0.5 rounded text-gray-300">⏱️ ${line.time}</span>
+                                            <span class="font-mono">Line ${line.id}</span>
                                         </div>
-                                        <span class="text-xs font-bold text-gray-500 peer-checked:text-green-400 transition-colors" id="verify-label-${uniqueId}">Verified for Bulk</span>
-                                    </label>
+                                        <p class="text-sm italic text-gray-300 line-clamp-2 pl-2 border-l-2 border-gray-700 hover:text-white transition-colors">"${line.script}"</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Prompt Controls (Collapsible) -->
+                            <div id="line-tools-${uniqueId}" class="hidden mt-2 pt-2 border-t border-gray-800 px-2">
+                                <div class="mb-3">
+                                    <div class="flex border-b border-gray-700 mb-2 space-x-1 overflow-x-auto no-scrollbar">
+                                        ${renderTabButton(uniqueId, 'image', '🖼️ Image', 'gemini-3-pro-image-preview', true)}
+                                        ${renderTabButton(uniqueId, 'graphic', '📊 Graphic', 'gemini-3-pro-image-preview')}
+                                        ${renderTabButton(uniqueId, 'music', '🎵 Music', 'gemini-2.5-pro-preview-tts')}
+                                        ${renderTabButton(uniqueId, 'animation', '🎬 Animation', 'veo-2.0-generate-001')}
+                                        ${renderTabButton(uniqueId, 'motion_graphics', '✨ Motion Graphics', 'gemini-2.0-flash')}
+                                        ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'gemini-2.5-pro-preview-tts')}
+                                    </div>
+                                    
+                                    <div class="flex items-center gap-2 mb-2 px-1">
+                                        <label class="flex items-center gap-2 cursor-pointer group-verify">
+                                            <div class="relative">
+                                                <input type="checkbox" id="verify-${uniqueId}" 
+                                                    onchange="handleVerifyChange('${uniqueId}', ${sceneIndex}, ${lineIndex})" 
+                                                    class="peer sr-only">
+                                                <div class="w-9 h-5 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-600"></div>
+                                            </div>
+                                            <span class="text-xs font-bold text-gray-500 peer-checked:text-green-400 transition-colors" id="verify-label-${uniqueId}">Verified for Bulk</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="relative">
+                                        <textarea id="text-${uniqueId}" rows="3" 
+                                                class="w-full bg-black/30 text-green-400 font-mono text-sm p-3 rounded border border-gray-700 focus:outline-none focus:border-green-500 resize-none pr-8 transition-colors"
+                                                placeholder="Enter prompt here..."
+                                                data-current-type="image"
+                                                oninput="handleTextChange('${uniqueId}', ${sceneIndex}, ${lineIndex})">${currentPrompt}</textarea>
+                                                
+                                        <button onclick="downloadYAML()" 
+                                                class="absolute top-2 right-20 text-gray-600 hover:text-white transition opacity-0 group-hover:opacity-100"
+                                                title="Save Updates to YAML">
+                                            <span class="text-lg">💾</span>
+                                        </button>
+                                        <button onclick="clearText('${uniqueId}', ${sceneIndex}, ${lineIndex})" 
+                                                class="absolute top-2 right-11 text-gray-600 hover:text-red-500 transition opacity-0 group-hover:opacity-100"
+                                                title="Clear Content">
+                                            <span class="text-lg">🗑️</span>
+                                        </button>
+                                        <button onclick="copyToClipboard('${uniqueId}')" 
+                                                class="absolute top-2 right-2 text-gray-600 hover:text-white transition opacity-0 group-hover:opacity-100"
+                                                title="Copy to Clipboard">
+                                            <span id="copy-text-${uniqueId}" class="text-lg">📋</span>
+                                        </button>
+                                    </div>
                                 </div>
                                 
-                                <div class="relative">
-                                    <textarea id="text-${uniqueId}" rows="3" 
-                                            class="w-full bg-black/30 text-green-400 font-mono text-sm p-3 rounded border border-gray-700 focus:outline-none focus:border-green-500 resize-none pr-8 transition-colors"
-                                            placeholder="Enter prompt here..."
-                                            data-current-type="image"
-                                            oninput="handleTextChange('${uniqueId}', ${sceneIndex}, ${lineIndex})">${currentPrompt}</textarea>
-                                            
-                                    <button onclick="downloadYAML()" 
-                                            class="absolute top-2 right-20 text-gray-600 hover:text-white transition opacity-0 group-hover:opacity-100"
-                                            title="Save Updates to YAML">
-                                        <span class="text-lg">💾</span>
+                                <div class="flex justify-between items-center mt-3 pt-3 border-t border-gray-800">
+                                    <button onclick="handleGenerate('${uniqueId}')" 
+                                        class="btn-gen text-white px-5 py-1.5 rounded shadow-lg shadow-blue-900/20 text-xs font-bold hover:brightness-110 flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95">
+                                        <span>⚡ Generate Artifact</span>
+                                        <div id="loader-${uniqueId}" class="loader"></div>
                                     </button>
-                                    <button onclick="clearText('${uniqueId}', ${sceneIndex}, ${lineIndex})" 
-                                            class="absolute top-2 right-11 text-gray-600 hover:text-red-500 transition opacity-0 group-hover:opacity-100"
-                                            title="Clear Content">
-                                        <span class="text-lg">🗑️</span>
-                                    </button>
-                                    <button onclick="copyToClipboard('${uniqueId}')" 
-                                            class="absolute top-2 right-2 text-gray-600 hover:text-white transition opacity-0 group-hover:opacity-100"
-                                            title="Copy to Clipboard">
-                                        <span id="copy-text-${uniqueId}" class="text-lg">📋</span>
-                                    </button>
+                                    <span id="status-${uniqueId}" class="text-xs font-mono"></span>
+                                </div>
+                                
+                                <div id="result-container-${uniqueId}" class="mt-4 hidden p-3 bg-black rounded border border-gray-700 text-xs text-gray-300 font-mono overflow-auto max-h-[300px] whitespace-pre-wrap shadow-inner">
                                 </div>
                             </div>
-                            
-                            <div class="flex justify-between items-center mt-3 pt-3 border-t border-gray-800">
-                                <button onclick="handleGenerate('${uniqueId}')" 
-                                    class="btn-gen text-white px-5 py-1.5 rounded shadow-lg shadow-blue-900/20 text-xs font-bold hover:brightness-110 flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95">
-                                    <span>⚡ Generate Artifact</span>
-                                    <div id="loader-${uniqueId}" class="loader"></div>
-                                </button>
-                                <span id="status-${uniqueId}" class="text-xs font-mono"></span>
-                            </div>
-                            
-                            <div id="result-container-${uniqueId}" class="mt-4 hidden p-3 bg-black rounded border border-gray-700 text-xs text-gray-300 font-mono overflow-auto max-h-[300px] whitespace-pre-wrap shadow-inner">
-                            </div>
-                        </div>
                     `;
                 });
 
@@ -856,11 +873,15 @@
 
                 // Transition (moved to bottom)
                 html += `
-                    <div class="mt-6">
-                        <div class="bg-gray-900 p-4 rounded border border-gray-700 relative">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="block text-xs font-bold text-gray-400">TRANSITION (to next scene)</label>
-                                <label class="flex items-center gap-2 cursor-pointer">
+                    <div class="mt-4">
+                        <div class="bg-gray-900 rounded border border-gray-700 relative overflow-hidden">
+                            <div class="flex justify-between items-center p-3 bg-gray-800 cursor-pointer hover:bg-gray-750 transition"
+                                 onclick="toggleSection('transition-content-${sceneIndex}', 'transition-arrow-${sceneIndex}')">
+                                <div class="flex items-center gap-2">
+                                    <span id="transition-arrow-${sceneIndex}" class="text-gray-400 transform transition-transform text-xs">▶</span>
+                                    <label class="block text-xs font-bold text-gray-400 cursor-pointer">TRANSITION (to next scene)</label>
+                                </div>
+                                <label class="flex items-center gap-2 cursor-pointer" onclick="event.stopPropagation()">
                                     <input type="checkbox" id="verify-transition-${sceneIndex}" 
                                         onchange="handleTransitionVerify(${sceneIndex}, this.checked)" 
                                         ${scene.verified_transition ? 'checked' : ''}
@@ -868,10 +889,12 @@
                                     <span class="text-[10px] text-gray-400">Verified</span>
                                 </label>
                             </div>
-                            <textarea id="transition-${sceneIndex}" rows="2" 
-                                class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
-                                placeholder="How does this scene end? Cut to black? Fade out?"
-                                oninput="handleTransitionChange(${sceneIndex}, this.value)">${scene.transition || ""}</textarea>
+                            <div id="transition-content-${sceneIndex}" class="hidden p-2 border-t border-gray-700">
+                                <textarea id="transition-${sceneIndex}" rows="2" 
+                                    class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                                    placeholder="How does this scene end? Cut to black? Fade out?"
+                                    oninput="handleTransitionChange(${sceneIndex}, this.value)">${scene.transition || ""}</textarea>
+                            </div>
                         </div>
                     </div>
                 `;
