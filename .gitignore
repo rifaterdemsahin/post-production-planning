@@ -1,1 +1,5 @@
 .env
+
+# Google Credentials
+6_Symbols/client_secret.json
+6_Symbols/.env

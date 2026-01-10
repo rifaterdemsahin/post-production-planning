@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         body { background-color: #121212; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         .scene-card { background-color: #1e1e1e; border: 1px solid #333; transition: all 0.3s ease; }
@@ -17,6 +18,19 @@
         
         /* Prompts Tab Styling */
         /* Removed @apply rules to avoid lint errors and runtime issues with CDN */
+
+        /* Markdown Content Styling within Modal */
+        #formula-content h1 { font-size: 1.5rem; font-weight: bold; color: #fff; margin-bottom: 1rem; border-bottom: 1px solid #444; padding-bottom: 0.5rem; }
+        #formula-content h2 { font-size: 1.25rem; font-weight: bold; color: #e0e0e0; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        #formula-content h3 { font-size: 1.1rem; font-weight: bold; color: #d0d0d0; margin-top: 1rem; margin-bottom: 0.5rem; }
+        #formula-content p { margin-bottom: 1rem; line-height: 1.6; color: #ccc; }
+        #formula-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: #ccc; }
+        #formula-content ol { list-style-type: decimal; padding-left: 1.5rem; margin-bottom: 1rem; color: #ccc; }
+        #formula-content code { background-color: #333; padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; color: #f0f0f0; }
+        #formula-content pre { background-color: #222; padding: 1rem; border-radius: 8px; overflow-x: auto; margin-bottom: 1rem; border: 1px solid #444; }
+        #formula-content pre code { background-color: transparent; padding: 0; }
+        #formula-content a { color: #60a5fa; text-decoration: underline; }
+        #formula-content blockquote { border-left: 4px solid #555; padding-left: 1rem; font-style: italic; color: #888; margin-bottom: 1rem; }
         
         /* Scroll to Top */
         #scroll-top-btn {
@@ -165,6 +179,19 @@
                 </div>
             </div>
 
+        </div>
+
+        <!-- CENTER: Formulas Menu -->
+        <div class="relative group mx-auto">
+             <button onclick="toggleFormulasMenu()" id="formulas-menu-btn" class="text-purple-300 hover:text-white text-xs font-bold flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded border border-purple-900/50 transition">
+                <span>🧪 Formulas</span>
+                <span class="text-[10px]">▼</span>
+            </button>
+            <div id="formulas-menu" class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 w-64 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 origin-bottom z-50">
+                <div class="p-2 space-y-1 max-h-80 overflow-y-auto" id="formulas-list">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
         </div>
 
         <!-- RIGHT: Primary Actions -->
@@ -442,6 +469,21 @@
                 <button onclick="confirmGeneration()" id="confirm-gen-btn" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded text-sm font-bold transition flex items-center gap-2 shadow-lg shadow-blue-900/30">
                     <span>⚡ Confirm & Execute</span>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formula View Modal -->
+    <div id="formula-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-[95vw] h-[90vh] flex flex-col border border-gray-700 max-w-5xl">
+            <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-gray-800/50 rounded-t-lg">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2" id="formula-modal-title">📄 Formula</h3>
+                <button onclick="closeFormulaModal()" class="text-gray-400 hover:text-white transition">✕</button>
+            </div>
+            <div class="p-6 overflow-y-auto flex-1 bg-[#1a1a1a]">
+                <div id="formula-content" class="max-w-4xl mx-auto prose prose-invert prose-sm md:prose-base">
+                    <!-- Markdown content will be rendered here -->
+                </div>
             </div>
         </div>
     </div>
@@ -729,7 +771,19 @@
                     linksMenu.classList.remove('flex');
                 }
             }
+
+            // Close Formulas Menu
+            const formulasMenu = document.getElementById('formulas-menu');
+            const formulasBtn = document.getElementById('formulas-menu-btn');
+            if (formulasMenu && !formulasMenu.classList.contains('hidden')) {
+                if (!formulasMenu.contains(event.target) && !formulasBtn.contains(event.target)) {
+                    formulasMenu.classList.add('hidden');
+                    formulasMenu.classList.remove('flex');
+                }
+            }
         });
+
+
 
         // ==========================================
         // TIMELINE HELPERS
@@ -1495,6 +1549,7 @@
         // Initialize state
         document.addEventListener('DOMContentLoaded', () => {
              // No initialization needed for fixed player
+             initFormulas();
         });
 
 
@@ -2162,9 +2217,48 @@
                 tokenClient.requestAccessToken({ prompt: '' }); 
             });
         }
+        
+        // Helper to find or create a folder
+        async function findOrCreateFolder(name, parentId, accessToken) {
+            const query = `mimeType='application/vnd.google-apps.folder' and name='${name.replace(/'/g, "\\'")}' and '${parentId}' in parents and trashed=false`;
+            const url = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(query)}&fields=files(id,name)`;
+            
+            const res = await fetch(url, {
+                headers: { 'Authorization': 'Bearer ' + accessToken }
+            });
+            const data = await res.json();
+            
+            if (data.files && data.files.length > 0) {
+                return data.files[0].id;
+            } else {
+                // Create it
+                const metadata = {
+                    name: name,
+                    mimeType: 'application/vnd.google-apps.folder',
+                    parents: [parentId]
+                };
+                
+                 const createRes = await fetch('https://www.googleapis.com/drive/v3/files', {
+                    method: 'POST',
+                    headers: { 
+                        'Authorization': 'Bearer ' + accessToken,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(metadata)
+                });
+                const createData = await createRes.json();
+                return createData.id;
+            }
+        }
 
         function uploadArtifactFromDOM(btn, filename) {
              const container = btn.parentElement;
+             // Find uniqueId context (parent with id result-container-...)
+             const resultContainer = btn.closest('[id^="result-container-"]');
+             let uniqueId = null;
+             if (resultContainer) {
+                 uniqueId = resultContainer.id.replace('result-container-', '');
+             }
              
              // Try to find source from various elements
              let src = null;
@@ -2179,14 +2273,14 @@
              else if (audio) src = audio.src;
 
              if (src) {
-                 handleDriveUpload(src, filename, btn);
+                 handleDriveUpload(src, filename, btn, uniqueId);
              } else {
                  console.error("Could not find artifact source");
                  alert("Error: Could not find artifact source.");
              }
         }
 
-        async function handleDriveUpload(src, filename, btn) {
+        async function handleDriveUpload(src, filename, btn, uniqueId) {
             const originalText = btn.innerText;
             btn.innerText = "⏳ Uploading...";
             btn.disabled = true;
@@ -2194,12 +2288,57 @@
             try {
                 const token = await getAccessToken();
                 const config = getDriveConfig();
+                let uploadFolderId = config.folderId; // Default to root
+                
+                // Dynamic Folder Structure
+                if (uniqueId) {
+                    btn.innerText = "📂 Organizing...";
+                    
+                    // Parse ID
+                    const parts = uniqueId.match(/s(\d+)_l(\d+)/);
+                    if (parts) {
+                        const sceneIndex = parseInt(parts[1]);
+                        const lineIndex = parseInt(parts[2]);
+                        
+                        // 1. Project Folder
+                        const projectTitle = (window.projectTitle || "Project").replace(/[^a-zA-Z0-9 ]/g, '_');
+                        const projFolderId = await findOrCreateFolder(projectTitle, config.folderId, token);
+                        
+                        // 2. Scene Folder
+                        const scene = scenes[sceneIndex];
+                        const safeSceneTitle = scene.title.replace(/[^a-zA-Z0-9 ]/g, '_');
+                        const sceneFolderName = `Scene ${scene.id} ${safeSceneTitle}`;
+                        const sceneFolderId = await findOrCreateFolder(sceneFolderName, projFolderId, token);
+                        
+                        uploadFolderId = sceneFolderId;
+                        
+                        // Simplify Filename for inside the folder
+                        // Current filename: Project_Scene_Line1_Type_Date
+                        // Desired: Line1_Type_Date
+                        const lineId = scene.lines[lineIndex].id;
+                        // Determine type from filename matching
+                        let type = "Artifact";
+                        if(filename.includes("Image")) type = "Image";
+                        else if(filename.includes("Video")) type = "Video";
+                        else if(filename.includes("Audio")) type = "Audio";
+                        
+                        const now = new Date();
+                        const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}`;
+                        
+                        filename = `Line${lineId}_${type}_${dateStr}`;
+                        if (src.startsWith('data:image')) filename += '.png';
+                        else if (src.startsWith('data:audio')) filename += '.mp3';
+                        else if (filename.includes('mp4') || src.includes('mp4')) filename = filename.replace('.mp4','') + '.mp4'; // Ensure ext
+                    }
+                }
+                
+                btn.innerText = "⬆️ Sending...";
                 
                 // Fetch blob data
                 const response = await fetch(src);
                 const blob = await response.blob();
                 
-                await performDriveUpload(blob, filename, config.folderId, token);
+                await performDriveUpload(blob, filename, uploadFolderId, token);
                 
                 btn.innerText = "✅ Uploaded!";
                 btn.classList.remove('text-indigo-400');
@@ -2673,8 +2812,90 @@
             bulkLogContainer.scrollTop = bulkLogContainer.scrollHeight;
         }
 
+        // ==========================================
+        // 1.5 FORMULAS LOGIC
+        // ==========================================
+        const formulas = [
+            { title: "Scenes Formula", path: "../5_Formula/scenes_formula.md" },
+            { title: "YAML HTML Logic", path: "../4_Formula/yaml_html_logic.md" },
+            { title: "YAML Hosting Workflow", path: "../4_Formula/yaml_hosting_workflow.md" },
+            { title: "Google OAuth Setup", path: "../4_Formula/google_oauth_setup.md" },
+            { title: "Sanity Check", path: "../5_Formula/sanity_check_post_prod_plan.md" },
+            { title: "Feedback Bias", path: "../5_Formula/feedback-bias-overestimate-ability.md" },
+            { title: "Dunning-Kruger Mitigation", path: "../5_Formula/mitigation-dunningkruger.md" },
+            { title: "Valley of Despair", path: "../5_Formula/valley-of-despair.md" },
+            { title: "References", path: "../5_Formula/references.md" }
+        ];
+
+        function initFormulas() {
+            const list = document.getElementById('formulas-list');
+            if(!list) return;
+            
+            formulas.forEach(f => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left text-xs text-purple-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50 truncate transition border-b border-purple-900/20";
+                btn.innerHTML = `<span class="opacity-70">📄</span> <span>${f.title}</span>`;
+                btn.onclick = () => openFormulaModal(f.path, f.title);
+                list.appendChild(btn);
+            });
+        }
+
+        async function openFormulaModal(path, title) {
+            const modal = document.getElementById('formula-modal');
+            const titleEl = document.getElementById('formula-modal-title');
+            const contentEl = document.getElementById('formula-content');
+            
+            titleEl.innerText = `📄 ${title}`;
+            // Reset content
+            contentEl.innerHTML = '<div class="flex items-center justify-center p-8"><div class="loader" style="display:block"></div></div>';
+            modal.classList.remove('hidden');
+            
+            try {
+                const response = await fetch(path);
+                if (!response.ok) throw new Error(`HTTP ${response.status} - Not Found`);
+                const text = await response.text();
+                // Render MD
+                contentEl.innerHTML = marked.parse(text);
+            } catch (error) {
+                console.error("Formula load error:", error);
+                contentEl.innerHTML = `
+                    <div class="bg-red-900/30 border border-red-800 rounded p-4 text-center">
+                        <h4 class="text-red-400 font-bold mb-2">Failed to load formula</h4>
+                        <p class="text-xs text-red-300 mb-2">${error.message}</p>
+                        <p class="text-[10px] text-gray-500">Ensure this file is served via HTTP/HTTPS or allow local file access.</p>
+                        <div class="mt-4 text-[10px] font-mono bg-black/50 p-2 rounded text-left overflow-auto">
+                            Path: ${path}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function closeFormulaModal() {
+             document.getElementById('formula-modal').classList.add('hidden');
+        }
+
+        function toggleFormulasMenu() {
+            const menu = document.getElementById('formulas-menu');
+            const otherMenus = ['actions-menu', 'links-menu'];
+            
+            otherMenus.forEach(id => {
+                const m = document.getElementById(id);
+                if(m) {
+                    m.classList.add('hidden');
+                    m.classList.remove('flex');
+                }
+            });
+
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
         // Initialize App
-        window.addEventListener('DOMContentLoaded', initApp);
+        window.addEventListener('DOMContentLoaded', () => {
+            initApp();
+            initFormulas();
+        });
     </script>
 </body>
 </html>
