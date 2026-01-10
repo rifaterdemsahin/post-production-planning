@@ -1047,7 +1047,7 @@ scenes:
     lines:
       - id: '1'
         time: '0:00'
-        script: And you might be thinking, does it work? Well, the proof is in the pudding.
+        script: And you might be thinking, does it work? Well, the proof is inmy github.
         prompts:
           image: A chef presenting a perfect futuristic looking dessert that glows
           graphic: Checkmark appearing
