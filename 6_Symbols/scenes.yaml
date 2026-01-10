@@ -637,7 +637,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: We're talking your team's security, your company's culture, your CI CD pipelines...
+        script: We're talking your ability to delivery using ai agents, not just talking to your team mates and expecting them to code and test for you.
         prompts:
           image: 'Triptych layout: A padlock (Security), a team high-fiving (Culture), and an infinite loop symbol (CI/CD)'
           graphic: Labels appearing under each image
