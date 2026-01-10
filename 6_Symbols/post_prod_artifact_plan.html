@@ -2827,14 +2827,31 @@
             { title: "References", path: "../5_Formula/references.md" }
         ];
 
+        function getFormulaEmoji(title) {
+            const lower = title.toLowerCase();
+            if (lower.includes('scene')) return '🎬';
+            if (lower.includes('yaml')) return '⚙️';
+            if (lower.includes('oauth') || lower.includes('setup')) return '🔐';
+            if (lower.includes('sanity')) return '✅';
+            if (lower.includes('bias') || lower.includes('despair') || lower.includes('dunning')) return '🧠';
+            if (lower.includes('reference')) return '📚';
+            return '📄';
+        }
+
         function initFormulas() {
             const list = document.getElementById('formulas-list');
             if(!list) return;
             
+            // Sort A-Z
+            formulas.sort((a, b) => a.title.localeCompare(b.title));
+
+            list.innerHTML = ''; // Clear existing
+            
             formulas.forEach(f => {
                 const btn = document.createElement('button');
                 btn.className = "w-full text-left text-xs text-purple-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50 truncate transition border-b border-purple-900/20";
-                btn.innerHTML = `<span class="opacity-70">📄</span> <span>${f.title}</span>`;
+                const emoji = getFormulaEmoji(f.title);
+                btn.innerHTML = `<span class="opacity-70">${emoji}</span> <span>${f.title}</span>`;
                 btn.onclick = () => openFormulaModal(f.path, f.title);
                 list.appendChild(btn);
             });
@@ -2845,7 +2862,17 @@
             const titleEl = document.getElementById('formula-modal-title');
             const contentEl = document.getElementById('formula-content');
             
-            titleEl.innerText = `📄 ${title}`;
+            // Add Copy Path Button to Title Area
+            // We'll replace the title content with title + button
+            titleEl.innerHTML = `
+                <span class="flex items-center gap-2">
+                    ${getFormulaEmoji(title)} ${title}
+                </span>
+                <button onclick="copyFormulaPath('${path}', this)" class="ml-4 text-[10px] bg-gray-700 hover:bg-gray-600 text-gray-300 px-2 py-1 rounded border border-gray-600 flex items-center gap-1 transition">
+                    📋 Copy Path
+                </button>
+            `;
+            
             // Reset content
             contentEl.innerHTML = '<div class="flex items-center justify-center p-8"><div class="loader" style="display:block"></div></div>';
             modal.classList.remove('hidden');
@@ -2856,6 +2883,10 @@
                 const text = await response.text();
                 // Render MD
                 contentEl.innerHTML = marked.parse(text);
+                
+                // Add scroll to top of content
+                contentEl.parentElement.scrollTop = 0;
+
             } catch (error) {
                 console.error("Formula load error:", error);
                 contentEl.innerHTML = `
@@ -2869,6 +2900,22 @@
                     </div>
                 `;
             }
+        }
+
+        function copyFormulaPath(path, btn) {
+            navigator.clipboard.writeText(path).then(() => {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = "✅ Copied!";
+                btn.classList.add('text-green-400', 'border-green-500');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.classList.remove('text-green-400', 'border-green-500');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy path:', err);
+                btn.innerHTML = "❌ Error";
+            });
         }
 
         function closeFormulaModal() {
