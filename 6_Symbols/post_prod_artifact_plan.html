@@ -751,9 +751,31 @@
                      const date = new Date(lastUpdated);
                      const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                      dateEl.innerText = `📅 ${formattedDate}`;
+                     
+                     // Calculate relative time for tooltip
+                     const now = new Date();
+                     const diffMs = now - date;
+                     const diffMins = Math.round(diffMs / 60000);
+                     const diffHours = Math.round(diffMs / 3600000);
+                     const diffDays = Math.round(diffMs / 86400000);
+
+                     let relativeTimeStr = "";
+                     if (diffMins < 1) {
+                        relativeTimeStr = "Updated just now";
+                     } else if (diffMins < 60) {
+                        relativeTimeStr = `Updated ${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`;
+                     } else if (diffHours < 24) {
+                        relativeTimeStr = `Updated ${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`;
+                     } else {
+                         relativeTimeStr = `Updated ${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
+                     }
+                     
+                     dateEl.title = relativeTimeStr;
+
                  } catch(e) {
                      console.error("Date format error", e);
                      dateEl.innerText = `📅 ${lastUpdated}`;
+                     dateEl.title = "Date format error";
                  }
              }
 
