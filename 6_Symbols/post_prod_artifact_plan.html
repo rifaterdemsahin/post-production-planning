@@ -96,6 +96,9 @@
 
             <!-- Right: API Key -->
             <div class="flex gap-3 items-center justify-end w-1/4">
+                 <!-- YAML Update Date Display -->
+                 <span id="yaml-update-date" class="hidden lg:block text-[10px] font-mono text-gray-400 mr-2" title="YAML Last Updated"></span>
+
                  <span id="header-notification" class="hidden lg:block text-[10px] font-mono text-blue-300 bg-blue-900/30 px-2 py-0.5 rounded opacity-0 transition-opacity duration-300"></span>
                  
                  <div class="relative flex items-center">
@@ -234,6 +237,16 @@
                     <span>🧪 Formula</span> <span class="text-[8px]">▼</span>
                 </button>
                 <div id="menu-list-formulas" class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 bg-gray-800 rounded-lg shadow-xl border border-gray-600 hidden flex-col overflow-hidden transition-all duration-200 z-[100]">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- SYMBOLS -->
+            <div class="relative group">
+                <button onclick="toggleDocMenu('symbols')" id="menu-btn-symbols" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded border border-gray-600/50 transition whitespace-nowrap shadow-sm">
+                    <span>🔣 Symbols</span> <span class="text-[8px]">▼</span>
+                </button>
+                <div id="menu-list-symbols" class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 bg-gray-800 rounded-lg shadow-xl border border-gray-600 hidden flex-col overflow-hidden transition-all duration-200 z-[100]">
                     <!-- Populated by JS -->
                 </div>
             </div>
@@ -731,6 +744,19 @@
              projectVersion = data.version || 1;
              lastUpdated = data.last_updated || new Date().toISOString();
 
+             // Update YAML Date Display
+             const dateEl = document.getElementById('yaml-update-date');
+             if (dateEl) {
+                 try {
+                     const date = new Date(lastUpdated);
+                     const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                     dateEl.innerText = `📅 ${formattedDate}`;
+                 } catch(e) {
+                     console.error("Date format error", e);
+                     dateEl.innerText = `📅 ${lastUpdated}`;
+                 }
+             }
+
              // Check URL for initial scene
              const urlParams = new URLSearchParams(window.location.search);
              const sceneParam = urlParams.get('scene');
@@ -863,12 +889,17 @@
 
         function toggleActionsMenu() {
             const menu = document.getElementById('actions-menu');
-            const otherMenu = document.getElementById('links-menu');
+            const linksMenu = document.getElementById('links-menu');
+            const symbolsMenu = document.getElementById('symbols-menu');
             
-            // Close other menu
-            if (otherMenu) {
-                otherMenu.classList.add('hidden');
-                otherMenu.classList.remove('flex');
+            // Close other menus
+            if (linksMenu) {
+                linksMenu.classList.add('hidden');
+                linksMenu.classList.remove('flex');
+            }
+            if (symbolsMenu) {
+                symbolsMenu.classList.add('hidden');
+                symbolsMenu.classList.remove('flex');
             }
 
             // Toggle this menu
@@ -878,18 +909,25 @@
 
         function toggleLinksMenu() {
             const menu = document.getElementById('links-menu');
-            const otherMenu = document.getElementById('actions-menu');
+            const actionsMenu = document.getElementById('actions-menu');
+            const symbolsMenu = document.getElementById('symbols-menu');
             
-            // Close other menu
-            if (otherMenu) {
-                otherMenu.classList.add('hidden');
-                otherMenu.classList.remove('flex');
+            // Close other menus
+            if (actionsMenu) {
+                actionsMenu.classList.add('hidden');
+                actionsMenu.classList.remove('flex');
+            }
+            if (symbolsMenu) {
+                symbolsMenu.classList.add('hidden');
+                symbolsMenu.classList.remove('flex');
             }
 
             // Toggle this menu
             menu.classList.toggle('hidden');
             menu.classList.toggle('flex');
         }
+
+
 
         // Close menus when clicking outside
         document.addEventListener('click', function(event) {
@@ -898,6 +936,8 @@
             
             const linksMenu = document.getElementById('links-menu');
             const linksBtn = document.getElementById('links-menu-btn');
+
+
 
             // Close Actions Menu
             if (actionsMenu && !actionsMenu.classList.contains('hidden')) {
@@ -916,7 +956,7 @@
             }
 
             // Close Doc Menus
-            const docKeys = ['real', 'environment', 'ui', 'formulas', 'semblance', 'test'];
+            const docKeys = ['real', 'environment', 'ui', 'formulas', 'symbols', 'semblance', 'test'];
             docKeys.forEach(key => {
                 const m = document.getElementById(`menu-list-${key}`);
                 const b = document.getElementById(`menu-btn-${key}`);
@@ -3245,6 +3285,15 @@
                 { title: "Project Health Report", path: "../5_Formula/project_health_check.md" },
                 { title: "References", path: "../5_Formula/references.md" },
                 { title: "Read Me (Formulas)", path: "../5_Formula/README.md" }
+            ],
+            symbols: [
+                { title: "Producer Flow", path: "../6_Symbols/producer_flow.html" },
+                { title: "Editor Flow", path: "../6_Symbols/editor_flow.html" },
+                { title: "Artifact Plan", path: "../6_Symbols/post_prod_artifact_plan.html" },
+                { title: "Scenes YAML", path: "../6_Symbols/scenes.yaml" },
+                { title: "Template YAML", path: "../6_Symbols/template.yaml" },
+                { title: "Styles CSS", path: "../6_Symbols/styles.css" },
+                { title: "Read Me", path: "../6_Symbols/README.md" }
             ],
             semblance: [
                 { title: "Read Me", path: "../7_Semblance/README.md" },
