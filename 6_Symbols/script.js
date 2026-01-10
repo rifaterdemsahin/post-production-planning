@@ -673,7 +673,7 @@
                                     <div id="script-container-${uniqueId}">
                                         <!-- Display Mode -->
                                         <div id="script-display-${uniqueId}" class="group/script relative pl-2 border-l-2 border-gray-700 hover:border-blue-500 transition-colors">
-                                            <p class="text-sm italic text-gray-300 line-clamp-2 hover:text-white transition-colors cursor-pointer" onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})">"${line.script}"</p>
+                                            <p class="text-sm italic text-gray-300 whitespace-normal break-words hover:text-white transition-colors cursor-pointer" onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})">"${line.script}"</p>
                                             <button onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="absolute top-0 right-0 opacity-0 group-hover/script:opacity-100 text-gray-500 hover:text-white transition-opacity p-1" title="Edit Voiceover">
                                                 ✏️
                                             </button>
