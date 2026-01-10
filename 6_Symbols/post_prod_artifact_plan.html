@@ -3146,6 +3146,7 @@
                 { title: "Scenes Formula", path: "../5_Formula/scenes_formula.md" },
                 { title: "YAML HTML Logic", path: "../4_Formula/yaml_html_logic.md" },
                 { title: "YAML Hosting Workflow", path: "../4_Formula/yaml_hosting_workflow.md" },
+                { title: "Turn Off Deployments", path: "../5_Formula/turn_off_deployments.md" },
                 { title: "Google OAuth Setup", path: "../4_Formula/google_oauth_setup.md" },
                 { title: "Sanity Check", path: "../5_Formula/sanity_check_post_prod_plan.md" },
                 { title: "Feedback Bias", path: "../5_Formula/feedback-bias-overestimate-ability.md" },
@@ -3179,6 +3180,7 @@
             if (lower.includes('sanity')) return '✅';
             if (lower.includes('bias') || lower.includes('despair') || lower.includes('dunning')) return '🧠';
             if (lower.includes('reference')) return '📚';
+            if (lower.includes('deploy')) return '🛑';
             
             return '📄';
         }
