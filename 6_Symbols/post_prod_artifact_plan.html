@@ -381,7 +381,12 @@
                     </div>
                     <!-- Transition Context -->
                     <div class="bg-gray-800 p-3 rounded border border-gray-700">
-                        <label class="block text-xs font-bold text-orange-400 mb-1">➡️ Transition</label>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-xs font-bold text-orange-400">➡️ Transition</label>
+                            <button onclick="clearTransitionPreview()" class="text-[10px] text-gray-500 hover:text-red-400 transition" title="Clear Transition">
+                                🗑️
+                            </button>
+                        </div>
                         <textarea id="preview-transition-context" class="w-full h-24 bg-black/30 text-gray-400 text-xs p-2 rounded border border-gray-700 resize-none focus:outline-none"></textarea>
                     </div>
                 </div>
@@ -1980,6 +1985,20 @@
             const originalText = btn.innerHTML;
             btn.innerHTML = "✅ Copied";
             setTimeout(() => btn.innerHTML = originalText, 2000);
+        }
+
+        function clearTransitionPreview() {
+            if(confirm("Clear the transition context?")) {
+                // 1. Clear text box
+                const transInput = document.getElementById('preview-transition-context');
+                transInput.value = "";
+                
+                // 2. Remove from Final Prompt
+                const finalInput = document.getElementById('preview-final-prompt');
+                // Regex to match [TRANSITION TO NEXT SCENE: ...] including newlines
+                const regex = /\[TRANSITION TO NEXT SCENE: [\s\S]*?\]\n?/g;
+                finalInput.value = finalInput.value.replace(regex, "");
+            }
         }
 
         // 5. HELPER FUNCTIONS
