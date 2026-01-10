@@ -1007,7 +1007,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: But in the age of AI, that's just too rigid, too fragile.
+        script: But in the age of AI, that's just too rigid, too fragile.We need something that is antifragile. gets stronger with iteration.
         prompts:
           image: The marble column vibrating and then shattering into pieces under pressure
           graphic: Cracks appearing on the I
