@@ -573,6 +573,14 @@
             container.innerHTML = html;
         }
 
+        function hideLine(sceneIndex, lineIndex) {
+            const uniqueId = `s${sceneIndex}_l${lineIndex}`;
+            const el = document.getElementById(`line-card-${uniqueId}`);
+            if (el) {
+                el.style.display = 'none';
+            }
+        }
+
         function renderScenes() {
             const app = document.getElementById('app');
             app.innerHTML = ''; // Clear loading state if any
@@ -676,7 +684,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 gap-4">
                 `;
 
             scene.lines.forEach((line, lineIndex) => {
@@ -695,6 +703,11 @@
                     <div id="line-card-${uniqueId}" 
                          class="line-item-card rounded border relative group hover:border-gray-600 transition-colors ${activeWrapperClass}"
                          onclick="selectLine(${sceneIndex}, ${lineIndex})">
+                        <button onclick="hideLine(${sceneIndex}, ${lineIndex}); event.stopPropagation();" 
+                            class="absolute top-1 right-1 text-gray-600 hover:text-red-500 z-20 p-1 rounded-full hover:bg-gray-800 transition-colors opacity-0 group-hover:opacity-100" 
+                            title="Hide Line">
+                            ✕
+                        </button>
                     <div class="flex justify-between items-start cursor-pointer p-2" onclick="event.stopPropagation(); toggleSection('line-tools-${uniqueId}', 'line-arrow-${uniqueId}'); selectLine(${sceneIndex}, ${lineIndex})">
                             <div class="flex gap-3 flex-1">
                                 <span id="line-arrow-${uniqueId}" class="text-gray-500 transform transition-transform text-[10px] mt-1">▶</span>
