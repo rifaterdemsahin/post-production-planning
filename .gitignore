@@ -3,3 +3,12 @@
 # Google Credentials
 6_Symbols/client_secret.json
 6_Symbols/.env
+
+# Screenshots and temporary files
+.screenshots/
+*.png
+*.jpg
+*.jpeg
+!assets/**/*.png
+!assets/**/*.jpg
+!assets/**/*.jpeg

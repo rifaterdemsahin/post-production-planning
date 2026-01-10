@@ -100,6 +100,28 @@
                 renderScenes();
             });
 
+            // Keyboard shortcuts for better UX
+            document.addEventListener('keydown', (e) => {
+                // Ctrl+S or Cmd+S to save
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    if (typeof saveChanges === 'function') {
+                        saveChanges();
+                    }
+                }
+                
+                // Arrow keys for navigation (only when not in input/textarea)
+                if (!['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+                    if (e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        prevScene();
+                    } else if (e.key === 'ArrowRight') {
+                        e.preventDefault();
+                        nextScene();
+                    }
+                }
+            });
+
             try {
                 // Fetch the YAML file (Default load)
                 await loadYAMLFromURL('scenes.yaml');
