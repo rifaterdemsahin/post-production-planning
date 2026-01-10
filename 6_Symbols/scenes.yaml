@@ -30,8 +30,9 @@ scenes:
           motion_graphics: false
           sound_effect: true
         uploaded_assets: {}
-      - id: "2"
-        time: "0:04"
+        uploaded_assets: {}
+      - id: '2'
+        time: '0:04'
         script: ...for, well, surviving and thriving in this new age of AI. If you're in the tech world...
         prompts:
           image: A chaotic but artistic collage of glowing holographic news headlines about Artificial Intelligence and Tech market shifts, cyberpunk aesthetic, motion blur, floating in dark void
