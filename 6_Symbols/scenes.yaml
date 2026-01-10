@@ -30,6 +30,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: true
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: ...for, well, surviving and thriving in this new age of AI. If you're in the tech world...
@@ -47,6 +48,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: ...you can feel it, right? Things are changing so fast it can make your head spin.
@@ -64,6 +66,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: The old rules? They just don't seem to apply anymore.
@@ -81,6 +84,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 02
     title: Avalanche
     color: border-l-4 border-green-500
@@ -104,6 +108,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: So, the big question is, how do you build a career that's actually ready for what's coming?
@@ -121,6 +126,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: Let's get into it. The material we're looking at kicks off with this line...
@@ -138,6 +144,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: ...and honestly, it's a fantastic and maybe a little terrifying way to put it. An AI avalanche. The things you can do with AI possibilities and delivery skills you got.
@@ -155,6 +162,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 03
     title: Reshaping
     color: border-l-4 border-orange-500
@@ -178,6 +186,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: It's a massive, overwhelming force that is completely reshaping the ground beneath our feet.
@@ -195,6 +204,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: And if your only piece of gear is a traditional resume...
@@ -212,6 +222,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: ...you're probably going to get buried.
@@ -229,6 +240,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 04
     title: Complex
     color: border-l-4 border-red-500
@@ -252,6 +264,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: The skills that were super valuable just a few years ago, now they're kind of the bare minimum.
@@ -269,6 +282,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: Companies are up against these new, incredibly complex problems...
@@ -286,6 +300,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: ...that need a totally different way of thinking. And you guessed it, a new kind of professional.
@@ -303,6 +318,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 05
     title: The Wizard
     color: border-l-4 border-purple-500
@@ -326,6 +342,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: On one side, you have the old world professional. You know the type. Their skill is super specific.coder/tester/devops..etc
@@ -343,6 +360,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: But on the other side, you have the new world wizard. This is a whole different beast.
@@ -360,6 +378,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: This isn't about one language or one framework. It's about being a creative problem solver.
@@ -377,6 +396,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 06
     title: Hunting
     color: border-l-4 border-indigo-500
@@ -400,6 +420,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: So if you're staring down an avalanche, standing still is absolutely not an option.
@@ -417,6 +438,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: You don't need a better raincoat. You need a vehicle which needs a delivery pilot.
@@ -434,6 +456,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: A really rugged all-terrain machine that's designed from the ground up to handle this chaos.
@@ -451,6 +474,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 07
     title: Protocol
     color: border-l-4 border-cyan-500
@@ -474,6 +498,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: It stands for Assess, Simulate, Certify. It's a system, an engineering mindset.
@@ -491,6 +516,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: The goal isn't just to learn a new skill here and there. Nope.
@@ -508,6 +534,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: It's designed to fundamentally transform you into one of those modern builders.
@@ -525,6 +552,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 08
     title: Process
     color: border-l-4 border-teal-500
@@ -548,6 +576,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: We're going to break it down piece by piece. The whole thing is built on a simple three-step process.
@@ -565,6 +594,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: First you run diagnostics. That's assess. Then you build the system collabratively which is simulate.
@@ -582,6 +612,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: And finally, you put it all together and hit the road and certify the pilots for their delivery.
@@ -599,6 +630,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 09
     title: Assess
     color: border-l-4 border-lime-500
@@ -622,6 +654,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: This isn't about guesswork. It's about running a full comprehensive scan on everything.
@@ -639,6 +672,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: We're talking your ability to delivery using ai agents, not just talking to your team mates and expecting them to code and test for you.
@@ -656,6 +690,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: The goal is to have the skills assessment for end to end delivery where you fix anything that comes along your way.
@@ -673,6 +708,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 10
     title: Train
     color: border-l-4 border-emerald-500
@@ -696,6 +732,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: This is not your typical corporate training day with bad coffee and PowerPoints.
@@ -713,6 +750,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: Sticking with that vehicle metaphor, you build this at real time while checking other team members doing something similar.
@@ -730,6 +768,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: ...you define what your objective is and the environment the imaginary world that you are going to create while iterating on it.
@@ -747,6 +786,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 11
     title: Workshop
     color: border-l-4 border-amber-500
@@ -770,6 +810,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: Because let's be honest, theory is totally useless if you can't apply it.
@@ -787,6 +828,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: All the diagnostics, all the setups and tools, they are designed for this one moment.
@@ -804,6 +846,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: The moment where you put your hands on the keyboard and actually build and ship real stuff.
@@ -821,6 +864,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 12
     title: Workforce
     color: border-l-4 border-yellow-500
@@ -844,6 +888,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: It creates what the source calls the all-terrain workforce which you learn to with a copilot.
@@ -861,6 +906,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: A brand new breed of builder who's ready for pretty much anything.
@@ -878,6 +924,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: And the ideal professional for this new world is called the X-shaped professional.
@@ -895,6 +942,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 13
     title: X-Factor
     color: border-l-4 border-rose-500
@@ -918,6 +966,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: ...but their real superpower is at the intersection, their ability to connect the dots.
@@ -935,6 +984,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: They can bridge the gap between delivering bespoke application using vibe programming.
@@ -952,6 +1002,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: They see the entire system, not just their one little piece of it. And not living in a silo but connected to the real world at all times.
@@ -969,6 +1020,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 14
     title: Rigid
     color: border-l-4 border-pink-500
@@ -992,6 +1044,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: People with deep knowledge in one narrow field. They were one-trick ponies with diplomas.
@@ -1009,6 +1062,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: But in the age of AI, that's just too rigid, too fragile.We need something that is antifragile. gets stronger with iteration.
@@ -1026,6 +1080,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: The X-shaped professional is adaptable. Creating solutions an I-shaped expert would never think of.
@@ -1043,6 +1098,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 15
     title: Proof
     color: border-l-4 border-fuchsia-500
@@ -1066,6 +1122,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: Over 200 repositories have been shipped using this exact protocol.
@@ -1083,6 +1140,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: Even this video got generated using agent. Delivery Pilots are real and the ASC isn't just a slide deck of ideas.
@@ -1100,6 +1158,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: It is a repeatable process that cranks out real results for delivery pilots.
@@ -1117,6 +1176,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
   - id: SCENE 16
     title: Action
     color: border-l-4 border-violet-500
@@ -1140,6 +1200,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "2"
         time: "0:04"
         script: Take it, fork it, break it, build your own version.
@@ -1157,6 +1218,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "3"
         time: "0:08"
         script: Because the worst thing you can do when you see an avalanche is stand still.
@@ -1174,6 +1236,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
       - id: "4"
         time: "0:12"
         script: If interested on getting certified as an enterprise feel free to contact and start your ai transformation.
@@ -1191,3 +1254,4 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+        uploaded_assets: {}
