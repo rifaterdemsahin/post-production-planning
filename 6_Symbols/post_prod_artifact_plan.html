@@ -45,14 +45,20 @@
     <!-- Sticky Header (Merged & Compact) -->
     <div class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur shadow-lg mb-2 border-b border-gray-800">
         <div class="flex justify-between items-center px-4 py-2 w-full max-w-7xl mx-auto">
-            <!-- Left: Title -->
-            <div class="flex items-center gap-4 w-1/4">
-                <h1 class="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400 hidden md:block whitespace-nowrap">
-                    🍌 Gemini Scene Creator
-                </h1>
-                <h1 class="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400 md:hidden">
-                    🍌
-                </h1>
+            <!-- Left: Navigation (Replaces Title) -->
+            <div class="flex items-center gap-3 w-1/4">
+                <span class="text-lg">🍌</span>
+                <div class="flex items-center gap-1 bg-gray-800 rounded p-1 border border-gray-700">
+                    <button id="nav-btn-prev" onclick="prevScene()" disabled class="text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition px-1">
+                        ⬅️
+                    </button>
+                    <span id="nav-scene-indicator" class="text-[10px] font-bold text-gray-300 w-16 text-center font-mono">
+                        -- / --
+                    </span>
+                    <button id="nav-btn-next" onclick="nextScene()" disabled class="text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition px-1">
+                        ➡️
+                    </button>
+                </div>
             </div>
 
              <!-- Center: Audio Control (Wider) -->
@@ -687,27 +693,17 @@
             const app = document.getElementById('app');
             app.innerHTML = ''; // Clear loading state if any
 
-            if (scenes.length === 0) return;
+            if (scenes.length === 0) {
+                 document.getElementById('nav-scene-indicator').innerText = "-- / --";
+                 document.getElementById('nav-btn-prev').disabled = true;
+                 document.getElementById('nav-btn-next').disabled = true;
+                 return;
+            }
 
-             // Navigation Controls (Moved to Top)
-            const navigationHtml = `
-                <div class="flex justify-between items-center mb-2 bg-gray-900 p-2 rounded border border-gray-700">
-                    <button onclick="prevScene()" ${currentSceneIndex === 0 ? 'disabled' : ''} 
-                        class="px-3 py-1 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-white text-xs font-bold transition flex items-center gap-2">
-                        ⬅️ Prev
-                    </button>
-                    <span class="text-sm font-bold text-gray-300">
-                        Scene ${currentSceneIndex + 1} / ${scenes.length}
-                    </span>
-                    <button onclick="nextScene()" ${currentSceneIndex === scenes.length - 1 ? 'disabled' : ''} 
-                        class="px-3 py-1 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-white text-xs font-bold transition flex items-center gap-2">
-                        Next ➡️
-                    </button>
-                </div>
-            `;
-            const navDiv = document.createElement('div');
-            navDiv.innerHTML = navigationHtml;
-            app.appendChild(navDiv);
+            // Update Sticky Header Navigation
+            document.getElementById('nav-scene-indicator').innerText = `Scene ${currentSceneIndex + 1} / ${scenes.length}`;
+            document.getElementById('nav-btn-prev').disabled = (currentSceneIndex === 0);
+            document.getElementById('nav-btn-next').disabled = (currentSceneIndex === scenes.length - 1);
 
             // Render Main Context Input (Collapsible) - MOVED DOWN
             // This is now appended later
