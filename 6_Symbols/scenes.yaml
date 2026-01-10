@@ -990,7 +990,7 @@ scenes:
           sound_effect: false
       - id: '2'
         time: '0:04'
-        script: People with deep knowledge in one narrow field. They were one-trick ponies.
+        script: People with deep knowledge in one narrow field. They were one-trick ponies with diplomas.
         prompts:
           image: A carousel pony going up and down in the same spot, looking sad
           graphic: Arrow pointing up and down only
