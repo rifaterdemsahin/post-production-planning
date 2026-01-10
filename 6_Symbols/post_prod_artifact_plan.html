@@ -148,6 +148,7 @@
                 </button>
                 <div id="links-menu" class="absolute bottom-full left-0 mb-3 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 origin-bottom-left z-50">
                     <div class="p-2 space-y-1">
+                        <a href="https://drive.google.com/drive/folders/1E_ctpNSyieC_fr2xowbg_RfXZDVWbgzJ?usp=sharing" target="_blank" class="block w-full text-left text-xs text-green-400 hover:bg-gray-700 hover:text-green-300 px-2 py-1 rounded relative z-50 font-bold">📂 Google Drive ↗</a>
                         <a href="https://github.com/rifaterdemsahin/post-production-planning" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">GitHub ↗</a>
                         <a href="#" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Online Site ↗</a>
                         <a href="https://www.canva.com/" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Canva Artifacts Plan ↗</a>
@@ -1467,6 +1468,9 @@
 
         // 4b. Multimodal (Image) Generation
         async function generateMultimodalContent(id, prompt, action = 'generate') {
+            const parts = id.split('_'); 
+            const sceneIndex = parseInt(parts[0].substring(1));
+            const lineIndex = parseInt(parts[1].substring(1));
             const apiKey = document.getElementById('apiKey').value;
             if (!apiKey) {
                 alert("⚠️ Please paste your Google API Key at the top first.");
@@ -1529,7 +1533,9 @@
                                     </a>
                                 </div>`;
                             
-                            // Auto Download
+                            // Update YAML with video_name
+                            updateVideoName(sceneIndex, lineIndex, filename);
+                            
                             // Auto Download or Upload
                             if (action === 'upload') {
                                 uploadArtifact(imgSrc, filename);
@@ -1569,6 +1575,9 @@
 
         // 4c. Audio Generation
         async function generateAudioContent(id, prompt, action = 'generate') {
+            const parts = id.split('_'); 
+            const sceneIndex = parseInt(parts[0].substring(1));
+            const lineIndex = parseInt(parts[1].substring(1));
             const apiKey = document.getElementById('apiKey').value;
             if (!apiKey) {
                 alert("⚠️ Please paste your Google API Key at the top first.");
@@ -1656,7 +1665,9 @@
                                     </a>
                                 </div>`;
                             
-                            // Auto Download
+                            // Update YAML with video_name (or generalized artifact name)
+                            updateVideoName(sceneIndex, lineIndex, filename);
+
                             // Auto Download or Upload
                             if (action === 'upload') {
                                 uploadArtifact(audioSrc, filename);
@@ -1691,6 +1702,9 @@
 
         // 4d. Video Generation (Veo 2.0)
         async function generateVideoContent(id, prompt, action = 'generate') {
+            const parts = id.split('_'); 
+            const sceneIndex = parseInt(parts[0].substring(1));
+            const lineIndex = parseInt(parts[1].substring(1));
             const apiKey = document.getElementById('apiKey').value;
             if (!apiKey) {
                 alert("⚠️ Please paste your Google API Key at the top first.");
@@ -1787,6 +1801,9 @@
                             </a>
                         </div>
                     `;
+                    
+                    // Update YAML with video_name
+                    updateVideoName(sceneIndex, lineIndex, filename);
                     
                     container.innerHTML = videoHtml;
                     container.classList.remove('hidden');
@@ -1978,6 +1995,14 @@
             return `${sceneTitle}_Line${lineId}_${type}_${dateStr}`;
         }
 
+        function updateVideoName(sceneIndex, lineIndex, filename) {
+             // In-memory update
+             scenes[sceneIndex].lines[lineIndex].video_name = filename;
+             console.log(`Updated video_name for S${sceneIndex} L${lineIndex} to ${filename}`);
+             
+             // Add a small visual indicator or toast could be nice here
+        }
+
         function triggerAutoDownload(url, filename) {
             const a = document.createElement('a');
             a.href = url;
@@ -2027,7 +2052,7 @@
                 return;
             }
             // Add columns for all new prompt types
-            let csv = "Scene,Line,Timecode,Detailed Script,Prompt Image,Prompt Graphic,Prompt Music,Prompt Animation,Prompt Motion Graphics,Prompt Sound Effect\n";
+            let csv = "Scene,Line,Timecode,Detailed Script,Prompt Image,Prompt Graphic,Prompt Music,Prompt Animation,Prompt Motion Graphics,Prompt Sound Effect,Video Name\n";
             
             scenes.forEach(scene => {
                 scene.lines.forEach(line => {
@@ -2038,7 +2063,7 @@
                     // Helper for verification status
                     const isV = (type) => v[type] ? " (Verified)" : "";
                     
-                    csv += `"${scene.id}", "${line.id}", "${line.time}", ${safe(line.script)}, ${safe(p.image + isV('image'))}, ${safe(p.graphic + isV('graphic'))}, ${safe(p.music + isV('music'))}, ${safe(p.animation + isV('animation'))}, ${safe(p.motion_graphics + isV('motion_graphics'))}, ${safe(p.sound_effect + isV('sound_effect'))}\n`;
+                    csv += `"${scene.id}", "${line.id}", "${line.time}", ${safe(line.script)}, ${safe(p.image + isV('image'))}, ${safe(p.graphic + isV('graphic'))}, ${safe(p.music + isV('music'))}, ${safe(p.animation + isV('animation'))}, ${safe(p.motion_graphics + isV('motion_graphics'))}, ${safe(p.sound_effect + isV('sound_effect'))}, ${safe(line.video_name)}\n`;
                 });
             });
 
