@@ -109,21 +109,27 @@ body {
 /* Scroll to Top */
 #scroll-top-btn {
   position: fixed;
-  bottom: 60px; /* Above debug panel */
-  right: 20px;
+  bottom: 64px; /* Above debug panel */
+  right: 24px;
   background-color: #3b82f6;
   color: white;
-  padding: 10px;
+  padding: 12px;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
   display: none;
   z-index: 40;
-  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+}
+#scroll-top-btn.visible {
+  display: block;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 #scroll-top-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   background-color: #2563eb;
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
 }
 
 /* Modal Overlay */
