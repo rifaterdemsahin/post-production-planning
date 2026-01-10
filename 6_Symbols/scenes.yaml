@@ -457,7 +457,7 @@ scenes:
         time: '0:00'
         script: And that vehicle, well, it has a name. And here it is, the ASC protocol.
         prompts:
-          image: The vehicle license plate zooming in, reading 'ATW-PROTO', metallic texture, lens flare
+          image: The vehicle license plate zooming in, reading 'ASC-PROTO', metallic texture, lens flare
           graphic: Text 'ATW PROTOCOL' appearing in bold metallic 3D letters
           music: Technological reveal sound, high tech synth
           animation: Zoom in to the license plate
@@ -472,7 +472,7 @@ scenes:
           sound_effect: false
       - id: '2'
         time: '0:04'
-        script: It stands for Assess, Train, Workshop. It's a system, an engineering mindset.
+        script: It stands for Assess, Simulate, Certify. It's a system, an engineering mindset.
         prompts:
           image: Technical blueprint on a blue background showing the three phases as interlocked gears, white chalk lines
           graphic: 'Three gears turning: ''Assess'', ''Train'', ''Workshop'''
