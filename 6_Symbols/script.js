@@ -568,8 +568,8 @@
 
                 html += `
                     <div class="bg-gray-900/50 p-2 rounded border border-gray-800 relative group hover:border-gray-600 transition-colors">
-                        <div class="flex justify-between items-start cursor-pointer p-2" onclick="toggleSection('line-tools-${uniqueId}', 'line-arrow-${uniqueId}')">
-                            <div class="flex gap-3 w-full">
+                    <div class="flex justify-between items-start cursor-pointer p-2" onclick="toggleSection('line-tools-${uniqueId}', 'line-arrow-${uniqueId}')">
+                            <div class="flex gap-3 flex-1">
                                 <span id="line-arrow-${uniqueId}" class="text-gray-500 transform transition-transform text-[10px] mt-1">▶</span>
                                 <div class="flex-1">
                                     <div class="flex justify-between text-xs text-gray-400 mb-1">
@@ -601,6 +601,30 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <!-- Uploaded Assets (Right Hand Side) -->
+                            <div class="w-1/3 min-w-[200px] ml-4 pl-4 border-l border-gray-800 text-xs">
+                                <span class="font-bold text-gray-500 block mb-1">Uploaded Assets:</span>
+                                ${(() => {
+                                    if (line.uploaded_assets && Object.keys(line.uploaded_assets).length > 0) {
+                                        return Object.entries(line.uploaded_assets).map(([type, asset]) => {
+                                            if (!asset || !asset.url) return '';
+                                            return `
+                                                <div class="mb-2">
+                                                    <span class="text-[10px] uppercase text-blue-400 font-bold block">${type}</span>
+                                                    <div class="pl-2 border-l border-gray-700 mt-0.5">
+                                                        <a href="${asset.url}" target="_blank" class="text-gray-300 hover:text-white hover:underline truncate block" title="${asset.filename}">
+                                                            📄 ${asset.filename || "View File"}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }).join('');
+                                    } else {
+                                        return '<span class="text-gray-600 italic">N/A</span>';
+                                    }
+                                })()}
                             </div>
                         </div>
                             
