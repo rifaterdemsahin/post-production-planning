@@ -1506,17 +1506,28 @@
                             // Update YAML with video_name
                             updateVideoName(sceneIndex, lineIndex, filename);
                             
-                            // Auto Upload to GitHub
+                            // Auto Upload to Google Drive
                             (async () => {
-                                const rawUrl = await uploadAssetToGitHub(filename, part.inlineData.data);
-                                if (rawUrl) {
-                                    updateArtifactData(sceneIndex, lineIndex, 'image', filename, rawUrl);
+                                // Convert base64 to Blob
+                                const byteCharacters = atob(part.inlineData.data);
+                                const byteNumbers = new Array(byteCharacters.length);
+                                for (let i = 0; i < byteCharacters.length; i++) {
+                                    byteNumbers[i] = byteCharacters.charCodeAt(i);
+                                }
+                                const byteArray = new Uint8Array(byteNumbers);
+                                const blob = new Blob([byteArray], { type: 'image/png' });
+
+                                // Upload
+                                const driveLink = await autoUploadToDrive(id, blob, filename + '.png');
+                                
+                                if (driveLink) {
+                                    updateArtifactData(sceneIndex, lineIndex, 'image', filename, driveLink);
                                     await saveChanges(true); // Save YAML to GitHub
                                     
                                      // Show Toast
                                     const toast = document.createElement('div');
                                     toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-blue-900 border border-blue-700 text-blue-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
-                                    toast.innerHTML = `<span>☁️ Auto-uploaded Image to GitHub!</span>`;
+                                    toast.innerHTML = `<span>☁️ Auto-uploaded Image to Drive!</span>`;
                                     document.body.appendChild(toast);
                                     setTimeout(() => toast.remove(), 4000);
                                 }
@@ -1652,17 +1663,23 @@
                             // Update YAML with video_name (or generalized artifact name)
                             updateVideoName(sceneIndex, lineIndex, filename);
 
-                            // Auto Upload to GitHub
+                            // Auto Upload to Google Drive
                             (async () => {
-                                const rawUrl = await uploadAssetToGitHub(filename, part.inlineData.data);
-                                if (rawUrl) {
-                                    updateArtifactData(sceneIndex, lineIndex, 'music', filename, rawUrl);
+                                // Fetch blob from src (since it's a blob URL or base64 data URI)
+                                const res = await fetch(audioSrc);
+                                const blob = await res.blob();
+
+                                // Upload
+                                const driveLink = await autoUploadToDrive(id, blob, filename + '.mp3');
+                                
+                                if (driveLink) {
+                                    updateArtifactData(sceneIndex, lineIndex, 'music', filename, driveLink);
                                     await saveChanges(true); // Save YAML to GitHub
 
                                     // Show Toast
                                     const toast = document.createElement('div');
                                     toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-purple-900 border border-purple-700 text-purple-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
-                                    toast.innerHTML = `<span>☁️ Auto-uploaded Audio to GitHub!</span>`;
+                                    toast.innerHTML = `<span>☁️ Auto-uploaded Audio to Drive!</span>`;
                                     document.body.appendChild(toast);
                                     setTimeout(() => toast.remove(), 4000);
                                 }
@@ -2686,6 +2703,47 @@ async function uploadAssetToGitHub(filename, contentBase64) {
         console.error("GitHub Asset Upload Error:", error);
         logDebug('ERROR', 'Asset Upload Failed', error.message);
         return null; 
+    }
+}
+
+async function autoUploadToDrive(uniqueId, blob, filename) {
+    try {
+        const token = await getAccessToken();
+        if (!token) {
+            console.warn("Skipping Drive upload: No token.");
+            return null;
+        }
+
+        const config = getDriveConfig();
+        let uploadFolderId = config.folderId; 
+        let type = "Artifact";
+
+        // Parse ID for Folder Logic (Project -> Scene)
+        const parts = uniqueId.match(/s(\d+)_l(\d+)/);
+        if (parts) {
+            const sceneIndex = parseInt(parts[1]);
+            const lineIndex = parseInt(parts[2]);
+            
+            // 1. Project Folder
+            const projectTitle = (window.projectTitle || "Project").replace(/[^a-zA-Z0-9 ]/g, '_');
+            const projFolderId = await findOrCreateFolder(projectTitle, config.folderId, token);
+            
+            // 2. Scene Folder
+            const scene = scenes[sceneIndex];
+            const safeSceneTitle = scene.title.replace(/[^a-zA-Z0-9 ]/g, '_');
+            const sceneFolderName = `Scene ${scene.id} ${safeSceneTitle}`;
+            const sceneFolderId = await findOrCreateFolder(sceneFolderName, projFolderId, token);
+            
+            uploadFolderId = sceneFolderId;
+        }
+
+        // Upload
+        const uploadData = await performDriveUpload(blob, filename, uploadFolderId, token);
+        return uploadData.webViewLink; // Return Drive Link
+
+    } catch (error) {
+        console.error("Auto Drive Upload Error:", error);
+        return null;
     }
 }
 

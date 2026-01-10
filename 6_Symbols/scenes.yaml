@@ -1,9 +1,8 @@
-title: "Plan your AI transformation journey"
+title: Plan your AI transformation journey
 main_context: "High-production value documentary style for youtube weekly video for rifat erdem sahin channel. Futuristic technology, serious but inspiring tone. Visuals should be cinematic, 8k resolution, with a mix of photorealism and high-end motion graphics. Color palette: Dark mode with neon accents (blue, purple, teal)."
 verified_main_context: false
-version: 1
-last_updated: "2026-01-10T17:05:20Z"
-
+version: 2
+last_updated: "2026-01-10T18:11:28.436Z"
 scenes:
   - id: SCENE 01
     title: The New Age
@@ -126,7 +125,12 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-        uploaded_assets: {}
+        uploaded_assets:
+          image:
+            filename: Plan_your_AI_transformation_journey_Avalanche_Line2_Image_2026-01-10_18-11.png
+            url: https://raw.githubusercontent.com/rifaterdemsahin/post-production-planning/main/assets/Plan_your_AI_transformation_journey_Avalanche_Line2_Image_2026-01-10_18-11.png
+            last_uploaded: "2026-01-10T18:11:28.432Z"
+        video_name: Plan_your_AI_transformation_journey_Avalanche_Line2_Image_2026-01-10_18-11.png
       - id: "3"
         time: "0:08"
         script: Let's get into it. The material we're looking at kicks off with this line...
