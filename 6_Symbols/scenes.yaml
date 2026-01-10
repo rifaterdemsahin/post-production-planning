@@ -136,7 +136,7 @@ scenes:
           sound_effect: false
       - id: '4'
         time: '0:12'
-        script: ...and honestly, it's a fantastic and maybe a little terrifying way to put it. An AI avalanche.
+        script: ...and honestly, it's a fantastic and maybe a little terrifying way to put it. An AI avalanche. The things you can do with AI possibilities and delivery skills you got.
         prompts:
           image: Action shot of a massive snow avalanche beginning to crumble down the mountain face, debris flying, terrifying power, white and gray palette
           graphic: Warning icons flashing red in corners
