@@ -842,7 +842,7 @@ scenes:
           sound_effect: false
       - id: '2'
         time: '0:04'
-        script: It creates what the source calls the all-terrain workforce.
+        script: It creates what the source calls the all-terrain workforce which you learn to with a copilot.
         prompts:
           image: A group of diverse professionals standing together, wearing futuristic tactical gear, looking ready
           graphic: Label 'All-Terrain Workforce' underneath them
