@@ -1506,12 +1506,21 @@
                             // Update YAML with video_name
                             updateVideoName(sceneIndex, lineIndex, filename);
                             
-                            // Auto Download or Upload removed in favor of manual buttons
-                             // if (action === 'upload') {
-                            //    uploadArtifact(imgSrc, filename);
-                            //} else {
-                            //    triggerAutoDownload(imgSrc, filename);
-                            //}
+                            // Auto Upload to GitHub
+                            (async () => {
+                                const rawUrl = await uploadAssetToGitHub(filename, part.inlineData.data);
+                                if (rawUrl) {
+                                    updateArtifactData(sceneIndex, lineIndex, 'image', filename, rawUrl);
+                                    await saveChanges(true); // Save YAML to GitHub
+                                    
+                                     // Show Toast
+                                    const toast = document.createElement('div');
+                                    toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-blue-900 border border-blue-700 text-blue-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
+                                    toast.innerHTML = `<span>☁️ Auto-uploaded Image to GitHub!</span>`;
+                                    document.body.appendChild(toast);
+                                    setTimeout(() => toast.remove(), 4000);
+                                }
+                            })();
                         } else if (part.text) {
                             // Render Text
                             htmlOutput += `<p class="mb-2 text-gray-300 border-l-2 border-purple-500 pl-2">${part.text}</p>`;
@@ -1643,12 +1652,21 @@
                             // Update YAML with video_name (or generalized artifact name)
                             updateVideoName(sceneIndex, lineIndex, filename);
 
-                            // Auto Download or Upload removed
-                            // if (action === 'upload') {
-                            //    uploadArtifact(audioSrc, filename);
-                            //} else {
-                            //    triggerAutoDownload(audioSrc, filename);
-                            //}
+                            // Auto Upload to GitHub
+                            (async () => {
+                                const rawUrl = await uploadAssetToGitHub(filename, part.inlineData.data);
+                                if (rawUrl) {
+                                    updateArtifactData(sceneIndex, lineIndex, 'music', filename, rawUrl);
+                                    await saveChanges(true); // Save YAML to GitHub
+
+                                    // Show Toast
+                                    const toast = document.createElement('div');
+                                    toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-purple-900 border border-purple-700 text-purple-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
+                                    toast.innerHTML = `<span>☁️ Auto-uploaded Audio to GitHub!</span>`;
+                                    document.body.appendChild(toast);
+                                    setTimeout(() => toast.remove(), 4000);
+                                }
+                            })();
                         }
                     });
                 }
@@ -2173,6 +2191,16 @@
                         const sceneIndex = parseInt(parts[1]);
                         const lineIndex = parseInt(parts[2]);
                         updateArtifactData(sceneIndex, lineIndex, type.toLowerCase(), filename, uploadData.webViewLink);
+                        
+                        // Auto-save to GitHub to persist the Drive link
+                        await saveChanges(true);
+
+                        // Show localized toast for double save
+                        const toast = document.createElement('div');
+                        toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-green-900 border border-green-700 text-green-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
+                        toast.innerHTML = `<span>☁️ Drive Link Saved to GitHub!</span>`;
+                        document.body.appendChild(toast);
+                        setTimeout(() => toast.remove(), 4000);
                      }
                 }
 
@@ -2598,6 +2626,68 @@
                 }
             }
         }
+
+
+async function uploadAssetToGitHub(filename, contentBase64) {
+    const config = checkGithubConfig();
+    if (!config) {
+        console.warn("Skipping GitHub upload: No configuration found.");
+        return null;
+    }
+
+    const apiUrl = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/assets/${filename}`;
+    
+    try {
+        // 1. Check if file exists to get SHA
+        let sha = null;
+        const getRes = await fetch(apiUrl, {
+            headers: {
+                'Authorization': `token ${config.token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+
+        if (getRes.ok) {
+            const getData = await getRes.json();
+            sha = getData.sha;
+        }
+
+        // 2. Upload/Update File
+        const putBody = {
+            message: `Upload asset ${filename} via Gemini Scene Creator`,
+            content: contentBase64,
+            branch: config.branch
+        };
+        if (sha) putBody.sha = sha;
+
+        logDebug('REQ', 'Uploading Asset to GitHub', { url: apiUrl, filename });
+
+        const putRes = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${config.token}`,
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(putBody)
+        });
+
+        if (!putRes.ok) {
+            const errData = await putRes.json();
+            throw new Error(errData.message || `Upload failed: ${putRes.status}`);
+        }
+
+        const putData = await putRes.json();
+        logDebug('RES', 'Asset Uploaded', putData);
+
+        return putData.content.download_url; // Return raw link
+
+    } catch (error) {
+        console.error("GitHub Asset Upload Error:", error);
+        logDebug('ERROR', 'Asset Upload Failed', error.message);
+        return null; 
+    }
+}
 
         // ==========================================
         // 8. BULK GENERATION LOGIC
