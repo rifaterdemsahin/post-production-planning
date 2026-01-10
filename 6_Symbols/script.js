@@ -532,7 +532,7 @@
                     if (isDrive && asset.url.includes('/view')) {
                         const idMatch = asset.url.match(/\/file\/d\/([^\/]+)/);
                         if (idMatch && idMatch[1]) {
-                            embedUrl = `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
+                            embedUrl = `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w800`;
                         }
                     }
 
