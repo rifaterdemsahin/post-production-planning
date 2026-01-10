@@ -918,6 +918,11 @@
                                         <span>⚡ Generate Artifact</span>
                                         <div id="loader-${uniqueId}" class="loader"></div>
                                     </button>
+                                    <button onclick="handleGenerate('${uniqueId}', 'upload')" 
+                                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-1.5 rounded shadow-lg shadow-indigo-900/20 text-xs font-bold hover:brightness-110 flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95 ml-2"
+                                        title="Generate and Upload to Google Drive (Save As)">
+                                        <span>☁️ Generate & Upload</span>
+                                    </button>
                                     <span id="status-${uniqueId}" class="text-xs font-mono"></span>
                                 </div>
                                 
@@ -1303,7 +1308,7 @@
         
         let pendingGeneration = null;
 
-        function openContextModal(uniqueId) {
+        function openContextModal(uniqueId, action = 'generate') {
             const textArea = document.getElementById(`text-${uniqueId}`);
             // Default to 'image' if not set
             const type = textArea.getAttribute('data-current-type') || 'image'; 
@@ -1331,7 +1336,8 @@
             pendingGeneration = {
                 uniqueId: uniqueId,
                 finalPrompt: finalPrompt,
-                type: type
+                type: type,
+                action: action
             };
 
             // 6. Show Modal
@@ -1346,22 +1352,22 @@
         function confirmGeneration() {
             if (!pendingGeneration) return;
             
-            const { uniqueId, finalPrompt, type } = pendingGeneration;
+            const { uniqueId, finalPrompt, type, action } = pendingGeneration;
             closeContextModal();
 
             if (type === 'image' || type === 'graphic') {
-                generateMultimodalContent(uniqueId, finalPrompt);
+                generateMultimodalContent(uniqueId, finalPrompt, action);
             } else if (type === 'animation') {
-                generateVideoContent(uniqueId, finalPrompt);
+                generateVideoContent(uniqueId, finalPrompt, action);
             } else if (type === 'music' || type === 'sound_effect') {
-                generateAudioContent(uniqueId, finalPrompt);
+                generateAudioContent(uniqueId, finalPrompt, action);
             } else {
                 generateContent(uniqueId, finalPrompt);
             }
         }
 
-        function handleGenerate(uniqueId) {
-            openContextModal(uniqueId);
+        function handleGenerate(uniqueId, action = 'generate') {
+            openContextModal(uniqueId, action);
         }
 
         function toggleDebug() {
@@ -1460,7 +1466,7 @@
         }
 
         // 4b. Multimodal (Image) Generation
-        async function generateMultimodalContent(id, prompt) {
+        async function generateMultimodalContent(id, prompt, action = 'generate') {
             const apiKey = document.getElementById('apiKey').value;
             if (!apiKey) {
                 alert("⚠️ Please paste your Google API Key at the top first.");
@@ -1524,7 +1530,12 @@
                                 </div>`;
                             
                             // Auto Download
-                            triggerAutoDownload(imgSrc, filename);
+                            // Auto Download or Upload
+                            if (action === 'upload') {
+                                uploadArtifact(imgSrc, filename);
+                            } else {
+                                triggerAutoDownload(imgSrc, filename);
+                            }
                         } else if (part.text) {
                             // Render Text
                             htmlOutput += `<p class="mb-2 text-gray-300 border-l-2 border-purple-500 pl-2">${part.text}</p>`;
@@ -1557,7 +1568,7 @@
         }
 
         // 4c. Audio Generation
-        async function generateAudioContent(id, prompt) {
+        async function generateAudioContent(id, prompt, action = 'generate') {
             const apiKey = document.getElementById('apiKey').value;
             if (!apiKey) {
                 alert("⚠️ Please paste your Google API Key at the top first.");
@@ -1646,7 +1657,12 @@
                                 </div>`;
                             
                             // Auto Download
-                            triggerAutoDownload(audioSrc, filename);
+                            // Auto Download or Upload
+                            if (action === 'upload') {
+                                uploadArtifact(audioSrc, filename);
+                            } else {
+                                triggerAutoDownload(audioSrc, filename);
+                            }
                         }
                     });
                 }
@@ -1674,7 +1690,7 @@
         }
 
         // 4d. Video Generation (Veo 2.0)
-        async function generateVideoContent(id, prompt) {
+        async function generateVideoContent(id, prompt, action = 'generate') {
             const apiKey = document.getElementById('apiKey').value;
             if (!apiKey) {
                 alert("⚠️ Please paste your Google API Key at the top first.");
@@ -1778,7 +1794,12 @@
                     status.className = "text-xs text-green-500";
 
                     // Auto Download
-                    triggerAutoDownload(fetchVideoUrl, filename);
+                    // Auto Download or Upload
+                    if (action === 'upload') {
+                        uploadArtifact(fetchVideoUrl, filename);
+                    } else {
+                        triggerAutoDownload(fetchVideoUrl, filename);
+                    }
 
                 }
 
@@ -1899,6 +1920,47 @@
             return finalPrompt;
         }
         
+        async function uploadArtifact(src, filename) {
+             try {
+                // Check if showSaveFilePicker is supported (Chrome/Edge/Opera)
+                if (window.showSaveFilePicker) {
+                    const opts = {
+                        suggestedName: filename,
+                        types: []
+                    };
+                    
+                    if (filename.endsWith('.png')) {
+                        opts.types.push({ description: 'PNG Image', accept: { 'image/png': ['.png'] } });
+                    } else if (filename.endsWith('.mp3')) {
+                        opts.types.push({ description: 'MP3 Audio', accept: { 'audio/mpeg': ['.mp3'] } });
+                    } else if (filename.endsWith('.mp4')) {
+                        opts.types.push({ description: 'MP4 Video', accept: { 'video/mp4': ['.mp4'] } });
+                    }
+                    
+                    const handle = await window.showSaveFilePicker(opts);
+                    const writable = await handle.createWritable();
+                    
+                    // Fetch blob (whether src is DataURI or URL)
+                    const response = await fetch(src);
+                    const blob = await response.blob();
+                    
+                    await writable.write(blob);
+                    await writable.close();
+                    
+                    // Optional: Notification?
+                } else {
+                    // Fallback for Firefox/Safari etc
+                    triggerAutoDownload(src, filename);
+                    alert("Your browser does not support direct 'Save As'. The file has been downloaded to your default folder. Please move it to Google Drive.");
+                }
+            } catch (err) {
+                if (err.name !== 'AbortError') {
+                    console.error("Save cancelled or failed", err);
+                    alert("Failed to save: " + err.message);
+                }
+            }
+        }
+
         function getArtifactFilename(uniqueId, type) {
             // uniqueId format: "s{sceneIndex}_l{lineIndex}"
             const parts = uniqueId.match(/s(\d+)_l(\d+)/);
