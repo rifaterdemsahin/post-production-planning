@@ -950,7 +950,7 @@ scenes:
           sound_effect: false
       - id: '4'
         time: '0:12'
-        script: They see the entire system, not just their one little piece of it.
+        script: They see the entire system, not just their one little piece of it. And not living in a silo but connected to the real world at all times.
         prompts:
           image: Wide shot of a complex galaxy of nodes, then zooming out to see it forms a single cohesive shape
           graphic: Macro view vs Micro view toggle
