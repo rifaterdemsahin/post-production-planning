@@ -6,6 +6,7 @@
     <title>Gemini Nanabanana Production Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         body { background-color: #121212; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         .scene-card { background-color: #1e1e1e; border: 1px solid #333; transition: all 0.3s ease; }
@@ -315,6 +316,34 @@
              <div class="mt-6 flex justify-end gap-3">
                  <button onclick="closeGithubModal()" class="px-4 py-2 text-sm text-gray-400 hover:text-white transition">Cancel</button>
                  <button onclick="saveGithubConfig()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm font-bold transition">Save Configuration</button>
+             </div>
+        </div>
+    </div>
+
+    <!-- Drive Config Modal -->
+    <div id="drive-modal" class="fixed inset-0 z-[75] hidden flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-md p-6 border border-gray-700 relative">
+             <button onclick="closeDriveModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">✕</button>
+             <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">☁️ Google Drive Integration</h3>
+             
+             <p class="text-xs text-gray-400 mb-4 bg-blue-900/20 p-2 rounded border border-blue-900/50">
+                To upload files directly, you need a Google Cloud Project with the <b>Drive API</b> enabled and an <b>OAuth 2.0 Client ID</b>.
+             </p>
+
+             <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">Google Client ID</label>
+                    <input type="text" id="drive-client-id" placeholder="e.g. 12345...apps.googleusercontent.com" class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">Target Folder ID</label>
+                    <input type="text" id="drive-folder-id" value="1E_ctpNSyieC_fr2xowbg_RfXZDVWbgzJ" placeholder="Folder ID from URL" class="w-full bg-black/50 text-gray-300 text-sm p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500">
+                </div>
+             </div>
+             
+             <div class="mt-6 flex justify-end gap-3">
+                 <button onclick="closeDriveModal()" class="px-4 py-2 text-sm text-gray-400 hover:text-white transition">Cancel</button>
+                 <button onclick="saveDriveConfig()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm font-bold transition">Save Configuration</button>
              </div>
         </div>
     </div>
@@ -949,11 +978,7 @@
                                         <span>⚡ Generate Artifact</span>
                                         <div id="loader-${uniqueId}" class="loader"></div>
                                     </button>
-                                    <button onclick="handleGenerate('${uniqueId}', 'upload')" 
-                                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-1.5 rounded shadow-lg shadow-indigo-900/20 text-xs font-bold hover:brightness-110 flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95 ml-2"
-                                        title="Generate, Download, and then Upload to Drive">
-                                        <span>☁️ Upload</span>
-                                    </button>
+
                                     <span id="status-${uniqueId}" class="text-xs font-mono"></span>
                                 </div>
                                 
@@ -1597,22 +1622,24 @@
                             const imgSrc = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
                             const filename = getArtifactFilename(id, 'Image') + '.png';
                             htmlOutput += `
-                                <div class="mb-4">
                                     <img src="${imgSrc}" class="w-full h-auto rounded mb-2 border border-gray-700">
                                     <a href="${imgSrc}" download="${filename}" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-bold hover:underline">
                                         📥 Download Image
                                     </a>
+                                     <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 text-xs font-bold hover:underline ml-3">
+                                        ☁️ Upload to Drive
+                                    </button>
                                 </div>`;
                             
                             // Update YAML with video_name
                             updateVideoName(sceneIndex, lineIndex, filename);
                             
-                            // Auto Download or Upload
-                            if (action === 'upload') {
-                                uploadArtifact(imgSrc, filename);
-                            } else {
-                                triggerAutoDownload(imgSrc, filename);
-                            }
+                            // Auto Download or Upload removed in favor of manual buttons
+                             // if (action === 'upload') {
+                            //    uploadArtifact(imgSrc, filename);
+                            //} else {
+                            //    triggerAutoDownload(imgSrc, filename);
+                            //}
                         } else if (part.text) {
                             // Render Text
                             htmlOutput += `<p class="mb-2 text-gray-300 border-l-2 border-purple-500 pl-2">${part.text}</p>`;
@@ -1734,17 +1761,20 @@
                                     <a href="${audioSrc}" download="${filename}" class="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 text-xs font-bold hover:underline">
                                         📥 Download Audio
                                     </a>
+                                     <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 text-xs font-bold hover:underline ml-3">
+                                        ☁️ Upload to Drive
+                                    </button>
                                 </div>`;
                             
                             // Update YAML with video_name (or generalized artifact name)
                             updateVideoName(sceneIndex, lineIndex, filename);
 
-                            // Auto Download or Upload
-                            if (action === 'upload') {
-                                uploadArtifact(audioSrc, filename);
-                            } else {
-                                triggerAutoDownload(audioSrc, filename);
-                            }
+                            // Auto Download or Upload removed
+                            // if (action === 'upload') {
+                            //    uploadArtifact(audioSrc, filename);
+                            //} else {
+                            //    triggerAutoDownload(audioSrc, filename);
+                            //}
                         }
                     });
                 }
@@ -1870,6 +1900,9 @@
                             <a href="${fetchVideoUrl}" download="${filename}" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-bold hover:underline">
                                 📥 Download MP4
                             </a>
+                             <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 text-xs font-bold hover:underline ml-3">
+                                ☁️ Upload to Drive
+                            </button>
                         </div>
                     `;
                     
@@ -1881,13 +1914,12 @@
                     status.innerText = "✅ Done";
                     status.className = "text-xs text-green-500";
 
-                    // Auto Download
-                    // Auto Download or Upload
-                    if (action === 'upload') {
-                        uploadArtifact(fetchVideoUrl, filename);
-                    } else {
-                        triggerAutoDownload(fetchVideoUrl, filename);
-                    }
+                    // Auto Download removed
+                    // if (action === 'upload') {
+                    //    uploadArtifact(fetchVideoUrl, filename);
+                    //} else {
+                    //    triggerAutoDownload(fetchVideoUrl, filename);
+                    //}
 
                 }
 
@@ -2032,21 +2064,206 @@
             return finalPrompt;
         }
         
-        async function uploadArtifact(src, filename) {
-             try {
-                // Force Download
-                triggerAutoDownload(src, filename);
-                
-                // Open Drive Folder
-                window.open('https://drive.google.com/drive/folders/1E_ctpNSyieC_fr2xowbg_RfXZDVWbgzJ', '_blank');
 
-                // Alert User
-                alert(`File '${filename}' has been downloaded.\n\nPlease upload it to the Google Drive folder that just opened.`);
+        // ==========================================
+        // 5.5 GOOGLE DRIVE UPLOAD LOGIC
+        // ==========================================
+
+        let tokenClient;
+        let accessToken = null;
+
+        function getDriveConfig() {
+            const config = localStorage.getItem('drive_config');
+            return config ? JSON.parse(config) : null;
+        }
+
+        function openDriveModal() {
+            const config = getDriveConfig();
+            if (config) {
+                document.getElementById('drive-client-id').value = config.clientId || '';
+                document.getElementById('drive-folder-id').value = config.folderId || '1E_ctpNSyieC_fr2xowbg_RfXZDVWbgzJ';
+            }
+            document.getElementById('drive-modal').classList.remove('hidden');
+        }
+
+        function closeDriveModal() {
+            document.getElementById('drive-modal').classList.add('hidden');
+        }
+
+        function saveDriveConfig() {
+            const clientId = document.getElementById('drive-client-id').value.trim();
+            const folderId = document.getElementById('drive-folder-id').value.trim();
+
+            if (!clientId || !folderId) {
+                alert("Please enter both Client ID and Folder ID.");
+                return;
+            }
+
+            localStorage.setItem('drive_config', JSON.stringify({ clientId, folderId }));
+            closeDriveModal();
+            
+            // Re-initialize token client if needed
+            accessToken = null; // Clear old token
+            initTokenClient(clientId);
+            
+            alert("Drive Configuration Saved!");
+        }
+
+        function initTokenClient(clientId) {
+            if (!window.google) {
+                console.error("Google Identity Services script not loaded.");
+                return;
+            }
+            
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: clientId,
+                scope: 'https://www.googleapis.com/auth/drive.file',
+                callback: (tokenResponse) => {
+                    accessToken = tokenResponse.access_token;
+                    // Resume pending upload if any - but for simplicity, we just ask user to click again or we could auto-retry
+                    // For now, simpler flow: User clicks "Upload", auth happens, then they might need to click again or we chain it.
+                    // Better UX: Return a promise resolver from the auth request.
+                    if (window.pendingUploadResolver) {
+                         window.pendingUploadResolver(accessToken);
+                         window.pendingUploadResolver = null;
+                    }
+                },
+            });
+        }
+
+        // Initialize on load if config exists
+        window.addEventListener('load', () => {
+            const config = getDriveConfig();
+            if (config && config.clientId) {
+                // Wait for script to load
+                const checkGoogle = setInterval(() => {
+                    if (window.google) {
+                        clearInterval(checkGoogle);
+                        initTokenClient(config.clientId);
+                    }
+                }, 100);
+            }
+        });
+
+        async function getAccessToken() {
+            const config = getDriveConfig();
+            if (!config || !config.clientId) {
+                openDriveModal();
+                throw new Error("Missing Drive Configuration");
+            }
+
+            if (accessToken) return accessToken;
+
+            // Trigger Auth
+            return new Promise((resolve) => {
+                window.pendingUploadResolver = resolve;
+                if (!tokenClient) initTokenClient(config.clientId);
+                // Skips consent if already signed in and authorized
+                tokenClient.requestAccessToken({ prompt: '' }); 
+            });
+        }
+
+        function uploadArtifactFromDOM(btn, filename) {
+             const container = btn.parentElement;
+             
+             // Try to find source from various elements
+             let src = null;
+             const link = container.querySelector('a[download]');
+             const img = container.parentElement.querySelector('img');
+             const video = container.parentElement.querySelector('video source');
+             const audio = container.parentElement.querySelector('audio source');
+
+             if (link) src = link.href;
+             else if (img) src = img.src;
+             else if (video) src = video.src;
+             else if (audio) src = audio.src;
+
+             if (src) {
+                 handleDriveUpload(src, filename, btn);
+             } else {
+                 console.error("Could not find artifact source");
+                 alert("Error: Could not find artifact source.");
+             }
+        }
+
+        async function handleDriveUpload(src, filename, btn) {
+            const originalText = btn.innerText;
+            btn.innerText = "⏳ Uploading...";
+            btn.disabled = true;
+
+            try {
+                const token = await getAccessToken();
+                const config = getDriveConfig();
+                
+                // Fetch blob data
+                const response = await fetch(src);
+                const blob = await response.blob();
+                
+                await performDriveUpload(blob, filename, config.folderId, token);
+                
+                btn.innerText = "✅ Uploaded!";
+                btn.classList.remove('text-indigo-400');
+                btn.classList.add('text-green-400');
+                
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                    btn.classList.add('text-indigo-400');
+                    btn.classList.remove('text-green-400');
+                }, 3000);
 
             } catch (err) {
+                console.error("Drive Upload Error:", err);
+                if (err.message !== "Missing Drive Configuration") {
+                     alert("Upload Failed: " + err.message);
+                }
+                btn.innerText = "❌ Failed";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }, 3000);
+            }
+        }
+
+        async function performDriveUpload(blob, filename, folderId, accessToken) {
+            const metadata = {
+                name: filename,
+                parents: [folderId]
+            };
+
+            const form = new FormData();
+            form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+            form.append('file', blob);
+
+            const url = 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,webViewLink';
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: new Headers({ 'Authorization': 'Bearer ' + accessToken }),
+                body: form
+            });
+            
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error?.message || "Upload failed");
+            }
+            
+            console.log("File uploaded:", data);
+            // Optional: Open the file or folder
+            // window.open(data.webViewLink, '_blank'); 
+        }
+
+        // Old manual function kept for fallback/reference if needed, but not used by button anymore
+        async function uploadArtifact(src, filename) {
+             // ... existing manual logic ...
+             try {
+                triggerAutoDownload(src, filename);
+                window.open('https://drive.google.com/drive/folders/1E_ctpNSyieC_fr2xowbg_RfXZDVWbgzJ', '_blank');
+                alert(`File '${filename}' has been downloaded.\n\nPlease upload it to the Google Drive folder that just opened.`);
+             } catch (err) {
                 console.error("Upload workflow failed", err);
                 alert("Failed to process upload workflow: " + err.message);
-            }
+             }
         }
 
         function getArtifactFilename(uniqueId, type) {
