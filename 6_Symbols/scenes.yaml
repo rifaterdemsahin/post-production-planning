@@ -11,7 +11,7 @@ scenes:
     lines:
       - id: '1'
         time: '0:00'
-        script: Alright, let's dive right in. Today, we're looking at a pretty powerful framework......
+        script: Alright, let's dive right in. Today, we're looking at a pretty powerful framework.
         prompts:
           image: Cinematic medium shot of a confident tech presenter in a modern, dimly lit studio with dynamic blue and orange rim lighting, shallow depth of field, 8k resolution, high production value
           graphic: ''
