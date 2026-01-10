@@ -899,7 +899,7 @@ scenes:
     lines:
       - id: '1'
         time: '0:00'
-        script: This is such a great way to visualize it. An X-shaped person has deep knowledge in a few areas...
+        script: This is such a great way to visualize it. An X-shaped person has deep knowledge in a few areas...Design,Implement,Plan,Operate
         prompts:
           image: Diagram of a person with four distinct colored energy beams radiating from their core to different corners
           graphic: Highlights on the tips of the X
