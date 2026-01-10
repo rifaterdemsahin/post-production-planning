@@ -184,64 +184,65 @@
         </div>
 
         <!-- CENTER: Documentation Menus -->
-        <div class="flex items-center gap-1 mx-auto overflow-x-auto no-scrollbar max-w-2xl px-2">
+        <!-- CENTER: Documentation Menus -->
+        <div class="flex items-center gap-2 mx-auto flex-wrap justify-center max-w-4xl px-2">
             
             <!-- REAL -->
             <div class="relative group">
-                <button onclick="toggleDocMenu('real')" id="menu-btn-real" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-gray-600/50 transition whitespace-nowrap">
+                <button onclick="toggleDocMenu('real')" id="menu-btn-real" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded border border-gray-600/50 transition whitespace-nowrap shadow-sm">
                     <span>🌍 Real</span> <span class="text-[8px]">▼</span>
                 </button>
-                <div id="menu-list-real" class="absolute bottom-full left-0 mb-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
+                <div id="menu-list-real" class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 bg-gray-800 rounded-lg shadow-xl border border-gray-600 hidden flex-col overflow-hidden transition-all duration-200 z-[100]">
                     <!-- Populated by JS -->
                 </div>
             </div>
 
             <!-- ENVIRONMENT -->
             <div class="relative group">
-                <button onclick="toggleDocMenu('environment')" id="menu-btn-environment" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-gray-600/50 transition whitespace-nowrap">
+                <button onclick="toggleDocMenu('environment')" id="menu-btn-environment" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded border border-gray-600/50 transition whitespace-nowrap shadow-sm">
                     <span>🏠 Env</span> <span class="text-[8px]">▼</span>
                 </button>
-                <div id="menu-list-environment" class="absolute bottom-full left-0 mb-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
+                <div id="menu-list-environment" class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 bg-gray-800 rounded-lg shadow-xl border border-gray-600 hidden flex-col overflow-hidden transition-all duration-200 z-[100]">
                     <!-- Populated by JS -->
                 </div>
             </div>
 
             <!-- UI -->
             <div class="relative group">
-                <button onclick="toggleDocMenu('ui')" id="menu-btn-ui" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-gray-600/50 transition whitespace-nowrap">
+                <button onclick="toggleDocMenu('ui')" id="menu-btn-ui" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded border border-gray-600/50 transition whitespace-nowrap shadow-sm">
                     <span>🎨 UI</span> <span class="text-[8px]">▼</span>
                 </button>
-                <div id="menu-list-ui" class="absolute bottom-full left-0 mb-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
+                <div id="menu-list-ui" class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 bg-gray-800 rounded-lg shadow-xl border border-gray-600 hidden flex-col overflow-hidden transition-all duration-200 z-[100]">
                     <!-- Populated by JS -->
                 </div>
             </div>
 
             <!-- FORMULAS -->
             <div class="relative group">
-                 <button onclick="toggleDocMenu('formulas')" id="menu-btn-formulas" class="text-purple-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-purple-900/50 transition whitespace-nowrap">
+                 <button onclick="toggleDocMenu('formulas')" id="menu-btn-formulas" class="text-purple-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded border border-purple-900/50 transition whitespace-nowrap shadow-sm">
                     <span>🧪 Formula</span> <span class="text-[8px]">▼</span>
                 </button>
-                <div id="menu-list-formulas" class="absolute bottom-full left-0 mb-2 w-56 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
+                <div id="menu-list-formulas" class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 bg-gray-800 rounded-lg shadow-xl border border-gray-600 hidden flex-col overflow-hidden transition-all duration-200 z-[100]">
                     <!-- Populated by JS -->
                 </div>
             </div>
 
             <!-- SEMBLANCE -->
             <div class="relative group">
-                <button onclick="toggleDocMenu('semblance')" id="menu-btn-semblance" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-gray-600/50 transition whitespace-nowrap">
+                <button onclick="toggleDocMenu('semblance')" id="menu-btn-semblance" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded border border-gray-600/50 transition whitespace-nowrap shadow-sm">
                     <span>🎭 Semblance</span> <span class="text-[8px]">▼</span>
                 </button>
-                <div id="menu-list-semblance" class="absolute bottom-full left-0 mb-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
+                <div id="menu-list-semblance" class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 bg-gray-800 rounded-lg shadow-xl border border-gray-600 hidden flex-col overflow-hidden transition-all duration-200 z-[100]">
                     <!-- Populated by JS -->
                 </div>
             </div>
 
             <!-- TEST -->
             <div class="relative group">
-                <button onclick="toggleDocMenu('test')" id="menu-btn-test" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-gray-600/50 transition whitespace-nowrap">
+                <button onclick="toggleDocMenu('test')" id="menu-btn-test" class="text-gray-300 hover:text-white text-[10px] font-bold flex items-center gap-1 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded border border-gray-600/50 transition whitespace-nowrap shadow-sm">
                     <span>🧪 Test</span> <span class="text-[8px]">▼</span>
                 </button>
-                <div id="menu-list-test" class="absolute bottom-full left-0 mb-2 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 z-50">
+                <div id="menu-list-test" class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 bg-gray-800 rounded-lg shadow-xl border border-gray-600 hidden flex-col overflow-hidden transition-all duration-200 z-[100]">
                     <!-- Populated by JS -->
                 </div>
             </div>
