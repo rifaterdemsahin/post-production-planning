@@ -973,7 +973,7 @@ scenes:
     lines:
       - id: '1'
         time: '0:00'
-        script: Now let's put that up against the old model. The old world loved I-shaped experts.
+        script: Now let's put that up against the old model. The old world loved I-shaped experts. Easier to train them in the university.
         prompts:
           image: A rigid marble column standing alone in a desert, labeled 'I-Shaped'
           graphic: Letter 'I' superimposed
