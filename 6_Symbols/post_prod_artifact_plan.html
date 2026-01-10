@@ -43,41 +43,48 @@
     <!-- Local Audio Preview -->
     <!-- Local Audio Preview (Fixed Top) -->
     <!-- Sticky Header (Merged & Compact) -->
-    <div class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur shadow-lg mb-2 flex justify-between items-center px-4 py-2 border-b border-gray-800">
-        <div class="flex items-center gap-4">
-             <!-- Audio Control (Mini) -->
-            <div class="flex items-center gap-2 bg-gray-800 rounded-full px-2 py-1 border border-gray-700">
+    <div class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur shadow-lg mb-2 border-b border-gray-800">
+        <div class="flex justify-between items-center px-4 py-2 w-full max-w-7xl mx-auto">
+            <!-- Left: Title -->
+            <div class="flex items-center gap-4 w-1/4">
+                <h1 class="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400 hidden md:block whitespace-nowrap">
+                    🍌 Gemini Scene Creator
+                </h1>
+                <h1 class="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400 md:hidden">
+                    🍌
+                </h1>
+            </div>
+
+             <!-- Center: Audio Control (Wider) -->
+            <div class="flex items-center justify-center gap-2 bg-gray-800 rounded-full px-4 py-1 border border-gray-700 w-1/2 max-w-md mx-2">
                 <span class="text-[10px] font-bold text-gray-400">🔊</span>
-                <audio controls class="h-4 w-24 opacity-80 hover:opacity-100 transition-opacity">
+                <audio controls class="h-6 w-full opacity-90 hover:opacity-100 transition-opacity">
                     <source src="proccesed_voiceover.mp3" type="audio/mpeg">
                 </audio>
             </div>
-            
-            <h1 class="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400 hidden md:block">
-                🍌 Gemini Scene Creator
-            </h1>
-        </div>
 
-        <div class="flex gap-3 items-center">
-             <span id="header-notification" class="text-[10px] font-mono text-blue-300 bg-blue-900/30 px-2 py-0.5 rounded opacity-0 transition-opacity duration-300"></span>
-             
-             <div class="relative flex items-center">
-                <!-- Input State -->
-                <div id="api-key-input-container" class="relative">
-                    <input type="password" id="apiKey" placeholder="Google API Key" 
-                        oninput="debouncedSaveApiKey(this.value)"
-                        class="bg-gray-800 border border-gray-600 text-white p-1 text-[10px] rounded w-32 focus:outline-none focus:border-blue-500 transition-colors pr-6">
-                    <span id="api-status-icon" class="absolute right-1 top-1 text-[10px] select-none" title="API Key Status"></span>
-                </div>
-                
-                <!-- Verified State -->
-                <div id="api-key-verified" class="hidden flex items-center gap-2 bg-gray-800/50 border border-green-900/50 px-2 py-1 rounded">
-                    <span class="text-[10px] font-bold text-green-400 flex items-center gap-1">
-                        ✅
-                    </span>
-                    <button onclick="resetApiKey()" class="text-[10px] text-gray-500 hover:text-white underline">
-                        Change
-                    </button>
+            <!-- Right: API Key -->
+            <div class="flex gap-3 items-center justify-end w-1/4">
+                 <span id="header-notification" class="hidden lg:block text-[10px] font-mono text-blue-300 bg-blue-900/30 px-2 py-0.5 rounded opacity-0 transition-opacity duration-300"></span>
+                 
+                 <div class="relative flex items-center">
+                    <!-- Input State -->
+                    <div id="api-key-input-container" class="relative">
+                        <input type="password" id="apiKey" placeholder="API Key" 
+                            oninput="debouncedSaveApiKey(this.value)"
+                            class="bg-gray-800 border border-gray-600 text-white p-1.5 text-[10px] rounded w-24 md:w-32 focus:outline-none focus:border-blue-500 transition-colors pr-6">
+                        <span id="api-status-icon" class="absolute right-1 top-1.5 text-[10px] select-none" title="API Key Status"></span>
+                    </div>
+                    
+                    <!-- Verified State -->
+                    <div id="api-key-verified" class="hidden flex items-center gap-2 bg-gray-800/50 border border-green-900/50 px-2 py-1.5 rounded">
+                        <span class="text-[10px] font-bold text-green-400 flex items-center gap-1">
+                            ✅
+                        </span>
+                        <button onclick="resetApiKey()" class="text-[10px] text-gray-500 hover:text-white underline">
+                            Change
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -91,45 +98,73 @@
     <div id="app" class="max-w-7xl mx-auto grid grid-cols-1 gap-6 pb-24">
     </div>
 
-    <!-- Bottom Action Bar (One Line) -->
+    <!-- Bottom Action Bar (Menus & Actions) -->
     <div class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-700 px-4 py-2 z-50 flex justify-between items-center shadow-2xl h-12">
-        <!-- LEFT: Links & Tools -->
-        <div class="flex items-center gap-3 overflow-x-auto no-scrollbar">
-             <!-- External Links (Icons) -->
-            <a href="https://github.com/rifaterdemsahin/post-production-planning" target="_blank" class="text-gray-500 hover:text-white" title="GitHub">
-                <svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-            </a>
-            <div class="h-4 w-px bg-gray-700"></div>
+        <!-- LEFT: Popover Menus -->
+        <div class="flex items-center gap-3">
+            
+            <!-- ACTIONS MENU -->
+            <div class="relative group">
+                <button onclick="toggleActionsMenu()" id="actions-menu-btn" class="text-gray-300 hover:text-white text-xs font-bold flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded border border-gray-600 transition">
+                    <span>🛠️ Actions</span>
+                    <span class="text-[10px]">▼</span>
+                </button>
+                <div id="actions-menu" class="absolute bottom-full left-0 mb-3 w-40 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 origin-bottom-left z-50">
+                    <div class="p-2 space-y-1">
+                        <button onclick="handleOpenFile()" class="w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
+                            📂 Open YAML
+                        </button>
+                        <button onclick="openScriptModal()" class="w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
+                            📜 View Script
+                        </button>
+                        <button onclick="openStatsModal()" class="w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
+                            📊 View Stats
+                        </button>
+                        <button onclick="downloadCSV()" class="w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
+                            📥 Download CSV
+                        </button>
+                        <button onclick="toggleFullScreen()" class="w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
+                            ⛶ Full Screen
+                        </button>
+                        <div class="h-px bg-gray-700 my-1"></div>
+                        <button onclick="toggleDebug()" class="w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
+                            🐞 Toggle Debug
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-            <button onclick="handleOpenFile()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
-                📂 Open
-            </button>
-             <button onclick="openScriptModal()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
-                📜 Script
-            </button>
-            <button onclick="openStatsModal()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
-                📊 Stats
-            </button>
-            <button onclick="downloadCSV()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
-                📥 CSV
-            </button>
-            <button onclick="toggleFullScreen()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
-                ⛶ Full
-            </button>
-            <button onclick="toggleDebug()" class="text-gray-400 hover:text-white text-[10px] font-bold flex items-center gap-1">
-                🐞 Debug
-            </button>
+            <!-- LINKS MENU -->
+            <div class="relative group">
+                <button onclick="toggleLinksMenu()" id="links-menu-btn" class="text-gray-300 hover:text-white text-xs font-bold flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-3 py-1.5 rounded border border-gray-600 transition">
+                    <span>🔗 Links</span>
+                    <span class="text-[10px]">▼</span>
+                </button>
+                <div id="links-menu" class="absolute bottom-full left-0 mb-3 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 origin-bottom-left z-50">
+                    <div class="p-2 space-y-1">
+                        <a href="https://github.com/rifaterdemsahin/post-production-planning" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">GitHub ↗</a>
+                        <a href="#" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Online Site ↗</a>
+                        <a href="https://www.canva.com/" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Canva Artifacts Plan ↗</a>
+                        <a href="https://colab.google/" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Google Colab ↗</a>
+                        <a href="#" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">Video Generate ↗</a>
+                        <a href="https://elevenlabs.io/" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">ElevenLabs ↗</a>
+                        <a href="https://aistudio.google.com/logs" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">AI Studio Logs ↗</a>
+                        <a href="https://github.com/settings/tokens" target="_blank" class="block w-full text-left text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1 rounded relative z-50">GitHub Tokens ↗</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- RIGHT: Primary Actions -->
         <div class="flex items-center gap-2">
-            <button onclick="saveChanges()" title="Save to GitHub" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded text-xs transition shadow-sm font-semibold border border-blue-400 flex items-center gap-1">
-                <svg height="10" width="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+            <button onclick="saveChanges()" title="Save to GitHub" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 rounded text-xs transition shadow-sm font-semibold border border-blue-400 flex items-center gap-1.5 shadow-lg shadow-blue-900/20">
+                <svg height="12" width="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
                 Save
             </button>
 
-            <button onclick="openBulkGenModal()" class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white px-3 py-1 rounded text-xs transition shadow-sm font-bold border border-rose-400 flex items-center gap-1">
-                ⚡ Bulk
+            <button onclick="openBulkGenModal()" class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white px-4 py-1.5 rounded text-xs transition shadow-sm font-bold border border-rose-400 flex items-center gap-1.5 shadow-lg shadow-pink-900/20">
+                ⚡ Bulk Generate
             </button>
         </div>
     </div>
@@ -572,6 +607,61 @@
             }
         }
 
+        function toggleActionsMenu() {
+            const menu = document.getElementById('actions-menu');
+            const otherMenu = document.getElementById('links-menu');
+            
+            // Close other menu
+            if (otherMenu) {
+                otherMenu.classList.add('hidden');
+                otherMenu.classList.remove('flex');
+            }
+
+            // Toggle this menu
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        function toggleLinksMenu() {
+            const menu = document.getElementById('links-menu');
+            const otherMenu = document.getElementById('actions-menu');
+            
+            // Close other menu
+            if (otherMenu) {
+                otherMenu.classList.add('hidden');
+                otherMenu.classList.remove('flex');
+            }
+
+            // Toggle this menu
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        // Close menus when clicking outside
+        document.addEventListener('click', function(event) {
+            const actionsMenu = document.getElementById('actions-menu');
+            const actionsBtn = document.getElementById('actions-menu-btn');
+            
+            const linksMenu = document.getElementById('links-menu');
+            const linksBtn = document.getElementById('links-menu-btn');
+
+            // Close Actions Menu
+            if (actionsMenu && !actionsMenu.classList.contains('hidden')) {
+                if (!actionsMenu.contains(event.target) && !actionsBtn.contains(event.target)) {
+                    actionsMenu.classList.add('hidden');
+                    actionsMenu.classList.remove('flex');
+                }
+            }
+
+            // Close Links Menu
+            if (linksMenu && !linksMenu.classList.contains('hidden')) {
+                if (!linksMenu.contains(event.target) && !linksBtn.contains(event.target)) {
+                    linksMenu.classList.add('hidden');
+                    linksMenu.classList.remove('flex');
+                }
+            }
+        });
+
         // ==========================================
         // 2. RENDER UI
         // ==========================================
@@ -619,9 +709,10 @@
             navDiv.innerHTML = navigationHtml;
             app.appendChild(navDiv);
 
-            // Render Main Context Input (Collapsible)
+            // Render Main Context Input (Collapsible) - MOVED DOWN
+            // This is now appended later
             const mainContextHtml = `
-                <div class="bg-gray-800 rounded mb-4 border border-blue-900/50 shadow-lg relative overflow-hidden">
+                <div class="bg-gray-800 rounded mb-4 border border-blue-900/50 shadow-lg relative overflow-hidden mt-6">
                     <div class="flex justify-between items-center p-2 bg-gray-800 cursor-pointer hover:bg-gray-700 transition" onclick="toggleMainContext()">
                         <div class="flex items-center gap-2">
                              <span id="main-context-arrow" class="text-gray-400 transform transition-transform ${isMainContextCollapsed ? '' : 'rotate-90'} text-xs">▶</span>
@@ -646,7 +737,7 @@
             `;
             const mainContextDiv = document.createElement('div');
             mainContextDiv.innerHTML = mainContextHtml;
-            app.appendChild(mainContextDiv);
+            // app.appendChild(mainContextDiv); // MOVED TO END of function
 
             const scene = scenes[currentSceneIndex];
             const sceneIndex = currentSceneIndex;
@@ -792,6 +883,9 @@
                 html += `</div></div>`; // Close scene-content and scene-card
                 sceneContainer.innerHTML = html;
                 app.appendChild(sceneContainer);
+
+                // Append Main Context at the BOTTOM
+                app.appendChild(mainContextDiv);
         }
 
         // ==========================================
