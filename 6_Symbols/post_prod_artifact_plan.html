@@ -676,9 +676,33 @@
         // ==========================================
         function parseDuration(timeStr) {
             if (!timeStr) return 0;
-            // Remove 's' and parse float
-            const cleanStr = timeStr.toString().toLowerCase().replace('s', '').trim();
-            const val = parseFloat(cleanStr);
+            const str = timeStr.toString().toLowerCase().trim();
+            
+            // Handle MM:SS or HH:MM:SS
+            if (str.includes(':')) {
+                const parts = str.split(':').map(p => parseFloat(p) || 0);
+                if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+                if (parts.length === 2) return parts[0] * 60 + parts[1];
+                return 0;
+            }
+
+            // Handle "2m 30s", "5m", "30s"
+            if (str.includes('m') || str.includes('s')) {
+                let total = 0;
+                const matchM = str.match(/(\d+(\.\d+)?)m/);
+                const matchS = str.match(/(\d+(\.\d+)?)s/);
+                
+                if (matchM) total += parseFloat(matchM[1]) * 60;
+                if (matchS) total += parseFloat(matchS[1]);
+                
+                // If it has m/s but regex failed (edge cases), fallback to simple parse
+                if (!matchM && !matchS) return parseFloat(str) || 0;
+                
+                return total;
+            }
+
+            // Fallback: simple float parsing
+            const val = parseFloat(str);
             return isNaN(val) ? 0 : val;
         }
 
