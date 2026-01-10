@@ -1678,13 +1678,14 @@
                             const filename = getArtifactFilename(id, 'Image') + '.png';
                             htmlOutput += `
                                     <img src="${imgSrc}" class="w-full h-auto rounded mb-2 border border-gray-700">
-                                    <a href="${imgSrc}" download="${filename}" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-bold hover:underline">
-                                        📥 Download Image
-                                    </a>
-                                     <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 text-xs font-bold hover:underline ml-3">
-                                        ☁️ Upload to Drive
-                                    </button>
-                                </div>`;
+                                    <div class="flex flex-wrap gap-2 mt-2">
+                                        <a href="${imgSrc}" download="${filename}" class="flex items-center gap-2 bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 border border-blue-800 px-3 py-1.5 rounded text-xs transition">
+                                            📥 Download Image
+                                        </a>
+                                        <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="flex items-center gap-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-800 px-3 py-1.5 rounded text-xs transition">
+                                            ☁️ Upload to Drive
+                                        </button>
+                                    </div>`;
                             
                             // Update YAML with video_name
                             updateVideoName(sceneIndex, lineIndex, filename);
@@ -1813,12 +1814,14 @@
                             htmlOutput += `
                                 <div class="mb-4">
                                     <audio controls src="${audioSrc}" class="w-full mb-2 bg-gray-800 rounded"></audio>
-                                    <a href="${audioSrc}" download="${filename}" class="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 text-xs font-bold hover:underline">
-                                        📥 Download Audio
-                                    </a>
-                                     <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 text-xs font-bold hover:underline ml-3">
-                                        ☁️ Upload to Drive
-                                    </button>
+                                    <div class="flex flex-wrap gap-2 mt-2">
+                                        <a href="${audioSrc}" download="${filename}" class="flex items-center gap-2 bg-yellow-900/30 hover:bg-yellow-900/50 text-yellow-300 border border-yellow-800 px-3 py-1.5 rounded text-xs transition">
+                                            📥 Download Audio
+                                        </a>
+                                        <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="flex items-center gap-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-800 px-3 py-1.5 rounded text-xs transition">
+                                            ☁️ Upload to Drive
+                                        </button>
+                                    </div>
                                 </div>`;
                             
                             // Update YAML with video_name (or generalized artifact name)
@@ -1952,12 +1955,14 @@
                                 <source src="${fetchVideoUrl}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
-                            <a href="${fetchVideoUrl}" download="${filename}" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-xs font-bold hover:underline">
-                                📥 Download MP4
-                            </a>
-                             <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 text-xs font-bold hover:underline ml-3">
-                                ☁️ Upload to Drive
-                            </button>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <a href="${fetchVideoUrl}" download="${filename}" class="flex items-center gap-2 bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 border border-blue-800 px-3 py-1.5 rounded text-xs transition">
+                                    📥 Download MP4
+                                </a>
+                                <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="flex items-center gap-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-800 px-3 py-1.5 rounded text-xs transition">
+                                    ☁️ Upload to Drive
+                                </button>
+                            </div>
                         </div>
                     `;
                     
