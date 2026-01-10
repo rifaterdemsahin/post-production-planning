@@ -1,5 +1,4 @@
-title: "Plan your AI transformation journey"
-main_context: "High-production value documentary style for youtube weekly video for rifat erdem sahin channel. Futuristic technology, serious but inspiring tone. Visuals should be cinematic, 8k resolution, with a mix of photorealism and high-end motion graphics. Color palette: Dark mode with neon accents (blue, purple, teal)."
+main_context: 'High-production value documentary style for youtube weekly video for rifat erdem sahin channel. Futuristic technology, serious but inspiring tone. Visuals should be cinematic, 8k resolution, with a mix of photorealism and high-end motion graphics. Color palette: Dark mode with neon accents (blue, purple, teal).'
 verified_main_context: false
 scenes:
   - id: SCENE 01
@@ -10,14 +9,14 @@ scenes:
     transition: Flash of light transitioning into the chaotic imagery of the next scene.
     verified_transition: true
     lines:
-      - id: "1"
-        time: "0:00"
-        script: Alright, let's dive right in. Today, we're looking at a pretty powerful framework...
+      - id: '1'
+        time: '0:00'
+        script: Alright, let's dive right in. Today, we're looking at a pretty powerful framework......
         prompts:
           image: Cinematic medium shot of a confident tech presenter in a modern, dimly lit studio with dynamic blue and orange rim lighting, shallow depth of field, 8k resolution, high production value
-          graphic: ""
+          graphic: ''
           music: Low, pulsing synth pad establishing a serious but curious tone, 120 BPM
-          animation: ""
+          animation: ''
           motion_graphics: Create a cinematic title card in Canva with the text 'THE NEW AGE' using a futuristic sans-serif font, glowing neon blue outline, set against a dark, high-tech abstract background
           sound_effect: Subtle high-tech whoosh sound on transition
         verified_prompts:
@@ -27,8 +26,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: true
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: ...for, well, surviving and thriving in this new age of AI. If you're in the tech world...
         prompts:
           image: A chaotic but artistic collage of glowing holographic news headlines about Artificial Intelligence and Tech market shifts, cyberpunk aesthetic, motion blur, floating in dark void
@@ -44,15 +43,15 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: ...you can feel it, right? Things are changing so fast it can make your head spin.
         prompts:
           image: First person POV shot of a modern office environment spinning rapidly with heavy radial motion blur, dizzying effect, photographic realism
           graphic: Motion blur lines intensifying the feeling of speed
           music: A disorienting, resonant swell that pitches up slightly
           animation: Camera spins 360 degrees rapidly
-          motion_graphics: ""
+          motion_graphics: ''
           sound_effect: Deep, airy whoosh sound syncs with the spin
         verified_prompts:
           image: false
@@ -61,8 +60,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: The old rules? They just don't seem to apply anymore.
         prompts:
           image: Close up of an ancient leather-bound book labeled 'The Old Rules' disintegrating into golden dust particles against a pitch black background, dramatic lighting
@@ -84,8 +83,8 @@ scenes:
     context: Chaotic, overwhelming, dangerous. Visuals of snow avalanches mixed with digital data streams. High contrast, fast motion.
     transition: Sudden freeze frame or slow motion to contrast with the next scene's precision.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: And the skills that got you here might not be enough to get you where you need to go next.
         prompts:
           image: Surreal minimalist 3D render of a business person climbing a white ladder that abruptly ends in the middle of a cloudy sky, infinite drop below, conceptual art
@@ -101,8 +100,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: So, the big question is, how do you build a career that's actually ready for what's coming?
         prompts:
           image: Wide shot of a tiny human silhouette standing on a cliff edge facing a massive towering wall of digital purple and green storm clouds made of binary code, epic scale
@@ -118,8 +117,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: Let's get into it. The material we're looking at kicks off with this line...
         prompts:
           image: Photorealistic majesty of a snow-capped mountain peak, perfectly calm blue sky, sharp details, national geographic style
@@ -135,8 +134,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: ...and honestly, it's a fantastic and maybe a little terrifying way to put it. An AI avalanche.
         prompts:
           image: Action shot of a massive snow avalanche beginning to crumble down the mountain face, debris flying, terrifying power, white and gray palette
@@ -158,8 +157,8 @@ scenes:
     context: Precise, intricate, structural. Focus on geometry, crystallization, and the hidden digital layers of reality.
     transition: The digital grid expands to fill the screen, transitioning to a dark void.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: Just think about that image. This isn't a slow, gentle snowfall of new tech.
         prompts:
           image: Macro photography of a single intricate snowflake suspended in mid-air, crystallizing, sharp focus, blue mood lighting
@@ -175,8 +174,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: It's a massive, overwhelming force that is completely reshaping the ground beneath our feet.
         prompts:
           image: The asphalt ground cracking open to reveal a glowing blue wireframe grid underneath, 3D render, mixture of reality and digital simulation
@@ -192,8 +191,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: And if your only piece of gear is a traditional resume...
         prompts:
           image: A single sheet of paper resume floating helplessly in a dark stormy void, spotlight on the paper, crumpled edges, dramatic
@@ -209,8 +208,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: ...you're probably going to get buried.
         prompts:
           image: POV of being buried under snow, white out, light fading from the top, claustrophobic atmosphere
@@ -232,8 +231,8 @@ scenes:
     context: Urgent, decaying, complex. Visuals of old things breaking and new complex systems forming. Red and black color scheme.
     transition: The complex puzzle solves itself, emitting a burst of light.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: And look, this isn't just being dramatic for the sake of it. We are right in the middle of a massive, seismic shift.
         prompts:
           image: Close up of a seismograph needle scribbling violently in red ink on paper, panic atmosphere, gritty texture
@@ -249,8 +248,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: The skills that were super valuable just a few years ago, now they're kind of the bare minimum.
         prompts:
           image: A timelapse composite showing a shiny gold medal rapidly oxidizing and turning into rusted iron, centered composition, black background
@@ -266,8 +265,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: Companies are up against these new, incredibly complex problems...
         prompts:
           image: A futuristic mechanical puzzle cube glowing with complex mathematical formulas, floating in zero gravity, intricate details
@@ -283,8 +282,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: ...that need a totally different way of thinking. And you guessed it, a new kind of professional.
         prompts:
           image: Medical illustration style of a human brain made entirely of glowing fiber optic cables and digital nodes, cyan and magenta lighting
@@ -306,8 +305,8 @@ scenes:
     context: Magical, powerful, contrasting old vs new. Purple and neon aesthetics. The 'Wizard' is a modern tech hero.
     transition: The magical energy particles flow into the next scene.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: Okay, so this is where it gets really interesting. Check out this comparison.
         prompts:
           image: Split screen composition, left side muted grey technical schematic, right side vibrant magical purple particle cloud, sharp contrast
@@ -323,8 +322,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: On one side, you have the old world coder. You know the type. Their skill is super specific.
         prompts:
           image: Cinematic shot of a coder hunching over a bulky retro beige computer terminal in a grey cubicle, Matrix green code reflection, claustrophobic atmosphere
@@ -340,8 +339,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: But on the other side, you have the new world wizard. This is a whole different beast.
         prompts:
           image: Hero shot of a silhouette figure standing amidst swirling data streams and holographic interfaces, wearing a modern hoodie, purple and neon blue lighting
@@ -357,8 +356,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: This isn't about one language or one framework. It's about being a creative problem solver.
         prompts:
           image: Abstract representation of different coding languages (Python, JS, C++) blending together into a glowing white light orb, creative and fluid
@@ -380,8 +379,8 @@ scenes:
     context: Corporate, predatory, urgent. Dark blue corporate vibes mixed with target reticles and scanning effects.
     transition: Zoom into the 'tank' vehicle, transitioning to the license plate.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: And here's the bottom line. Companies aren't just hiring coders anymore. They're hunting for wizards.
         prompts:
           image: Corporate sleek boardroom table where the empty chair is glowing with magical energy, rest of the room is dark corporate blue
@@ -397,8 +396,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: So if you're staring down an avalanche, standing still is absolutely not an option.
         prompts:
           image: Wide shot looking up at a massive snow wave frozen in time above a small figure, impending verification, dramatic scale
@@ -414,12 +413,12 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: You don't need a better raincoat. You need a vehicle.
         prompts:
           image: Side profile of a flimsy yellow raincoat tearing in the wind versus a sleek armored all-terrain vehicle chassis, comparison shot
-          graphic: "Icon transform effect: Raincoat -> Tank"
+          graphic: 'Icon transform effect: Raincoat -> Tank'
           music: Heavy industrial beat kicks in
           animation: Morphing transition between items
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'UPGRADE' using a futuristic font
@@ -431,8 +430,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: A really rugged all-terrain machine that's designed from the ground up to handle this chaos.
         prompts:
           image: Detailed 3D render of a futuristic sci-fi buggy with massive wheels and sensors, driving through a digital snowstorm, action pose
@@ -454,8 +453,8 @@ scenes:
     context: Technical, engineering, schematic. Blueprints, gears, and metallic textures. Clean and organized.
     transition: The mechanical gears dissolve into a digital transformation effect.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: And that vehicle, well, it has a name. And here it is, the ATW protocol.
         prompts:
           image: The vehicle license plate zooming in, reading 'ATW-PROTO', metallic texture, lens flare
@@ -471,12 +470,12 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: It stands for Assess, Train, Workshop. It's a system, an engineering mindset.
         prompts:
           image: Technical blueprint on a blue background showing the three phases as interlocked gears, white chalk lines
-          graphic: "Three gears turning: 'Assess', 'Train', 'Workshop'"
+          graphic: 'Three gears turning: ''Assess'', ''Train'', ''Workshop'''
           music: Rhythmic clockwork mechanical sound
           animation: Gears rotating in synchronization
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE SYSTEM' using a futuristic font
@@ -488,8 +487,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: The goal isn't just to learn a new skill here and there. Nope.
         prompts:
           image: A messy desk with scattered random sticky notes vs a clean organized server rack, contrast of chaos vs order
@@ -505,8 +504,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: It's designed to fundamentally transform you into one of those modern builders.
         prompts:
           image: A person stepping into a scanning chamber and emerging as a digital avatar with glowing tools, transformation sequence
@@ -528,8 +527,8 @@ scenes:
     context: Exploded view, mechanical, instructional. Breaking things down into parts. Teal and cyan lighting.
     transition: The components reassemble and speed off.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: So let's pop the hood on this thing, right? How does this protocol actually work?
         prompts:
           image: POV opening the hood of the futuristic vehicle, revealing a glowing blue energy core instead of an engine
@@ -545,8 +544,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: We're going to break it down piece by piece. The whole thing is built on a simple three-step process.
         prompts:
           image: The energy core disassembling into three distinct floating components, exploded view 3D render
@@ -562,12 +561,12 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: First you run diagnostics. That's assess. Then you install targeted upgrades. That's train.
         prompts:
-          image: "Split screen: Left side a diagnostic digital readout screen, Right side a robotic arm installing a chip"
-          graphic: "Icons: Magnifying glass (Assess) -> Microchip (Train)"
+          image: 'Split screen: Left side a diagnostic digital readout screen, Right side a robotic arm installing a chip'
+          graphic: 'Icons: Magnifying glass (Assess) -> Microchip (Train)'
           music: Two distinct beats or musical phrases
           animation: Wipe transition between left and right actions
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ASSESS -> TRAIN' using a futuristic font
@@ -579,8 +578,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: And finally, you put it all together and hit the road. That's the workshop.
         prompts:
           image: The vehicle speeding off into a neon horizon, leaving a light trail, sense of speed and completion
@@ -602,12 +601,12 @@ scenes:
     context: Diagnostic, scanning, analytical. X-ray views, digital readouts, green and red status indicators.
     transition: The scan completes, verifying a specific issue.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: Let's take a closer look at that first step. Assess. This is the engine check.
         prompts:
           image: Close up macro shot of a digital diagnostic tool plugging into a port, blue light emitting
-          graphic: "Text 'STEP 1: ASSESS' in technical font"
+          graphic: 'Text ''STEP 1: ASSESS'' in technical font'
           music: Low humming, ambient data sound
           animation: Cable plugging in and light pulsing
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'STEP 1' using a futuristic font
@@ -619,8 +618,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: This isn't about guesswork. It's about running a full comprehensive scan on everything.
         prompts:
           image: A holographic wireframe scan of an entire office building, highlighting different zones in red and green
@@ -636,11 +635,11 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: We're talking your team's security, your company's culture, your CI CD pipelines...
         prompts:
-          image: "Triptych layout: A padlock (Security), a team high-fiving (Culture), and an infinite loop symbol (CI/CD)"
+          image: 'Triptych layout: A padlock (Security), a team high-fiving (Culture), and an infinite loop symbol (CI/CD)'
           graphic: Labels appearing under each image
           music: Fast paced rhythmic cuts
           animation: Images popping in one by one
@@ -653,8 +652,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: The goal is to find the real problems before you try to fix anything.
         prompts:
           image: X-ray vision view revealing a crack in a structural beam hidden behind a wall
@@ -676,12 +675,12 @@ scenes:
     context: Simulation, upgrade, construction. Virtual reality training rooms, robotic arms installing parts.
     transition: The upgrades lock into place with a mechanical slam.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: Okay, so once you know what's broken, you move to step two, train.
         prompts:
           image: A futuristic training dojo simulation room, white grid, minimalist, awaiting input
-          graphic: "Text 'STEP 2: TRAIN' entering screen"
+          graphic: 'Text ''STEP 2: TRAIN'' entering screen'
           music: Upbeat, motivational training montage music
           animation: Grid lines drawing the room
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'STEP 2' using a futuristic font
@@ -693,8 +692,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: This is not your typical corporate training day with bad coffee and PowerPoints.
         prompts:
           image: A grey boring conference room with a sleeping employee and a pie chart on screen, desaturated
@@ -710,8 +709,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: Sticking with that vehicle metaphor, if diagnostics found a weakness in security...
         prompts:
           image: The vehicle from before, highlighting the doors with a weak red shield
@@ -719,7 +718,7 @@ scenes:
           music: Warning tone
           animation: Red glow pulsating on the doors
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'WEAKNESS' using a futuristic font
-          sound_effect: " Alarm blip"
+          sound_effect: ' Alarm blip'
         verified_prompts:
           image: false
           graphic: false
@@ -727,8 +726,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: ...you install ML SecOps tires. If ops are shaky, you add an AI ops suspension.
         prompts:
           image: Robotic arms bolting on rugged, glowing armored tires and heavy duty springs onto the vehicle
@@ -750,12 +749,12 @@ scenes:
     context: Industrial, creative, high-energy. Sparks, welding, factories. Amber and orange lighting.
     transition: The finished product launches, transforming into the result.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: And this quote brings us to the heart of the protocol. The workshop.
         prompts:
           image: A high-tech garage workshop, sparks flying, welding torches, atmosphere of creation
-          graphic: "Text 'STEP 3: WORKSHOP' stamped on screen"
+          graphic: 'Text ''STEP 3: WORKSHOP'' stamped on screen'
           music: Industrial, heavy beat, productive vibe
           animation: Sparks falling in foreground
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'STEP 3' using a futuristic font
@@ -767,8 +766,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: Because let's be honest, theory is totally useless if you can't apply it.
         prompts:
           image: A thick textbook labeled 'Theory' gathering dust on a shelf
@@ -784,8 +783,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: All the diagnostics, all the upgrades, they are designed for this one moment.
         prompts:
           image: Close up of a driver's gloved hand hovering over a big red 'IGNITION' button
@@ -801,8 +800,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: The moment where you put your hands on the keyboard and actually build and ship real stuff.
         prompts:
           image: Fast paced montage of hands typing code, git push commands, deployment success screens, green lights
@@ -824,8 +823,8 @@ scenes:
     context: Heroic, triumphant, sun-drenched. Epic landscapes and diverse teams looking towards the horizon.
     transition: Zoom into the eye of a builder, seeing the reflection.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: So after you go through this, what's the end result? What does the ATW protocol create?
         prompts:
           image: A silhouette of a person standing at the top of the mountain peak from earlier, looking out over the landscape
@@ -841,8 +840,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: It creates what the source calls the all-terrain workforce.
         prompts:
           image: A group of diverse professionals standing together, wearing futuristic tactical gear, looking ready
@@ -858,8 +857,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: A brand new breed of builder who's ready for pretty much anything.
         prompts:
           image: Close up of one builder's face, determined expression, reflecting digital code in their eyes
@@ -875,8 +874,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: And the ideal professional for this new world is called the X-shaped builder.
         prompts:
           image: A glowing letter 'X' formed by two crossing laser beams in a dark room
@@ -898,8 +897,8 @@ scenes:
     context: Abstract, connecting, glowing. Beams of light, nodes connecting, bridges forming. Rose and pink hues.
     transition: The network expands to show the full system view.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: This is such a great way to visualize it. An X-shaped person has deep knowledge in a few areas...
         prompts:
           image: Diagram of a person with four distinct colored energy beams radiating from their core to different corners
@@ -915,8 +914,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: ...but their real superpower is at the intersection, their ability to connect the dots.
         prompts:
           image: Close up of the center of the X where the colors mix into a brilliant white light
@@ -932,8 +931,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: They can bridge the gap between, say, DevOps and machine learning, or security and product.
         prompts:
           image: A digital bridge connecting two floating islands, one labeled 'DevOps', one 'ML'
@@ -949,8 +948,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: They see the entire system, not just their one little piece of it.
         prompts:
           image: Wide shot of a complex galaxy of nodes, then zooming out to see it forms a single cohesive shape
@@ -972,8 +971,8 @@ scenes:
     context: Static, fragile, old-fashioned. Marble columns, deserts, cracking stone. Pink and grey contrast.
     transition: The rigid structure shatters, revealing fluid metal underneath.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: Now let's put that up against the old model. The old world loved I-shaped experts.
         prompts:
           image: A rigid marble column standing alone in a desert, labeled 'I-Shaped'
@@ -989,8 +988,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: People with deep knowledge in one narrow field. They were one-trick ponies.
         prompts:
           image: A carousel pony going up and down in the same spot, looking sad
@@ -1006,8 +1005,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: But in the age of AI, that's just too rigid, too fragile.
         prompts:
           image: The marble column vibrating and then shattering into pieces under pressure
@@ -1023,8 +1022,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: The X-shaped builder is adaptable. Creating solutions an I-shaped expert would never think of.
         prompts:
           image: The X-shape structure flexing and morphing like liquid metal to fit through a complex maze
@@ -1046,8 +1045,8 @@ scenes:
     context: Evidence, success, data-driven. Graphs going up, checkmarks, factories producing results. Fuchsia and bright colors.
     transition: The factory line speeds up, blurring into the open source logo.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: And you might be thinking, does it work? Well, the proof is in the pudding.
         prompts:
           image: A chef presenting a perfect futuristic looking dessert that glows
@@ -1063,8 +1062,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: Over 200 repositories have been shipped using this exact protocol.
         prompts:
           image: A visualization of a git commit history graph growing exponentially, thousands of green dots
@@ -1080,8 +1079,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: That number tells you everything. ATW isn't just a slide deck with ideas.
         prompts:
           image: A PowerPoint presentation file being thrown into a trash can
@@ -1097,8 +1096,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: It's a factory. It is a repeatable process that cranks out real results.
         prompts:
           image: A high-tech automated factory floor with conveyor belts producing shiny finished software boxes
@@ -1120,8 +1119,8 @@ scenes:
     context: Open, inviting, energetic. Green open source glow, running towards the future. Violet and sunset colors.
     transition: Fade to black with a final inspiring logo or text.
     lines:
-      - id: "1"
-        time: "0:00"
+      - id: '1'
+        time: '0:00'
         script: The ATW protocol itself? It's open source. The philosophy is forward motion.
         prompts:
           image: The Open Source logo glowing green on a dark background, unlocked padlock
@@ -1137,8 +1136,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "2"
-        time: "0:04"
+      - id: '2'
+        time: '0:04'
         script: Take it, fork it, break it, build your own version.
         prompts:
           image: A branching git tree diagram showing multiple forks diverging from the main line
@@ -1154,8 +1153,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "3"
-        time: "0:08"
+      - id: '3'
+        time: '0:08'
         script: Because the worst thing you can do when you see an avalanche is stand still.
         prompts:
           image: Rear view of a person sprinting towards the horizon, away from a blurry white wall of snow
@@ -1171,8 +1170,8 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-      - id: "4"
-        time: "0:12"
+      - id: '4'
+        time: '0:12'
         script: Are you building a vehicle to carry you through the wild terrain ahead?
         prompts:
           image: Final epic shot of the ATW vehicle parked on a mountain peak at sunset, looking out at a new world
