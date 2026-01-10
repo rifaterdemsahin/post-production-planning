@@ -1026,7 +1026,24 @@
                                         </div>
                                         <span class="font-mono">Line ${line.id}</span>
                                     </div>
-                                    <p class="text-sm italic text-gray-300 line-clamp-2 pl-2 border-l-2 border-gray-700 hover:text-white transition-colors">"${line.script}"</p>
+                                    <div id="script-container-${uniqueId}">
+                                        <!-- Display Mode -->
+                                        <div id="script-display-${uniqueId}" class="group/script relative pl-2 border-l-2 border-gray-700 hover:border-blue-500 transition-colors">
+                                            <p class="text-sm italic text-gray-300 line-clamp-2 hover:text-white transition-colors cursor-pointer" onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})">"${line.script}"</p>
+                                            <button onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="absolute top-0 right-0 opacity-0 group-hover/script:opacity-100 text-gray-500 hover:text-white transition-opacity p-1" title="Edit Voiceover">
+                                                ✏️
+                                            </button>
+                                        </div>
+
+                                        <!-- Edit Mode -->
+                                        <div id="script-edit-${uniqueId}" class="hidden mt-1">
+                                            <textarea id="script-input-${uniqueId}" rows="3" class="w-full bg-black/50 text-white p-2 text-sm rounded border border-blue-500 focus:outline-none mb-2 font-mono">${line.script}</textarea>
+                                            <div class="flex justify-end gap-2">
+                                                <button onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-xs text-gray-400 hover:text-white px-2 py-1">Cancel</button>
+                                                <button onclick="saveScriptUpdate('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded font-bold">Save & Sync</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1141,6 +1158,58 @@
         function handleContextChange(sceneIndex) {
             const textArea = document.getElementById(`context-${sceneIndex}`);
             scenes[sceneIndex].context = textArea.value;
+        }
+
+        function toggleScriptEdit(uniqueId, sceneIndex, lineIndex) {
+            // Prevent event bubbling if triggered from multiple places
+            if (event) event.stopPropagation();
+            
+            const displayEl = document.getElementById(`script-display-${uniqueId}`);
+            const editEl = document.getElementById(`script-edit-${uniqueId}`);
+            const inputEl = document.getElementById(`script-input-${uniqueId}`);
+            
+            if (editEl.classList.contains('hidden')) {
+                // Switch to Edit Mode
+                displayEl.classList.add('hidden');
+                editEl.classList.remove('hidden');
+                inputEl.focus();
+            } else {
+                // Switch to Display Mode (Cancel)
+                displayEl.classList.remove('hidden');
+                editEl.classList.add('hidden');
+                // Reset value to current state
+                inputEl.value = scenes[sceneIndex].lines[lineIndex].script;
+            }
+        }
+
+        async function saveScriptUpdate(uniqueId, sceneIndex, lineIndex) {
+            if (event) event.stopPropagation();
+            
+            const inputEl = document.getElementById(`script-input-${uniqueId}`);
+            const newScript = inputEl.value;
+            
+            // 1. Update Local Data
+            scenes[sceneIndex].lines[lineIndex].script = newScript;
+            
+            // 2. Optimistic UI Update (Switch back to display mode with new text)
+            const displayEl = document.getElementById(`script-display-${uniqueId}`);
+            const editEl = document.getElementById(`script-edit-${uniqueId}`);
+            
+            // Update the display paragraph
+            const pObj = displayEl.querySelector('p');
+            if (pObj) pObj.innerText = `"${newScript}"`;
+            
+            displayEl.classList.remove('hidden');
+            editEl.classList.add('hidden');
+            
+            // 3. Trigger Save to GitHub
+            // passing true to saveChanges to indicate this is an auto-save/background save if needed, 
+            // but for now we'll just call it directly. 
+            // We might want to change saveChanges to accept a "silent" flag or similar.
+            
+            // For better UX during "Save & Sync", let's show a toast or change the button state temporarily before switching?
+            // Actually saveChanges() puts the main button in "Saving..." state which is visible global feedback.
+            await saveChanges();
         }
 
         function openScriptModal() {
@@ -2617,15 +2686,17 @@
             alert("Configuration saved! You can now use the 'Save YAML' button.");
         }
 
-        async function saveChanges() {
+        async function saveChanges(skipConfirm = false) {
             const config = checkGithubConfig();
             if (!config) {
                 openGithubModal();
                 return;
             }
 
-            const confirmSave = confirm(`Save changes to ${config.owner}/${config.repo}/${config.path}?`);
-            if (!confirmSave) return;
+            if (!skipConfirm) {
+                const confirmSave = confirm(`Save changes to ${config.owner}/${config.repo}/${config.path}?`);
+                if (!confirmSave) return;
+            }
 
             const btn = document.querySelector('button[onclick="saveChanges()"]');
             const originalText = btn ? btn.innerText : "💾 Save YAML";
