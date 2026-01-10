@@ -63,12 +63,20 @@
             // Scroll Listener for "Scroll to Top"
             window.onscroll = function() {
                 const btn = document.getElementById("scroll-top-btn");
-                if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                    btn.style.display = "block";
-                    setTimeout(() => btn.style.opacity = "1", 10);
-                } else {
-                    btn.style.opacity = "0";
-                    setTimeout(() => btn.style.display = "none", 300);
+                if (btn) {
+                    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                        btn.classList.add('visible');
+                        btn.style.display = "block";
+                        btn.style.visibility = "visible";
+                        setTimeout(() => btn.style.opacity = "1", 10);
+                    } else {
+                        btn.style.opacity = "0";
+                        setTimeout(() => {
+                            btn.style.display = "none";
+                            btn.style.visibility = "hidden";
+                            btn.classList.remove('visible');
+                        }, 300);
+                    }
                 }
             };
 
@@ -134,6 +142,11 @@
         }
 
         function parseAndLoadData(yamlText) {
+             if (typeof jsyaml === 'undefined') {
+                 console.error('js-yaml library not loaded. Please check your internet connection.');
+                 alert('⚠️ YAML parser not loaded. Please check your internet connection and refresh the page.');
+                 return;
+             }
              const data = jsyaml.load(yamlText);
              if (!data || !data.scenes) throw new Error("Invalid YAML format");
              
@@ -1450,7 +1463,7 @@
         // Initialize state
         document.addEventListener('DOMContentLoaded', () => {
              // No initialization needed for fixed player
-             initFormulas();
+             initDocumentationMenus();
         });
 
 
