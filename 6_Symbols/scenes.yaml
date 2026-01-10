@@ -563,7 +563,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: First you run diagnostics. That's assess. Then you install targeted upgrades. That's train.
+        script: First you run diagnostics. That's assess. Then you build the system collabratively which is simulate.
         prompts:
           image: 'Split screen: Left side a diagnostic digital readout screen, Right side a robotic arm installing a chip'
           graphic: 'Icons: Magnifying glass (Assess) -> Microchip (Train)'
