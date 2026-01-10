@@ -22,32 +22,34 @@
                 <span class="text-lg">🍌</span>
                 
                 <!-- Title Input -->
-                <div class="relative group/title flex-1 mr-4">
+                <div class="relative group/title flex-1 mr-4" title="Click to edit project title">
                     <input type="text" id="project-title-input" 
                         class="bg-transparent text-sm font-bold text-white border-b border-transparent hover:border-gray-500 focus:border-blue-500 focus:outline-none w-full transition-colors pb-0.5 truncate"
                         placeholder="Project Title"
+                        aria-label="Project Title"
                         oninput="handleProjectTitleChange(this.value)">
-                    <span class="absolute right-0 top-0 text-[10px] text-gray-500 opacity-0 group-hover/title:opacity-100 pointer-events-none">✏️</span>
+                    <span class="absolute right-0 top-0 text-xs text-gray-500 opacity-0 group-hover/title:opacity-100 pointer-events-none transition-opacity">✏️</span>
                 </div>
 
-                <div class="flex items-center gap-1 bg-gray-800 rounded p-1 border border-gray-700 shrink-0">
-                    <button id="nav-btn-prev" onclick="prevScene()" disabled class="text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition px-1">
+                <div class="flex items-center gap-1 bg-gray-800 rounded p-1 border border-gray-700 shrink-0" title="Scene Navigation">
+                    <button id="nav-btn-prev" onclick="prevScene()" disabled class="text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition px-1.5 py-0.5" aria-label="Previous Scene">
                         ⬅️
                     </button>
-                    <span id="nav-scene-indicator" class="text-[10px] font-bold text-gray-300 w-16 text-center font-mono">
+                    <span id="nav-scene-indicator" class="text-[10px] font-bold text-gray-300 w-20 text-center font-mono px-1" aria-live="polite">
                         -- / --
                     </span>
-                    <button id="nav-btn-next" onclick="nextScene()" disabled class="text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition px-1">
+                    <button id="nav-btn-next" onclick="nextScene()" disabled class="text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition px-1.5 py-0.5" aria-label="Next Scene">
                         ➡️
                     </button>
                 </div>
             </div>
 
              <!-- Center: Audio Control (Wider) -->
-            <div class="flex items-center justify-center gap-2 bg-gray-800 rounded-full px-4 py-1 border border-gray-700 w-1/2 max-w-md mx-2">
-                <span class="text-[10px] font-bold text-gray-400">🔊</span>
-                <audio controls class="h-6 w-full opacity-90 hover:opacity-100 transition-opacity">
+            <div class="flex items-center justify-center gap-2 bg-gray-800 rounded-full px-4 py-1.5 border border-gray-700 w-1/2 max-w-md mx-2" title="Project Voiceover">
+                <span class="text-xs font-bold text-gray-400" aria-label="Audio Player">🔊</span>
+                <audio controls class="h-7 w-full opacity-90 hover:opacity-100 transition-opacity" aria-label="Project voiceover audio">
                     <source src="proccesed_voiceover_v2.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
                 </audio>
             </div>
 
@@ -58,21 +60,31 @@
 
                  <span id="header-notification" class="hidden lg:block text-[10px] font-mono text-blue-300 bg-blue-900/30 px-2 py-0.5 rounded opacity-0 transition-opacity duration-300"></span>
                  
-                 <div class="relative flex items-center">
+                 <div class="relative flex items-center gap-2">
+                    <!-- Info Button for API Key -->
+                    <button 
+                        onclick="alert('Get your free Google Gemini API key from:\nhttps://aistudio.google.com/apikey\n\nThe API key is stored locally in your browser and never sent to any server except Google\'s API.')"
+                        class="text-gray-500 hover:text-blue-400 transition-colors text-sm"
+                        title="How to get API key"
+                        aria-label="API Key Help">
+                        ℹ️
+                    </button>
+                    
                     <!-- Input State -->
                     <div id="api-key-input-container" class="relative">
-                        <input type="password" id="apiKey" placeholder="API Key" 
+                        <input type="password" id="apiKey" placeholder="Google API Key" 
                             oninput="debouncedSaveApiKey(this.value)"
-                            class="bg-gray-800 border border-gray-600 text-white p-1.5 text-[10px] rounded w-24 md:w-32 focus:outline-none focus:border-blue-500 transition-colors pr-6">
-                        <span id="api-status-icon" class="absolute right-1 top-1.5 text-[10px] select-none" title="API Key Status"></span>
+                            aria-label="Google Gemini API Key"
+                            class="bg-gray-800 border border-gray-600 text-white p-1.5 text-xs rounded w-28 md:w-36 focus:outline-none focus:border-blue-500 transition-colors pr-6 placeholder-gray-500">
+                        <span id="api-status-icon" class="absolute right-1.5 top-1.5 text-xs select-none" title="API Key Status"></span>
                     </div>
                     
                     <!-- Verified State -->
                     <div id="api-key-verified" class="hidden flex items-center gap-2 bg-gray-800/50 border border-green-900/50 px-2 py-1.5 rounded">
-                        <span class="text-[10px] font-bold text-green-400 flex items-center gap-1">
+                        <span class="text-xs font-bold text-green-400 flex items-center gap-1" title="API Key Verified">
                             ✅
                         </span>
-                        <button onclick="resetApiKey()" class="text-[10px] text-gray-500 hover:text-white underline">
+                        <button onclick="resetApiKey()" class="text-xs text-gray-500 hover:text-white underline" aria-label="Change API Key">
                             Change
                         </button>
                     </div>
@@ -82,11 +94,20 @@
     </div>
 
     <!-- Scroll To Top Button -->
-    <button id="scroll-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Scroll to Top">
+    <button id="scroll-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+        title="Scroll to Top" 
+        aria-label="Scroll to top of page"
+        class="fixed bottom-16 right-6 bg-blue-600 hover:bg-blue-500 text-white text-xl p-3 rounded-full shadow-lg transition-all duration-300 opacity-0 invisible">
         ⬆️
     </button>
 
     <div id="app" class="w-full xl:w-1/2 p-4 pb-24 transition-all duration-300">
+        <!-- Loading State -->
+        <div id="loading-indicator" class="flex flex-col items-center justify-center py-20 gap-4">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500"></div>
+            <p class="text-gray-400 text-sm">Loading project data...</p>
+        </div>
+    </div>
     </div>
 
     <!-- Floating Assets Panel (Right Side) -->
@@ -237,12 +258,18 @@
 
         <!-- RIGHT: Primary Actions -->
         <div class="flex items-center gap-2">
-            <button onclick="saveChanges()" title="Save to GitHub" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 rounded text-xs transition shadow-sm font-semibold border border-blue-400 flex items-center gap-1.5 shadow-lg shadow-blue-900/20">
-                <svg height="12" width="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+            <button onclick="saveChanges()" 
+                title="Save to GitHub (Ctrl+S)" 
+                class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 rounded text-xs transition shadow-sm font-semibold border border-blue-400 flex items-center gap-1.5 shadow-lg shadow-blue-900/20 hover:shadow-xl hover:shadow-blue-900/30"
+                aria-label="Save changes to GitHub">
+                <svg height="12" width="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
                 Save
             </button>
 
-            <button onclick="openBulkGenModal()" class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white px-4 py-1.5 rounded text-xs transition shadow-sm font-bold border border-rose-400 flex items-center gap-1.5 shadow-lg shadow-pink-900/20">
+            <button onclick="openBulkGenModal()" 
+                title="Generate content for multiple scenes at once"
+                class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white px-4 py-1.5 rounded text-xs transition shadow-sm font-bold border border-rose-400 flex items-center gap-1.5 shadow-lg shadow-pink-900/20 hover:shadow-xl hover:shadow-pink-900/30"
+                aria-label="Open bulk generation modal">
                 ⚡ Bulk Generate
             </button>
         </div>

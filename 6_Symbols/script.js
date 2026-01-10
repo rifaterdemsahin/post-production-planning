@@ -63,12 +63,20 @@
             // Scroll Listener for "Scroll to Top"
             window.onscroll = function() {
                 const btn = document.getElementById("scroll-top-btn");
-                if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                    btn.style.display = "block";
-                    setTimeout(() => btn.style.opacity = "1", 10);
-                } else {
-                    btn.style.opacity = "0";
-                    setTimeout(() => btn.style.display = "none", 300);
+                if (btn) {
+                    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                        btn.classList.add('visible');
+                        btn.style.display = "block";
+                        btn.style.visibility = "visible";
+                        setTimeout(() => btn.style.opacity = "1", 10);
+                    } else {
+                        btn.style.opacity = "0";
+                        setTimeout(() => {
+                            btn.style.display = "none";
+                            btn.style.visibility = "hidden";
+                            btn.classList.remove('visible');
+                        }, 300);
+                    }
                 }
             };
 
@@ -90,6 +98,28 @@
                     }
                 }
                 renderScenes();
+            });
+
+            // Keyboard shortcuts for better UX
+            document.addEventListener('keydown', (e) => {
+                // Ctrl+S or Cmd+S to save
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    if (typeof saveChanges === 'function') {
+                        saveChanges();
+                    }
+                }
+                
+                // Arrow keys for navigation (only when not in input/textarea)
+                if (!['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+                    if (e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        prevScene();
+                    } else if (e.key === 'ArrowRight') {
+                        e.preventDefault();
+                        nextScene();
+                    }
+                }
             });
 
             try {
@@ -134,6 +164,11 @@
         }
 
         function parseAndLoadData(yamlText) {
+             if (typeof jsyaml === 'undefined') {
+                 console.error('js-yaml library not loaded. Please check your internet connection.');
+                 alert('⚠️ YAML parser not loaded. Please check your internet connection and refresh the page.');
+                 return;
+             }
              const data = jsyaml.load(yamlText);
              if (!data || !data.scenes) throw new Error("Invalid YAML format");
              
@@ -658,7 +693,7 @@
 
                 html += `
                     <div id="line-card-${uniqueId}" 
-                         class="line-item-card p-2 rounded border relative group hover:border-gray-600 transition-colors ${activeWrapperClass}"
+                         class="line-item-card rounded border relative group hover:border-gray-600 transition-colors ${activeWrapperClass}"
                          onclick="selectLine(${sceneIndex}, ${lineIndex})">
                     <div class="flex justify-between items-start cursor-pointer p-2" onclick="event.stopPropagation(); toggleSection('line-tools-${uniqueId}', 'line-arrow-${uniqueId}'); selectLine(${sceneIndex}, ${lineIndex})">
                             <div class="flex gap-3 flex-1">
@@ -1451,7 +1486,7 @@
         // Initialize state
         document.addEventListener('DOMContentLoaded', () => {
              // No initialization needed for fixed player
-             initFormulas();
+             initDocumentationMenus();
         });
 
 
