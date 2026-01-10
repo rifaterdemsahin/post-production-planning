@@ -2748,6 +2748,7 @@
             try {
                 // Wrap in root object to match original structure
                 const exportData = { 
+                    title: window.projectTitle || "",
                     main_context: window.mainContext || "",
                     verified_main_context: window.verifiedMainContext || false,
                     scenes: scenes 
