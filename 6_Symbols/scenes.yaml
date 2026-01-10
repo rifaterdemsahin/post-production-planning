@@ -711,7 +711,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: Sticking with that vehicle metaphor, if diagnostics found a weakness in security...
+        script: Sticking with that vehicle metaphor, you build this at real time while checking other team members doing something similar.
         prompts:
           image: The vehicle from before, highlighting the doors with a weak red shield
           graphic: Shield icon flashing red
