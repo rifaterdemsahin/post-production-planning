@@ -582,9 +582,17 @@
         let scenes = []; // Global variable to hold data after loading
         let currentSceneIndex = 0;
 
+
+        function updateURL(index) {
+            const url = new URL(window.location);
+            url.searchParams.set('scene', index + 1);
+            window.history.pushState({ sceneIndex: index }, '', url);
+        }
+
         function nextScene() {
             if (currentSceneIndex < scenes.length - 1) {
                 currentSceneIndex++;
+                updateURL(currentSceneIndex);
                 renderScenes();
                 document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
             }
@@ -612,10 +620,12 @@
         function prevScene() {
             if (currentSceneIndex > 0) {
                 currentSceneIndex--;
+                updateURL(currentSceneIndex);
                 renderScenes();
                 document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
             }
         }
+
 
         async function initApp() {
             // Restore API Key
@@ -636,6 +646,26 @@
                     setTimeout(() => btn.style.display = "none", 300);
                 }
             };
+
+            // Handle Browser Back/Forward
+            window.addEventListener('popstate', (event) => {
+                if (event.state && typeof event.state.sceneIndex === 'number') {
+                    currentSceneIndex = event.state.sceneIndex;
+                } else {
+                    // Fallback to URL or default
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const sceneParam = urlParams.get('scene');
+                    if (sceneParam) {
+                       const index = parseInt(sceneParam) - 1;
+                       if (index >= 0 && index < scenes.length) {
+                           currentSceneIndex = index;
+                       }
+                    } else {
+                        currentSceneIndex = 0;
+                    }
+                }
+                renderScenes();
+            });
 
             try {
                 // Fetch the YAML file (Default load)
@@ -686,7 +716,23 @@
              window.mainContext = data.main_context || "";
              window.verifiedMainContext = data.verified_main_context || false;
              window.projectTitle = data.title || "";
+
+             // Check URL for initial scene
+             const urlParams = new URLSearchParams(window.location.search);
+             const sceneParam = urlParams.get('scene');
+             if (sceneParam) {
+                 const index = parseInt(sceneParam) - 1;
+                 if (index >= 0 && index < scenes.length) {
+                     currentSceneIndex = index;
+                 }
+             }
+
              renderScenes();
+             
+             // Update history state for the initial load
+             const url = new URL(window.location);
+             url.searchParams.set('scene', currentSceneIndex + 1);
+             window.history.replaceState({ sceneIndex: currentSceneIndex }, '', url);
         }
 
         let apiKeyDebounceTimer;
@@ -3160,7 +3206,12 @@
             ],
             test: [
                 { title: "Read Me", path: "../8_Test/README.md" },
-                { title: "Test Turn Off Deployments", path: "../8_Test/test_deployment_settings.md" }
+                { title: "Test Turn Off Deployments", path: "../8_Test/test_deployment_settings.md" },
+                { title: "Test Bulk Generation", path: "../8_Test/test_bulk_generation.md" },
+                { title: "Test GitHub Save", path: "../8_Test/test_github_save.md" },
+                { title: "Test Google Drive Upload", path: "../8_Test/test_google_drive_upload.md" },
+                { title: "Test Stats Verification", path: "../8_Test/test_stats_verification.md" },
+                { title: "Test API Key Validation", path: "../8_Test/test_api_key_validation.md" }
             ]
         };
 
