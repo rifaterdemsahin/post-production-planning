@@ -600,6 +600,7 @@
             const sceneIndex = currentSceneIndex;
             
             const sceneContainer = document.createElement('div');
+            sceneContainer.id = `scene-card-${sceneIndex}`;
             sceneContainer.className = `scene-card rounded-lg ${scene.color} overflow-hidden`;
                 
                 let html = `

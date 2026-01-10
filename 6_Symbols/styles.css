@@ -131,3 +131,51 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(4px);
 }
+
+/* 
+  ID Hover Effect for Debugging 
+  Only applies to elements with IDs inside #app and #floating-assets-container
+  that we specifically care about for structure.
+  
+  Excluding inputs, textareas, and certain specific wrappers if they get too noisy.
+*/
+#app div[id]:hover::before, 
+#floating-assets-container div[id]:hover::before,
+.line-item-card[id]:hover::before {
+    content: attr(id);
+    position: absolute;
+    top: -10px;
+    right: 0;
+    background: #00ff00;
+    color: black;
+    font-size: 10px;
+    font-family: monospace;
+    padding: 2px 4px;
+    border-radius: 4px;
+    z-index: 9999;
+    pointer-events: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    font-weight: bold;
+    border: 1px solid white;
+}
+
+/* Highlight bounds on hover */
+#app div[id]:hover,
+#floating-assets-container div[id]:hover,
+.line-item-card[id]:hover {
+   box-shadow: 0 0 0 1px rgba(0, 255, 0, 0.5);
+}
+
+/* Ensure relative positioning for the absolute badge to work, 
+   but try not to break layout. 
+   Apply cautiously. */
+
+.line-item-card {
+    position: relative; /* Already relative in many cases from tailwind classes */
+}
+
+/* Specific exclusions to prevent UI clutter */
+#app div[id*="script-display"]:hover::before,
+#app div[id*="script-edit"]:hover::before {
+    display: none; /* Hide for smaller script chunks if noisy */
+}
