@@ -324,7 +324,7 @@ scenes:
           sound_effect: false
       - id: '2'
         time: '0:04'
-        script: On one side, you have the old world coder. You know the type. Their skill is super specific.
+        script: On one side, you have the old world professional. You know the type. Their skill is super specific.coder/tester/devops..etc
         prompts:
           image: Cinematic shot of a coder hunching over a bulky retro beige computer terminal in a grey cubicle, Matrix green code reflection, claustrophobic atmosphere
           graphic: A single narrow vertical bar representing 'Deep Skill' in a chart
@@ -415,7 +415,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: You don't need a better raincoat. You need a vehicle.
+        script: You don't need a better raincoat. You need a vehicle which needs a delivery pilot.
         prompts:
           image: Side profile of a flimsy yellow raincoat tearing in the wind versus a sleek armored all-terrain vehicle chassis, comparison shot
           graphic: 'Icon transform effect: Raincoat -> Tank'
@@ -455,9 +455,9 @@ scenes:
     lines:
       - id: '1'
         time: '0:00'
-        script: And that vehicle, well, it has a name. And here it is, the ATW protocol.
+        script: And that vehicle, well, it has a name. And here it is, the ASC protocol.
         prompts:
-          image: The vehicle license plate zooming in, reading 'ATW-PROTO', metallic texture, lens flare
+          image: The vehicle license plate zooming in, reading 'ASC-PROTO', metallic texture, lens flare
           graphic: Text 'ATW PROTOCOL' appearing in bold metallic 3D letters
           music: Technological reveal sound, high tech synth
           animation: Zoom in to the license plate
@@ -472,7 +472,7 @@ scenes:
           sound_effect: false
       - id: '2'
         time: '0:04'
-        script: It stands for Assess, Train, Workshop. It's a system, an engineering mindset.
+        script: It stands for Assess, Simulate, Certify. It's a system, an engineering mindset.
         prompts:
           image: Technical blueprint on a blue background showing the three phases as interlocked gears, white chalk lines
           graphic: 'Three gears turning: ''Assess'', ''Train'', ''Workshop'''
@@ -563,7 +563,7 @@ scenes:
           sound_effect: false
       - id: '3'
         time: '0:08'
-        script: First you run diagnostics. That's assess. Then you install targeted upgrades. That's train.
+        script: First you run diagnostics. That's assess. Then you build the system collabratively which is simulate.
         prompts:
           image: 'Split screen: Left side a diagnostic digital readout screen, Right side a robotic arm installing a chip'
           graphic: 'Icons: Magnifying glass (Assess) -> Microchip (Train)'
@@ -580,7 +580,7 @@ scenes:
           sound_effect: false
       - id: '4'
         time: '0:12'
-        script: And finally, you put it all together and hit the road. That's the workshop.
+        script: And finally, you put it all together and hit the road and certify the pilots for their delivery.
         prompts:
           image: The vehicle speeding off into a neon horizon, leaving a light trail, sense of speed and completion
           graphic: Checkered flag icon waving
