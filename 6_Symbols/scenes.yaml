@@ -1121,7 +1121,7 @@ scenes:
     lines:
       - id: '1'
         time: '0:00'
-        script: The ATW protocol itself? It's open source. The philosophy is forward motion.
+        script: The Delivery pilot itself? It's open source. The philosophy is iteration and self learning.
         prompts:
           image: The Open Source logo glowing green on a dark background, unlocked padlock
           graphic: Text 'MIT LICENSE' or similar open source iconography
