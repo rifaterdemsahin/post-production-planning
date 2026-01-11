@@ -557,6 +557,7 @@
             const menu = document.getElementById('actions-menu');
             const linksMenu = document.getElementById('links-menu');
             const symbolsMenu = document.getElementById('symbols-menu');
+            const aiMenu = document.getElementById('ai-menu');
             
             // Close other menus
             if (linksMenu) {
@@ -566,6 +567,10 @@
             if (symbolsMenu) {
                 symbolsMenu.classList.add('hidden');
                 symbolsMenu.classList.remove('flex');
+            }
+            if (aiMenu) {
+                aiMenu.classList.add('hidden');
+                aiMenu.classList.remove('flex');
             }
 
             // Toggle this menu
@@ -628,11 +633,41 @@
             const menu = document.getElementById('links-menu');
             const actionsMenu = document.getElementById('actions-menu');
             const symbolsMenu = document.getElementById('symbols-menu');
+            const aiMenu = document.getElementById('ai-menu');
             
             // Close other menus
             if (actionsMenu) {
                 actionsMenu.classList.add('hidden');
                 actionsMenu.classList.remove('flex');
+            }
+            if (symbolsMenu) {
+                symbolsMenu.classList.add('hidden');
+                symbolsMenu.classList.remove('flex');
+            }
+            if (aiMenu) {
+                aiMenu.classList.add('hidden');
+                aiMenu.classList.remove('flex');
+            }
+
+            // Toggle this menu
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        function toggleAIMenu() {
+            const menu = document.getElementById('ai-menu');
+            const actionsMenu = document.getElementById('actions-menu');
+            const linksMenu = document.getElementById('links-menu');
+            const symbolsMenu = document.getElementById('symbols-menu');
+            
+            // Close other menus
+            if (actionsMenu) {
+                actionsMenu.classList.add('hidden');
+                actionsMenu.classList.remove('flex');
+            }
+            if (linksMenu) {
+                linksMenu.classList.add('hidden');
+                linksMenu.classList.remove('flex');
             }
             if (symbolsMenu) {
                 symbolsMenu.classList.add('hidden');

@@ -216,6 +216,86 @@
                 </div>
             </div>
 
+            <!-- AI GENERATORS MENU -->
+            <div class="relative group">
+                <button onclick="toggleAIMenu()" id="ai-menu-btn" class="text-gray-300 hover:text-white text-xs font-bold flex items-center gap-2 bg-gradient-to-r from-purple-900 to-blue-900 hover:from-purple-800 hover:to-blue-800 px-3 py-1.5 rounded border border-purple-600 transition">
+                    <span>🤖 AI Tools</span>
+                    <span class="text-[10px]">▼</span>
+                </button>
+                <div id="ai-menu" class="absolute bottom-full left-0 mb-3 w-56 bg-gray-800 rounded-lg shadow-xl border border-gray-700 hidden flex-col overflow-hidden transition-all duration-200 origin-bottom-left z-50">
+                    <div class="p-2 border-b border-gray-700 bg-gradient-to-r from-purple-900/50 to-blue-900/50">
+                        <span class="text-xs text-gray-300 font-bold">✨ AI Generators</span>
+                    </div>
+                    <div class="p-2 space-y-1">
+                        <a href="https://gemini.google.com/" target="_blank" class="flex items-center gap-2 text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1.5 rounded">
+                            <span class="text-lg">💎</span>
+                            <span class="font-bold">Gemini</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">Google</span>
+                        </a>
+                        <a href="https://aistudio.google.com/" target="_blank" class="flex items-center gap-2 text-xs text-cyan-400 hover:bg-gray-700 hover:text-cyan-300 px-2 py-1.5 rounded">
+                            <span class="text-lg">🧪</span>
+                            <span class="font-bold">AI Studio</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">Google</span>
+                        </a>
+                        <a href="https://github.com/copilot" target="_blank" class="flex items-center gap-2 text-xs text-green-400 hover:bg-gray-700 hover:text-green-300 px-2 py-1.5 rounded">
+                            <span class="text-lg">🐙</span>
+                            <span class="font-bold">GitHub Copilot</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">Microsoft</span>
+                        </a>
+                        <a href="https://copilot.microsoft.com/" target="_blank" class="flex items-center gap-2 text-xs text-blue-400 hover:bg-gray-700 hover:text-blue-300 px-2 py-1.5 rounded">
+                            <span class="text-lg">🪟</span>
+                            <span class="font-bold">Microsoft Copilot</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">Microsoft</span>
+                        </a>
+                        <a href="https://claude.ai/" target="_blank" class="flex items-center gap-2 text-xs text-orange-400 hover:bg-gray-700 hover:text-orange-300 px-2 py-1.5 rounded">
+                            <span class="text-lg">🧠</span>
+                            <span class="font-bold">Claude</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">Anthropic</span>
+                        </a>
+                        <a href="https://x.com/i/grok" target="_blank" class="flex items-center gap-2 text-xs text-white hover:bg-gray-700 hover:text-gray-200 px-2 py-1.5 rounded">
+                            <span class="text-lg">⚡</span>
+                            <span class="font-bold">Grok</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">xAI</span>
+                        </a>
+                        <a href="https://chat.openai.com/" target="_blank" class="flex items-center gap-2 text-xs text-emerald-400 hover:bg-gray-700 hover:text-emerald-300 px-2 py-1.5 rounded">
+                            <span class="text-lg">🌀</span>
+                            <span class="font-bold">ChatGPT</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">OpenAI</span>
+                        </a>
+                        <a href="https://poe.com/" target="_blank" class="flex items-center gap-2 text-xs text-purple-400 hover:bg-gray-700 hover:text-purple-300 px-2 py-1.5 rounded">
+                            <span class="text-lg">🔮</span>
+                            <span class="font-bold">Poe</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">Quora</span>
+                        </a>
+                    </div>
+                    <div class="p-2 border-t border-gray-700 bg-gray-900/50">
+                        <span class="text-[10px] text-gray-500">🎨 Image & Media</span>
+                    </div>
+                    <div class="p-2 space-y-1">
+                        <a href="https://www.midjourney.com/" target="_blank" class="flex items-center gap-2 text-xs text-pink-400 hover:bg-gray-700 hover:text-pink-300 px-2 py-1.5 rounded">
+                            <span class="text-lg">🎨</span>
+                            <span class="font-bold">Midjourney</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">Images</span>
+                        </a>
+                        <a href="https://labs.openai.com/" target="_blank" class="flex items-center gap-2 text-xs text-teal-400 hover:bg-gray-700 hover:text-teal-300 px-2 py-1.5 rounded">
+                            <span class="text-lg">🖼️</span>
+                            <span class="font-bold">DALL-E</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">OpenAI</span>
+                        </a>
+                        <a href="https://runwayml.com/" target="_blank" class="flex items-center gap-2 text-xs text-red-400 hover:bg-gray-700 hover:text-red-300 px-2 py-1.5 rounded">
+                            <span class="text-lg">🎬</span>
+                            <span class="font-bold">Runway</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">Video</span>
+                        </a>
+                        <a href="https://suno.com/" target="_blank" class="flex items-center gap-2 text-xs text-yellow-400 hover:bg-gray-700 hover:text-yellow-300 px-2 py-1.5 rounded">
+                            <span class="text-lg">🎵</span>
+                            <span class="font-bold">Suno</span>
+                            <span class="text-gray-500 text-[10px] ml-auto">Music</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- CENTER: Documentation Menus -->
