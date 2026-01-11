@@ -2505,7 +2505,7 @@
                 if (videoUri) {
                     // The video URI is a GCS-like link containing the key if passed correctly, but let's append key just in case
                     const fetchVideoUrl = `${videoUri}&key=${apiKey}`;
-                    const filename = getArtifactFilename(id, 'Video') + '.mp4';
+                    const filename = getArtifactFilename(id, 'Animation') + '.mp4';
                     
                     const videoHtml = `
                         <div class="mb-4">
@@ -2961,15 +2961,18 @@
                         // Determine type from filename matching
                         if(filename.includes("Image")) type = "Image";
                         else if(filename.includes("Video")) type = "Video";
+                        else if(filename.includes("Animation")) type = "Animation";
                         else if(filename.includes("Audio")) type = "Audio";
                         
                         const now = new Date();
                         const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}`;
                         
-                        filename = `Line${lineId}_${type}_${dateStr}`;
-                        if (src.startsWith('data:image')) filename += '.png';
-                        else if (src.startsWith('data:audio')) filename += '.mp3';
-                        else if (filename.includes('mp4') || src.includes('mp4')) filename = filename.replace('.mp4','') + '.mp4'; // Ensure ext
+                        let ext = "";
+                        if (src.startsWith('data:image') || filename.toLowerCase().endsWith('.png')) ext = '.png';
+                        else if (src.startsWith('data:audio') || filename.toLowerCase().endsWith('.mp3')) ext = '.mp3';
+                        else if (type === 'Video' || type === 'Animation' || filename.toLowerCase().endsWith('.mp4')) ext = '.mp4';
+                        
+                        filename = `Line${lineId}_${type}_${dateStr}${ext}`;
                     }
                 }
                 
