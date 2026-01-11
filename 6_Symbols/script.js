@@ -15,16 +15,16 @@
             sheetsApiKey: '', // Will be loaded from storage
             // Actual sheet names from the spreadsheet:
             // 1. Overview (gid=0), 2. Scenes Summary (gid=440551049), 
-            // 3. All Lines, 4. Uploaded Assets, 5. Asset Lines (gid=1278766054)
-            sheetName: 'Asset Lines', // Main data sheet - UPDATE THIS if sheet name is different
+            // 3. All Lines, 4. Uploaded Assets
+            // NOTE: gid=1278766054 - need to find the actual sheet name for this
+            sheetName: 'All Lines', // Main data sheet - change this to match your sheet tab name
             titleSheet: 'Overview', // Sheet containing project title in B3
             // Sheet names/gids for different data
             sheets: {
                 overview: { name: 'Overview', gid: '0' },
                 scenesSummary: { name: 'Scenes Summary', gid: '440551049' },
-                allLines: { name: 'All Lines', gid: '' },
-                uploadedAssets: { name: 'Uploaded Assets', gid: '' },
-                assetLines: { name: 'Asset Lines', gid: '1278766054' } // New sheet for asset lines
+                allLines: { name: 'All Lines', gid: '1278766054' },
+                uploadedAssets: { name: 'Uploaded Assets', gid: '' }
             }
         };
 
