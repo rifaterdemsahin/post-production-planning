@@ -38,12 +38,7 @@ A proper response should look like:
 
 If you share more context about how you're making the API call and processing the response, I can help debug further!
 
-
-
 ---
-
-
-
 
 Unfortunately, **Gemini's TTS model cannot generate sound effects** - it's specifically designed for text-to-speech (converting written text into spoken voice).
 
@@ -105,3 +100,59 @@ The best approach for your documentary:
    * Stock libraries: Epidemic Sound, Artlist
 
 Would you like help setting up one of the AI audio generation tools instead, or guidance on integrating sound effects into your video workflow?
+
+---
+
+
+
+Based on the available models, **Google doesn't have a dedicated sound effect generation model** in their API. However, you have a couple options:
+
+## Option 1: Use TTS Models (Limited)
+
+The TTS models can only do voice/speech, not pure sound effects:
+
+* `gemini-2.5-flash-preview-tts`
+* `gemini-2.5-pro-preview-tts`
+
+These won't generate actual sound effects like chimes or bells.
+
+## Option 2: Use Image Generation Models for Video
+
+If you're creating a documentary, you might want visuals instead:
+
+* `imagen-4.0-generate-001` - Generate images
+* `veo-3.1-generate-preview` - **Generate video** (this might be more useful!)
+
+## Option 3: Use Veo for Video with Sound
+
+**Veo 3.1** can generate video, and videos often include ambient audio:
+
+```json
+{
+  "model": "models/veo-3.1-fast-generate-preview",
+  "contents": [{
+    "parts": [{
+      "text": "A crystalline glass bell chiming in slow motion, high-pitched resonant sound, dark background with neon blue lighting, cinematic 8k quality"
+    }]
+  }]
+}
+```
+
+This generates a **video clip** that might include the sound effect naturally.
+
+## **Recommended Solution**
+
+Since Google doesn't have sound effect generation, I recommend:
+
+1. **Use Gemini TTS** for narration
+2. **Use Veo 3.1** for b-roll video footage (which may include some audio)
+3. **Get sound effects from free libraries** :
+
+* Freesound.org
+* Pixabay
+* Zapsplat
+* Search for "crystal chime" or "glass bell"
+
+ **For your specific crystal chime sound effect** , just download it from Freesound - it'll be faster, higher quality, and free.
+
+Would you like help setting up Veo for video generation instead, or should I show you how to find the perfect sound effects on Freesound?

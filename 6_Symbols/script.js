@@ -54,10 +54,15 @@
 
         async function initApp() {
             // Restore API Key
-            const savedKey = localStorage.getItem('google_api_key');
             if (savedKey) {
                 document.getElementById('apiKey').value = savedKey;
                 verifyApiKey(savedKey);
+            }
+
+            // Restore ElevenLabs Key
+            const savedElevenKey = localStorage.getItem('elevenlabs_api_key');
+            if (savedElevenKey) {
+                document.getElementById('elevenApiKey').value = savedElevenKey;
             }
 
             // Scroll Listener for "Scroll to Top"
@@ -256,6 +261,10 @@
 
         function saveApiKey(key) {
             localStorage.setItem('google_api_key', key);
+        }
+
+        function saveElevenKey(key) {
+            localStorage.setItem('elevenlabs_api_key', key);
         }
 
         async function verifyApiKey(key) {
@@ -787,10 +796,10 @@
                                     <div class="flex border-b border-gray-700 mb-2 space-x-1 overflow-x-auto no-scrollbar">
                                         ${renderTabButton(uniqueId, 'image', '🖼️ Image', 'gemini-3-pro-image-preview', true)}
                                         ${renderTabButton(uniqueId, 'graphic', '📊 Graphic', 'gemini-3-pro-image-preview')}
-                                        ${renderTabButton(uniqueId, 'music', '🎵 Music', 'music-generation-001')}
+                                        ${renderTabButton(uniqueId, 'music', '🎵 Music', 'eleven_turbo_v2')}
                                         ${renderTabButton(uniqueId, 'animation', '🎬 Animation', 'veo-2.0-generate-001')}
                                         ${renderTabButton(uniqueId, 'motion_graphics', '✨ Motion Graphics', 'gemini-2.0-flash')}
-                                        ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'music-generation-001')}
+                                        ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'eleven_turbo_v2_sfx')}
                                     </div>
                                     
                                     <div class="flex items-center gap-2 mb-2 px-1">
@@ -1751,14 +1760,16 @@
             }
         }
 
-        // 4c. Audio Generation (MusicLM / MusicFX)
-        async function generateAudioContent(id, prompt, action = 'generate') {
+        // 4c. Audio Generation (ElevenLabs)
+        async function generateAudioContent(id, prompt, action = 'generate', type = 'sound_effect') {
             const parts = id.split('_'); 
             const sceneIndex = parseInt(parts[0].substring(1));
             const lineIndex = parseInt(parts[1].substring(1));
-            const apiKey = document.getElementById('apiKey').value;
-            if (!apiKey) {
-                alert("⚠️ Please paste your Google API Key at the top first.");
+            
+            // Check for ElevenLabs Key First
+            const elevenKey = document.getElementById('elevenApiKey').value;
+            if (!elevenKey) {
+                alert("⚠️ Please enter your ElevenLabs API Key in the top header.");
                 return;
             }
 
@@ -1767,119 +1778,87 @@
             const container = document.getElementById(`result-container-${id}`);
 
             loader.style.display = "block";
-            status.innerText = "Composing Music/SFX...";
-            status.className = "text-xs text-yellow-400";
+            status.innerText = "Generating Audio (ElevenLabs)...";
+            status.className = "text-xs text-orange-400";
             container.classList.add('hidden');
 
-            // Using MusicLM / MusicFX model
-            const modelId = "music-generation-001"; 
-            // Using predict endpoint for specialized media generation
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:predict`;
-
-            // Determine duration based on type (default 10s)
-            let durationSeconds = 10;
-            const promptLower = prompt.toLowerCase();
-            if (promptLower.includes("sound effect") || promptLower.includes("sfx")) {
-                durationSeconds = 5;
+            const url = "https://api.elevenlabs.io/v1/sound-generation";
+            
+            // Determine duration based on explicit type
+            let durationSeconds = 5.0; // Default SFX
+            
+            if (type === 'music') {
+                durationSeconds = 11.0; // Max reasonable for music/preview
+            } else if (type === 'sound_effect') {
+                durationSeconds = 4.0;
             }
 
             const payload = {
-                instances: [
-                    {
-                        prompt: prompt
-                    }
-                ],
-                parameters: {
-                    sampleCount: 1,
-                    durationSeconds: durationSeconds
-                }
+                text: prompt,
+                duration_seconds: durationSeconds,
+                prompt_influence: 0.3
             };
 
-            logDebug('REQ', 'Sending Audio Request (MusicLM)', { url, payload });
+            logDebug('REQ', 'Sending Audio Request (ElevenLabs)', { url, payload });
 
             try {
                 const response = await fetch(url, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
+                    headers: { 
+                        'xi-api-key': elevenKey,
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify(payload)
                 });
 
-                const data = await response.json();
-                
-                // Log ID is often different for predict, but checking header
-                const requestId = response.headers.get('x-goog-request-id');
-                const logUrl = requestId ? `https://aistudio.google.com/logs/${requestId}` : "https://aistudio.google.com/logs";
-                
-                logDebug('RES', `Response (${response.status})`, data);
-
-                if (!response.ok) throw new Error(data.error?.message || `API Error: ${response.status}`);
-
-                let htmlOutput = "";
-                
-                // Parse 'predictions' for MusicLM/Vertex style response
-                if (data.predictions && data.predictions.length > 0) {
-                    const prediction = data.predictions[0];
-                    
-                    // MusicLM usually returns 'audio' or 'bytes' in base64
-                    // Check structure: prediction.audio? prediction.bytes? prediction.content?
-                    // Common Vertex pattern: { audio: "base64..." } or { content: "base64..." }
-                    
-                    let audioBase64 = null;
-                    if (prediction.audio) audioBase64 = prediction.audio;
-                    else if (prediction.bytes) audioBase64 = prediction.bytes;
-                    else if (prediction.content) audioBase64 = prediction.content;
-                    
-                    // If prediction is just a string, it might be the base64
-                    if (typeof prediction === 'string') audioBase64 = prediction;
-
-                    if (audioBase64) {
-                        const audioSrc = `data:audio/mp3;base64,${audioBase64}`; // Assuming MP3 or WAV, usually MP3
-                        const filename = getArtifactFilename(id, 'Audio') + '.mp3';
-                        
-                        htmlOutput += `
-                            <div class="mb-4">
-                                <p class="text-xs text-yellow-400 mb-2">✅ Audio Generated (MusicLM)</p>
-                                <audio controls src="${audioSrc}" class="w-full mb-2 bg-gray-800 rounded"></audio>
-                                <div class="flex flex-wrap gap-2 mt-2">
-                                    <a href="${audioSrc}" download="${filename}" class="flex items-center gap-2 bg-yellow-900/30 hover:bg-yellow-900/50 text-yellow-300 border border-yellow-800 px-3 py-1.5 rounded text-xs transition">
-                                        📥 Download Audio
-                                    </a>
-                                    <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="flex items-center gap-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-800 px-3 py-1.5 rounded text-xs transition">
-                                        ☁️ Upload to Drive
-                                    </button>
-                                </div>
-                            </div>`;
-                        
-                        // Update YAML
-                        updateVideoName(sceneIndex, lineIndex, filename);
-
-                        // Auto Upload
-                        (async () => {
-                            const res = await fetch(audioSrc);
-                            const blob = await res.blob();
-                            const driveLink = await autoUploadToDrive(id, blob, filename);
-                            if (driveLink) {
-                                updateArtifactData(sceneIndex, lineIndex, 'music', filename, driveLink);
-                                await saveChanges(true); 
-                                const toast = document.createElement('div');
-                                toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-purple-900 border border-purple-700 text-purple-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
-                                toast.innerHTML = `<span>☁️ Auto-uploaded Audio to Drive!</span>`;
-                                document.body.appendChild(toast);
-                                setTimeout(() => toast.remove(), 4000);
-                            }
-                        })();
-                    }
+                if (!response.ok) {
+                    const errText = await response.text();
+                    throw new Error(`API Error: ${response.status} - ${errText}`);
                 }
 
-                if (htmlOutput) {
-                    const logLink = `<div class="mt-4 pt-2 border-t border-gray-700"><a href="${logUrl}" target="_blank" class="text-xs text-gray-500 hover:text-blue-400">View Logs ↗</a></div>`;
-                    container.innerHTML = htmlOutput + logLink;
-                    container.classList.remove('hidden');
-                    status.innerText = "✅ Done";
-                    status.className = "text-xs text-green-500";
-                } else {
-                    throw new Error("No audio content returned in predictions.");
-                }
+                // ElevenLabs returns binary audio data directly
+                const audioBlob = await response.blob();
+                const audioSrc = URL.createObjectURL(audioBlob);
+                
+                logDebug('RES', `Response (${response.status})`, "Audio Blob Received");
+
+                const filename = getArtifactFilename(id, 'Audio') + '.mp3';
+                
+                let htmlOutput = `
+                    <div class="mb-4">
+                        <p class="text-xs text-orange-400 mb-2">✅ Audio Generated (ElevenLabs)</p>
+                        <audio controls src="${audioSrc}" class="w-full mb-2 bg-gray-800 rounded"></audio>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <a href="${audioSrc}" download="${filename}" class="flex items-center gap-2 bg-orange-900/30 hover:bg-orange-900/50 text-orange-300 border border-orange-800 px-3 py-1.5 rounded text-xs transition">
+                                📥 Download MP3
+                            </a>
+                            <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="flex items-center gap-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-800 px-3 py-1.5 rounded text-xs transition">
+                                ☁️ Upload to Drive
+                            </button>
+                        </div>
+                    </div>`;
+
+                // Update YAML
+                updateVideoName(sceneIndex, lineIndex, filename);
+
+                // Auto Upload
+                (async () => {
+                   const driveLink = await autoUploadToDrive(id, audioBlob, filename);
+                   if (driveLink) {
+                       updateArtifactData(sceneIndex, lineIndex, 'music', filename, driveLink);
+                       await saveChanges(true); 
+                       const toast = document.createElement('div');
+                       toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-purple-900 border border-purple-700 text-purple-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
+                       toast.innerHTML = `<span>☁️ Auto-uploaded Audio to Drive!</span>`;
+                       document.body.appendChild(toast);
+                       setTimeout(() => toast.remove(), 4000);
+                   }
+                })();
+
+                container.innerHTML = htmlOutput;
+                container.classList.remove('hidden');
+                status.innerText = "✅ Done";
+                status.className = "text-xs text-green-500";
 
             } catch (error) {
                 console.error(error);
@@ -3312,7 +3291,112 @@ async function autoUploadToDrive(uniqueId, blob, filename) {
         // Removed toggleFormulasMenu as it is replaced by toggleDocMenu
 
 
-        // Initialize App
+        // ==========================================
+        // LIST MODELS FUNCTIONALITY
+        // ==========================================
+        let allModels = []; // Store fetched models for filtering
+
+        async function openListModelsModal() {
+            const modal = document.getElementById('models-modal');
+            modal.classList.remove('hidden');
+            
+            const apiKey = localStorage.getItem('google_api_key');
+            if (!apiKey) {
+                renderModelsError("No API Key found. Please enter your Google API Key in the top right.");
+                return;
+            }
+
+            try {
+                await fetchModels(apiKey);
+            } catch (error) {
+                console.error("Error fetching models:", error);
+                renderModelsError("Failed to fetch models. Check your API key and network connection.");
+            }
+        }
+
+        function closeModelsModal() {
+            document.getElementById('models-modal').classList.add('hidden');
+        }
+
+        async function fetchModels(key) {
+            const tbody = document.getElementById('models-table-body');
+            tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center italic">Fetching models from Google...</td></tr>';
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models?key=${key}&pageSize=100`;
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                throw new Error(`API Error: ${response.status} ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            if (data.models) {
+                allModels = data.models; // Store for filtering
+                renderModels(allModels);
+            } else {
+                throw new Error("No models found in response");
+            }
+        }
+
+        function renderModels(models) {
+            const tbody = document.getElementById('models-table-body');
+            const countSpan = document.getElementById('model-count');
+            
+            tbody.innerHTML = '';
+            countSpan.innerText = `${models.length} human-friendly models found`;
+
+            if (models.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center italic text-gray-500">No models match your search.</td></tr>';
+                return;
+            }
+
+            models.forEach(model => {
+                const name = model.name.replace('models/', '');
+                const displayName = model.displayName || name;
+                const version = model.version || '-';
+                const inputTokenLimit = model.inputTokenLimit || '-';
+                const outputTokenLimit = model.outputTokenLimit || '-';
+                const supportedGenMethods = model.supportedGenerationMethods ? model.supportedGenerationMethods.join(', ') : '-';
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-800 transition-colors border-b border-gray-800 last:border-0";
+                tr.innerHTML = `
+                    <td class="p-3 font-mono text-blue-300 select-all">${name}</td>
+                    <td class="p-3 text-white font-bold">${displayName}</td>
+                    <td class="p-3 font-mono text-gray-400">${version}</td>
+                    <td class="p-3 text-xs">
+                        <div class="flex flex-col gap-1">
+                           <span title="Input Tokens">📥 ${inputTokenLimit}</span>
+                           <span title="Output Tokens">📤 ${outputTokenLimit}</span>
+                        </div>
+                    </td>
+                     <td class="p-3 text-[10px] text-gray-500 max-w-xs truncate" title="${supportedGenMethods}">
+                        ${supportedGenMethods}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderModelsError(msg) {
+            const tbody = document.getElementById('models-table-body');
+            tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-red-400 font-bold">❌ ${msg}</td></tr>`;
+        }
+
+        function filterModels(query) {
+            if (!query) {
+                renderModels(allModels);
+                return;
+            }
+            
+            const lowerQuery = query.toLowerCase();
+            const filtered = allModels.filter(m => 
+                m.name.toLowerCase().includes(lowerQuery) || 
+                (m.displayName && m.displayName.toLowerCase().includes(lowerQuery))
+            );
+            renderModels(filtered);
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             initApp();
             initDocumentationMenus();
