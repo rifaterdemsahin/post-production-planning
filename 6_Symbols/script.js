@@ -973,10 +973,22 @@
             // Check URL for initial scene
             const urlParams = new URLSearchParams(window.location.search);
             const sceneParam = urlParams.get('scene');
+            const lineParam = urlParams.get('line');
+            
             if (sceneParam) {
                 const index = parseInt(sceneParam) - 1;
                 if (index >= 0 && index < scenes.length) {
                     currentSceneIndex = index;
+                }
+            }
+            
+            // Check URL for initial line selection
+            if (lineParam) {
+                const lineIndex = parseInt(lineParam) - 1;
+                const scene = scenes[currentSceneIndex];
+                if (scene && lineIndex >= 0 && lineIndex < (scene.lines?.length || 0)) {
+                    currentSelectedLineIndex = lineIndex;
+                    console.log('%c📍 LINE FROM URL:', 'color: #4caf50;', `scene=${currentSceneIndex + 1}, line=${lineIndex + 1}`);
                 }
             }
 
@@ -986,10 +998,11 @@
             const titleInput = document.getElementById('project-title-input');
             if(titleInput) titleInput.value = window.projectTitle || "";
 
-            // Update history state for the initial load
+            // Update history state for the initial load with both scene and line
             const url = new URL(window.location);
             url.searchParams.set('scene', currentSceneIndex + 1);
-            window.history.replaceState({ sceneIndex: currentSceneIndex }, '', url);
+            url.searchParams.set('line', currentSelectedLineIndex + 1);
+            window.history.replaceState({ sceneIndex: currentSceneIndex, lineIndex: currentSelectedLineIndex }, '', url);
         }
 
         function updateDateDisplay() {
@@ -1712,6 +1725,21 @@
         function selectLine(sceneIndex, lineIndex) {
             currentSelectedLineIndex = lineIndex;
             
+            // Log scene/line selection change
+            const scene = scenes[sceneIndex];
+            const line = scene?.lines?.[lineIndex];
+            console.log('%c🎬 SCENE/LINE SELECTED:', 'background: #673ab7; color: white; padding: 4px 8px; border-radius: 4px;');
+            console.log(`  Scene: ${sceneIndex + 1} (ID: ${scene?.id || 'N/A'})`);
+            console.log(`  Line: ${lineIndex + 1} (ID: ${line?.id || 'N/A'})`);
+            console.log(`  Assets loaded:`, line?.uploaded_assets ? Object.keys(line.uploaded_assets).join(', ') || 'none' : 'none');
+            
+            // Update URL with scene and line parameters
+            const url = new URL(window.location);
+            url.searchParams.set('scene', sceneIndex + 1);
+            url.searchParams.set('line', lineIndex + 1);
+            window.history.replaceState({ sceneIndex, lineIndex }, '', url);
+            console.log(`  URL updated: ${url.search}`);
+            
             // 1. Visual Update (Toggle Classes) using DOM to avoid full re-render
             const allLines = document.querySelectorAll('.line-item-card');
             allLines.forEach(el => {
@@ -1740,7 +1768,10 @@
             }
 
             const line = scene.lines[lineIndex];
-            let html = `<h3 class="text-xs font-bold text-gray-400 mb-2 uppercase sticky top-0 bg-gray-900 pb-2 border-b border-gray-800 z-10 w-full">Line ${line.id} Assets</h3>`;
+            // Show Scene X Line Y format with scene ID and line ID
+            const sceneLabel = scene.id || `Scene ${sceneIndex + 1}`;
+            const lineLabel = line.id || `Line ${lineIndex + 1}`;
+            let html = `<h3 class="text-xs font-bold text-gray-400 mb-2 uppercase sticky top-0 bg-gray-900 pb-2 border-b border-gray-800 z-10 w-full">${sceneLabel} ${lineLabel} Assets</h3>`;
 
             if (line.uploaded_assets && Object.keys(line.uploaded_assets).length > 0) {
                  Object.entries(line.uploaded_assets).forEach(([type, assetData]) => {
