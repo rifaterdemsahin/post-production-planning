@@ -242,15 +242,6 @@ scenes:
             sound_effect_output: ""
             diagram_output: ""
             html_output: "<div style='background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); width: 800px; height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;'><div style='width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 250px solid #e8e8e8; margin-bottom: 50px;'></div><div style='position: absolute; top: 50px; font-size: 48px; color: #00d4ff; text-shadow: 0 0 15px #00d4ff;'>THE FORCE</div></div>"
-          prompt_outputs:
-            image_output: ""
-            graphic_output: ""
-            music_output: ""
-            animation_output: ""
-            motion_graphics_output: ""
-            sound_effect_output: ""
-            diagram_output: ""
-            html_output: ""
         verified_prompts:
           image: false
           graphic: false
