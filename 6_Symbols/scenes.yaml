@@ -881,15 +881,6 @@ scenes:
             sound_effect_output: ""
             diagram_output: ""
             html_output: "<div style='background: #2a2a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: space-around;'><div style='position: relative;'><div style='width: 200px; height: 200px; background: #f5f5dc; display: flex; flex-wrap: wrap; gap: 5px; padding: 10px; transform: rotate(-5deg);'><div style='width: 30px; height: 30px; background: #ffeb3b;'></div><div style='width: 30px; height: 30px; background: #ff9800;'></div><div style='width: 30px; height: 30px; background: #4caf50;'></div></div><div style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 72px; color: #ff0000;'>✗</div></div><div style='font-size: 36px; color: #ff0000;'>NOT RANDOM</div></div>"
-          prompt_outputs:
-            image_output: ""
-            graphic_output: ""
-            music_output: ""
-            animation_output: ""
-            motion_graphics_output: ""
-            sound_effect_output: ""
-            diagram_output: ""
-            html_output: ""
         verified_prompts:
           image: false
           graphic: false
