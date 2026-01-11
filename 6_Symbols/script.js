@@ -32,47 +32,12 @@
             return `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`;
         }
 
-        // Load ONLY the project title from Google Sheets cell B3
-        async function loadProjectTitleFromSheets() {
-            const apiKey = getSheetsApiKey();
-            if (!apiKey) {
-                logDebug("WARN", "Sheets API", "No API key - cannot load project title from B3");
-                return null;
-            }
-
-            try {
-                const titleUrl = buildSheetsApiUrl('Sheet1!B3', apiKey);
-                console.log('%c🔗 FETCHING PROJECT TITLE FROM SHEETS', 'background: #1a73e8; color: white; padding: 4px 8px; border-radius: 4px;');
-                console.log(`  URL: ${titleUrl}`);
-                console.log(`  Cell: Sheet1!B3`);
-                
-                const response = await fetch(titleUrl);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                
-                const titleJson = await response.json();
-                console.log('%c📄 RAW RESPONSE FROM B3:', 'color: #fbbc04;', titleJson);
-                
-                const title = titleJson.values?.[0]?.[0] || null;
-                
-                if (title) {
-                    console.log('%c✅ PROJECT TITLE MAPPED FROM B3:', 'color: #34a853; font-weight: bold;', `"${title}"`);
-                    logDebug("SUCCESS", "Project Title from Sheets B3", title);
-                }
-                return title;
-            } catch (error) {
-                logDebug("ERROR", "Failed to load title from Sheets", error.message);
-                return null;
-            }
-        }
-
-        // Load data from Google Sheets
+        // Load data from Google Sheets (ONLY data source - YAML removed)
         async function loadFromGoogleSheets() {
             const apiKey = getSheetsApiKey();
             if (!apiKey) {
-                logDebug("WARN", "Sheets API", "No API key found, falling back to YAML");
+                logDebug("ERROR", "Sheets API", "No API key found - cannot load data");
+                showToast("❌ Google API key required. Set it in Settings.", 5000);
                 return null;
             }
 
@@ -127,7 +92,7 @@
             }
         }
 
-        // Transform Google Sheets data to match YAML structure
+        // Transform Google Sheets data to app data structure
         function transformSheetsToData(metadataJson, scenesJson, projectTitleFromCell = null) {
             console.log('%c📊 GOOGLE SHEETS DATA MAPPING START', 'background: #4285f4; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
             console.log('%cSource: https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30', 'color: #1a73e8; font-style: italic;');
@@ -375,8 +340,8 @@
             }
         }
 
-        // Toggle between YAML and Sheets data source
-        let useGoogleSheets = true; // Default to using Google Sheets
+        // Google Sheets is the ONLY data source (YAML removed)
+        const useGoogleSheets = true; // Always use Google Sheets
 
 
         function updateURL(index) {
@@ -553,40 +518,23 @@
             });
 
             try {
-                // ALWAYS load project title from Google Sheets B3 first
-                const sheetProjectTitle = await loadProjectTitleFromSheets();
+                // Load ALL data from Google Sheets (no YAML fallback)
+                console.log('%c🚀 LOADING DATA FROM GOOGLE SHEETS ONLY', 'background: #4285f4; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
                 
-                // Try loading scene data from Google Sheets (if API key available)
-                let sheetsData = null;
-                if (useGoogleSheets) {
-                    sheetsData = await loadFromGoogleSheets();
-                }
+                const sheetsData = await loadFromGoogleSheets();
 
                 if (sheetsData && sheetsData.scenes && sheetsData.scenes.length > 0) {
                     // Successfully loaded from Google Sheets
-                    // Override title with the one from B3 if available
-                    if (sheetProjectTitle) {
-                        sheetsData.title = sheetProjectTitle;
-                    }
                     loadDataIntoApp(sheetsData);
                     showToast("📊 Data loaded from Google Sheets", 2000);
                     logDebug("SUCCESS", "Data Source", "Google Sheets");
-                    // Update data source indicator
                     updateDataSourceIndicator('sheets');
                 } else {
-                    // Fallback to YAML file for scene data
-                    logDebug("INFO", "Fallback", "Loading scenes from YAML file");
-                    await loadYAMLFromURL('scenes.yaml');
-                    
-                    // But ALWAYS use Google Sheets title (override YAML title)
-                    if (sheetProjectTitle) {
-                        window.projectTitle = sheetProjectTitle;
-                        const titleInput = document.getElementById('project-title-input');
-                        if (titleInput) titleInput.value = sheetProjectTitle;
-                        logDebug("INFO", "Title Override", "Using title from Sheets B3, not YAML");
-                    }
-                    // Update data source indicator
-                    updateDataSourceIndicator('yaml');
+                    // No data available - show error
+                    console.error('%c❌ FAILED TO LOAD FROM GOOGLE SHEETS', 'background: #ea4335; color: white; padding: 4px 8px; border-radius: 4px;');
+                    logDebug("ERROR", "Data Load", "Failed to load from Google Sheets - check API key");
+                    showToast("❌ Failed to load from Google Sheets. Please check API key.", 5000);
+                    updateDataSourceIndicator('error');
                 }
                 
                 // Pre-load templates
@@ -594,10 +542,11 @@
             } catch (error) {
                 console.error("Error loading scenes:", error);
                 logDebug("ERROR", "InitApp Failed", error.message);
+                showToast("❌ Error: " + error.message, 5000);
             }
         }
 
-        // Load transformed data into the app (shared by both YAML and Sheets)
+        // Load transformed data into the app (from Google Sheets)
         function loadDataIntoApp(data) {
             if (!data || !data.scenes) {
                 logDebug("ERROR", "Invalid Data", "Missing 'scenes' property");
@@ -612,7 +561,7 @@
             projectVersion = data.version || 1;
             lastUpdated = data.last_updated || new Date().toISOString();
 
-            // Update YAML Date Display
+            // Update Date Display
             updateDateDisplay();
 
             // Check URL for initial scene
@@ -673,63 +622,13 @@
             }
         }
 
-        async function loadYAMLFromURL(url) {
-            logDebug("INFO", "Fetching YAML", url);
-            const response = await fetch(url);
-            if (!response.ok) {
-                const msg = `HTTP error! status: ${response.status}`;
-                logDebug("ERROR", "YAML Fetch Failed", msg);
-                throw new Error(msg);
-            }
-            const yamlText = await response.text();
-            parseAndLoadData(yamlText);
-        }
+        // YAML loading removed - all data comes from Google Sheets
+        // The handleOpenFile function below is kept for backward compatibility
+        // but will show a message directing users to use Google Sheets
 
         async function handleOpenFile() {
-            try {
-                const [handle] = await window.showOpenFilePicker({
-                    types: [{
-                        description: 'YAML Files',
-                        accept: { 'text/yaml': ['.yaml', '.yml'] },
-                    }],
-                    multiple: false
-                });
-                
-                fileHandle = handle;
-                const file = await fileHandle.getFile();
-                const yamlText = await file.text();
-                parseAndLoadData(yamlText);
-
-                // Update UI to show we are in "Edit Mode"
-                const notificationEl = document.getElementById('header-notification');
-                notificationEl.innerText = `📂 Editing: ${file.name}`;
-                notificationEl.classList.remove('opacity-0');
-                
-            } catch (err) {
-                console.error('User cancelled or API not supported', err);
-            }
-        }
-
-        function parseAndLoadData(yamlText) {
-             if (typeof jsyaml === 'undefined') {
-                 const msg = 'js-yaml library not loaded.';
-                 console.error(msg);
-                 logDebug("ERROR", "Dependency Error", msg);
-                 alert('⚠️ YAML parser not loaded. Please check your internet connection.');
-                 return;
-             }
-
-             let data;
-             try {
-                data = jsyaml.load(yamlText);
-             } catch(e) {
-                 logDebug("ERROR", "YAML Parse Error", e.message);
-                 console.error(e);
-                 return;
-             }
-
-             // Use shared data loading function
-             loadDataIntoApp(data);
+            showToast("⚠️ YAML file loading disabled. Data is loaded from Google Sheets.", 4000);
+            logDebug("WARN", "handleOpenFile", "YAML file loading is disabled - use Google Sheets");
         }
 
         function handleProjectTitleChange(val) {
@@ -746,28 +645,19 @@
                     indicator.innerHTML = '📊 Sheets';
                     indicator.className = 'hidden lg:block text-[10px] font-mono text-green-400 bg-green-900/30 px-2 py-0.5 rounded border border-green-800/50';
                     indicator.title = 'Data loaded from Google Sheets';
+                } else if (source === 'error') {
+                    indicator.innerHTML = '❌ Error';
+                    indicator.className = 'hidden lg:block text-[10px] font-mono text-red-400 bg-red-900/30 px-2 py-0.5 rounded border border-red-800/50';
+                    indicator.title = 'Failed to load data - check API key';
                 } else {
-                    indicator.innerHTML = '📄 YAML';
+                    indicator.innerHTML = '⚠️ Unknown';
                     indicator.className = 'hidden lg:block text-[10px] font-mono text-yellow-400 bg-yellow-900/30 px-2 py-0.5 rounded border border-yellow-800/50';
-                    indicator.title = 'Data loaded from YAML file';
+                    indicator.title = 'Unknown data source';
                 }
             }
         }
 
-        function toggleDataSource() {
-            useGoogleSheets = !useGoogleSheets;
-            const btn = document.getElementById('data-source-toggle');
-            if (btn) {
-                btn.innerHTML = useGoogleSheets 
-                    ? '📊 Using: Google Sheets'
-                    : '📄 Using: YAML File';
-            }
-            showToast(useGoogleSheets 
-                ? '📊 Switched to Google Sheets. Reload to apply.' 
-                : '📄 Switched to YAML file. Reload to apply.', 3000);
-            logDebug("INFO", "Data Source", useGoogleSheets ? "Google Sheets" : "YAML");
-        }
-
+        // Reload data from Google Sheets (YAML removed)
         async function reloadFromSheets() {
             showToast("🔄 Reloading from Google Sheets...", 2000);
             logDebug("INFO", "Reload", "Fetching fresh data from Google Sheets");
