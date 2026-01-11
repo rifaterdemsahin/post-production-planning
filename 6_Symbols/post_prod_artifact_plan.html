@@ -135,6 +135,11 @@
         <!-- Content injected by JS -->
     </div>
 
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-20 right-4 z-[200] flex flex-col gap-2 pointer-events-none">
+        <!-- Toasts injected here -->
+    </div>
+
     <!-- Bottom Action Bar (Menus & Actions) -->
     <div class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-700 px-4 py-2 z-50 flex justify-between items-center shadow-2xl h-12">
         <!-- LEFT: Popover Menus -->
@@ -532,7 +537,10 @@
     <div id="context-preview-modal" class="fixed inset-0 z-[90] hidden flex items-center justify-center p-4 modal-overlay">
         <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-4xl p-6 border border-gray-700 relative flex flex-col max-h-[90vh]">
             <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-2">
-                <h3 class="text-xl font-bold text-white flex items-center gap-2">🔍 Context Preview</h3>
+                <div class="flex items-center gap-2">
+                    <h3 class="text-xl font-bold text-gray-200">Context / Prompt Preview</h3>
+                    <span id="template-indicator" class="hidden text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded border border-blue-800">Using Template</span>
+                </div>
                 <button onclick="closeContextModal()" class="text-gray-400 hover:text-white transition">✕</button>
             </div>
 

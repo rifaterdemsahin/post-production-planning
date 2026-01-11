@@ -83,11 +83,18 @@
             
             if (savedKey) {
                 document.getElementById('apiKey').value = savedKey;
+                
+                let source = "Storage";
                 // If it was in local storage but not cookie, migrate it
                 if (!getCookie('google_api_key')) {
                     setCookie('google_api_key', savedKey, 365);
+                    source = "Migrated to Cookie";
+                } else {
+                     source = "Cookie";
                 }
                 verifyApiKey(savedKey);
+                // Delay toast slightly to not overwhelm on load
+                setTimeout(() => showToast(`🔑 Google Key loaded from ${source}`, 2000), 1000);
             }
 
             // Restore ElevenLabs Key
@@ -96,10 +103,15 @@
             if (savedElevenKey) {
                 document.getElementById('elevenApiKey').value = savedElevenKey;
                  // If it was in local storage but not cookie, migrate it
+                 let source = "Storage";
                  if (!getCookie('elevenlabs_api_key')) {
                     setCookie('elevenlabs_api_key', savedElevenKey, 365);
+                    source = "Migrated to Cookie";
+                } else {
+                    source = "Cookie";
                 }
                 verifyElevenApiKey(savedElevenKey);
+                setTimeout(() => showToast(`🗣️ ElevenLabs Key loaded from ${source}`, 2000), 1500);
             }
 
             // Scroll Listener for "Scroll to Top"
@@ -167,6 +179,8 @@
             try {
                 // Fetch the YAML file (Default load)
                 await loadYAMLFromURL('scenes.yaml');
+                // Pre-load templates
+                loadTemplates(); 
             } catch (error) {
                 console.error("Error loading scenes:", error);
                 logDebug("ERROR", "InitApp Failed", error.message);
@@ -324,6 +338,8 @@
             const modalInput = document.getElementById('modal-google-key');
             if(headerInput && headerInput.value !== key) headerInput.value = key;
             if(modalInput && modalInput.value !== key) modalInput.value = key;
+
+            if(key) showToast("✅ Google Key saved to Cookie & Storage");
         }
 
         function saveElevenKey(key) {
@@ -335,6 +351,8 @@
              const modalInput = document.getElementById('modal-eleven-key');
              if(headerInput && headerInput.value !== key) headerInput.value = key;
              if(modalInput && modalInput.value !== key) modalInput.value = key;
+
+             if(key) showToast("✅ ElevenLabs Key saved to Cookie & Storage");
         }
 
         let elevenApiKeyDebounceTimer;
@@ -588,6 +606,33 @@
         }
 
 
+
+        // ==========================================
+        // TOAST NOTIFICATIONS
+        // ==========================================
+        function showToast(message, duration = 3000) {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = "bg-gray-800 border border-gray-600 text-white px-4 py-3 rounded shadow-lg flex items-center gap-2 transform transition-all duration-300 translate-y-4 opacity-0 pointer-events-auto min-w-[200px]";
+            toast.innerHTML = `<span class="text-lg">🔔</span> <span class="text-sm font-bold">${message}</span>`;
+            
+            container.appendChild(toast);
+
+            // Animate In
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            });
+
+            // Remove after duration
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => {
+                    if (toast.parentNode) toast.parentNode.removeChild(toast);
+                }, 300);
+            }, duration);
+        }
 
         // Close menus when clicking outside
         document.addEventListener('click', function(event) {
@@ -1609,7 +1654,7 @@
         
         let pendingGeneration = null;
 
-        function openContextModal(uniqueId, action = 'generate') {
+        async function openContextModal(uniqueId, action = 'generate') {
             const textArea = document.getElementById(`text-${uniqueId}`);
             // Default to 'image' if not set
             const type = textArea.getAttribute('data-current-type') || 'image'; 
@@ -1625,7 +1670,7 @@
             const transitionCtx = scenes[sceneIndex].transition || "";
 
             // 3. Construct Context Block
-            const finalPrompt = constructFullPrompt(sceneIndex, promptText, type);
+            const finalPrompt = await constructFullPrompt(sceneIndex, promptText, type);
 
             // 4. Populate Modal
             document.getElementById('preview-main-context').value = mainCtx || "(No Main Context)";
@@ -2440,7 +2485,7 @@
         // 5. HELPER FUNCTIONS
         // ==========================================
 
-        function constructFullPrompt(sceneIndex, promptText, type) {
+        async function constructFullPrompt(sceneIndex, promptText, type) {
             // 2. Gather Contexts
             const mainCtx = window.mainContext || "";
             const sceneCtx = scenes[sceneIndex].context || "";
@@ -2465,6 +2510,31 @@
             if (type === 'animation') typeLabel = 'VIDEO'; 
             
             finalPrompt = `[CREATE ${typeLabel}] > ${finalPrompt}`;
+
+            // Auto-Inject Template
+            const templates = await loadTemplates();
+            if (templates) {
+                let templateKey = "";
+                switch(type) {
+                    case 'image': templateKey = 'Sample_Prompt_Image'; break;
+                    case 'graphic': templateKey = 'Sample_Prompt_Graphic'; break;
+                    case 'music': templateKey = 'Sample_Prompt_Music'; break;
+                    case 'animation': templateKey = 'Sample_Prompt_Animation'; break;
+                    case 'motion_graphics': templateKey = 'Sample_Prompt_MotionGraphics'; break;
+                    case 'sound_effect': templateKey = 'Sample_Prompt_SFX'; break;
+                }
+
+                if (templateKey && templates[templateKey]) {
+                    finalPrompt += `\n\n[STYLE TEMPLATE]: ${templates[templateKey]}`;
+                    
+                    // Update UI Label if function runs in context of modal opening
+                    const templateLabel = document.getElementById('template-indicator');
+                    if (templateLabel) {
+                        templateLabel.innerText = `Using Template: ${templateKey.replace('Sample_Prompt_', '')}`;
+                        templateLabel.classList.remove('hidden');
+                    }
+                }
+            }
 
             if (type === 'motion_graphics') {
                  finalPrompt += " (Note: This prompt is generated for Canva)";
