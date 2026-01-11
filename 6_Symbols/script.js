@@ -79,13 +79,21 @@
                 return null;
             }
 
-            // First row is headers
+            // First row is headers - normalize to lowercase with underscores
             const headers = rows[0].map(h => h.toLowerCase().trim().replace(/\s+/g, '_'));
             const dataRows = rows.slice(1);
 
             // Find column indices
             const colIndex = {};
-            headers.forEach((h, i) => colIndex[h] = i);
+            headers.forEach((h, i) => {
+                colIndex[h] = i;
+                // Also add version without underscores for camelCase matching
+                colIndex[h.replace(/_/g, '')] = i;
+            });
+
+            // Log found columns for debugging
+            logDebug("INFO", "Sheet Columns", headers.join(', '));
+            logDebug("INFO", "Data Rows", `${dataRows.length} rows found`);
 
             // Extract metadata from first few rows or dedicated columns
             // Check if there's a 'title' column, otherwise use first cell
@@ -113,15 +121,15 @@
             const scenesMap = new Map();
             
             dataRows.forEach((row, idx) => {
-                const sceneId = row[colIndex['scene_id']] || row[colIndex['scene']] || `SCENE ${Math.floor(idx / 5) + 1}`;
-                const sceneTitle = row[colIndex['scene_title']] || row[colIndex['scene_name']] || 'Untitled Scene';
+                const sceneId = row[colIndex['scene_id']] || row[colIndex['sceneid']] || row[colIndex['scene']] || `SCENE ${Math.floor(idx / 5) + 1}`;
+                const sceneTitle = row[colIndex['scenetitle']] || row[colIndex['scene_title']] || row[colIndex['scene_name']] || row[colIndex['title']] || 'Untitled Scene';
                 
                 if (!scenesMap.has(sceneId)) {
                     scenesMap.set(sceneId, {
                         id: sceneId,
                         title: sceneTitle,
                         color: row[colIndex['color']] || 'border-l-4 border-blue-500',
-                        context: row[colIndex['scene_context']] || row[colIndex['context']] || '',
+                        context: row[colIndex['scene_context']] || row[colIndex['scenecontext']] || row[colIndex['context']] || '',
                         verified_context: row[colIndex['verified_context']] === 'TRUE' || row[colIndex['verified_context']] === 'true',
                         transition: row[colIndex['transition']] || '',
                         verified_transition: row[colIndex['verified_transition']] === 'TRUE' || row[colIndex['verified_transition']] === 'true',
@@ -409,10 +417,14 @@
                     loadDataIntoApp(sheetsData);
                     showToast("📊 Data loaded from Google Sheets", 2000);
                     logDebug("SUCCESS", "Data Source", "Google Sheets");
+                    // Update data source indicator
+                    updateDataSourceIndicator('sheets');
                 } else {
                     // Fallback to YAML file
                     logDebug("INFO", "Fallback", "Loading from YAML file");
                     await loadYAMLFromURL('scenes.yaml');
+                    // Update data source indicator
+                    updateDataSourceIndicator('yaml');
                 }
                 
                 // Pre-load templates
@@ -563,8 +575,23 @@
         }
 
         // ==========================================
-        // DATA SOURCE TOGGLE FUNCTIONS
+        // DATA SOURCE INDICATOR & TOGGLE FUNCTIONS
         // ==========================================
+        function updateDataSourceIndicator(source) {
+            const indicator = document.getElementById('data-source-indicator');
+            if (indicator) {
+                if (source === 'sheets') {
+                    indicator.innerHTML = '📊 Sheets';
+                    indicator.className = 'hidden lg:block text-[10px] font-mono text-green-400 bg-green-900/30 px-2 py-0.5 rounded border border-green-800/50';
+                    indicator.title = 'Data loaded from Google Sheets';
+                } else {
+                    indicator.innerHTML = '📄 YAML';
+                    indicator.className = 'hidden lg:block text-[10px] font-mono text-yellow-400 bg-yellow-900/30 px-2 py-0.5 rounded border border-yellow-800/50';
+                    indicator.title = 'Data loaded from YAML file';
+                }
+            }
+        }
+
         function toggleDataSource() {
             useGoogleSheets = !useGoogleSheets;
             const btn = document.getElementById('data-source-toggle');
@@ -1423,9 +1450,10 @@
                 let html = `
                     <div class="flex justify-between items-center p-4 bg-[#252525] cursor-pointer hover:bg-[#2a2a2a] transition border-b border-gray-700" 
                          onclick="toggleScene(${sceneIndex})">
-                        <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-3 flex-1">
                             <span id="chevron-${sceneIndex}" class="transform transition-transform rotate-0 text-gray-400">▼</span>
-                            <h2 class="text-xl font-bold text-white">${scene.id}: ${scene.title}</h2>
+                            <h2 class="text-xl font-bold text-white text-left">${scene.title}</h2>
+                            <span class="text-xs text-gray-500 bg-gray-700 px-2 py-0.5 rounded ml-2">${scene.id}</span>
                         </div>
                         <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">${scene.lines.length} Lines</span>
                     </div>
