@@ -318,11 +318,23 @@
         function saveApiKey(key) {
             setCookie('google_api_key', key, 365);
             localStorage.setItem('google_api_key', key); // Sync backup
+            
+            // Sync Input Fields
+            const headerInput = document.getElementById('apiKey');
+            const modalInput = document.getElementById('modal-google-key');
+            if(headerInput && headerInput.value !== key) headerInput.value = key;
+            if(modalInput && modalInput.value !== key) modalInput.value = key;
         }
 
         function saveElevenKey(key) {
              setCookie('elevenlabs_api_key', key, 365);
              localStorage.setItem('elevenlabs_api_key', key); // Sync backup
+
+             // Sync Input Fields
+             const headerInput = document.getElementById('elevenApiKey');
+             const modalInput = document.getElementById('modal-eleven-key');
+             if(headerInput && headerInput.value !== key) headerInput.value = key;
+             if(modalInput && modalInput.value !== key) modalInput.value = key;
         }
 
         let elevenApiKeyDebounceTimer;
@@ -502,6 +514,57 @@
             // Toggle this menu
             menu.classList.toggle('hidden');
             menu.classList.toggle('flex');
+        }
+
+        // ==========================================
+        // API KEY MODAL
+        // ==========================================
+        function openApiKeysModal() {
+            const modal = document.getElementById('api-keys-modal');
+            const googleKey = getCookie('google_api_key') || localStorage.getItem('google_api_key') || "";
+            const elevenKey = getCookie('elevenlabs_api_key') || localStorage.getItem('elevenlabs_api_key') || "";
+
+            document.getElementById('modal-google-key').value = googleKey;
+            document.getElementById('modal-eleven-key').value = elevenKey;
+            
+            modal.classList.remove('hidden');
+            
+            // Close actions menu
+            const actionsMenu = document.getElementById('actions-menu');
+            if(actionsMenu) {
+                actionsMenu.classList.add('hidden');
+                actionsMenu.classList.remove('flex');
+            }
+        }
+
+        function closeApiKeysModal() {
+            document.getElementById('api-keys-modal').classList.add('hidden');
+        }
+
+        function clearAllKeysAndCookies() {
+            if(!confirm("Are you sure you want to clear all stored keys and cookies?")) return;
+
+            // Clear Cookies
+            document.cookie.split(";").forEach((c) => {
+                document.cookie = c
+                    .replace(/^ +/, "")
+                    .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+            });
+
+            // Clear LocalStorage
+            localStorage.removeItem('google_api_key');
+            localStorage.removeItem('elevenlabs_api_key');
+            localStorage.removeItem('gh_token'); // Also clear github token if present
+            
+            // Clear Inputs
+            const ids = ['apiKey', 'elevenApiKey', 'modal-google-key', 'modal-eleven-key'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.value = "";
+            });
+
+            alert("Cache cleared. Reloading page.");
+            window.location.reload();
         }
 
         function toggleLinksMenu() {

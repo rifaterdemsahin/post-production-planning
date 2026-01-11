@@ -151,6 +151,9 @@
                         <button onclick="handleOpenFile()" class="w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
                             📂 Open YAML
                         </button>
+                        <button onclick="openApiKeysModal()" class="w-full text-left text-xs text-yellow-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
+                            🔑 Manage Keys
+                        </button>
                         <button onclick="openYamlModal()" class="w-full text-left text-xs text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1.5 rounded flex items-center gap-2 relative z-50">
                             📄 View YAML
                         </button>
@@ -635,6 +638,41 @@
              <div class="mt-4 pt-2 border-t border-gray-800 text-xs text-gray-500 flex justify-between">
                 <span id="model-count">0 models found</span>
                 <span>Data from Google Generative Language API</span>
+             </div>
+        </div>
+    </div>
+
+    <!-- API Keys Management Modal -->
+    <div id="api-keys-modal" class="fixed inset-0 z-[120] hidden flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-md p-6 border border-gray-700 relative">
+             <button onclick="closeApiKeysModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">✕</button>
+             <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">🔑 Manage API Keys</h3>
+             
+             <div class="space-y-6">
+                <!-- Google Gemini -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">Google Gemini API Key</label>
+                    <input type="password" id="modal-google-key" placeholder="Enter Google API Key" 
+                        oninput="debouncedSaveApiKey(this.value)"
+                        class="w-full bg-black/50 text-gray-300 text-sm p-3 rounded border border-gray-600 focus:outline-none focus:border-blue-500 transition-colors">
+                    <p class="text-[10px] text-gray-500 mt-1">Stored securely in cookies/local storage.</p>
+                </div>
+
+                <!-- ElevenLabs -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">ElevenLabs API Key</label>
+                    <input type="password" id="modal-eleven-key" placeholder="Enter ElevenLabs API Key" 
+                        oninput="debouncedSaveElevenKey(this.value)"
+                        class="w-full bg-black/50 text-gray-300 text-sm p-3 rounded border border-gray-600 focus:outline-none focus:border-green-500 transition-colors">
+                     <p class="text-[10px] text-gray-500 mt-1">Stored securely in cookies/local storage.</p>
+                </div>
+
+                <div class="border-t border-gray-700 pt-6">
+                    <button onclick="clearAllKeysAndCookies()" class="w-full bg-red-900/30 hover:bg-red-900/50 text-red-400 border border-red-900/50 px-4 py-3 rounded text-sm font-bold transition flex items-center justify-center gap-2">
+                        🗑️ Clear All Keys & Cache
+                    </button>
+                    <p class="text-[10px] text-red-500/70 text-center mt-2">Warning: This will remove all saved keys and reload the page.</p>
+                </div>
              </div>
         </div>
     </div>
