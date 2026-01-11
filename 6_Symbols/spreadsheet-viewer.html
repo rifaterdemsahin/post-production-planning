@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Spreadsheet Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        .table-container {
+            max-height: calc(100vh - 200px);
+            overflow: auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th {
+            position: sticky;
+            top: 0;
+            background: #1e3a5f;
+            z-index: 10;
+        }
+        th, td {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 12px;
+            text-align: left;
+        }
+        tr:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+        .loader {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #00d4ff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="p-6 text-gray-100">
+    
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto mb-6">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold text-white flex items-center gap-3">
+                    <span class="text-3xl">📊</span>
+                    Project Spreadsheet Viewer
+                </h1>
+                <p class="text-gray-400 text-sm mt-1">Real-time data from Google Sheets</p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="refreshData()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition">
+                    🔄 Refresh
+                </button>
+                <a href="https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30/edit?usp=sharing" 
+                   target="_blank" rel="noopener noreferrer"
+                   class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition">
+                    📝 Open in Sheets
+                </a>
+                <a href="post_prod_artifact_plan.html" 
+                   class="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition">
+                    🎬 Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Toggle -->
+    <div class="max-w-7xl mx-auto mb-4">
+        <div class="flex gap-2">
+            <button onclick="showView('table')" id="btn-table" class="px-4 py-2 rounded-lg text-sm font-bold transition bg-blue-600 text-white">
+                📋 Table View
+            </button>
+            <button onclick="showView('embed')" id="btn-embed" class="px-4 py-2 rounded-lg text-sm font-bold transition bg-gray-700 text-gray-300 hover:bg-gray-600">
+                🖼️ Embed View
+            </button>
+        </div>
+    </div>
+
+    <!-- Table View -->
+    <div id="view-table" class="max-w-7xl mx-auto">
+        <div class="glass-card rounded-xl neon-glow overflow-hidden">
+            <!-- Loading State -->
+            <div id="loading" class="flex flex-col items-center justify-center py-20 gap-4">
+                <div class="loader"></div>
+                <p class="text-gray-400 text-sm">Loading spreadsheet data...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error" class="hidden flex flex-col items-center justify-center py-20 gap-4">
+                <span class="text-5xl">⚠️</span>
+                <p class="text-red-400 text-sm" id="error-message">Failed to load data</p>
+                <p class="text-gray-500 text-xs max-w-md text-center">
+                    Make sure the spreadsheet is published to the web. 
+                    Go to File → Share → Publish to web → Select CSV format.
+                </p>
+                <button onclick="showView('embed')" class="mt-4 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition">
+                    Try Embed View Instead
+                </button>
+            </div>
+
+            <!-- Data Table -->
+            <div id="table-container" class="table-container hidden">
+                <table id="data-table" class="text-sm">
+                    <thead id="table-head" class="text-blue-300 uppercase text-xs tracking-wider">
+                    </thead>
+                    <tbody id="table-body" class="text-gray-300">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Stats Bar -->
+            <div id="stats-bar" class="hidden bg-gray-900/50 px-4 py-2 text-xs text-gray-400 flex justify-between items-center border-t border-gray-700">
+                <span id="row-count">0 rows</span>
+                <span id="last-updated">Last updated: --</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Embed View -->
+    <div id="view-embed" class="max-w-7xl mx-auto hidden">
+        <div class="glass-card rounded-xl neon-glow overflow-hidden">
+            <iframe 
+                src="https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30/edit?usp=sharing&rm=minimal&widget=true&headers=false"
+                style="width: 100%; height: calc(100vh - 200px); border: none;"
+                class="bg-white rounded-lg"
+            ></iframe>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="max-w-7xl mx-auto mt-6 text-center text-xs text-gray-500">
+        <p>Data source: <a href="https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30" target="_blank" class="text-blue-400 hover:underline">Google Sheets</a></p>
+    </div>
+
+    <script>
+        const SPREADSHEET_ID = '19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30';
+        const SHEET_NAME = 'Sheet1'; // Change if different
+        
+        // CSV URL for published spreadsheet
+        const CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${SHEET_NAME}`;
+        
+        // Alternative JSON URL
+        const JSON_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
+
+        async function loadData() {
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const tableContainer = document.getElementById('table-container');
+            const statsBar = document.getElementById('stats-bar');
+
+            loading.classList.remove('hidden');
+            error.classList.add('hidden');
+            tableContainer.classList.add('hidden');
+            statsBar.classList.add('hidden');
+
+            try {
+                // Try fetching CSV data
+                const response = await fetch(CSV_URL);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: Unable to fetch data`);
+                }
+
+                const csvText = await response.text();
+                const rows = parseCSV(csvText);
+
+                if (rows.length === 0) {
+                    throw new Error('No data found in spreadsheet');
+                }
+
+                renderTable(rows);
+                
+                loading.classList.add('hidden');
+                tableContainer.classList.remove('hidden');
+                statsBar.classList.remove('hidden');
+                
+                document.getElementById('row-count').textContent = `${rows.length - 1} rows`;
+                document.getElementById('last-updated').textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+
+            } catch (err) {
+                console.error('Error loading data:', err);
+                loading.classList.add('hidden');
+                error.classList.remove('hidden');
+                document.getElementById('error-message').textContent = err.message;
+            }
+        }
+
+        function parseCSV(csv) {
+            const lines = csv.split('\n');
+            const result = [];
+            
+            for (let line of lines) {
+                if (line.trim() === '') continue;
+                
+                const row = [];
+                let inQuotes = false;
+                let cell = '';
+                
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    
+                    if (char === '"') {
+                        if (inQuotes && line[i + 1] === '"') {
+                            cell += '"';
+                            i++;
+                        } else {
+                            inQuotes = !inQuotes;
+                        }
+                    } else if (char === ',' && !inQuotes) {
+                        row.push(cell.trim());
+                        cell = '';
+                    } else {
+                        cell += char;
+                    }
+                }
+                row.push(cell.trim());
+                result.push(row);
+            }
+            
+            return result;
+        }
+
+        function renderTable(rows) {
+            const thead = document.getElementById('table-head');
+            const tbody = document.getElementById('table-body');
+            
+            thead.innerHTML = '';
+            tbody.innerHTML = '';
+            
+            if (rows.length === 0) return;
+            
+            // Header row
+            const headerRow = document.createElement('tr');
+            rows[0].forEach((cell, idx) => {
+                const th = document.createElement('th');
+                th.textContent = cell || `Column ${idx + 1}`;
+                th.className = 'font-bold';
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            
+            // Data rows
+            for (let i = 1; i < rows.length; i++) {
+                const tr = document.createElement('tr');
+                tr.className = i % 2 === 0 ? 'bg-gray-800/30' : '';
+                
+                rows[i].forEach((cell, idx) => {
+                    const td = document.createElement('td');
+                    
+                    // Check if it's a URL
+                    if (cell && (cell.startsWith('http://') || cell.startsWith('https://'))) {
+                        const link = document.createElement('a');
+                        link.href = cell;
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+                        link.className = 'text-blue-400 hover:underline';
+                        link.textContent = cell.length > 50 ? cell.substring(0, 50) + '...' : cell;
+                        td.appendChild(link);
+                    } else {
+                        td.textContent = cell;
+                    }
+                    
+                    tr.appendChild(td);
+                });
+                
+                tbody.appendChild(tr);
+            }
+        }
+
+        function refreshData() {
+            loadData();
+        }
+
+        function showView(view) {
+            const tableView = document.getElementById('view-table');
+            const embedView = document.getElementById('view-embed');
+            const btnTable = document.getElementById('btn-table');
+            const btnEmbed = document.getElementById('btn-embed');
+            
+            if (view === 'table') {
+                tableView.classList.remove('hidden');
+                embedView.classList.add('hidden');
+                btnTable.className = 'px-4 py-2 rounded-lg text-sm font-bold transition bg-blue-600 text-white';
+                btnEmbed.className = 'px-4 py-2 rounded-lg text-sm font-bold transition bg-gray-700 text-gray-300 hover:bg-gray-600';
+            } else {
+                tableView.classList.add('hidden');
+                embedView.classList.remove('hidden');
+                btnTable.className = 'px-4 py-2 rounded-lg text-sm font-bold transition bg-gray-700 text-gray-300 hover:bg-gray-600';
+                btnEmbed.className = 'px-4 py-2 rounded-lg text-sm font-bold transition bg-blue-600 text-white';
+            }
+        }
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>
