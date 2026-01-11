@@ -23,10 +23,41 @@
             sheets: {
                 overview: { name: 'Overview', gid: '0' },
                 scenesSummary: { name: 'Scenes Summary', gid: '440551049' },
-                allLines: { name: 'All Lines', gid: '1278766054' },
+                allLines: { name: 'All Lines', gid: '864826077' },
                 uploadedAssets: { name: 'Uploaded Assets', gid: '' }
+            },
+            // Column mapping for direct edit links (0-indexed, A=0)
+            // Update these based on your actual sheet structure
+            columnMap: {
+                script: 'E',           // Script/voiceover column
+                image_prompt: 'H',     // Image prompt
+                graphic_prompt: 'I',   // Graphic prompt  
+                music_prompt: 'J',     // Music prompt
+                animation_prompt: 'K', // Animation prompt
+                motion_graphics_prompt: 'L', // Motion graphics prompt
+                sound_effect_prompt: 'M',    // Sound effect prompt
+                diagram_prompt: 'N',   // Diagram prompt
+                html_prompt: 'O'       // HTML prompt
             }
         };
+
+        // Build Google Sheets direct edit URL for a specific cell
+        function buildSheetsEditUrl(promptType, rowIndex) {
+            const { spreadsheetId, sheets, columnMap } = GOOGLE_SHEETS_CONFIG;
+            const gid = sheets.allLines.gid;
+            const column = columnMap[promptType] || columnMap['image_prompt'];
+            // Row number in sheets is 1-indexed, +2 for header row offset (row 1 = header, row 2 = first data)
+            const row = rowIndex + 2;
+            return `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit?gid=${gid}#gid=${gid}&range=${column}${row}`;
+        }
+
+        // Open Google Sheets at specific cell for editing
+        function openSheetsEditCell(promptType, lineIndex) {
+            const url = buildSheetsEditUrl(promptType, lineIndex);
+            console.log(`📝 Opening Google Sheets for editing: ${promptType} at line ${lineIndex + 1}`);
+            console.log(`   URL: ${url}`);
+            window.open(url, '_blank');
+        }
 
         // Get Google Sheets API key from storage
         function getSheetsApiKey() {
@@ -790,13 +821,6 @@
         }
 
         // YAML loading removed - all data comes from Google Sheets
-        // The handleOpenFile function below is kept for backward compatibility
-        // but will show a message directing users to use Google Sheets
-
-        async function handleOpenFile() {
-            showToast("⚠️ YAML file loading disabled. Data is loaded from Google Sheets.", 4000);
-            logDebug("WARN", "handleOpenFile", "YAML file loading is disabled - use Google Sheets");
-        }
 
         function handleProjectTitleChange(val) {
              window.projectTitle = val;
@@ -1738,9 +1762,20 @@
                         <div class="grid grid-cols-1 gap-4">
                 `;
 
+            // Calculate global row offset for Google Sheets (lines in previous scenes)
+            let globalRowOffset = 0;
+            for(let i = 0; i < currentSceneIndex; i++) {
+                if(scenes[i].lines) {
+                    globalRowOffset += scenes[i].lines.length;
+                }
+            }
+
             scene.lines.forEach((line, lineIndex) => {
                 const uniqueId = `s${sceneIndex}_l${lineIndex}`;
                 const currentPrompt = line.prompts ? line.prompts.image : "";
+                
+                // Global row index for Google Sheets (0-indexed)
+                const globalRowIndex = globalRowOffset + lineIndex;
                 
                 // Calculate Timeline Position
                 const startTime = formatTimelineTime(currentSceneTime);
@@ -1774,16 +1809,24 @@
                                         <!-- Display Mode -->
                                         <div id="script-display-${uniqueId}" class="group/script relative pl-2 border-l-2 border-gray-700 hover:border-blue-500 transition-colors">
                                             <p class="text-sm italic text-gray-300 whitespace-normal break-words hover:text-white transition-colors cursor-pointer" onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})">"${line.script}"</p>
-                                            <button onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="absolute top-0 right-0 opacity-0 group-hover/script:opacity-100 text-gray-500 hover:text-white transition-opacity p-1" title="Edit Voiceover">
-                                                ✏️
-                                            </button>
+                                            <div class="absolute top-0 right-0 flex gap-1 opacity-0 group-hover/script:opacity-100 transition-opacity">
+                                                <button onclick="openSheetsEditCell('script', ${globalRowIndex}); event.stopPropagation();" class="text-gray-500 hover:text-green-400 p-1" title="Edit Script in Google Sheets">
+                                                    📝
+                                                </button>
+                                                <button onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-gray-500 hover:text-white p-1" title="Edit Voiceover">
+                                                    ✏️
+                                                </button>
+                                            </div>
                                         </div>
 
                                         <!-- Edit Mode -->
                                         <div id="script-edit-${uniqueId}" class="hidden mt-1">
                                             <textarea id="script-input-${uniqueId}" rows="3" class="w-full bg-black/50 text-white p-2 text-sm rounded border border-blue-500 focus:outline-none mb-2 font-mono">${line.script}</textarea>
                                             <div class="flex justify-between items-center gap-2">
-                                                <button id="regen-btn-${uniqueId}" onclick="regenerateScript('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-xs bg-purple-900/50 hover:bg-purple-800 text-purple-300 px-2 py-1 rounded border border-purple-700/50 transition">✨ Regenerate</button>
+                                                <div class="flex gap-2">
+                                                    <button id="regen-btn-${uniqueId}" onclick="regenerateScript('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-xs bg-purple-900/50 hover:bg-purple-800 text-purple-300 px-2 py-1 rounded border border-purple-700/50 transition">✨ Regenerate</button>
+                                                    <button onclick="openSheetsEditCell('script', ${globalRowIndex})" class="text-xs bg-green-900/50 hover:bg-green-800 text-green-300 px-2 py-1 rounded border border-green-700/50 transition" title="Edit in Google Sheets">📝 Sheets</button>
+                                                </div>
                                                 <div class="flex gap-2">
                                                     <button onclick="toggleScriptEdit('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-xs text-gray-400 hover:text-white px-2 py-1">Cancel</button>
                                                     <button onclick="saveScriptUpdate('${uniqueId}', ${sceneIndex}, ${lineIndex})" class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded font-bold">Save & Sync</button>
@@ -1908,8 +1951,14 @@
                                                 class="w-full bg-black/30 text-green-400 font-mono text-sm p-3 rounded border border-gray-700 focus:outline-none focus:border-green-500 resize-none pr-8 transition-colors"
                                                 placeholder="Enter prompt here..."
                                                 data-current-type="image"
+                                                data-global-row="${globalRowIndex}"
                                                 oninput="handleTextChange('${uniqueId}', ${sceneIndex}, ${lineIndex})">${currentPrompt}</textarea>
                                                 
+                                        <button onclick="openSheetsEditCell(document.getElementById('text-${uniqueId}').dataset.currentType + '_prompt', ${globalRowIndex})" 
+                                                class="absolute top-2 right-28 text-gray-600 hover:text-green-400 transition opacity-0 group-hover:opacity-100"
+                                                title="Edit in Google Sheets">
+                                            <span class="text-lg">📝</span>
+                                        </button>
                                         <button onclick="downloadYAML()" 
                                                 class="absolute top-2 right-20 text-gray-600 hover:text-white transition opacity-0 group-hover:opacity-100"
                                                 title="Save Updates to YAML">
@@ -2175,47 +2224,6 @@
 
         function copyScriptToClipboard(btn) {
             const textarea = document.getElementById('full-script-content');
-            textarea.select();
-            document.execCommand('copy'); 
-            
-            const originalText = btn.innerText;
-            btn.innerText = "✅ Copied!";
-            setTimeout(() => btn.innerText = originalText, 2000);
-        }
-
-        function openYamlModal() {
-            const modal = document.getElementById('yaml-modal');
-            modal.classList.remove('hidden');
-            renderYamlContent();
-        }
-
-        function renderYamlContent() {
-            const textarea = document.getElementById('full-yaml-content');
-            try {
-                // Reconstruct the full object structure
-                // Reconstruct the full object structure
-                const data = {
-                    title: window.projectTitle || "",
-                    main_context: window.mainContext,
-                    verified_main_context: window.verifiedMainContext,
-                    default_negative_prompts: window.defaultNegativePrompts || {},
-                    scenes: scenes
-                };
-                // Dump to YAML
-                const yamlString = jsyaml.dump(data, { indent: 2, lineWidth: -1 });
-                textarea.value = yamlString;
-            } catch (e) {
-                console.error("YAML Dump Error:", e);
-                textarea.value = "Error generating YAML: " + e.message;
-            }
-        }
-
-        function closeYamlModal() {
-            document.getElementById('yaml-modal').classList.add('hidden');
-        }
-
-        function copyYamlToClipboard(btn) {
-            const textarea = document.getElementById('full-yaml-content');
             textarea.select();
             document.execCommand('copy'); 
             
@@ -2844,21 +2852,7 @@
         }
 
         function reloadApp() {
-            logDebug("INFO", "Reloading Application...", "User triggered reload");
-            const app = document.getElementById('app');
-            if (app) {
-                app.innerHTML = `
-                <div id="loading-indicator" class="flex flex-col items-center justify-center py-20 gap-4">
-                    <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500"></div>
-                    <p class="text-gray-400 text-sm">Reloading project data...</p>
-                </div>`;
-            }
-            // Clear data
-            scenes = [];
-            // Re-fetch
-            loadYAMLFromURL('scenes.yaml').catch(err => {
-                logDebug("ERROR", "Reload Failed", err.message);
-            });
+            reloadFromSheets();
         }
 
         function logDebug(type, title, data) {

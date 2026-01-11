@@ -285,3 +285,81 @@ try {
 4. **Column index mapping** allows flexible column name matching
 5. **Rows are grouped by scene_id** to create the scene structure
 6. **Final data structure** matches the app's expected format
+7. **Direct edit links** open Google Sheets at the exact cell for quick editing
+
+---
+
+## Direct Edit Links to Google Sheets
+
+The app provides "📝" edit buttons that open Google Sheets directly at the specific cell for editing.
+
+### URL Formula for Direct Cell Editing
+
+```
+BASE_URL = https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit?gid={SHEET_GID}#gid={SHEET_GID}&range={COLUMN}{ROW}
+```
+
+### Components:
+
+| Component | Value | Description |
+|-----------|-------|-------------|
+| `SPREADSHEET_ID` | `19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30` | Unique ID from Google Sheet URL |
+| `SHEET_GID` | `864826077` | GID of the "All Lines" sheet tab |
+| `COLUMN` | Letter (A-Z) | Column letter for the field being edited |
+| `ROW` | Number | Row number = dataRowIndex + 2 (header row + 1-indexed) |
+
+### Column Mapping Configuration
+
+```javascript
+columnMap: {
+    script: 'E',              // Script/voiceover column
+    image_prompt: 'H',        // Image prompt
+    graphic_prompt: 'I',      // Graphic prompt  
+    music_prompt: 'J',        // Music prompt
+    animation_prompt: 'K',    // Animation prompt
+    motion_graphics_prompt: 'L', // Motion graphics prompt
+    sound_effect_prompt: 'M', // Sound effect prompt
+    diagram_prompt: 'N',      // Diagram prompt
+    html_prompt: 'O'          // HTML prompt
+}
+```
+
+### Example URLs:
+
+```
+# Edit script for row 2 (first data row)
+https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30/edit?gid=864826077#gid=864826077&range=E2
+
+# Edit image_prompt for row 3 (second data row)
+https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30/edit?gid=864826077#gid=864826077&range=H3
+
+# Edit music_prompt for row 5
+https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30/edit?gid=864826077#gid=864826077&range=J5
+```
+
+### Row Calculation Formula
+
+```javascript
+// Formula: Calculate Google Sheets row number from data index
+sheetRowNumber = globalRowIndex + 2
+
+// Why +2?
+// Row 1: Header row (scene_id, scenetitle, line_id, ...)
+// Row 2: First data row (index 0)
+// Row 3: Second data row (index 1)
+// etc.
+```
+
+### Global Row Index Calculation
+
+Since lines are spread across scenes, the global row index is calculated as:
+
+```javascript
+// Formula: Count all lines in previous scenes + current line index
+globalRowIndex = sum(lines in scenes 0..currentSceneIndex-1) + lineIndex
+
+// Example:
+// Scene 0 has 5 lines, Scene 1 has 3 lines
+// Line 2 of Scene 1 = 5 + 2 = globalRowIndex 7
+// Sheet row = 7 + 2 = 9
+```
