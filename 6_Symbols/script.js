@@ -892,7 +892,35 @@
                             contentHtml = `<audio controls src="${embedUrl}" class="w-full h-8 mt-1"></audio>`;
                         }
                     } else if (isVideo) {
-                        contentHtml = `<video controls src="${embedUrl}" class="w-full h-auto rounded border border-gray-700 mt-1"></video>`;
+                         // Check for Google Drive Video
+                        const isDriveVideo = isDrive; // Already checked global isDrive
+                        let driveFileId = null;
+                        
+                        if (isDriveVideo) {
+                            const match = asset.url.match(/\/d\/([a-zA-Z0-9_-]+)|id=([a-zA-Z0-9_-]+)/);
+                            driveFileId = match ? (match[1] || match[2]) : null;
+                        }
+
+                        if (driveFileId) {
+                             const playerContainerId = `sidebar-drive-video-${driveFileId}-${line.id}`;
+                             contentHtml = `
+                                <div id="${playerContainerId}" class="mt-1">
+                                    <button onclick="fetchAndPlayDriveVideo('${driveFileId}', '${playerContainerId}')" 
+                                        class="text-xs bg-purple-900/30 hover:bg-purple-900/50 text-purple-300 border border-purple-800 px-2 py-1 rounded w-full flex items-center justify-center gap-1 transition">
+                                        <span>🔓</span> Load Video (API)
+                                    </button>
+                                </div>
+                                <div class="mt-1 flex justify-end">
+                                     <button onclick="fetchAndPlayDriveModal('${driveFileId}', '${asset.filename || 'Video'}', 'video')" 
+                                        class="text-[9px] bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white px-1.5 py-0.5 rounded border border-gray-700"
+                                        title="Play Video in Popup (API)">
+                                        ⏵ Popup
+                                    </button>
+                                </div>
+                             `;
+                        } else {
+                            contentHtml = `<video controls src="${embedUrl}" class="w-full h-auto rounded border border-gray-700 mt-1"></video>`;
+                        }
                     } else {
                         contentHtml = `<div class="p-2 bg-gray-800 rounded mt-1 text-center border border-gray-700">📄 File Preview</div>`;
                     }
@@ -4112,6 +4140,105 @@ async function autoUploadToDrive(uniqueId, blob, filename) {
                         <p class="text-xs text-gray-400">Playing: ${filename}</p>
                     </div>
                 `;
+
+            } catch (error) {
+                console.error("Drive Modal Error:", error);
+                const contentEl = document.getElementById('media-modal-content');
+                if (contentEl) {
+                    contentEl.innerHTML = `
+                        <div class="text-center">
+                            <p class="text-red-400 font-bold mb-2">⚠ Playback Error</p>
+                            <p class="text-xs text-gray-400">${error.message}</p>
+                            <button onclick="closeMediaModal()" class="mt-4 bg-gray-700 px-3 py-1 rounded text-xs hover:bg-gray-600">Close</button>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        async function fetchAndPlayDriveVideo(fileId, containerId) {
+            const container = document.getElementById(containerId);
+            const btn = container.querySelector('button');
+            
+            try {
+                if (btn) btn.innerText = "⏳ Loading Video...";
+                
+                // Get Token
+                const token = await getAccessToken();
+                
+                // Fetch File Blob
+                const response = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
+                
+                const blob = await response.blob();
+                const videoUrl = URL.createObjectURL(blob);
+                
+                // Replace button with player
+                container.innerHTML = `
+                    <video controls autoplay class="w-full max-h-[300px] rounded border border-gray-700">
+                        <source src="${videoUrl}" type="video/mp4">
+                        Your browser does not support the video element.
+                    </video>
+                `;
+                
+            } catch (error) {
+                console.error("Drive Video Error:", error);
+                if (btn) {
+                    btn.innerHTML = `<span class="text-red-400">⚠ Error</span>`;
+                    btn.title = error.message;
+                }
+            }
+        }
+
+        // Updated modal signature to accept type
+        async function fetchAndPlayDriveModal(fileId, filename, type = 'audio') {
+            try {
+                // Open modal immediately with loading state
+                const modal = document.getElementById('media-modal');
+                const titleEl = document.getElementById('media-modal-title');
+                const contentEl = document.getElementById('media-modal-content');
+                
+                titleEl.innerHTML = `▶ ${filename}`;
+                contentEl.innerHTML = `<p class="text-blue-300 animate-pulse">⏳ Authenticating & Loading from Drive...</p>`;
+                modal.classList.remove('hidden');
+
+                // Get Token & Fetch
+                const token = await getAccessToken();
+                const response = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
+                
+                const blob = await response.blob();
+                const mediaUrl = URL.createObjectURL(blob);
+                
+                // Update Modal Content based on type
+                if (type === 'video') {
+                     contentEl.innerHTML = `
+                        <div class="w-full text-center">
+                            <video controls autoplay class="w-full max-h-[80vh]">
+                                <source src="${mediaUrl}" type="video/mp4">
+                                Your browser does not support the video element.
+                            </video>
+                            <p class="text-xs text-gray-400 mt-2">Playing: ${filename}</p>
+                        </div>
+                    `;
+                } else {
+                    // Default Audio
+                    contentEl.innerHTML = `
+                        <div class="w-full text-center">
+                            <audio controls autoplay class="w-full mb-4">
+                                <source src="${mediaUrl}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                            <p class="text-xs text-gray-400">Playing: ${filename}</p>
+                        </div>
+                    `;
+                }
 
             } catch (error) {
                 console.error("Drive Modal Error:", error);
