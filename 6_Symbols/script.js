@@ -37,7 +37,7 @@
                 overview: { name: 'Overview', gid: '0' },
                 scenesSummary: { name: 'Scenes Summary', gid: '440551049' },
                 allLines: { name: 'All Lines', gid: '864826077' },
-                uploadedAssets: { name: 'Uploaded Assets', gid: '' }
+                uploadedAssets: { name: 'Uploaded Assets', gid: '1278766054' }
             },
             // Column mapping for direct edit links (0-indexed, A=0)
             // Update these based on your actual sheet structure
@@ -121,31 +121,37 @@
                 const titleSheet = GOOGLE_SHEETS_CONFIG.titleSheet || 'Overview';
                 const dataSheet = GOOGLE_SHEETS_CONFIG.sheetName || 'All Lines';
                 const scenesSummarySheet = GOOGLE_SHEETS_CONFIG.sheets.scenesSummary.name || 'Scenes Summary';
+                const uploadedAssetsSheet = GOOGLE_SHEETS_CONFIG.sheets.uploadedAssets.name || 'Uploaded Assets';
                 
                 // Fetch data from correct sheets:
                 // - Project title from Overview!B3
                 // - Main context from Scenes Summary!B4
                 // - Metadata from Overview
                 // - Scene/line data from All Lines
+                // - Uploaded assets from Uploaded Assets sheet
                 const projectTitleUrl = buildSheetsApiUrl(`${titleSheet}!B3`, apiKey);
                 const mainContextUrl = buildSheetsApiUrl(`${scenesSummarySheet}!B4`, apiKey);
                 const metadataUrl = buildSheetsApiUrl(`${titleSheet}!A1:B10`, apiKey);
                 const scenesUrl = buildSheetsApiUrl(`${dataSheet}!A1:Z1000`, apiKey);
+                const uploadedAssetsUrl = buildSheetsApiUrl(`${uploadedAssetsSheet}!A1:Z100`, apiKey);
 
                 console.log('%c🔗 API URLs being fetched:', 'color: #fbbc04; font-weight: bold;');
                 console.log(`  Title Sheet: "${titleSheet}" (for project title in B3)`);
                 console.log(`  Scenes Summary Sheet: "${scenesSummarySheet}" (for main context in B4)`);
                 console.log(`  Data Sheet: "${dataSheet}" (for scenes/lines data)`);
+                console.log(`  Uploaded Assets Sheet: "${uploadedAssetsSheet}" (for uploaded assets)`);
                 console.log(`  [1] Project Title (${titleSheet}!B3): ${projectTitleUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
                 console.log(`  [2] Main Context (${scenesSummarySheet}!B4): ${mainContextUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
                 console.log(`  [3] Metadata (${titleSheet}!A1:B10): ${metadataUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
                 console.log(`  [4] Scenes (${dataSheet}!A1:Z1000): ${scenesUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
+                console.log(`  [5] Uploaded Assets (${uploadedAssetsSheet}!A1:Z100): ${uploadedAssetsUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
 
-                const [titleRes, mainContextRes, metadataRes, scenesRes] = await Promise.all([
+                const [titleRes, mainContextRes, metadataRes, scenesRes, uploadedAssetsRes] = await Promise.all([
                     fetch(projectTitleUrl),
                     fetch(mainContextUrl),
                     fetch(metadataUrl),
-                    fetch(scenesUrl)
+                    fetch(scenesUrl),
+                    fetch(uploadedAssetsUrl)
                 ]);
 
                 console.log('%c📥 API Response Status:', 'color: #34a853;');
@@ -153,21 +159,24 @@
                 console.log(`  Main Context: ${mainContextRes.status} ${mainContextRes.ok ? '✅' : '❌'}`);
                 console.log(`  Metadata: ${metadataRes.status} ${metadataRes.ok ? '✅' : '❌'}`);
                 console.log(`  Scenes: ${scenesRes.status} ${scenesRes.ok ? '✅' : '❌'}`);
+                console.log(`  Uploaded Assets: ${uploadedAssetsRes.status} ${uploadedAssetsRes.ok ? '✅' : '❌'}`);
 
-                if (!titleRes.ok || !mainContextRes.ok || !metadataRes.ok || !scenesRes.ok) {
+                if (!titleRes.ok || !mainContextRes.ok || !metadataRes.ok || !scenesRes.ok || !uploadedAssetsRes.ok) {
                     // Get error details
                     const titleError = !titleRes.ok ? await titleRes.json().catch(() => ({})) : null;
                     const mainContextError = !mainContextRes.ok ? await mainContextRes.json().catch(() => ({})) : null;
                     const metadataError = !metadataRes.ok ? await metadataRes.json().catch(() => ({})) : null;
                     const scenesError = !scenesRes.ok ? await scenesRes.json().catch(() => ({})) : null;
+                    const uploadedAssetsError = !uploadedAssetsRes.ok ? await uploadedAssetsRes.json().catch(() => ({})) : null;
                     
                     console.error('%c❌ API Error Details:', 'color: #ea4335; font-weight: bold;');
                     if (titleError) console.error('  Title Error:', titleError);
                     if (mainContextError) console.error('  Main Context Error:', mainContextError);
                     if (metadataError) console.error('  Metadata Error:', metadataError);
                     if (scenesError) console.error('  Scenes Error:', scenesError);
+                    if (uploadedAssetsError) console.error('  Uploaded Assets Error:', uploadedAssetsError);
                     
-                    const errorMsg = titleError?.error?.message || mainContextError?.error?.message || metadataError?.error?.message || scenesError?.error?.message || 'Unknown error';
+                    const errorMsg = titleError?.error?.message || mainContextError?.error?.message || metadataError?.error?.message || scenesError?.error?.message || uploadedAssetsError?.error?.message || 'Unknown error';
                     throw new Error(`Sheets API error: ${errorMsg}`);
                 }
 
@@ -175,6 +184,16 @@
                 const mainContextJson = await mainContextRes.json();
                 const metadataJson = await metadataRes.json();
                 const scenesJson = await scenesRes.json();
+                const uploadedAssetsJson = await uploadedAssetsRes.json();
+                
+                console.log('%c📁 UPLOADED ASSETS RAW DATA:', 'color: #ff5722; font-weight: bold;');
+                console.log('  Rows:', uploadedAssetsJson.values?.length || 0);
+                if (uploadedAssetsJson.values) {
+                    console.log('  Headers:', uploadedAssetsJson.values[0]);
+                    uploadedAssetsJson.values.slice(1).forEach((row, i) => {
+                        console.log(`  Row ${i + 2}:`, row);
+                    });
+                }
 
                 // Extract project title from B3
                 const projectTitle = titleJson.values?.[0]?.[0] || 'Plan your AI transformation journey';
@@ -188,9 +207,9 @@
                 console.log('%c✅ MAIN CONTEXT EXTRACTED:', 'color: #34a853; font-weight: bold;', `"${mainContext.substring(0, 100)}${mainContext.length > 100 ? '...' : ''}"`);
                 logDebug("INFO", "Main Context from Scenes Summary!B4", mainContext.substring(0, 50) + '...');
                 
-                logDebug("SUCCESS", "Google Sheets loaded", `${scenesJson.values?.length || 0} rows`);
+                logDebug("SUCCESS", "Google Sheets loaded", `${scenesJson.values?.length || 0} rows, ${uploadedAssetsJson.values?.length || 0} assets`);
 
-                return transformSheetsToData(metadataJson, scenesJson, projectTitle, mainContext);
+                return transformSheetsToData(metadataJson, scenesJson, projectTitle, mainContext, uploadedAssetsJson);
             } catch (error) {
                 console.error('%c❌ GOOGLE SHEETS LOAD FAILED', 'background: #ea4335; color: white; padding: 4px 8px; border-radius: 4px;');
                 console.error('Error:', error.message);
@@ -205,7 +224,7 @@
         }
 
         // Transform Google Sheets data to app data structure
-        function transformSheetsToData(metadataJson, scenesJson, projectTitleFromCell = null, mainContextFromCell = null) {
+        function transformSheetsToData(metadataJson, scenesJson, projectTitleFromCell = null, mainContextFromCell = null, uploadedAssetsJson = null) {
             console.log('%c📊 GOOGLE SHEETS DATA MAPPING START', 'background: #4285f4; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
             console.log('%cSource: https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30', 'color: #1a73e8; font-style: italic;');
             
@@ -218,6 +237,69 @@
             // First row is headers - normalize to lowercase with underscores
             const headers = rows[0].map(h => h.toLowerCase().trim().replace(/\s+/g, '_'));
             const dataRows = rows.slice(1);
+            
+            // Parse uploaded assets from dedicated sheet
+            // Expected columns: line_id, asset_type, url (or similar)
+            const uploadedAssetsMap = new Map();
+            if (uploadedAssetsJson?.values && uploadedAssetsJson.values.length > 1) {
+                const assetHeaders = uploadedAssetsJson.values[0].map(h => h.toLowerCase().trim().replace(/\s+/g, '_'));
+                const assetDataRows = uploadedAssetsJson.values.slice(1);
+                
+                // Find column indices for uploaded assets sheet
+                const assetColIndex = {};
+                assetHeaders.forEach((h, i) => {
+                    assetColIndex[h] = i;
+                    assetColIndex[h.replace(/_/g, '')] = i;
+                });
+                
+                console.log('%c📁 UPLOADED ASSETS SHEET PARSING:', 'color: #ff5722; font-weight: bold;');
+                console.log('  Headers:', assetHeaders);
+                console.log('  Column mapping:', assetColIndex);
+                
+                assetDataRows.forEach((row, idx) => {
+                    // Try multiple possible column names for line_id
+                    const lineId = row[assetColIndex['line_id']] || row[assetColIndex['lineid']] || row[assetColIndex['id']] || '';
+                    // Try multiple possible column names for asset type
+                    const assetType = row[assetColIndex['asset_type']] || row[assetColIndex['assettype']] || row[assetColIndex['type']] || '';
+                    // Try multiple possible column names for URL
+                    const url = row[assetColIndex['url']] || row[assetColIndex['asset_url']] || row[assetColIndex['link']] || '';
+                    // Optional filename
+                    const filename = row[assetColIndex['filename']] || row[assetColIndex['name']] || 'Uploaded Asset';
+                    
+                    console.log(`  Asset row ${idx + 2}: line_id="${lineId}", type="${assetType}", url="${url.substring(0, 50)}${url.length > 50 ? '...' : ''}"`);
+                    
+                    if (lineId && url) {
+                        if (!uploadedAssetsMap.has(lineId)) {
+                            uploadedAssetsMap.set(lineId, {});
+                        }
+                        const lineAssets = uploadedAssetsMap.get(lineId);
+                        
+                        // Map asset type to the correct structure
+                        const normalizedType = assetType.toLowerCase().replace(/\s+/g, '_');
+                        if (normalizedType === 'image' || normalizedType === 'images') {
+                            if (!lineAssets.image) lineAssets.image = [];
+                            lineAssets.image.push({ url, filename, last_uploaded: new Date().toISOString() });
+                        } else if (normalizedType === 'music' || normalizedType === 'audio') {
+                            lineAssets.music = { url, filename, last_uploaded: new Date().toISOString() };
+                        } else if (normalizedType === 'voiceover' || normalizedType === 'voice') {
+                            lineAssets.audio = { url, filename, last_uploaded: new Date().toISOString() };
+                        } else if (normalizedType === 'video') {
+                            lineAssets.video = { url, filename, last_uploaded: new Date().toISOString() };
+                        } else {
+                            // Generic - store by type name
+                            lineAssets[normalizedType] = { url, filename, last_uploaded: new Date().toISOString() };
+                        }
+                    }
+                });
+                
+                console.log('%c✅ UPLOADED ASSETS MAPPED:', 'color: #34a853; font-weight: bold;');
+                console.log(`  Total lines with assets: ${uploadedAssetsMap.size}`);
+                uploadedAssetsMap.forEach((assets, lineId) => {
+                    console.log(`  Line ${lineId}:`, Object.keys(assets).join(', '));
+                });
+            } else {
+                console.log('%c⚠️ NO UPLOADED ASSETS FOUND:', 'color: #ff9800;', 'Sheet is empty or missing');
+            }
 
             // Find column indices
             const colIndex = {};
@@ -364,7 +446,7 @@
                 console.log(`  MAP verified_sound_effect: ${verifiedSoundEffect}`);
                 console.log(`  MAP verified_html: ${verifiedHtml}`);
                 
-                // Map uploaded assets
+                // Map uploaded assets from inline columns in All Lines sheet
                 const uploadedAssets = {};
                 
                 const imageAssetUrl = row[colIndex['image_asset']] || row[colIndex['image_url']] || '';
@@ -381,6 +463,19 @@
                 if (audioAssetUrl) {
                     uploadedAssets.audio = { url: audioAssetUrl, filename: 'Sheet Asset', last_uploaded: new Date().toISOString() };
                 }
+                
+                // Merge assets from the dedicated Uploaded Assets sheet
+                const sheetAssets = uploadedAssetsMap.get(lineId) || {};
+                Object.keys(sheetAssets).forEach(assetKey => {
+                    if (!uploadedAssets[assetKey]) {
+                        uploadedAssets[assetKey] = sheetAssets[assetKey];
+                    } else if (Array.isArray(uploadedAssets[assetKey]) && Array.isArray(sheetAssets[assetKey])) {
+                        // Merge arrays (for images)
+                        uploadedAssets[assetKey] = [...uploadedAssets[assetKey], ...sheetAssets[assetKey]];
+                    }
+                });
+                
+                console.log(`  MAP uploaded_assets for line ${lineId}:`, Object.keys(uploadedAssets).length > 0 ? Object.keys(uploadedAssets).join(', ') : 'none');
 
                 const videoName = row[colIndex['video_name']] || '';
 
