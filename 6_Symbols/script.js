@@ -99,6 +99,7 @@
                  if (!getCookie('elevenlabs_api_key')) {
                     setCookie('elevenlabs_api_key', savedElevenKey, 365);
                 }
+                verifyElevenApiKey(savedElevenKey);
             }
 
             // Scroll Listener for "Scroll to Top"
@@ -322,6 +323,79 @@
         function saveElevenKey(key) {
              setCookie('elevenlabs_api_key', key, 365);
              localStorage.setItem('elevenlabs_api_key', key); // Sync backup
+        }
+
+        let elevenApiKeyDebounceTimer;
+        function debouncedSaveElevenKey(key) {
+            clearTimeout(elevenApiKeyDebounceTimer);
+            saveElevenKey(key); // Save immediately
+            
+            // Debounce verification
+            const icon = document.getElementById('eleven-status-icon');
+            if(icon) icon.innerText = "⏳";
+            
+            elevenApiKeyDebounceTimer = setTimeout(() => {
+                verifyElevenApiKey(key);
+            }, 800);
+        }
+
+        async function verifyElevenApiKey(key) {
+             const icon = document.getElementById('eleven-status-icon');
+             const input = document.getElementById('elevenApiKey');
+             const inputContainer = document.getElementById('eleven-key-container');
+             const verifiedContainer = document.getElementById('eleven-key-verified');
+
+             if (!key) {
+                 if(icon) icon.innerText = "";
+                 if(input) input.classList.remove('border-green-500', 'border-red-500');
+                 return;
+             }
+
+             try {
+                 const response = await fetch('https://api.elevenlabs.io/v1/user', {
+                     method: 'GET',
+                     headers: {
+                         'xi-api-key': key
+                     }
+                 });
+
+                 if (response.ok) {
+                    if(icon) icon.innerText = "✅";
+                    if(input) {
+                        input.classList.add('border-green-500');
+                        input.classList.remove('border-red-500');
+                    }
+                    
+                    setTimeout(() => {
+                        if(inputContainer) inputContainer.classList.add('hidden');
+                        if(verifiedContainer) verifiedContainer.classList.remove('hidden');
+                    }, 500);
+
+                 } else {
+                     throw new Error("Invalid Key");
+                 }
+             } catch (e) {
+                 if(icon) icon.innerText = "❌";
+                 if(input) {
+                    input.classList.add('border-red-500');
+                    input.classList.remove('border-green-500');
+                 }
+             }
+        }
+
+        function resetElevenApiKey() {
+            const inputContainer = document.getElementById('eleven-key-container');
+            const verifiedContainer = document.getElementById('eleven-key-verified');
+            const input = document.getElementById('elevenApiKey');
+            const icon = document.getElementById('eleven-status-icon');
+
+            if(verifiedContainer) verifiedContainer.classList.add('hidden');
+            if(inputContainer) inputContainer.classList.remove('hidden');
+            
+            if(input) {
+                input.focus();
+                input.select();
+            }
         }
 
         async function verifyApiKey(key) {
