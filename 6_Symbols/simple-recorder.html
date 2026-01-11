@@ -25,6 +25,10 @@ textarea { width: 100%; height: 200px; font-family: monospace; font-size: 12px; 
 label { display: block; margin: 10px 0 5px; font-weight: bold; }
 .size-inputs { display: flex; gap: 10px; align-items: center; }
 .size-inputs input { width: 100px; padding: 5px; }
+.debug-console { margin-top: 20px; border-top: 2px solid #ddd; padding-top: 10px; }
+#debugLog { width: 100%; height: 150px; background: #333; color: #0f0; font-family: monospace; font-size: 12px; padding: 10px; border-radius: 3px; overflow-y: scroll; margin-bottom: 5px; box-sizing: border-box; }
+.debug-controls { display: flex; gap: 10px; }
+.debug-controls button { font-size: 12px; padding: 5px 10px; }
 </style>
 </head>
 <body>
@@ -103,7 +107,71 @@ label { display: block; margin: 10px 0 5px; font-weight: bold; }
 
 </div>
 
+<div class="debug-console">
+    <h3>Debug Console</h3>
+    <textarea id="debugLog" readonly></textarea>
+    <div class="debug-controls">
+        <button onclick="copyDebugLogs()" style="background: #34495e;">📋 Copy Logs</button>
+        <button onclick="clearDebugLogs()" style="background: #95a5a6;">🗑️ Clear Logs</button>
+    </div>
+</div>
+
+</div>
+
 <script>
+// Debugging Logic
+const debugLog = document.getElementById('debugLog');
+
+function logToConsole(msg, type = 'INFO') {
+    const timestamp = new Date().toLocaleTimeString();
+    const logLine = `[${timestamp}] [${type}] ${msg}\n`;
+    if (debugLog) {
+        debugLog.value += logLine;
+        debugLog.scrollTop = debugLog.scrollHeight; // Auto-scroll
+    }
+    // Also log to real console to avoid breaking it
+    if (type === 'ERROR') {
+         // Prevent infinite loop if we override console.error later (not doing full override here for safety)
+         // But for now, we just append to our textarea
+    }
+}
+
+// Global error handler
+window.onerror = function(message, source, lineno, colno, error) {
+    logToConsole(`${message} at ${source}:${lineno}:${colno}`, 'ERROR');
+    console.error(error); // Keep original behavior
+};
+
+// Override console.log and console.error safely
+const originalLog = console.log;
+const originalError = console.error;
+
+console.log = function(...args) {
+    logToConsole(args.map(a => (typeof a === 'object' ? JSON.stringify(a) : String(a))).join(' '));
+    originalLog.apply(console, args);
+};
+
+console.error = function(...args) {
+    logToConsole(args.map(a => (typeof a === 'object' ? JSON.stringify(a) : String(a))).join(' '), 'ERROR');
+    originalError.apply(console, args);
+};
+
+function copyDebugLogs() {
+    if (!debugLog) return;
+    debugLog.select();
+    debugLog.setSelectionRange(0, 99999); // For mobile
+    navigator.clipboard.writeText(debugLog.value).then(() => {
+        alert('Logs copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy logs:', err);
+        alert('Failed to copy logs');
+    });
+}
+
+function clearDebugLogs() {
+    if (debugLog) debugLog.value = '';
+}
+
 const htmlInput = document.getElementById('htmlInput');
 const preview = document.getElementById('preview');
 const canvas = document.getElementById('canvas');
