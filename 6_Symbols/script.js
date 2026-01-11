@@ -1645,6 +1645,80 @@
             document.getElementById('context-preview-modal').classList.remove('hidden');
         }
 
+        // ==========================================
+        // TEMPLATES MODAL
+        // ==========================================
+        let templatesCache = null;
+
+        async function loadTemplates() {
+            if (templatesCache) return templatesCache;
+            
+            try {
+                logDebug("INFO", "Fetching Templates", "template.yaml");
+                const response = await fetch('template.yaml');
+                if (!response.ok) throw new Error("Failed to load template.yaml");
+                const text = await response.text();
+                templatesCache = jsyaml.load(text);
+                return templatesCache;
+            } catch (e) {
+                console.error("Error loading templates", e);
+                logDebug("ERROR", "Template Load Failed", e.message);
+                alert("Failed to load templates. Please check template.yaml");
+                return null;
+            }
+        }
+
+        async function openTemplatesModal() {
+            const modal = document.getElementById('templates-modal');
+            const listContainer = document.getElementById('templates-list');
+            
+            // Show loading state
+            listContainer.innerHTML = '<div class="text-center p-4 text-gray-500">Loading templates...</div>';
+            modal.classList.remove('hidden');
+            
+            const templates = await loadTemplates();
+            if (!templates) {
+                listContainer.innerHTML = '<div class="text-center p-4 text-red-500">Error loading templates.</div>';
+                return;
+            }
+
+            let html = '';
+            Object.entries(templates).forEach(([key, value]) => {
+                // Format key: Sample_Prompt_Music -> Music
+                const label = key.replace('Sample_Prompt_', '');
+                
+                html += `
+                    <div class="bg-gray-800 p-3 rounded border border-gray-700 hover:border-blue-500 cursor-pointer transition group" onclick="applyTemplate('${key}')">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-blue-300 text-xs">${label}</span>
+                            <span class="text-[10px] text-gray-500 group-hover:text-blue-400">Apply ➡️</span>
+                        </div>
+                        <p class="text-xs text-gray-400 line-clamp-2">${value}</p>
+                    </div>
+                `;
+            });
+            
+            listContainer.innerHTML = html;
+        }
+
+        function closeTemplatesModal() {
+            document.getElementById('templates-modal').classList.add('hidden');
+        }
+
+        async function applyTemplate(key) {
+            const templates = await loadTemplates(); // Should be cached
+            if (templates && templates[key]) {
+                const value = templates[key];
+                document.getElementById('preview-final-prompt').value = value;
+                closeTemplatesModal();
+                
+                // Update pending generation if exists
+                if (typeof pendingGeneration !== 'undefined') {
+                    pendingGeneration.finalPrompt = value;
+                }
+            }
+        }
+
         function closeContextModal() {
             document.getElementById('context-preview-modal').classList.add('hidden');
             pendingGeneration = null;
@@ -2051,7 +2125,7 @@
             }
 
             const payload = {
-                text: prompt,
+                text: prompt.substring(0, 450), // Truncate to 450 chars to avoid API error
                 duration_seconds: durationSeconds,
                 prompt_influence: 0.3
             };
