@@ -1085,21 +1085,23 @@
                                                 const fileId = match ? (match[1] || match[2]) : null;
                                                 
                                                 if (fileId) {
-                                                    const exportUrl = `https://docs.google.com/uc?export=download&id=${fileId}`;
-                                                    // Compact Audio Player
+                                                    // API-based Playback UI
+                                                    const playerContainerId = `drive-player-${fileId}-${uniqueId}`;
+                                                    
                                                     audioPlayerHtml = `
-                                                        <div class="mt-1">
-                                                            <audio controls class="w-full h-6 opacity-70 hover:opacity-100 transition-opacity">
-                                                                <source src="${exportUrl}" type="audio/mpeg">
-                                                            </audio>
+                                                        <div id="${playerContainerId}" class="mt-1">
+                                                            <button onclick="fetchAndPlayDriveAudio('${fileId}', '${playerContainerId}')" 
+                                                                class="text-xs bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 border border-blue-800 px-2 py-1 rounded w-full flex items-center justify-center gap-1 transition">
+                                                                <span>🔓</span> Load & Play (API)
+                                                            </button>
                                                         </div>
                                                     `;
                                                     
-                                                    // Modal Button
+                                                    // Modal Button (modified to use API)
                                                     modalButton = `
-                                                        <button onclick="openMediaModal('${exportUrl}', '${asset.filename || 'Audio'}', 'audio')" 
+                                                        <button onclick="fetchAndPlayDriveModal('${fileId}', '${asset.filename || 'Audio'}')" 
                                                             class="text-[10px] bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white px-1.5 py-0.5 rounded border border-gray-700 ml-1"
-                                                            title="Play in Popup">
+                                                            title="Play in Popup (API)">
                                                             ⏵ Popup
                                                         </button>
                                                     `;
@@ -3996,4 +3998,93 @@ async function autoUploadToDrive(uniqueId, blob, filename) {
             contentEl.innerHTML = '';
             
             modal.classList.add('hidden');
+        }
+
+        // ==========================================
+        // DRIVE API AUDIO PLAYBACK
+        // ==========================================
+        
+        async function fetchAndPlayDriveAudio(fileId, containerId) {
+            const container = document.getElementById(containerId);
+            const btn = container.querySelector('button');
+            
+            try {
+                if (btn) btn.innerText = "⏳ Loading...";
+                
+                // Get Token
+                const token = await getAccessToken();
+                
+                // Fetch File Blob
+                const response = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
+                
+                const blob = await response.blob();
+                const audioUrl = URL.createObjectURL(blob);
+                
+                // Replace button with player
+                container.innerHTML = `
+                    <audio controls autoplay class="w-full h-6 opacity-90 hover:opacity-100 transition-opacity">
+                        <source src="${audioUrl}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                `;
+                
+            } catch (error) {
+                console.error("Drive Audio Error:", error);
+                if (btn) {
+                    btn.innerHTML = `<span class="text-red-400">⚠ Error</span>`;
+                    btn.title = error.message;
+                }
+            }
+        }
+
+        async function fetchAndPlayDriveModal(fileId, filename) {
+            try {
+                // Open modal immediately with loading state
+                const modal = document.getElementById('media-modal');
+                const titleEl = document.getElementById('media-modal-title');
+                const contentEl = document.getElementById('media-modal-content');
+                
+                titleEl.innerHTML = `▶ ${filename}`;
+                contentEl.innerHTML = `<p class="text-blue-300 animate-pulse">⏳ Authenticating & Loading from Drive...</p>`;
+                modal.classList.remove('hidden');
+
+                // Get Token & Fetch
+                const token = await getAccessToken();
+                const response = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
+                
+                const blob = await response.blob();
+                const audioUrl = URL.createObjectURL(blob);
+                
+                // Update Modal Content
+                contentEl.innerHTML = `
+                    <div class="w-full text-center">
+                        <audio controls autoplay class="w-full mb-4">
+                            <source src="${audioUrl}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <p class="text-xs text-gray-400">Playing: ${filename}</p>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error("Drive Modal Error:", error);
+                const contentEl = document.getElementById('media-modal-content');
+                if (contentEl) {
+                    contentEl.innerHTML = `
+                        <div class="text-center">
+                            <p class="text-red-400 font-bold mb-2">⚠ Playback Error</p>
+                            <p class="text-xs text-gray-400">${error.message}</p>
+                            <button onclick="closeMediaModal()" class="mt-4 bg-gray-700 px-3 py-1 rounded text-xs hover:bg-gray-600">Close</button>
+                        </div>
+                    `;
+                }
+            }
         }
