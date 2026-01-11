@@ -1,17 +1,8 @@
 title: Plan your AI transformation journey
 main_context: 'High-production value documentary style for youtube weekly video for rifat erdem sahin channel. Futuristic technology, serious but inspiring tone. Visuals should be cinematic, 8k resolution, with a mix of photorealism and high-end motion graphics. Color palette: Dark mode with neon accents (blue, purple, teal).'
 verified_main_context: false
-version: 12
-last_updated: '2026-01-11T12:20:28.350Z'
-default_negative_prompts:
-  image: 'blurry, low quality, watermark, text, deformed, ugly, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, amateur, stock photo'
-  graphic: 'blurry, low resolution, pixelated, cluttered, messy layout, unreadable text, inconsistent style, poor contrast, amateur design, childish, clip art'
-  animation: 'jerky motion, flickering, glitchy, low fps, stuttering, frame drops, compression artifacts, blurry motion, unnatural movement'
-  music: 'distorted, clipping, off-key, arrhythmic, harsh noise, static, poor mixing, inconsistent tempo, amateur, royalty-free generic'
-  sound_effect: 'clipping, distorted, too loud, muffled, background noise, echo, reverb artifacts, stock sound'
-  diagram: 'cluttered, unreadable, overlapping text, broken arrows, inconsistent styling, missing labels, too complex'
-  motion_graphics: 'static, boring, no movement, poor timing, misaligned elements, jarring transitions, amateur'
-  html: 'broken layout, misaligned elements, inconsistent colors, poor responsive design, accessibility issues, outdated styling'
+version: 13
+last_updated: '2026-01-11T13:05:14.268Z'
 scenes:
   - id: SCENE 01
     title: The New Age
@@ -24,7 +15,7 @@ scenes:
       - id: '1'
         time: '0:00'
         script: Alright, let's dive right in. Today, we're looking at a pretty powerful framework.
-        negative_prompt: 'blurry, low quality, watermark, cartoon, anime, illustrated, low resolution, amateur lighting, overexposed, underexposed, stock photo feel'
+        negative_prompt: blurry, low quality, watermark, cartoon, anime, illustrated, low resolution, amateur lighting, overexposed, underexposed, stock photo feel
         prompts:
           image: Cinematic medium shot of a confident tech presenter in a modern, dimly lit studio with dynamic blue and orange rim lighting, shallow depth of field, 8k resolution, high production value
           graphic: a transformation logo
@@ -59,6 +50,9 @@ scenes:
             - filename: Line1_Image_2026-01-11_12-20.png
               url: https://drive.google.com/file/d/1P2Yt4OBFekH0KbV3Ur2LaClr_m5l82WN/view?usp=drivesdk
               last_uploaded: '2026-01-11T12:20:28.346Z'
+            - filename: Line1_Image_2026-01-11_13-05.png
+              url: https://drive.google.com/file/d/1u5aBDq2JNkWzhji1x7eEPzNyq8KdUJl0/view?usp=drivesdk
+              last_uploaded: '2026-01-11T13:05:14.263Z'
           music:
             filename: Plan_your_AI_transformation_journey_The_New_Age_Line1_Audio_2026-01-11_08-20.mp3
             url: https://drive.google.com/file/d/1aVhbsec5fmztFqCEMzxYFK9Co0_7jLwt/view?usp=drivesdk
@@ -67,11 +61,11 @@ scenes:
             filename: Line1_Audio_2026-01-11_08-20
             url: https://drive.google.com/file/d/1UxzfqUsedWDf5Iw6h4IX3YYoCeZMEqzq/view?usp=drivesdk
             last_uploaded: '2026-01-11T08:20:22.448Z'
-        video_name: Plan_your_AI_transformation_journey_The_New_Age_Line1_Image_2026-01-11_12-20.png
+        video_name: Plan_your_AI_transformation_journey_The_New_Age_Line1_Image_2026-01-11_13-04.png
       - id: '2'
         time: '0:04'
         script: ...for, well, surviving and thriving in this new age of AI. If you're in the tech world...
-        negative_prompt: 'blurry, low quality, watermark, static image, boring composition, flat lighting, generic stock imagery, cluttered background'
+        negative_prompt: blurry, low quality, watermark, static image, boring composition, flat lighting, generic stock imagery, cluttered background
         prompts:
           image: A chaotic but artistic collage of glowing holographic news headlines about Artificial Intelligence and Tech market shifts, cyberpunk aesthetic, motion blur, floating in dark void
           graphic: Digital stock ticker scrolling rapidly at the bottom with 'AI UP', 'JOBS DOWN', 'MARKET SHIFT'
@@ -102,7 +96,7 @@ scenes:
       - id: '3'
         time: '0:08'
         script: ...you can feel it, right? Things are changing so fast it can make your head spin.
-        negative_prompt: 'blurry, static, no motion blur, stable camera, calm, boring, low energy, poor composition'
+        negative_prompt: blurry, static, no motion blur, stable camera, calm, boring, low energy, poor composition
         prompts:
           image: First person POV shot of a modern office environment spinning rapidly with heavy radial motion blur, dizzying effect, photographic realism
           graphic: Motion blur lines intensifying the feeling of speed
@@ -133,7 +127,7 @@ scenes:
       - id: '4'
         time: '0:12'
         script: The old rules? They just don't seem to apply anymore.
-        negative_prompt: 'blurry, low quality, happy, bright colors, modern book, intact, clean, undamaged, poor lighting'
+        negative_prompt: blurry, low quality, happy, bright colors, modern book, intact, clean, undamaged, poor lighting
         prompts:
           image: Close up of an ancient leather-bound book labeled 'The Old Rules' disintegrating into golden dust particles against a pitch black background, dramatic lighting
           graphic: Golden particles drifting across the screen
