@@ -22,6 +22,7 @@ scenes:
           animation: ""
           motion_graphics: Create a cinematic title card in Canva with the text 'THE NEW AGE' using a futuristic sans-serif font, glowing neon blue outline, set against a dark, high-tech abstract background
           sound_effect: Subtle high-tech whoosh sound on transition
+          html: ""
           image_saved_final: ""
         verified_prompts:
           image: true
@@ -30,6 +31,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: true
+          html: false
         uploaded_assets:
           image:
             filename: Line1_Image_2026-01-11_07-44.png
@@ -54,7 +56,7 @@ scenes:
           animation: Floating icons and headlines drifting towards the camera, parallex effect
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'AI REVOLUTION' using a futuristic font
           sound_effect: Digital data processing chirps and beeps
-          html:
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -62,6 +64,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -73,7 +76,7 @@ scenes:
           animation: Camera spins 360 degrees rapidly
           motion_graphics: ""
           sound_effect: Deep, airy whoosh sound syncs with the spin
-          html:
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -81,6 +84,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -92,7 +96,7 @@ scenes:
           animation: Slow motion disintegration of the book cover
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'RULES BROKEN' using a futuristic font
           sound_effect: Sound of heavy stone cracking or dry paper crumbling
-          html:
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -100,6 +104,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 02
     title: Avalanche
@@ -117,7 +122,7 @@ scenes:
           animation: Ladder extending infinitely upwards but leading nowhere
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'SKILLS GAP' using a futuristic font
           sound_effect: Hollow wind howling sound
-          html:
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -125,6 +130,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets:
           image:
             filename: Line1_Image_2026-01-10_18-22.png
@@ -141,7 +147,7 @@ scenes:
           animation: Storm clouds swirling aggressively
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ARE YOU READY?' using a futuristic font
           sound_effect: Distant thunder rumble mixed with digital static
-          html:
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -149,6 +155,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets:
           image:
             filename: Plan_your_AI_transformation_journey_Avalanche_Line2_Image_2026-01-10_18-11.png
@@ -165,7 +172,7 @@ scenes:
           animation: Slow panoramic pan up the mountain face
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE FORCE' using a futuristic font
           sound_effect: Sudden silence followed by a low frequency wind build-up
-          html:
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -173,6 +180,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
           html: false
         uploaded_assets: {}
       - id: "4"
@@ -185,7 +193,7 @@ scenes:
           animation: Camera shake effect to simulate impact
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'WARNING' using a futuristic font
           sound_effect: Roar of the avalanche, like a freight train
-          html:
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -193,6 +201,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
           html: false
         uploaded_assets: {}
   - id: SCENE 03
@@ -211,6 +220,7 @@ scenes:
           animation: Slow rotation of the snowflake
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'PRECISION' using a futuristic font
           sound_effect: High-pitched crystal chime or glass sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -218,6 +228,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets:
           music:
             filename: Plan_your_AI_transformation_journey_Reshaping_Line1_Audio_2026-01-11_05-58.mp3
@@ -242,6 +253,7 @@ scenes:
           animation: The crack expanding to reveal the digital world below
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'FOUNDATIONS' using a futuristic font
           sound_effect: Digital transformation sci-fi sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -249,6 +261,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets:
           image:
             filename: Line2_Image_2026-01-10_22-50.png
@@ -265,6 +278,7 @@ scenes:
           animation: Paper drifting aimlessly in the wind
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'TRADITION' using a futuristic font
           sound_effect: Lonely paper rustling sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -272,6 +286,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -283,6 +298,7 @@ scenes:
           animation: Fade to white then cut to black
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'OBSOLETE' using a futuristic font
           sound_effect: Slow, heavy heartbeat
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -290,6 +306,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 04
     title: Complex
@@ -307,6 +324,7 @@ scenes:
           animation: Needle moving frantically back and forth
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'MAGNITUDE 10' using a futuristic font
           sound_effect: Sound of a pen scratching violently on paper
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -314,6 +332,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -325,6 +344,7 @@ scenes:
           animation: Time-lapse speed ramp
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'DECAY' using a futuristic font
           sound_effect: Loud ticking clock
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -332,6 +352,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -343,6 +364,7 @@ scenes:
           animation: The cube twisting and solving itself
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'COMPLEXITY' using a futuristic font
           sound_effect: Mechanical clicks and whirs
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -350,6 +372,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -361,6 +384,7 @@ scenes:
           animation: Light pulses travelling through the fiber optics
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'NEURAL NETWORK' using a futuristic font
           sound_effect: Futuristic power-up hum
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -368,6 +392,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 05
     title: The Wizard
@@ -385,6 +410,7 @@ scenes:
           animation: Split screen sliding into place from opposite sides
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE COMPARISON' using a futuristic font
           sound_effect: Whoosh sound with a metallic clang
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -392,6 +418,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -403,6 +430,7 @@ scenes:
           animation: Camera static shot with flickering fluorescent light
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'OLD WORLD' using a futuristic font
           sound_effect: Dial-up modem connecting sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -410,6 +438,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -421,6 +450,7 @@ scenes:
           animation: Camera dollying around the figure dynamically
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE WIZARD' using a futuristic font
           sound_effect: Magical sci-fi power up sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -428,6 +458,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -439,6 +470,7 @@ scenes:
           animation: The languages merging into the orb smoothly
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'PROBLEM SOLVER' using a futuristic font
           sound_effect: Soft, harmonic chime
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -446,6 +478,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 06
     title: Hunting
@@ -463,6 +496,7 @@ scenes:
           animation: Target reticle moving across the screen
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'HEADHUNTING' using a futuristic font
           sound_effect: Sonar ping sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -470,6 +504,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -481,6 +516,7 @@ scenes:
           animation: The snow wave inches closer slightly
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'DON'T FREEZE' using a futuristic font
           sound_effect: Ice cracking sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -488,6 +524,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -499,6 +536,7 @@ scenes:
           animation: Morphing transition between items
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'UPGRADE' using a futuristic font
           sound_effect: Transformer-like mechanical shifting sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -506,6 +544,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -517,6 +556,7 @@ scenes:
           animation: Vehicle suspension flexing as it hits a bump
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ALL-TERRAIN' using a futuristic font
           sound_effect: Engine revving up powerfully
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -524,6 +564,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 07
     title: Protocol
@@ -541,6 +582,7 @@ scenes:
           animation: Zoom in to the license plate
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ATW PROTOCOL' using a futuristic font
           sound_effect: Metallic stamp sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -548,6 +590,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -559,6 +602,7 @@ scenes:
           animation: Gears rotating in synchronization
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE SYSTEM' using a futuristic font
           sound_effect: Ratchet tool sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -566,6 +610,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -577,6 +622,7 @@ scenes:
           animation: Hand sweeping away the sticky notes
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'NOT RANDOM' using a futuristic font
           sound_effect: Paper crumping sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -584,6 +630,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -595,6 +642,7 @@ scenes:
           animation: Light scanning over the person
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'TRANSFORM' using a futuristic font
           sound_effect: Sci-fi scanner hum
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -602,6 +650,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 08
     title: Process
@@ -619,6 +668,7 @@ scenes:
           animation: Hood opening smoothly
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'POP THE HOOD' using a futuristic font
           sound_effect: Hydraulic hiss of the hood opening
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -626,6 +676,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -637,6 +688,7 @@ scenes:
           animation: Exploded view expansion
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text '3 STEPS' using a futuristic font
           sound_effect: Mechanical parts sliding apart
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -644,6 +696,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -655,6 +708,7 @@ scenes:
           animation: Wipe transition between left and right actions
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ASSESS -> TRAIN' using a futuristic font
           sound_effect: Computer beep followed by a pneumatic drill sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -662,6 +716,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -673,6 +728,7 @@ scenes:
           animation: Vehicle launching forward
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'WORKSHOP' using a futuristic font
           sound_effect: Tires screeching and engine roar
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -680,6 +736,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 09
     title: Assess
@@ -697,6 +754,7 @@ scenes:
           animation: Cable plugging in and light pulsing
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'STEP 1' using a futuristic font
           sound_effect: Connection click sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -704,6 +762,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -715,6 +774,7 @@ scenes:
           animation: Scan line moving top to bottom
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'FULL SCAN' using a futuristic font
           sound_effect: Digital scanning warble
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -722,6 +782,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -733,6 +794,7 @@ scenes:
           animation: Images popping in one by one
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'DEEP DIVE' using a futuristic font
           sound_effect: Three rapid camera shutter sounds
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -740,6 +802,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -751,6 +814,7 @@ scenes:
           animation: X-ray layer peeling back to reveal the issue
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ROOT CAUSE' using a futuristic font
           sound_effect: Alert ping
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -758,6 +822,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 10
     title: Train
@@ -775,6 +840,7 @@ scenes:
           animation: Grid lines drawing the room
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'STEP 2' using a futuristic font
           sound_effect: Virtual reality startup sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -782,6 +848,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -793,6 +860,7 @@ scenes:
           animation: The image getting crushed or swiped away
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'NO BORING' using a futuristic font
           sound_effect: Yawn sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -800,6 +868,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -811,6 +880,7 @@ scenes:
           animation: Red glow pulsating on the doors
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'WEAKNESS' using a futuristic font
           sound_effect: " Alarm blip"
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -818,6 +888,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -829,6 +900,7 @@ scenes:
           animation: Tires locking into place with sparks
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'UPGRADES' using a futuristic font
           sound_effect: Impact wrench sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -836,6 +908,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 11
     title: Workshop
@@ -853,6 +926,7 @@ scenes:
           animation: Sparks falling in foreground
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'STEP 3' using a futuristic font
           sound_effect: Arc welder electric buzz
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -860,6 +934,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -871,6 +946,7 @@ scenes:
           animation: Camera tracking slowly sideways
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'USELESS THEORY' using a futuristic font
           sound_effect: Blowing dust sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -878,6 +954,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -889,6 +966,7 @@ scenes:
           animation: Finger moving closer to the button
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE MOMENT' using a futuristic font
           sound_effect: Slow motion sound distortion
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -896,6 +974,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -907,6 +986,7 @@ scenes:
           animation: Rapid cut editing
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'SHIP IT' using a futuristic font
           sound_effect: Typing sounds maximizing into a rocket launch
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -914,6 +994,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 12
     title: Workforce
@@ -931,6 +1012,7 @@ scenes:
           animation: Sun flare peaking over the mountain
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE RESULT' using a futuristic font
           sound_effect: Wind sweeping
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -938,6 +1020,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -949,6 +1032,7 @@ scenes:
           animation: Slow motion walk towards camera
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ALL-TERRAIN' using a futuristic font
           sound_effect: Footsteps crunching on gravel synchronized
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -956,6 +1040,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -967,6 +1052,7 @@ scenes:
           animation: Zoom eye reflection
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'READY' using a futuristic font
           sound_effect: Energy hum
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -974,6 +1060,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -985,6 +1072,7 @@ scenes:
           animation: Beams crossing to make the X
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'X-SHAPED' using a futuristic font
           sound_effect: Laser cross sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -992,6 +1080,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 13
     title: X-Factor
@@ -1009,6 +1098,7 @@ scenes:
           animation: Energy flowing to the tips
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'DEEP KNOWLEDGE' using a futuristic font
           sound_effect: Flowing energy sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1016,6 +1106,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -1027,6 +1118,7 @@ scenes:
           animation: Pulse expanding from the center
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'INTERSECTION' using a futuristic font
           sound_effect: Resonant gong
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1034,6 +1126,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -1045,6 +1138,7 @@ scenes:
           animation: Bridge segments locking in
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'BRIDGE THE GAP' using a futuristic font
           sound_effect: Sci-fi bridge extension sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1052,6 +1146,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -1063,6 +1158,7 @@ scenes:
           animation: Rapid zoom out
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'SYSTEM VIEW' using a futuristic font
           sound_effect: Whoosh zoom out
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1070,6 +1166,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 14
     title: Rigid
@@ -1087,6 +1184,7 @@ scenes:
           animation: Column standing still
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'OLD MODEL' using a futuristic font
           sound_effect: Stone thud
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1094,6 +1192,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -1105,6 +1204,7 @@ scenes:
           animation: Looping up and down motion
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'NARROW' using a futuristic font
           sound_effect: Squeaky gear sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1112,6 +1212,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -1123,6 +1224,7 @@ scenes:
           animation: Column crumbling
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'FRAGILE' using a futuristic font
           sound_effect: Crash of stone
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1130,6 +1232,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -1141,6 +1244,7 @@ scenes:
           animation: Liquid morphing effect
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ADAPTABLE' using a futuristic font
           sound_effect: Liquid flowing sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1148,6 +1252,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 15
     title: Proof
@@ -1165,6 +1270,7 @@ scenes:
           animation: Sparkles on the dessert
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'DOES IT WORK?' using a futuristic font
           sound_effect: Ding sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1172,6 +1278,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -1183,6 +1290,7 @@ scenes:
           animation: Graph expanding upwards
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text '200+ REPOS' using a futuristic font
           sound_effect: Slot machine jackpot sound as numbers tick up
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1190,6 +1298,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -1201,6 +1310,7 @@ scenes:
           animation: File falling arc
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'NO FLUFF' using a futuristic font
           sound_effect: Trash can clang
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1208,6 +1318,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -1219,6 +1330,7 @@ scenes:
           animation: Boxes moving down the line
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'RESULTS FACTORY' using a futuristic font
           sound_effect: Factory machinery hum
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1226,6 +1338,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 16
     title: Action
@@ -1243,6 +1356,7 @@ scenes:
           animation: Padlock unlocking
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'OPEN SOURCE' using a futuristic font
           sound_effect: Unlock click
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1250,6 +1364,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "2"
         time: "0:04"
@@ -1261,6 +1376,7 @@ scenes:
           animation: Lines growing and splitting
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'FORK IT' using a futuristic font
           sound_effect: Tree branch cracking/growing sound
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1268,6 +1384,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "3"
         time: "0:08"
@@ -1279,6 +1396,7 @@ scenes:
           animation: Running motion blur
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'MOVE' using a futuristic font
           sound_effect: Heavy breathing and running steps
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1286,6 +1404,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -1297,6 +1416,7 @@ scenes:
           animation: Sun setting and stars appearing
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'LETS BUILD' using a futuristic font
           sound_effect: Wind and final boom
+          html: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1304,4 +1424,5 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}

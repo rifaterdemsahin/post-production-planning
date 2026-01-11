@@ -1135,7 +1135,8 @@
                                                 'animation': '🎬',
                                                 'graphic': '📊',
                                                 'motion_graphics': '✨',
-                                                'diagram': '📐'
+                                                'diagram': '📐',
+                                                'html': '💻'
                                             };
                                             const icon = typeIcons[type.toLowerCase()] || '📄';
                                             
@@ -1206,6 +1207,7 @@
                                         ${renderTabButton(uniqueId, 'motion_graphics', '✨ Motion Graphics', 'gemini-2.0-flash')}
                                         ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'eleven_turbo_v2_sfx')}
                                         ${renderTabButton(uniqueId, 'diagram', '📐 Diagram', 'gemini-2.0-flash')}
+                                        ${renderTabButton(uniqueId, 'html', '💻 HTML', 'gemini-2.0-flash')}
                                     </div>
                                     
                                     <div class="flex items-center gap-2 mb-2 px-1">
