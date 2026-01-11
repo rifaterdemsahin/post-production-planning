@@ -1847,7 +1847,20 @@
             }
 
             // 3. Construct Context Block
-            const finalPrompt = await constructFullPrompt(sceneIndex, promptText, type);
+            // Check for saved final prompt
+            let finalPrompt = "";
+            const lineIndex = parseInt(parts[1].substring(1));
+            const promptKey = `${type}_saved_final`;
+            
+            if (scenes[sceneIndex].lines[lineIndex].prompts && scenes[sceneIndex].lines[lineIndex].prompts[promptKey]) {
+                finalPrompt = scenes[sceneIndex].lines[lineIndex].prompts[promptKey];
+                
+                // Show indicator handled in HTML or toast? 
+                // We'll rely on the value being there.
+                // Could add a visual cue if needed.
+            } else {
+                 finalPrompt = await constructFullPrompt(sceneIndex, promptText, type);
+            }
 
             // 4. Populate Modal
             document.getElementById('preview-main-context').value = mainCtx || "(No Main Context)";
@@ -1865,6 +1878,50 @@
 
             // 6. Show Modal
             document.getElementById('context-preview-modal').classList.remove('hidden');
+        }
+
+        function saveFinalPrompt() {
+            if (!pendingGeneration) return;
+            const { uniqueId, type } = pendingGeneration;
+            
+            const finalPrompt = document.getElementById('preview-final-prompt').value;
+            const parts = uniqueId.split('_');
+            const sceneIndex = parseInt(parts[0].substring(1));
+            const lineIndex = parseInt(parts[1].substring(1));
+
+            if (!scenes[sceneIndex].lines[lineIndex].prompts) {
+                 scenes[sceneIndex].lines[lineIndex].prompts = {};
+            }
+
+            const promptKey = `${type}_saved_final`;
+            scenes[sceneIndex].lines[lineIndex].prompts[promptKey] = finalPrompt;
+            
+            showToast("✅ Final Prompt Saved!");
+            // Auto-save changes to local storage/download prompt if configured
+        }
+
+        async function clearFinalPrompt() {
+            if (!pendingGeneration) return;
+            const { uniqueId, type } = pendingGeneration;
+            
+            const parts = uniqueId.split('_');
+            const sceneIndex = parseInt(parts[0].substring(1));
+            const lineIndex = parseInt(parts[1].substring(1));
+            const promptKey = `${type}_saved_final`;
+
+            if (scenes[sceneIndex].lines[lineIndex].prompts && scenes[sceneIndex].lines[lineIndex].prompts[promptKey]) {
+                delete scenes[sceneIndex].lines[lineIndex].prompts[promptKey];
+            }
+            
+            // Regenerate
+            const textArea = document.getElementById(`text-${uniqueId}`);
+            const promptText = textArea.value;
+            
+            showToast("⏳ Regenerating Prompt...");
+            const finalPrompt = await constructFullPrompt(sceneIndex, promptText, type);
+            document.getElementById('preview-final-prompt').value = finalPrompt;
+            
+            showToast("🧹 Final Prompt Cleared & Regenerated!");
         }
 
         // ==========================================
@@ -2149,8 +2206,8 @@
             container.classList.add('hidden');
 
             const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
-            // Explicitly ask for mermaid code
-            const systemPrompt = "You are an expert technical diagram generator. Create a Mermaid JS diagram based on the user request. Output ONLY the mermaid code block (```mermaid ... ```). Do not add explanations. Use 'graph TD' or 'sequenceDiagram' etc.";
+            // Explicitly ask for mermaid code and forbid edge styling
+            const systemPrompt = "You are an expert technical diagram generator. Create a Mermaid JS diagram based on the user request. Output ONLY the mermaid code block (```mermaid ... ```). Do not add explanations. IMPORTANT: Do NOT use the `style` command on edge labels or text strings, only style node IDs. Ensure valid Mermaid syntax.";
             
             const payload = {
                 contents: [{ 
@@ -2173,20 +2230,14 @@
                 
                 if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
                     let text = data.candidates[0].content.parts[0].text;
-                    // Extract code block
                     const match = text.match(/```mermaid\n([\s\S]*?)\n```/) || text.match(/```\n([\s\S]*?)\n```/);
                     let mermaidCode = match ? match[1] : text;
-                    mermaidCode = mermaidCode.trim();
-                    // Remove any remaining markdown ticks if regex failed to catch perfectly
-                    mermaidCode = mermaidCode.replace(/```mermaid/g, '').replace(/```/g, '').trim();
+                    mermaidCode = mermaidCode.trim().replace(/```mermaid/g, '').replace(/```/g, '').trim();
 
-                    // Render Mermaid
                     const svgId = `mermaid-svg-${id}-${Date.now()}`;
                     try {
-                         // Mermaid render returns { svg } promise
                          const { svg } = await mermaid.render(svgId, mermaidCode);
                          
-                         // Generate Filename
                          const filename = `diagram_${id}.svg`;
                          const encodedSvg = encodeURIComponent(svg);
                          const rawCodeId = `mermaid-code-${id}`;
@@ -2206,6 +2257,39 @@
                          container.classList.remove('hidden');
                          status.innerText = "✅ Designed";
                          status.className = "text-xs text-green-500";
+
+                         // --- AUTO UPLOAD LOGIC ---
+                         (async () => {
+                             try {
+                                 // Convert to PNG for Drive
+                                 const pngBlob = await svgToPngBlob(svg);
+                                 const pngFilename = `diagram_${id}.png`;
+                                 
+                                 // Upload
+                                 const driveLink = await autoUploadToDrive(id, pngBlob, pngFilename);
+                                 
+                                 if (driveLink) {
+                                     const parts = id.split('_');
+                                     const sceneIndex = parseInt(parts[0].substring(1));
+                                     const lineIndex = parseInt(parts[1].substring(1));
+                                     
+                                     updateVideoName(sceneIndex, lineIndex, pngFilename);
+                                     updateArtifactData(sceneIndex, lineIndex, 'diagram', pngFilename, driveLink);
+                                     await saveChanges(true); // Save to GitHub
+                                     
+                                     // Toast
+                                     const toast = document.createElement('div');
+                                     toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-blue-900 border border-blue-700 text-blue-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
+                                     toast.innerHTML = `<span>☁️ Auto-uploaded Diagram to Drive!</span>`;
+                                     document.body.appendChild(toast);
+                                     setTimeout(() => toast.remove(), 4000);
+                                 }
+                             } catch (uploadErr) {
+                                 console.error("Auto Upload Failed for Diagram", uploadErr);
+                                 logDebug("ERROR", "Diagram Upload Failed", uploadErr.message);
+                             }
+                         })();
+                         // -------------------------
                          
                     } catch (renderErr) {
                         console.error("Mermaid Render Error", renderErr);
@@ -2228,6 +2312,40 @@
             } finally {
                 loader.style.display = "none";
             }
+        }
+
+        function svgToPngBlob(svgStr) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                // Ensure dimensions exist in SVG or force them
+                if (!svgStr.includes('width=') && !svgStr.includes('height=')) {
+                    // This is a naive heuristic, Mermaid usually adds them. 
+                    // If missing, we might need to parse viewBox.
+                }
+                
+                const svgBlob = new Blob([svgStr], {type: 'image/svg+xml;charset=utf-8'});
+                const url = URL.createObjectURL(svgBlob);
+                
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    // Get explicit size or fallback
+                    canvas.width = img.width || 800;
+                    canvas.height = img.height || 600;
+                    
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = '#ffffff'; // White background for diagrams
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                    
+                    URL.revokeObjectURL(url);
+                    canvas.toBlob(resolve, 'image/png');
+                };
+                img.onerror = (e) => {
+                    URL.revokeObjectURL(url);
+                    reject(e);
+                };
+                img.src = url;
+            });
         }
 
         function copyElementText(elementId) {
