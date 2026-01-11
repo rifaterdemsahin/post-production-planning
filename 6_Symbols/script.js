@@ -1,15 +1,28 @@
         // ==========================================
         // 1. DATA LOADING & INITIALIZATION
         // ==========================================
+        console.log('%c🚀 DATA LOADING & INITIALIZATION', 'background: #1a1a2e; color: #00ff88; padding: 8px 16px; border-radius: 4px; font-size: 14px; font-weight: bold;');
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #00ff88;');
+        console.log('%c📋 Initializing global variables...', 'color: #64b5f6;');
+        
         let scenes = []; // Global variable to hold data after loading
         let projectVersion = 1;
         let lastUpdated = "";
         let currentSceneIndex = 0;
         let currentSelectedLineIndex = 0; // Track selected line within the scene
+        
+        console.log('%c✅ Global Variables Initialized:', 'color: #4caf50; font-weight: bold;');
+        console.log('   • scenes: [] (empty array)');
+        console.log('   • projectVersion:', projectVersion);
+        console.log('   • lastUpdated:', lastUpdated || '(empty)');
+        console.log('   • currentSceneIndex:', currentSceneIndex);
+        console.log('   • currentSelectedLineIndex:', currentSelectedLineIndex);
 
         // ==========================================
         // GOOGLE SHEETS CONFIGURATION
         // ==========================================
+        console.log('%c⚙️ GOOGLE SHEETS CONFIGURATION', 'background: #4285f4; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
+        
         const GOOGLE_SHEETS_CONFIG = {
             spreadsheetId: '19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30',
             sheetsApiKey: '', // Will be loaded from storage
@@ -40,6 +53,20 @@
                 html_prompt: 'O'       // HTML prompt
             }
         };
+        
+        console.log('%c📊 Spreadsheet Config Loaded:', 'color: #ff9800; font-weight: bold;');
+        console.log('   • Spreadsheet ID:', GOOGLE_SHEETS_CONFIG.spreadsheetId);
+        console.log('   • Main Data Sheet:', GOOGLE_SHEETS_CONFIG.sheetName);
+        console.log('   • Title Sheet:', GOOGLE_SHEETS_CONFIG.titleSheet);
+        console.log('%c📑 Sheet Tabs:', 'color: #9c27b0;');
+        console.log('   • Overview (gid=' + GOOGLE_SHEETS_CONFIG.sheets.overview.gid + ')');
+        console.log('   • Scenes Summary (gid=' + GOOGLE_SHEETS_CONFIG.sheets.scenesSummary.gid + ')');
+        console.log('   • All Lines (gid=' + GOOGLE_SHEETS_CONFIG.sheets.allLines.gid + ')');
+        console.log('%c🔤 Column Mapping:', 'color: #00bcd4;');
+        Object.entries(GOOGLE_SHEETS_CONFIG.columnMap).forEach(([key, col]) => {
+            console.log(`   • ${key}: Column ${col}`);
+        });
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #00ff88;');
 
         // Build Google Sheets direct edit URL for a specific cell
         function buildSheetsEditUrl(promptType, rowIndex) {
