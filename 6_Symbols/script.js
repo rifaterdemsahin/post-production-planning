@@ -256,6 +256,7 @@
              window.mainContext = data.main_context || "";
              window.verifiedMainContext = data.verified_main_context || false;
              window.projectTitle = data.title || "";
+             window.defaultNegativePrompts = data.default_negative_prompts || {};
              projectVersion = data.version || 1;
              lastUpdated = data.last_updated || new Date().toISOString();
 
@@ -1565,6 +1566,7 @@
                     title: window.projectTitle || "",
                     main_context: window.mainContext,
                     verified_main_context: window.verifiedMainContext,
+                    default_negative_prompts: window.defaultNegativePrompts || {},
                     scenes: scenes
                 };
                 // Dump to YAML
@@ -1936,6 +1938,12 @@
 
         // Get default negative prompts based on generation type
         function getDefaultNegativePrompt(type) {
+            // First check if we have YAML defaults
+            if (window.defaultNegativePrompts && window.defaultNegativePrompts[type]) {
+                return window.defaultNegativePrompts[type];
+            }
+            
+            // Fallback defaults
             const defaults = {
                 image: "blurry, low quality, watermark, text, deformed, ugly, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck",
                 graphic: "blurry, low resolution, pixelated, cluttered, messy layout, unreadable text, inconsistent style, poor contrast, amateur design",
@@ -3616,6 +3624,7 @@
                     verified_main_context: window.verifiedMainContext || false,
                     version: projectVersion,
                     last_updated: lastUpdated,
+                    default_negative_prompts: window.defaultNegativePrompts || {},
                     scenes: scenes 
                 };
                 // Dump to YAML

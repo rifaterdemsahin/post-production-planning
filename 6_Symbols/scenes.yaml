@@ -102,6 +102,7 @@ scenes:
       - id: '3'
         time: '0:08'
         script: ...you can feel it, right? Things are changing so fast it can make your head spin.
+        negative_prompt: 'blurry, static, no motion blur, stable camera, calm, boring, low energy, poor composition'
         prompts:
           image: First person POV shot of a modern office environment spinning rapidly with heavy radial motion blur, dizzying effect, photographic realism
           graphic: Motion blur lines intensifying the feeling of speed
@@ -132,6 +133,7 @@ scenes:
       - id: '4'
         time: '0:12'
         script: The old rules? They just don't seem to apply anymore.
+        negative_prompt: 'blurry, low quality, happy, bright colors, modern book, intact, clean, undamaged, poor lighting'
         prompts:
           image: Close up of an ancient leather-bound book labeled 'The Old Rules' disintegrating into golden dust particles against a pitch black background, dramatic lighting
           graphic: Golden particles drifting across the screen
