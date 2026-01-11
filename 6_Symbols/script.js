@@ -132,13 +132,18 @@
                 await loadYAMLFromURL('scenes.yaml');
             } catch (error) {
                 console.error("Error loading scenes:", error);
-                 // ... error handling
+                logDebug("ERROR", "InitApp Failed", error.message);
             }
         }
 
         async function loadYAMLFromURL(url) {
+            logDebug("INFO", "Fetching YAML", url);
             const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            if (!response.ok) {
+                const msg = `HTTP error! status: ${response.status}`;
+                logDebug("ERROR", "YAML Fetch Failed", msg);
+                throw new Error(msg);
+            }
             const yamlText = await response.text();
             parseAndLoadData(yamlText);
         }
@@ -170,12 +175,26 @@
 
         function parseAndLoadData(yamlText) {
              if (typeof jsyaml === 'undefined') {
-                 console.error('js-yaml library not loaded. Please check your internet connection.');
-                 alert('⚠️ YAML parser not loaded. Please check your internet connection and refresh the page.');
+                 const msg = 'js-yaml library not loaded.';
+                 console.error(msg);
+                 logDebug("ERROR", "Dependency Error", msg);
+                 alert('⚠️ YAML parser not loaded. Please check your internet connection.');
                  return;
              }
-             const data = jsyaml.load(yamlText);
-             if (!data || !data.scenes) throw new Error("Invalid YAML format");
+
+             let data;
+             try {
+                data = jsyaml.load(yamlText);
+             } catch(e) {
+                 logDebug("ERROR", "YAML Parse Error", e.message);
+                 console.error(e);
+                 return;
+             }
+
+             if (!data || !data.scenes) {
+                 logDebug("ERROR", "Invalid YAML", "Missing 'scenes' property");
+                 throw new Error("Invalid YAML format");
+             }
              
              scenes = data.scenes;
              window.mainContext = data.main_context || "";
@@ -1482,7 +1501,41 @@
 
         function toggleDebug() {
             const panel = document.getElementById('debug-panel');
-            panel.classList.toggle('translate-y-[calc(100%-40px)]');
+            const isHidden = panel.classList.contains('translate-y-[calc(100%)]');
+            if (isHidden) {
+                panel.classList.remove('translate-y-[calc(100%)]');
+            } else {
+                panel.classList.add('translate-y-[calc(100%)]');
+            }
+        }
+
+        function toggleDebugHeight() {
+            const panel = document.getElementById('debug-panel');
+            const btn = document.getElementById('debug-maximize-btn');
+            const isTall = panel.classList.contains('h-[80vh]');
+            
+            if (isTall) {
+                panel.classList.remove('h-[80vh]');
+                panel.classList.add('h-48');
+                if(btn) {
+                    btn.innerText = "⛶";
+                    btn.title = "Maximize";
+                }
+            } else {
+                panel.classList.remove('h-48');
+                panel.classList.add('h-[80vh]');
+                if(btn) {
+                    btn.innerText = "_";
+                    btn.title = "Minimize";
+                }
+            }
+        }
+
+        function clearDebugLog() {
+            const logContainer = document.getElementById('debug-log');
+            if (logContainer) {
+                logContainer.innerHTML = '<div class="text-gray-500 italic">-- Log Cleared --</div>';
+            }
         }
 
         function logDebug(type, title, data) {
