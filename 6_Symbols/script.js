@@ -2593,6 +2593,10 @@
                                 
                                 if (driveLink) {
                                     updateArtifactData(sceneIndex, lineIndex, 'image', filename, driveLink);
+                                    
+                                    // Save the base64 image data to prompt_outputs
+                                    updatePromptOutput(sceneIndex, lineIndex, 'image', `data:${part.inlineData.mimeType};base64,${part.inlineData.data.substring(0, 500)}...`);
+                                    
                                     await saveChanges(true); // Save YAML to GitHub
                                     
                                      // Show Toast
@@ -3465,6 +3469,40 @@
             const toast = document.createElement('div');
             toast.className = 'fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-green-900 border border-green-700 text-green-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
             toast.innerHTML = `<span>🔗 Link Saved to YAML!</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function updatePromptOutput(sceneIndex, lineIndex, type, output) {
+            // Ensure prompt_outputs object exists
+            if (!scenes[sceneIndex].lines[lineIndex].prompt_outputs) {
+                scenes[sceneIndex].lines[lineIndex].prompt_outputs = {
+                    image_output: "",
+                    graphic_output: "",
+                    music_output: "",
+                    animation_output: "",
+                    motion_graphics_output: "",
+                    sound_effect_output: "",
+                    diagram_output: "",
+                    html_output: ""
+                };
+            }
+            
+            // Map type to output field name
+            const outputKey = `${type}_output`;
+            
+            // Store the output (truncate if too long for YAML)
+            const maxLength = 10000; // Limit to prevent huge YAML files
+            const truncatedOutput = output.length > maxLength ? output.substring(0, maxLength) + '...[truncated]' : output;
+            
+            scenes[sceneIndex].lines[lineIndex].prompt_outputs[outputKey] = truncatedOutput;
+            
+            console.log(`Updated prompt_outputs.${outputKey} for S${sceneIndex} L${lineIndex}`, truncatedOutput.substring(0, 100) + '...');
+            
+            // Show a temporary toast for feedback
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-28 left-1/2 transform -translate-x-1/2 bg-purple-900 border border-purple-700 text-purple-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2';
+            toast.innerHTML = `<span>💾 Output saved to prompt_outputs!</span>`;
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 3000);
         }
