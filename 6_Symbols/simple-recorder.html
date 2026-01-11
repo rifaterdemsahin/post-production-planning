@@ -38,7 +38,19 @@ label { display: block; margin: 10px 0 5px; font-weight: bold; }
 </div>
 
 <div id="inputTab" class="tab-content active">
-<label>Paste your HTML content here:</label>
+    <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 5px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <button id="loadSampleBtn" style="background: #8e44ad; margin: 0;">✨ Load Sample Animation</button>
+            <span style="color: #6c757d; font-size: 0.9em;">Click to see a complex example & prompt</span>
+        </div>
+        
+        <div id="samplePromptContainer" style="display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #dee2e6;">
+            <label style="color: #495057; margin-bottom: 8px;">Prompt used to generate this animation:</label>
+            <textarea id="promptOutput" readonly style="height: 150px; background: #fff; color: #333; font-family: monospace; font-size: 11px; margin-bottom: 0;"></textarea>
+        </div>
+    </div>
+
+    <label>Paste your HTML content here:</label>
 <textarea id="htmlInput" placeholder="<div style='background: linear-gradient(45deg, #667eea, #764ba2); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; font-size: 48px; color: white; font-family: Arial;'>
   <div class='box' style='animation: spin 2s linear infinite;'>Hello World!</div>
 </div>
@@ -249,6 +261,96 @@ function stopRec() {
 loadBtn.onclick = loadHtml;
 startBtn.onclick = startRec;
 stopBtn.onclick = stopRec;
+
+const loadSampleBtn = document.getElementById('loadSampleBtn');
+const promptOutput = document.getElementById('promptOutput');
+const samplePromptContainer = document.getElementById('samplePromptContainer');
+
+const sampleHtml = `<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+  
+  <!-- Animated background particles -->
+  <div class="particle" style="position: absolute; width: 20px; height: 20px; background: rgba(255,255,255,0.3); border-radius: 50%; top: 20%; left: 10%; animation: float 4s ease-in-out infinite;"></div>
+  <div class="particle" style="position: absolute; width: 15px; height: 15px; background: rgba(255,255,255,0.2); border-radius: 50%; top: 60%; left: 80%; animation: float 6s ease-in-out infinite 1s;"></div>
+  <div class="particle" style="position: absolute; width: 25px; height: 25px; background: rgba(255,255,255,0.25); border-radius: 50%; top: 40%; left: 50%; animation: float 5s ease-in-out infinite 2s;"></div>
+  
+  <!-- Main content -->
+  <div style="text-align: center; z-index: 10;">
+    <h1 style="color: white; font-size: 72px; margin: 0; animation: slideDown 1s ease-out, pulse 2s ease-in-out infinite 1s; font-family: Arial, sans-serif; text-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+      Welcome
+    </h1>
+    <div style="width: 200px; height: 200px; margin: 30px auto; position: relative;">
+      <div class="spinner" style="position: absolute; width: 100%; height: 100%; border: 8px solid rgba(255,255,255,0.2); border-top: 8px solid white; border-radius: 50%; animation: spin 2s linear infinite;"></div>
+      <div style="position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 48px; animation: colorChange 3s linear infinite;">
+        🚀
+      </div>
+    </div>
+    <p style="color: rgba(255,255,255,0.9); font-size: 24px; animation: fadeIn 2s ease-out; font-family: Arial, sans-serif;">
+      Creating Amazing Animations
+    </p>
+  </div>
+  
+</div>
+
+<style>
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes slideDown {
+  from { 
+    transform: translateY(-50px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateY(0); 
+    opacity: 1; 
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
+}
+
+@keyframes colorChange {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+</style>`;
+
+const samplePrompt = `Create a complete HTML snippet with inline styles and CSS animations for a [DESCRIPTION]. 
+The HTML should be self-contained with all styles in <style> tags at the bottom.
+
+Requirements:
+- Width and height should use 100% to fill the canvas area
+- Include smooth CSS animations (transform, opacity, etc.)
+- Use vibrant gradients for backgrounds
+- Add multiple animated elements (minimum 3)
+- Include keyframe animations that loop infinitely
+- Use modern CSS (flexbox, gradients, transforms, shadows)
+- Make it visually impressive and suitable for a 10-second video recording
+
+Theme: [YOUR THEME HERE - e.g., "space exploration", "product launch", "celebration", "tech startup", "nature/ocean", "geometric shapes"]
+
+Return only the HTML code, ready to paste into the recorder.`;
+
+loadSampleBtn.onclick = () => {
+  htmlInput.value = sampleHtml;
+  promptOutput.value = samplePrompt;
+  samplePromptContainer.style.display = 'block';
+  loadHtml();
+};
 
 // Load default example
 loadHtml();
