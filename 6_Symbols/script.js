@@ -93,49 +93,59 @@
                 // Sheet names from config
                 const titleSheet = GOOGLE_SHEETS_CONFIG.titleSheet || 'Overview';
                 const dataSheet = GOOGLE_SHEETS_CONFIG.sheetName || 'All Lines';
+                const scenesSummarySheet = GOOGLE_SHEETS_CONFIG.sheets.scenesSummary.name || 'Scenes Summary';
                 
                 // Fetch data from correct sheets:
                 // - Project title from Overview!B3
+                // - Main context from Scenes Summary!B4
                 // - Metadata from Overview
                 // - Scene/line data from All Lines
                 const projectTitleUrl = buildSheetsApiUrl(`${titleSheet}!B3`, apiKey);
+                const mainContextUrl = buildSheetsApiUrl(`${scenesSummarySheet}!B4`, apiKey);
                 const metadataUrl = buildSheetsApiUrl(`${titleSheet}!A1:B10`, apiKey);
                 const scenesUrl = buildSheetsApiUrl(`${dataSheet}!A1:Z1000`, apiKey);
 
                 console.log('%c🔗 API URLs being fetched:', 'color: #fbbc04; font-weight: bold;');
                 console.log(`  Title Sheet: "${titleSheet}" (for project title in B3)`);
+                console.log(`  Scenes Summary Sheet: "${scenesSummarySheet}" (for main context in B4)`);
                 console.log(`  Data Sheet: "${dataSheet}" (for scenes/lines data)`);
                 console.log(`  [1] Project Title (${titleSheet}!B3): ${projectTitleUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
-                console.log(`  [2] Metadata (${titleSheet}!A1:B10): ${metadataUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
-                console.log(`  [3] Scenes (${dataSheet}!A1:Z1000): ${scenesUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
+                console.log(`  [2] Main Context (${scenesSummarySheet}!B4): ${mainContextUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
+                console.log(`  [3] Metadata (${titleSheet}!A1:B10): ${metadataUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
+                console.log(`  [4] Scenes (${dataSheet}!A1:Z1000): ${scenesUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
 
-                const [titleRes, metadataRes, scenesRes] = await Promise.all([
+                const [titleRes, mainContextRes, metadataRes, scenesRes] = await Promise.all([
                     fetch(projectTitleUrl),
+                    fetch(mainContextUrl),
                     fetch(metadataUrl),
                     fetch(scenesUrl)
                 ]);
 
                 console.log('%c📥 API Response Status:', 'color: #34a853;');
                 console.log(`  Title: ${titleRes.status} ${titleRes.ok ? '✅' : '❌'}`);
+                console.log(`  Main Context: ${mainContextRes.status} ${mainContextRes.ok ? '✅' : '❌'}`);
                 console.log(`  Metadata: ${metadataRes.status} ${metadataRes.ok ? '✅' : '❌'}`);
                 console.log(`  Scenes: ${scenesRes.status} ${scenesRes.ok ? '✅' : '❌'}`);
 
-                if (!titleRes.ok || !metadataRes.ok || !scenesRes.ok) {
+                if (!titleRes.ok || !mainContextRes.ok || !metadataRes.ok || !scenesRes.ok) {
                     // Get error details
                     const titleError = !titleRes.ok ? await titleRes.json().catch(() => ({})) : null;
+                    const mainContextError = !mainContextRes.ok ? await mainContextRes.json().catch(() => ({})) : null;
                     const metadataError = !metadataRes.ok ? await metadataRes.json().catch(() => ({})) : null;
                     const scenesError = !scenesRes.ok ? await scenesRes.json().catch(() => ({})) : null;
                     
                     console.error('%c❌ API Error Details:', 'color: #ea4335; font-weight: bold;');
                     if (titleError) console.error('  Title Error:', titleError);
+                    if (mainContextError) console.error('  Main Context Error:', mainContextError);
                     if (metadataError) console.error('  Metadata Error:', metadataError);
                     if (scenesError) console.error('  Scenes Error:', scenesError);
                     
-                    const errorMsg = titleError?.error?.message || metadataError?.error?.message || scenesError?.error?.message || 'Unknown error';
+                    const errorMsg = titleError?.error?.message || mainContextError?.error?.message || metadataError?.error?.message || scenesError?.error?.message || 'Unknown error';
                     throw new Error(`Sheets API error: ${errorMsg}`);
                 }
 
                 const titleJson = await titleRes.json();
+                const mainContextJson = await mainContextRes.json();
                 const metadataJson = await metadataRes.json();
                 const scenesJson = await scenesRes.json();
 
@@ -144,9 +154,16 @@
                 console.log('%c🏷️ RAW TITLE JSON FROM B3:', 'color: #ea4335;', titleJson);
                 console.log('%c✅ PROJECT TITLE EXTRACTED:', 'color: #34a853; font-weight: bold;', `"${projectTitle}"`);
                 logDebug("INFO", "Project Title from B3", projectTitle);
+                
+                // Extract main context from Scenes Summary!B4
+                const mainContext = mainContextJson.values?.[0]?.[0] || '';
+                console.log('%c🌍 RAW MAIN CONTEXT JSON FROM B4:', 'color: #9c27b0;', mainContextJson);
+                console.log('%c✅ MAIN CONTEXT EXTRACTED:', 'color: #34a853; font-weight: bold;', `"${mainContext.substring(0, 100)}${mainContext.length > 100 ? '...' : ''}"`);
+                logDebug("INFO", "Main Context from Scenes Summary!B4", mainContext.substring(0, 50) + '...');
+                
                 logDebug("SUCCESS", "Google Sheets loaded", `${scenesJson.values?.length || 0} rows`);
 
-                return transformSheetsToData(metadataJson, scenesJson, projectTitle);
+                return transformSheetsToData(metadataJson, scenesJson, projectTitle, mainContext);
             } catch (error) {
                 console.error('%c❌ GOOGLE SHEETS LOAD FAILED', 'background: #ea4335; color: white; padding: 4px 8px; border-radius: 4px;');
                 console.error('Error:', error.message);
@@ -161,7 +178,7 @@
         }
 
         // Transform Google Sheets data to app data structure
-        function transformSheetsToData(metadataJson, scenesJson, projectTitleFromCell = null) {
+        function transformSheetsToData(metadataJson, scenesJson, projectTitleFromCell = null, mainContextFromCell = null) {
             console.log('%c📊 GOOGLE SHEETS DATA MAPPING START', 'background: #4285f4; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
             console.log('%cSource: https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30', 'color: #1a73e8; font-style: italic;');
             
@@ -195,19 +212,22 @@
             let title = projectTitleFromCell || 'Untitled Project';
             console.log('%c🏷️ PROJECT TITLE (from B3):', 'color: #34a853; font-weight: bold;', title);
             
-            let mainContext = '';
+            // Main context ONLY from Google Sheets Scenes Summary!B4
+            let mainContext = mainContextFromCell || '';
+            console.log('%c🌍 MAIN CONTEXT (from Scenes Summary!B4):', 'color: #9c27b0; font-weight: bold;', mainContext.substring(0, 100) + (mainContext.length > 100 ? '...' : ''));
+            
             let version = 1;
             let lastUpdatedVal = new Date().toISOString();
 
-            // Parse other metadata from sheet (not title - that comes from B3 only)
+            // Parse other metadata from sheet (not title or main_context - those come from dedicated cells)
             if (metadataJson.values) {
                 console.log('%c📝 METADATA MAPPING:', 'color: #ea4335; font-weight: bold;');
                 metadataJson.values.forEach(row => {
                     const key = (row[0] || '').toLowerCase().trim();
                     const value = row[1] || '';
                     console.log(`  MAP metadata: "${key}" → "${value}"`);
-                    if (key === 'main_context') mainContext = value;
-                    else if (key === 'version') version = parseInt(value) || 1;
+                    // Skip main_context - now loaded from Scenes Summary!B4
+                    if (key === 'version') version = parseInt(value) || 1;
                     else if (key === 'last_updated') lastUpdatedVal = value;
                 });
             }
@@ -1691,6 +1711,10 @@
                         <div class="flex items-center gap-2">
                              <span id="main-context-arrow" class="text-gray-400 transform transition-transform ${isMainContextCollapsed ? '' : 'rotate-90'} text-xs">▶</span>
                              <label class="block text-xs font-bold text-blue-400 cursor-pointer">🌍 MAIN PROJECT CONTEXT (Globals)</label>
+                             <button onclick="event.stopPropagation(); window.open('https://docs.google.com/spreadsheets/d/${GOOGLE_SHEETS_CONFIG.spreadsheetId}/edit?gid=${GOOGLE_SHEETS_CONFIG.sheets.scenesSummary.gid}#gid=${GOOGLE_SHEETS_CONFIG.sheets.scenesSummary.gid}&range=B4', '_blank');" 
+                                     class="text-gray-500 hover:text-green-400 p-1 transition" title="Edit Main Context in Google Sheets">
+                                 📝
+                             </button>
                         </div>
                         <label class="flex items-center gap-2 cursor-pointer" onclick="event.stopPropagation()">
                             <input type="checkbox" id="verify-main-context" 
@@ -2263,8 +2287,10 @@
                     scene.lines.forEach(line => {
                          // Count prompts
                          if(line.prompts) {
-                             Object.values(line.prompts).forEach(val => {
-                                 if(val && val.trim() !== "") totalPrompts++;
+                             Object.entries(line.prompts).forEach(([key, val]) => {
+                                 if (key !== 'prompt_outputs' && typeof val === 'string' && val.trim() !== "") {
+                                     totalPrompts++;
+                                 }
                              });
                          }
                          
