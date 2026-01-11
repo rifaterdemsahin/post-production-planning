@@ -1,8 +1,8 @@
 title: Plan your AI transformation journey
 main_context: 'High-production value documentary style for youtube weekly video for rifat erdem sahin channel. Futuristic technology, serious but inspiring tone. Visuals should be cinematic, 8k resolution, with a mix of photorealism and high-end motion graphics. Color palette: Dark mode with neon accents (blue, purple, teal).'
 verified_main_context: false
-version: 4
-last_updated: '2026-01-10T22:50:42.520Z'
+version: 5
+last_updated: '2026-01-11T05:58:47.474Z'
 scenes:
   - id: SCENE 01
     title: The New Age
@@ -195,7 +195,12 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-        uploaded_assets: {}
+        uploaded_assets:
+          music:
+            filename: Plan_your_AI_transformation_journey_Reshaping_Line1_Audio_2026-01-11_05-58.mp3
+            url: https://drive.google.com/file/d/1A2B5LfMqRNu268dVBUTS49VSZDn7KsYM/view?usp=drivesdk
+            last_uploaded: '2026-01-11T05:58:47.471Z'
+        video_name: Plan_your_AI_transformation_journey_Reshaping_Line1_Audio_2026-01-11_05-58.mp3
       - id: '2'
         time: '0:04'
         script: It's a massive, overwhelming force that is completely reshaping the ground beneath our feet.
