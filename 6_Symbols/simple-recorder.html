@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <title>Dynamic HTML Recorder</title>
 <style>
 body { font-family: sans-serif; padding: 20px; background: #f0f0f0; margin: 0; }
@@ -236,33 +237,34 @@ function loadHtml() {
 
 function startCaptureLoop() {
   function capture() {
-    // Use html2canvas-like technique: draw DOM to canvas
-    // For now, we'll use a simpler approach - you can enhance this
+    if (!isRecording) return;
     
-    // Simple method: create a foreign object in SVG
-    const data = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">
-        <foreignObject width="100%" height="100%">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="width:${canvas.width}px;height:${canvas.height}px;">
-            ${preview.innerHTML}
-          </div>
-        </foreignObject>
-      </svg>
-    `;
-    
-    const img = new Image();
-    const blob = new Blob([data], { type: 'image/svg+xml' });
-    const url = URL.createObjectURL(blob);
-    
-    img.onload = function() {
-      ctx.drawImage(img, 0, 0);
-      URL.revokeObjectURL(url);
-      if (isRecording) {
-        animFrame = requestAnimationFrame(capture);
-      }
-    };
-    
-    img.src = url;
+    // Use html2canvas to safely render DOM to canvas without tainting
+    if (typeof html2canvas === 'undefined') {
+        alert("Error: html2canvas library not loaded. Check internet connection.");
+        isRecording = false;
+        return;
+    }
+
+    html2canvas(preview, {
+      backgroundColor: null,
+      scale: 1,
+      logging: false,
+      useCORS: true,
+      width: canvas.width,
+      height: canvas.height,
+      removeContainer: true
+    }).then(renderedCanvas => {
+      if (!isRecording) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(renderedCanvas, 0, 0);
+      
+      // Schedule next frame
+      requestAnimationFrame(capture);
+    }).catch(err => {
+      console.error("Capture error:", err);
+      isRecording = false;
+    });
   }
   
   isRecording = true;
