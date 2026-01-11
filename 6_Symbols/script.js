@@ -13,11 +13,16 @@
         const GOOGLE_SHEETS_CONFIG = {
             spreadsheetId: '19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30',
             sheetsApiKey: '', // Will be loaded from storage
+            // Actual sheet names from the spreadsheet:
+            // 1. Overview, 2. Scenes Summary, 3. All Lines, 4. Uploaded Assets
+            sheetName: 'All Lines', // Main data sheet with all line details
+            titleSheet: 'Overview', // Sheet containing project title in B3
             // Sheet names/gids for different data
             sheets: {
-                metadata: { name: 'Metadata', gid: '0' },
-                scenes: { name: 'Scenes', gid: '440551049' },
-                lines: { name: 'Lines', gid: '440551049' } // Same sheet, different columns
+                overview: { name: 'Overview', gid: '0' },
+                scenesSummary: { name: 'Scenes Summary', gid: '440551049' },
+                allLines: { name: 'All Lines', gid: '' },
+                uploadedAssets: { name: 'Uploaded Assets', gid: '' }
             }
         };
 
@@ -46,17 +51,24 @@
                 console.log('%cSpreadsheet: https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30', 'color: #1a73e8; font-style: italic;');
                 logDebug("INFO", "Loading from Google Sheets", GOOGLE_SHEETS_CONFIG.spreadsheetId);
 
-                // Fetch the main data range (adjust based on your sheet structure)
-                // Project title is in cell B3
-                // Scene data starts from row with headers
-                const projectTitleUrl = buildSheetsApiUrl('Sheet1!B3', apiKey);
-                const metadataUrl = buildSheetsApiUrl('Sheet1!A1:B10', apiKey);
-                const scenesUrl = buildSheetsApiUrl('Sheet1!A1:Z1000', apiKey);
+                // Sheet names from config
+                const titleSheet = GOOGLE_SHEETS_CONFIG.titleSheet || 'Overview';
+                const dataSheet = GOOGLE_SHEETS_CONFIG.sheetName || 'All Lines';
+                
+                // Fetch data from correct sheets:
+                // - Project title from Overview!B3
+                // - Metadata from Overview
+                // - Scene/line data from All Lines
+                const projectTitleUrl = buildSheetsApiUrl(`${titleSheet}!B3`, apiKey);
+                const metadataUrl = buildSheetsApiUrl(`${titleSheet}!A1:B10`, apiKey);
+                const scenesUrl = buildSheetsApiUrl(`${dataSheet}!A1:Z1000`, apiKey);
 
                 console.log('%c🔗 API URLs being fetched:', 'color: #fbbc04; font-weight: bold;');
-                console.log(`  [1] Project Title (B3): ${projectTitleUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
-                console.log(`  [2] Metadata (A1:B10): ${metadataUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
-                console.log(`  [3] Scenes (A1:Z1000): ${scenesUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
+                console.log(`  Title Sheet: "${titleSheet}" (for project title in B3)`);
+                console.log(`  Data Sheet: "${dataSheet}" (for scenes/lines data)`);
+                console.log(`  [1] Project Title (${titleSheet}!B3): ${projectTitleUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
+                console.log(`  [2] Metadata (${titleSheet}!A1:B10): ${metadataUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
+                console.log(`  [3] Scenes (${dataSheet}!A1:Z1000): ${scenesUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
 
                 const [titleRes, metadataRes, scenesRes] = await Promise.all([
                     fetch(projectTitleUrl),
@@ -70,7 +82,18 @@
                 console.log(`  Scenes: ${scenesRes.status} ${scenesRes.ok ? '✅' : '❌'}`);
 
                 if (!titleRes.ok || !metadataRes.ok || !scenesRes.ok) {
-                    throw new Error(`Sheets API error: Title=${titleRes.status}, Metadata=${metadataRes.status}, Scenes=${scenesRes.status}`);
+                    // Get error details
+                    const titleError = !titleRes.ok ? await titleRes.json().catch(() => ({})) : null;
+                    const metadataError = !metadataRes.ok ? await metadataRes.json().catch(() => ({})) : null;
+                    const scenesError = !scenesRes.ok ? await scenesRes.json().catch(() => ({})) : null;
+                    
+                    console.error('%c❌ API Error Details:', 'color: #ea4335; font-weight: bold;');
+                    if (titleError) console.error('  Title Error:', titleError);
+                    if (metadataError) console.error('  Metadata Error:', metadataError);
+                    if (scenesError) console.error('  Scenes Error:', scenesError);
+                    
+                    const errorMsg = titleError?.error?.message || metadataError?.error?.message || scenesError?.error?.message || 'Unknown error';
+                    throw new Error(`Sheets API error: ${errorMsg}`);
                 }
 
                 const titleJson = await titleRes.json();
@@ -86,8 +109,14 @@
 
                 return transformSheetsToData(metadataJson, scenesJson, projectTitle);
             } catch (error) {
+                console.error('%c❌ GOOGLE SHEETS LOAD FAILED', 'background: #ea4335; color: white; padding: 4px 8px; border-radius: 4px;');
+                console.error('Error:', error.message);
+                console.error('Possible causes:');
+                console.error('  1. API key is invalid or missing');
+                console.error('  2. Google Sheets API is not enabled in Google Cloud Console');
+                console.error('  3. Sheet name is incorrect (current: "' + (GOOGLE_SHEETS_CONFIG.sheetName || 'Scenes') + '")');
+                console.error('  4. Spreadsheet is not shared or not accessible');
                 logDebug("ERROR", "Google Sheets load failed", error.message);
-                console.error("Google Sheets Error:", error);
                 return null;
             }
         }
