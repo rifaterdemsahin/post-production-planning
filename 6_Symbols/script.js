@@ -32,6 +32,35 @@
             return `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`;
         }
 
+        // Load ONLY the project title from Google Sheets cell B3
+        async function loadProjectTitleFromSheets() {
+            const apiKey = getSheetsApiKey();
+            if (!apiKey) {
+                logDebug("WARN", "Sheets API", "No API key - cannot load project title from B3");
+                return null;
+            }
+
+            try {
+                const titleUrl = buildSheetsApiUrl('Sheet1!B3', apiKey);
+                const response = await fetch(titleUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const titleJson = await response.json();
+                const title = titleJson.values?.[0]?.[0] || null;
+                
+                if (title) {
+                    logDebug("SUCCESS", "Project Title from Sheets B3", title);
+                }
+                return title;
+            } catch (error) {
+                logDebug("ERROR", "Failed to load title from Sheets", error.message);
+                return null;
+            }
+        }
+
         // Load data from Google Sheets
         async function loadFromGoogleSheets() {
             const apiKey = getSheetsApiKey();
@@ -44,26 +73,32 @@
                 logDebug("INFO", "Loading from Google Sheets", GOOGLE_SHEETS_CONFIG.spreadsheetId);
 
                 // Fetch the main data range (adjust based on your sheet structure)
-                // Assuming Sheet1 has: title, main_context, version, last_updated in first rows
-                // And scene data starts from a specific row
+                // Project title is in cell B3
+                // Scene data starts from row with headers
+                const projectTitleUrl = buildSheetsApiUrl('Sheet1!B3', apiKey);
                 const metadataUrl = buildSheetsApiUrl('Sheet1!A1:B10', apiKey);
                 const scenesUrl = buildSheetsApiUrl('Sheet1!A1:Z1000', apiKey);
 
-                const [metadataRes, scenesRes] = await Promise.all([
+                const [titleRes, metadataRes, scenesRes] = await Promise.all([
+                    fetch(projectTitleUrl),
                     fetch(metadataUrl),
                     fetch(scenesUrl)
                 ]);
 
-                if (!metadataRes.ok || !scenesRes.ok) {
-                    throw new Error(`Sheets API error: Metadata=${metadataRes.status}, Scenes=${scenesRes.status}`);
+                if (!titleRes.ok || !metadataRes.ok || !scenesRes.ok) {
+                    throw new Error(`Sheets API error: Title=${titleRes.status}, Metadata=${metadataRes.status}, Scenes=${scenesRes.status}`);
                 }
 
+                const titleJson = await titleRes.json();
                 const metadataJson = await metadataRes.json();
                 const scenesJson = await scenesRes.json();
 
+                // Extract project title from B3
+                const projectTitle = titleJson.values?.[0]?.[0] || 'Plan your AI transformation journey';
+                logDebug("INFO", "Project Title from B3", projectTitle);
                 logDebug("SUCCESS", "Google Sheets loaded", `${scenesJson.values?.length || 0} rows`);
 
-                return transformSheetsToData(metadataJson, scenesJson);
+                return transformSheetsToData(metadataJson, scenesJson, projectTitle);
             } catch (error) {
                 logDebug("ERROR", "Google Sheets load failed", error.message);
                 console.error("Google Sheets Error:", error);
@@ -72,7 +107,7 @@
         }
 
         // Transform Google Sheets data to match YAML structure
-        function transformSheetsToData(metadataJson, scenesJson) {
+        function transformSheetsToData(metadataJson, scenesJson, projectTitleFromCell = null) {
             const rows = scenesJson.values || [];
             if (rows.length < 2) {
                 logDebug("WARN", "Sheets Transform", "No data rows found");
@@ -95,23 +130,18 @@
             logDebug("INFO", "Sheet Columns", headers.join(', '));
             logDebug("INFO", "Data Rows", `${dataRows.length} rows found`);
 
-            // Extract metadata from first few rows or dedicated columns
-            // Check if there's a 'title' column, otherwise use first cell
-            let title = 'Plan your AI transformation journey'; // Default
+            // Project title ONLY from Google Sheets cell B3
+            let title = projectTitleFromCell || 'Untitled Project';
             let mainContext = '';
             let version = 1;
             let lastUpdatedVal = new Date().toISOString();
 
-            // Try to find metadata in the sheet
-            if (colIndex['title'] !== undefined && dataRows[0]) {
-                title = dataRows[0][colIndex['title']] || title;
-            } else if (metadataJson.values) {
-                // Parse key-value metadata
+            // Parse other metadata from sheet (not title - that comes from B3 only)
+            if (metadataJson.values) {
                 metadataJson.values.forEach(row => {
                     const key = (row[0] || '').toLowerCase().trim();
                     const value = row[1] || '';
-                    if (key === 'title') title = value;
-                    else if (key === 'main_context') mainContext = value;
+                    if (key === 'main_context') mainContext = value;
                     else if (key === 'version') version = parseInt(value) || 1;
                     else if (key === 'last_updated') lastUpdatedVal = value;
                 });
@@ -406,7 +436,10 @@
             });
 
             try {
-                // Try loading from Google Sheets first (if API key available)
+                // ALWAYS load project title from Google Sheets B3 first
+                const sheetProjectTitle = await loadProjectTitleFromSheets();
+                
+                // Try loading scene data from Google Sheets (if API key available)
                 let sheetsData = null;
                 if (useGoogleSheets) {
                     sheetsData = await loadFromGoogleSheets();
@@ -414,15 +447,27 @@
 
                 if (sheetsData && sheetsData.scenes && sheetsData.scenes.length > 0) {
                     // Successfully loaded from Google Sheets
+                    // Override title with the one from B3 if available
+                    if (sheetProjectTitle) {
+                        sheetsData.title = sheetProjectTitle;
+                    }
                     loadDataIntoApp(sheetsData);
                     showToast("📊 Data loaded from Google Sheets", 2000);
                     logDebug("SUCCESS", "Data Source", "Google Sheets");
                     // Update data source indicator
                     updateDataSourceIndicator('sheets');
                 } else {
-                    // Fallback to YAML file
-                    logDebug("INFO", "Fallback", "Loading from YAML file");
+                    // Fallback to YAML file for scene data
+                    logDebug("INFO", "Fallback", "Loading scenes from YAML file");
                     await loadYAMLFromURL('scenes.yaml');
+                    
+                    // But ALWAYS use Google Sheets title (override YAML title)
+                    if (sheetProjectTitle) {
+                        window.projectTitle = sheetProjectTitle;
+                        const titleInput = document.getElementById('project-title-input');
+                        if (titleInput) titleInput.value = sheetProjectTitle;
+                        logDebug("INFO", "Title Override", "Using title from Sheets B3, not YAML");
+                    }
                     // Update data source indicator
                     updateDataSourceIndicator('yaml');
                 }
