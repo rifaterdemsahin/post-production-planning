@@ -879,25 +879,29 @@
             let html = `<h3 class="text-xs font-bold text-gray-400 mb-2 uppercase sticky top-0 bg-gray-900 pb-2 border-b border-gray-800 z-10 w-full">Line ${line.id} Assets</h3>`;
 
             if (line.uploaded_assets && Object.keys(line.uploaded_assets).length > 0) {
-                 Object.entries(line.uploaded_assets).forEach(([type, asset]) => {
-                    if (!asset || !asset.url) return;
+                 Object.entries(line.uploaded_assets).forEach(([type, assetData]) => {
+                    // Normalize to array format (support both old single-object and new array format)
+                    const assets = Array.isArray(assetData) ? assetData : [assetData];
                     
-                    let embedUrl = asset.url;
-                    const isDrive = asset.url.includes('drive.google.com');
-                    if (isDrive && asset.url.includes('/view')) {
-                        const idMatch = asset.url.match(/\/file\/d\/([^\/]+)/);
-                        if (idMatch && idMatch[1]) {
-                            embedUrl = `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w800`;
+                    assets.forEach((asset, assetIndex) => {
+                        if (!asset || !asset.url) return;
+                        
+                        let embedUrl = asset.url;
+                        const isDrive = asset.url.includes('drive.google.com');
+                        if (isDrive && asset.url.includes('/view')) {
+                            const idMatch = asset.url.match(/\/file\/d\/([^\/]+)/);
+                            if (idMatch && idMatch[1]) {
+                                embedUrl = `https://drive.google.com/thumbnail?id=${idMatch[1]}&sz=w800`;
+                            }
                         }
-                    }
 
-                    let contentHtml = '';
-                    const typeLower = type.toLowerCase();
-                    
-                    const isImage = /\.(jpg|jpeg|png|webp|gif)$/i.test(asset.filename) || typeLower === 'image';
-                    const isAudio = /\.(mp3|wav|ogg)$/i.test(asset.filename) || typeLower === 'music' || typeLower === 'sound_effect';
-                    const isVideo = /\.(mp4|webm)$/i.test(asset.filename) || typeLower === 'animation';
-                    
+                        let contentHtml = '';
+                        const typeLower = type.toLowerCase();
+                        
+                        const isImage = /\.(jpg|jpeg|png|webp|gif)$/i.test(asset.filename) || typeLower === 'image';
+                        const isAudio = /\.(mp3|wav|ogg)$/i.test(asset.filename) || typeLower === 'music' || typeLower === 'sound_effect';
+                        const isVideo = /\.(mp4|webm)$/i.test(asset.filename) || typeLower === 'animation';
+                        
                     if (isImage) {
                         contentHtml = `<img src="${embedUrl}" class="w-full h-auto rounded border border-gray-700 mt-1" alt="${type}" loading="lazy" onerror="this.style.display='none';">`;
                     } else if (isAudio) {
@@ -965,10 +969,11 @@
                         contentHtml = `<div class="p-2 bg-gray-800 rounded mt-1 text-center border border-gray-700">📄 File Preview</div>`;
                     }
 
+                    const assetLabel = assets.length > 1 ? `${type} #${assetIndex + 1}` : type;
                     html += `
                         <div class="bg-gray-900/50 p-2 rounded border border-gray-800 relative group hover:border-gray-600 transition-colors mb-2">
                             <div class="flex justify-between items-center mb-1">
-                                <span class="text-[10px] uppercase text-blue-300 font-bold">${type}</span>
+                                <span class="text-[10px] uppercase text-blue-300 font-bold">${assetLabel}</span>
                                 <a href="${asset.url}" target="_blank" class="text-gray-500 hover:text-white" title="Open in new tab">↗</a>
                             </div>
                             ${contentHtml}
@@ -977,7 +982,8 @@
                             </div>
                         </div>
                     `;
-                 });
+                    }); // End assets.forEach
+                 }); // End Object.entries.forEach
             } else {
                 html += '<div class="text-gray-600 text-xs italic p-2 text-center">No assets for this line</div>';
             }
@@ -1160,8 +1166,9 @@
                                 <span class="font-bold text-gray-500 block mb-2 text-[10px] uppercase tracking-wider">Assets</span>
                                 ${(() => {
                                     if (line.uploaded_assets && Object.keys(line.uploaded_assets).length > 0) {
-                                        return Object.entries(line.uploaded_assets).map(([type, asset]) => {
-                                            if (!asset || !asset.url) return '';
+                                        return Object.entries(line.uploaded_assets).map(([type, assetData]) => {
+                                            // Normalize to array format (support both old single-object and new array format)
+                                            const assets = Array.isArray(assetData) ? assetData : [assetData];
                                             
                                             const typeIcons = {
                                                 'image': '🖼️',
@@ -1175,50 +1182,56 @@
                                             };
                                             const icon = typeIcons[type.toLowerCase()] || '📄';
                                             
-                                            let audioPlayerHtml = '';
-                                            let modalButton = '';
-                                            
-                                            if ((type === 'music' || type === 'sound_effect') && asset.url.includes('drive.google.com')) {
-                                                // Extract File ID
-                                                const match = asset.url.match(/\/d\/([a-zA-Z0-9_-]+)|id=([a-zA-Z0-9_-]+)/);
-                                                const fileId = match ? (match[1] || match[2]) : null;
+                                            return assets.map((asset, assetIndex) => {
+                                                if (!asset || !asset.url) return '';
                                                 
-                                                if (fileId) {
-                                                    // API-based Playback UI
-                                                    const playerContainerId = `drive-player-${fileId}-${uniqueId}`;
+                                                let audioPlayerHtml = '';
+                                                let modalButton = '';
+                                                
+                                                if ((type === 'music' || type === 'sound_effect') && asset.url.includes('drive.google.com')) {
+                                                    // Extract File ID
+                                                    const match = asset.url.match(/\/d\/([a-zA-Z0-9_-]+)|id=([a-zA-Z0-9_-]+)/);
+                                                    const fileId = match ? (match[1] || match[2]) : null;
                                                     
-                                                    audioPlayerHtml = `
-                                                        <div id="${playerContainerId}" class="mt-1">
-                                                            <button onclick="fetchAndPlayDriveAudio('${fileId}', '${playerContainerId}')" 
-                                                                class="text-xs bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 border border-blue-800 px-2 py-1 rounded w-full flex items-center justify-center gap-1 transition">
-                                                                <span>🔓</span> Load & Play (API)
+                                                    if (fileId) {
+                                                        // API-based Playback UI
+                                                        const playerContainerId = `drive-player-${fileId}-${uniqueId}-${assetIndex}`;
+                                                        
+                                                        audioPlayerHtml = `
+                                                            <div id="${playerContainerId}" class="mt-1">
+                                                                <button onclick="fetchAndPlayDriveAudio('${fileId}', '${playerContainerId}')" 
+                                                                    class="text-xs bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 border border-blue-800 px-2 py-1 rounded w-full flex items-center justify-center gap-1 transition">
+                                                                    <span>🔓</span> Load & Play (API)
+                                                                </button>
+                                                            </div>
+                                                        `;
+                                                        
+                                                        // Modal Button (modified to use API)
+                                                        modalButton = `
+                                                            <button onclick="fetchAndPlayDriveModal('${fileId}', '${asset.filename || 'Audio'}')" 
+                                                                class="text-[10px] bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white px-1.5 py-0.5 rounded border border-gray-700 ml-1"
+                                                                title="Play in Popup (API)">
+                                                                ⏵ Popup
                                                             </button>
-                                                        </div>
-                                                    `;
-                                                    
-                                                    // Modal Button (modified to use API)
-                                                    modalButton = `
-                                                        <button onclick="fetchAndPlayDriveModal('${fileId}', '${asset.filename || 'Audio'}')" 
-                                                            class="text-[10px] bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white px-1.5 py-0.5 rounded border border-gray-700 ml-1"
-                                                            title="Play in Popup (API)">
-                                                            ⏵ Popup
-                                                        </button>
-                                                    `;
+                                                        `;
+                                                    }
                                                 }
-                                            }
+                                                
+                                                const assetLabel = assets.length > 1 ? `${type} #${assetIndex + 1}` : type;
 
-                                            return `
-                                                <div class="mb-2">
-                                                    <div class="flex justify-end items-center gap-1 mb-0.5">
-                                                        <a href="${asset.url}" target="_blank" class="text-blue-400 hover:text-white hover:underline truncate inline-flex items-center gap-1 max-w-[80%]" title="${asset.filename}">
-                                                           <span>${icon}</span>
-                                                           <span class="truncate">${type} ↗</span>
-                                                        </a>
-                                                        ${modalButton}
+                                                return `
+                                                    <div class="mb-2">
+                                                        <div class="flex justify-end items-center gap-1 mb-0.5">
+                                                            <a href="${asset.url}" target="_blank" class="text-blue-400 hover:text-white hover:underline truncate inline-flex items-center gap-1 max-w-[80%]" title="${asset.filename}">
+                                                               <span>${icon}</span>
+                                                               <span class="truncate">${assetLabel} ↗</span>
+                                                            </a>
+                                                            ${modalButton}
+                                                        </div>
+                                                        ${audioPlayerHtml}
                                                     </div>
-                                                    ${audioPlayerHtml}
-                                                </div>
-                                            `;
+                                                `;
+                                            }).join('');
                                         }).join('');
                                     } else {
                                         return '<span class="text-gray-700 italic text-[10px]">-</span>';
@@ -3417,11 +3430,34 @@
                 scenes[sceneIndex].lines[lineIndex].uploaded_assets = {};
             }
             
-            scenes[sceneIndex].lines[lineIndex].uploaded_assets[type] = {
+            // Support multiple assets per type - store as array
+            const existingAsset = scenes[sceneIndex].lines[lineIndex].uploaded_assets[type];
+            const newAsset = {
                 filename: filename,
                 url: url,
                 last_uploaded: new Date().toISOString()
             };
+            
+            // If no existing asset, create new array with single item
+            if (!existingAsset) {
+                scenes[sceneIndex].lines[lineIndex].uploaded_assets[type] = [newAsset];
+            } 
+            // If existing asset is already an array, append to it
+            else if (Array.isArray(existingAsset)) {
+                // Check if URL already exists to avoid duplicates
+                const exists = existingAsset.some(a => a.url === url);
+                if (!exists) {
+                    existingAsset.push(newAsset);
+                } else {
+                    // Update existing entry with new timestamp
+                    const idx = existingAsset.findIndex(a => a.url === url);
+                    existingAsset[idx] = newAsset;
+                }
+            }
+            // If existing asset is old format (single object), convert to array
+            else {
+                scenes[sceneIndex].lines[lineIndex].uploaded_assets[type] = [existingAsset, newAsset];
+            }
             
             console.log(`Updated uploaded_assets for S${sceneIndex} L${lineIndex} [${type}]`, scenes[sceneIndex].lines[lineIndex].uploaded_assets[type]);
             
