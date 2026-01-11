@@ -23,7 +23,7 @@ scenes:
           motion_graphics: Create a cinematic title card in Canva with the text 'THE NEW AGE' using a futuristic sans-serif font, glowing neon blue outline, set against a dark, high-tech abstract background
           sound_effect: Subtle high-tech whoosh sound on transition
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(135deg, #0a0a0a, #1a1a2e); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; font-family: Arial;'><div style='text-align: center;'><h1 style='font-size: 72px; color: #00d4ff; text-shadow: 0 0 30px #00d4ff, 0 0 60px #00d4ff; animation: pulse 2s infinite;'>THE NEW AGE</h1><p style='color: #888; font-size: 24px; letter-spacing: 5px;'>AI TRANSFORMATION FRAMEWORK</p></div></div><style>@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'THE NEW AGE' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -32,7 +32,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: linear-gradient(135deg, #0a0a0a, #1a1a2e); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; font-family: Arial;'><div style='text-align: center;'><h1 style='font-size: 72px; color: #00d4ff; text-shadow: 0 0 30px #00d4ff, 0 0 60px #00d4ff; animation: pulse 2s infinite;'>THE NEW AGE</h1><p style='color: #888; font-size: 24px; letter-spacing: 5px;'>AI TRANSFORMATION FRAMEWORK</p></div></div><style>@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }</style>"
         verified_prompts:
           image: true
           graphic: false
@@ -66,7 +66,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'AI REVOLUTION' using a futuristic font
           sound_effect: Digital data processing chirps and beeps
           diagram: "flowchart LR showing AI market forces: Traditional Jobs --> Skills Gap --> AI Revolution --> New Opportunities"
-          html: "<div style='background: #000; width: 800px; height: 450px; position: relative; overflow: hidden; font-family: monospace;'><div style='position: absolute; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.03) 2px, rgba(0,255,0,0.03) 4px);'></div><div style='position: absolute; bottom: 20px; width: 100%; padding: 10px; background: rgba(0,0,0,0.8); color: #0f0; font-size: 14px; animation: scroll 10s linear infinite;'>AI UP +234% | JOBS SHIFT | MARKET TRANSFORMATION | SKILLS GAP WIDENING | ADAPT OR FALL BEHIND</div></div><style>@keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -75,7 +75,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #000; width: 800px; height: 450px; position: relative; overflow: hidden; font-family: monospace;'><div style='position: absolute; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.03) 2px, rgba(0,255,0,0.03) 4px);'></div><div style='position: absolute; bottom: 20px; width: 100%; padding: 10px; background: rgba(0,0,0,0.8); color: #0f0; font-size: 14px; animation: scroll 10s linear infinite;'>AI UP +234% | JOBS SHIFT | MARKET TRANSFORMATION | SKILLS GAP WIDENING | ADAPT OR FALL BEHIND</div></div><style>@keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -96,7 +96,7 @@ scenes:
           motion_graphics: Create a dizzying spinning effect motion graphic in Canva with text 'SPINNING FAST' using distorted futuristic font
           sound_effect: Deep, airy whoosh sound syncs with the spin
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #1a1a2e; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; perspective: 1000px;'><div style='font-size: 48px; color: white; animation: spin3d 3s linear infinite; text-shadow: 0 0 20px rgba(255,255,255,0.5);'>CHANGE IS FAST</div></div><style>@keyframes spin3d { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'CHANGE IS FAST' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -105,7 +105,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #1a1a2e; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; perspective: 1000px;'><div style='font-size: 48px; color: white; animation: spin3d 3s linear infinite; text-shadow: 0 0 20px rgba(255,255,255,0.5);'>CHANGE IS FAST</div></div><style>@keyframes spin3d { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -126,7 +126,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'RULES BROKEN' using a futuristic font
           sound_effect: Sound of heavy stone cracking or dry paper crumbling
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #000; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='position: relative;'><h1 style='font-size: 64px; color: #d4af37; font-family: serif; animation: crumble 4s forwards;'>OLD RULES</h1><div style='position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(212,175,55,0.3) 0%, transparent 70%); animation: dust 4s infinite;'></div></div></div><style>@keyframes crumble { 0% { opacity: 1; filter: blur(0); } 100% { opacity: 0; filter: blur(10px); transform: scale(0.8); } } @keyframes dust { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'OLD RULES' in #d4af37 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -135,7 +135,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #000; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='position: relative;'><h1 style='font-size: 64px; color: #d4af37; font-family: serif; animation: crumble 4s forwards;'>OLD RULES</h1><div style='position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(212,175,55,0.3) 0%, transparent 70%); animation: dust 4s infinite;'></div></div></div><style>@keyframes crumble { 0% { opacity: 1; filter: blur(0); } 100% { opacity: 0; filter: blur(10px); transform: scale(0.8); } } @keyframes dust { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -162,7 +162,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'SKILLS GAP' using a futuristic font
           sound_effect: Hollow wind howling sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(180deg, #87ceeb 0%, #f0f0f0 100%); width: 800px; height: 450px; display: flex; align-items: flex-end; justify-content: center; position: relative;'><div style='width: 20px; background: linear-gradient(180deg, #8b4513, #654321); height: 300px; animation: ladder 3s ease-in-out infinite;'></div><div style='position: absolute; top: 50px; font-size: 36px; color: #ff4444; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);'>SKILLS GAP</div></div><style>@keyframes ladder { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'SKILLS GAP' in #ff4444 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -171,7 +171,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: linear-gradient(180deg, #87ceeb 0%, #f0f0f0 100%); width: 800px; height: 450px; display: flex; align-items: flex-end; justify-content: center; position: relative;'><div style='width: 20px; background: linear-gradient(180deg, #8b4513, #654321); height: 300px; animation: ladder 3s ease-in-out infinite;'></div><div style='position: absolute; top: 50px; font-size: 36px; color: #ff4444; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);'>SKILLS GAP</div></div><style>@keyframes ladder { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -197,7 +197,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ARE YOU READY?' using a futuristic font
           sound_effect: Distant thunder rumble mixed with digital static
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;'><div style='font-size: 56px; color: #9b59b6; text-shadow: 0 0 20px #9b59b6; animation: flash 1s infinite;'>ARE YOU READY?</div><div style='position: absolute; width: 100%; height: 100%; background: linear-gradient(transparent 50%, rgba(155,89,182,0.1) 50%); background-size: 100% 4px; pointer-events: none;'></div></div><style>@keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'ARE YOU READY?' in #9b59b6 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -206,7 +206,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;'><div style='font-size: 56px; color: #9b59b6; text-shadow: 0 0 20px #9b59b6; animation: flash 1s infinite;'>ARE YOU READY?</div><div style='position: absolute; width: 100%; height: 100%; background: linear-gradient(transparent 50%, rgba(155,89,182,0.1) 50%); background-size: 100% 4px; pointer-events: none;'></div></div><style>@keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -232,7 +232,16 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE FORCE' using a futuristic font
           sound_effect: Sudden silence followed by a low frequency wind build-up
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); width: 800px; height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;'><div style='width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 250px solid #e8e8e8; margin-bottom: 50px;'></div><div style='position: absolute; top: 50px; font-size: 48px; color: #00d4ff; text-shadow: 0 0 15px #00d4ff;'>THE FORCE</div></div>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'THE FORCE' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
+          prompt_outputs:
+            image_output: ""
+            graphic_output: ""
+            music_output: ""
+            animation_output: ""
+            motion_graphics_output: ""
+            sound_effect_output: ""
+            diagram_output: ""
+            html_output: "<div style='background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); width: 800px; height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;'><div style='width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 250px solid #e8e8e8; margin-bottom: 50px;'></div><div style='position: absolute; top: 50px; font-size: 48px; color: #00d4ff; text-shadow: 0 0 15px #00d4ff;'>THE FORCE</div></div>"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -263,15 +272,6 @@ scenes:
           sound_effect: Roar of the avalanche, like a freight train
           diagram: "Create Mermaid flowchart showing key concept relationships"
           html: "<div style='background: #1a0a0a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 72px; color: #ff0000; animation: warning 0.5s infinite; text-shadow: 0 0 30px #ff0000;'>⚠️ WARNING</div><div style='position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, transparent 30%, rgba(255,0,0,0.1) 100%); animation: pulse 1s infinite;'></div></div><style>@keyframes warning { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } } @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }</style>"
-          prompt_outputs:
-            image_output: ""
-            graphic_output: ""
-            music_output: ""
-            animation_output: ""
-            motion_graphics_output: ""
-            sound_effect_output: ""
-            diagram_output: ""
-            html_output: ""
         verified_prompts:
           image: false
           graphic: false
@@ -298,7 +298,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'PRECISION' using a futuristic font
           sound_effect: High-pitched crystal chime or glass sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: radial-gradient(circle, #1a1a3a, #0a0a1a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 150px; height: 150px; background: radial-gradient(circle, #fff, #87ceeb, #4169e1); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); animation: rotate 8s linear infinite, glow 2s infinite;'></div></div><style>@keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } } @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 20px #4169e1); } 50% { filter: drop-shadow(0 0 40px #87ceeb); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -307,7 +307,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: radial-gradient(circle, #1a1a3a, #0a0a1a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 150px; height: 150px; background: radial-gradient(circle, #fff, #87ceeb, #4169e1); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); animation: rotate 8s linear infinite, glow 2s infinite;'></div></div><style>@keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } } @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 20px #4169e1); } 50% { filter: drop-shadow(0 0 40px #87ceeb); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -341,7 +341,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'FOUNDATIONS' using a futuristic font
           sound_effect: Digital transformation sci-fi sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #1a1a1a; width: 800px; height: 450px; position: relative; overflow: hidden;'><div style='position: absolute; bottom: 0; width: 100%; height: 50%; background: linear-gradient(0deg, rgba(0,100,255,0.3), transparent); display: grid; grid-template-columns: repeat(20, 1fr); grid-template-rows: repeat(10, 1fr);'><div style='border: 1px solid rgba(0,200,255,0.5); animation: gridPulse 2s infinite;'></div></div><div style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; color: #00d4ff; text-shadow: 0 0 20px #00d4ff;'>FOUNDATIONS</div></div><style>@keyframes gridPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'FOUNDATIONS' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -350,7 +350,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #1a1a1a; width: 800px; height: 450px; position: relative; overflow: hidden;'><div style='position: absolute; bottom: 0; width: 100%; height: 50%; background: linear-gradient(0deg, rgba(0,100,255,0.3), transparent); display: grid; grid-template-columns: repeat(20, 1fr); grid-template-rows: repeat(10, 1fr);'><div style='border: 1px solid rgba(0,200,255,0.5); animation: gridPulse 2s infinite;'></div></div><div style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; color: #00d4ff; text-shadow: 0 0 20px #00d4ff;'>FOUNDATIONS</div></div><style>@keyframes gridPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -376,7 +376,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'TRADITION' using a futuristic font
           sound_effect: Lonely paper rustling sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: radial-gradient(circle at 50% 30%, #333, #000); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 200px; height: 280px; background: linear-gradient(180deg, #f5f5dc, #e8e8d0); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: rotate(-5deg); animation: float 4s ease-in-out infinite; display: flex; align-items: center; justify-content: center; font-family: serif; font-size: 14px; color: #333; text-align: center; padding: 20px;'>TRADITIONAL<br>RESUME<br><br>• Skills<br>• Experience<br>• Education</div></div><style>@keyframes float { 0%, 100% { transform: rotate(-5deg) translateY(0); } 50% { transform: rotate(-3deg) translateY(-20px); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'TRADITIONAL' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -385,7 +385,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: radial-gradient(circle at 50% 30%, #333, #000); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 200px; height: 280px; background: linear-gradient(180deg, #f5f5dc, #e8e8d0); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: rotate(-5deg); animation: float 4s ease-in-out infinite; display: flex; align-items: center; justify-content: center; font-family: serif; font-size: 14px; color: #333; text-align: center; padding: 20px;'>TRADITIONAL<br>RESUME<br><br>• Skills<br>• Experience<br>• Education</div></div><style>@keyframes float { 0%, 100% { transform: rotate(-5deg) translateY(0); } 50% { transform: rotate(-3deg) translateY(-20px); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -406,7 +406,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'OBSOLETE' using a futuristic font
           sound_effect: Slow, heavy heartbeat
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #fff; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; animation: fadeToBlack 5s forwards;'><div style='font-size: 64px; color: #333; animation: heartbeat 1s infinite;'>BURIED</div></div><style>@keyframes fadeToBlack { 0% { background: #fff; } 100% { background: #000; } } @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'BURIED' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -415,7 +415,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #fff; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; animation: fadeToBlack 5s forwards;'><div style='font-size: 64px; color: #333; animation: heartbeat 1s infinite;'>BURIED</div></div><style>@keyframes fadeToBlack { 0% { background: #fff; } 100% { background: #000; } } @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -442,7 +442,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'MAGNITUDE 10' using a futuristic font
           sound_effect: Sound of a pen scratching violently on paper
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #1a0a0a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; flex-direction: column;'><div style='width: 600px; height: 100px; background: #f5f5dc; position: relative; overflow: hidden;'><div style='position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: #ff0000; animation: seismo 0.1s infinite;'></div></div><div style='margin-top: 30px; font-size: 48px; color: #ff0000; animation: shake 0.1s infinite;'>MAGNITUDE 10</div></div><style>@keyframes seismo { 0% { transform: translateY(-30px); } 50% { transform: translateY(30px); } 100% { transform: translateY(-30px); } } @keyframes shake { 0%, 100% { transform: translateX(-2px); } 50% { transform: translateX(2px); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #ff0000 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -451,7 +451,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #1a0a0a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; flex-direction: column;'><div style='width: 600px; height: 100px; background: #f5f5dc; position: relative; overflow: hidden;'><div style='position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: #ff0000; animation: seismo 0.1s infinite;'></div></div><div style='margin-top: 30px; font-size: 48px; color: #ff0000; animation: shake 0.1s infinite;'>MAGNITUDE 10</div></div><style>@keyframes seismo { 0% { transform: translateY(-30px); } 50% { transform: translateY(30px); } 100% { transform: translateY(-30px); } } @keyframes shake { 0%, 100% { transform: translateX(-2px); } 50% { transform: translateX(2px); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -472,7 +472,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'DECAY' using a futuristic font
           sound_effect: Loud ticking clock
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #000; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='font-size: 120px; animation: decay 5s forwards;'>🥇</div><div style='position: absolute; font-size: 36px; color: #8b4513; animation: fadeIn 3s 2s forwards; opacity: 0;'>DECAY</div></div><style>@keyframes decay { 0% { filter: sepia(0) brightness(1); } 100% { filter: sepia(1) brightness(0.5); } } @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'DECAY' in #8b4513 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -481,7 +481,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #000; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='font-size: 120px; animation: decay 5s forwards;'>🥇</div><div style='position: absolute; font-size: 36px; color: #8b4513; animation: fadeIn 3s 2s forwards; opacity: 0;'>DECAY</div></div><style>@keyframes decay { 0% { filter: sepia(0) brightness(1); } 100% { filter: sepia(1) brightness(0.5); } } @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -502,7 +502,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'COMPLEXITY' using a futuristic font
           sound_effect: Mechanical clicks and whirs
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: radial-gradient(circle, #1a1a3a, #0a0a1a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 150px; height: 150px; border: 3px solid #00d4ff; animation: rotate3d 4s linear infinite; box-shadow: 0 0 30px #00d4ff;'></div><div style='position: absolute; font-size: 24px; color: #00d4ff; font-family: monospace;'>E=mc² | ∫ | π | Σ</div></div><style>@keyframes rotate3d { 0% { transform: rotateX(0) rotateY(0); } 100% { transform: rotateX(360deg) rotateY(360deg); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -511,7 +511,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: radial-gradient(circle, #1a1a3a, #0a0a1a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 150px; height: 150px; border: 3px solid #00d4ff; animation: rotate3d 4s linear infinite; box-shadow: 0 0 30px #00d4ff;'></div><div style='position: absolute; font-size: 24px; color: #00d4ff; font-family: monospace;'>E=mc² | ∫ | π | Σ</div></div><style>@keyframes rotate3d { 0% { transform: rotateX(0) rotateY(0); } 100% { transform: rotateX(360deg) rotateY(360deg); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -532,7 +532,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'NEURAL NETWORK' using a futuristic font
           sound_effect: Futuristic power-up hum
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 100px; animation: brainPulse 1.5s infinite;'>🧠</div><div style='position: absolute; font-size: 36px; color: #ff00ff; text-shadow: 0 0 20px #00ffff; bottom: 80px;'>NEURAL NETWORK</div></div><style>@keyframes brainPulse { 0%, 100% { filter: hue-rotate(0deg) drop-shadow(0 0 20px #00ffff); } 50% { filter: hue-rotate(180deg) drop-shadow(0 0 40px #ff00ff); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'NEURAL NETWORK' in #ff00ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -541,7 +541,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 100px; animation: brainPulse 1.5s infinite;'>🧠</div><div style='position: absolute; font-size: 36px; color: #ff00ff; text-shadow: 0 0 20px #00ffff; bottom: 80px;'>NEURAL NETWORK</div></div><style>@keyframes brainPulse { 0%, 100% { filter: hue-rotate(0deg) drop-shadow(0 0 20px #00ffff); } 50% { filter: hue-rotate(180deg) drop-shadow(0 0 40px #ff00ff); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -568,7 +568,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE COMPARISON' using a futuristic font
           sound_effect: Whoosh sound with a metallic clang
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a0a; width: 800px; height: 450px; display: flex;'><div style='flex: 1; background: #1a1a1a; display: flex; align-items: center; justify-content: center; color: #666; font-size: 24px;'>OLD</div><div style='width: 4px; background: linear-gradient(180deg, #9b59b6, #3498db);'></div><div style='flex: 1; background: linear-gradient(135deg, #1a1a3a, #2a1a4a); display: flex; align-items: center; justify-content: center; color: #9b59b6; font-size: 24px; animation: glow 2s infinite;'>NEW</div></div><style>@keyframes glow { 0%, 100% { text-shadow: 0 0 10px #9b59b6; } 50% { text-shadow: 0 0 30px #9b59b6; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'OLD' in #9b59b6 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -577,7 +577,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a0a; width: 800px; height: 450px; display: flex;'><div style='flex: 1; background: #1a1a1a; display: flex; align-items: center; justify-content: center; color: #666; font-size: 24px;'>OLD</div><div style='width: 4px; background: linear-gradient(180deg, #9b59b6, #3498db);'></div><div style='flex: 1; background: linear-gradient(135deg, #1a1a3a, #2a1a4a); display: flex; align-items: center; justify-content: center; color: #9b59b6; font-size: 24px; animation: glow 2s infinite;'>NEW</div></div><style>@keyframes glow { 0%, 100% { text-shadow: 0 0 10px #9b59b6; } 50% { text-shadow: 0 0 30px #9b59b6; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -598,7 +598,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'OLD WORLD' using a futuristic font
           sound_effect: Dial-up modem connecting sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #2a2a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; font-family: monospace;'><div style='background: #1a1a1a; padding: 40px; border: 3px solid #333;'><div style='color: #0f0; font-size: 18px; animation: typewriter 3s steps(30) infinite;'>CODER.EXE<br>&gt; SPECIALIST<br>&gt; ONE SKILL<br>&gt; ISOLATED</div></div></div><style>@keyframes typewriter { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -607,7 +607,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #2a2a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; font-family: monospace;'><div style='background: #1a1a1a; padding: 40px; border: 3px solid #333;'><div style='color: #0f0; font-size: 18px; animation: typewriter 3s steps(30) infinite;'>CODER.EXE<br>&gt; SPECIALIST<br>&gt; ONE SKILL<br>&gt; ISOLATED</div></div></div><style>@keyframes typewriter { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -628,7 +628,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE WIZARD' using a futuristic font
           sound_effect: Magical sci-fi power up sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: radial-gradient(circle at 50% 80%, #1a0a3a, #0a0a1a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 100px; height: 200px; background: #000; border-radius: 50px 50px 0 0;'></div><div style='position: absolute; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(155,89,182,0.3), transparent); animation: aura 2s infinite;'></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #9b59b6; text-shadow: 0 0 30px #9b59b6;'>THE WIZARD</div></div><style>@keyframes aura { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'THE WIZARD' in #9b59b6 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -637,7 +637,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: radial-gradient(circle at 50% 80%, #1a0a3a, #0a0a1a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 100px; height: 200px; background: #000; border-radius: 50px 50px 0 0;'></div><div style='position: absolute; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(155,89,182,0.3), transparent); animation: aura 2s infinite;'></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #9b59b6; text-shadow: 0 0 30px #9b59b6;'>THE WIZARD</div></div><style>@keyframes aura { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.2); opacity: 1; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -658,7 +658,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'PROBLEM SOLVER' using a futuristic font
           sound_effect: Soft, harmonic chime
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, #fff, #ffd700, #ff6b00); animation: merge 3s infinite; box-shadow: 0 0 50px #ffd700;'></div><div style='position: absolute; font-size: 32px; color: #fff; margin-top: 250px;'>PROBLEM SOLVER</div></div><style>@keyframes merge { 0%, 100% { transform: scale(0.8); } 50% { transform: scale(1.2); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'PROBLEM SOLVER' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -667,7 +667,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, #fff, #ffd700, #ff6b00); animation: merge 3s infinite; box-shadow: 0 0 50px #ffd700;'></div><div style='position: absolute; font-size: 32px; color: #fff; margin-top: 250px;'>PROBLEM SOLVER</div></div><style>@keyframes merge { 0%, 100% { transform: scale(0.8); } 50% { transform: scale(1.2); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -694,7 +694,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'HEADHUNTING' using a futuristic font
           sound_effect: Sonar ping sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 200px; height: 200px; border: 2px solid #ff0000; border-radius: 50%; animation: scan 2s infinite;'></div><div style='position: absolute; width: 10px; height: 10px; background: #ff0000; border-radius: 50%;'></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #ff0000;'>HEADHUNTING</div></div><style>@keyframes scan { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'HEADHUNTING' in #ff0000 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -703,7 +703,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 200px; height: 200px; border: 2px solid #ff0000; border-radius: 50%; animation: scan 2s infinite;'></div><div style='position: absolute; width: 10px; height: 10px; background: #ff0000; border-radius: 50%;'></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #ff0000;'>HEADHUNTING</div></div><style>@keyframes scan { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -724,7 +724,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'DON'T FREEZE' using a futuristic font
           sound_effect: Ice cracking sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(180deg, #87ceeb, #fff); width: 800px; height: 450px; display: flex; align-items: flex-end; justify-content: center; position: relative;'><div style='position: absolute; top: 0; width: 100%; height: 70%; background: linear-gradient(180deg, rgba(255,255,255,0.9), transparent);'></div><div style='font-size: 48px; color: #ff0000; text-shadow: 2px 2px 4px #000; animation: freeze 1s infinite; margin-bottom: 50px;'>DON'T FREEZE</div></div><style>@keyframes freeze { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #ff0000 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -733,7 +733,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: linear-gradient(180deg, #87ceeb, #fff); width: 800px; height: 450px; display: flex; align-items: flex-end; justify-content: center; position: relative;'><div style='position: absolute; top: 0; width: 100%; height: 70%; background: linear-gradient(180deg, rgba(255,255,255,0.9), transparent);'></div><div style='font-size: 48px; color: #ff0000; text-shadow: 2px 2px 4px #000; animation: freeze 1s infinite; margin-bottom: 50px;'>DON'T FREEZE</div></div><style>@keyframes freeze { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -754,7 +754,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'UPGRADE' using a futuristic font
           sound_effect: Transformer-like mechanical shifting sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #1a1a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='display: flex; align-items: center; gap: 50px;'><div style='font-size: 64px; animation: fadeOut 3s forwards;'>🧥</div><div style='font-size: 48px; color: #00d4ff;'>➡️</div><div style='font-size: 64px; animation: fadeIn 3s forwards; opacity: 0;'>🚙</div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #00d4ff;'>UPGRADE</div></div><style>@keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0.2; } } @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'UPGRADE' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -763,7 +763,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #1a1a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='display: flex; align-items: center; gap: 50px;'><div style='font-size: 64px; animation: fadeOut 3s forwards;'>🧥</div><div style='font-size: 48px; color: #00d4ff;'>➡️</div><div style='font-size: 64px; animation: fadeIn 3s forwards; opacity: 0;'>🚙</div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #00d4ff;'>UPGRADE</div></div><style>@keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0.2; } } @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -784,7 +784,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ALL-TERRAIN' using a futuristic font
           sound_effect: Engine revving up powerfully
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(135deg, #1a1a2e, #0f3460); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 100px; animation: drive 2s infinite;'>🚙</div><div style='position: absolute; width: 100%; height: 20px; bottom: 100px; background: repeating-linear-gradient(90deg, #fff 0px, #fff 20px, transparent 20px, transparent 40px); animation: road 0.5s linear infinite;'></div><div style='position: absolute; bottom: 30px; font-size: 36px; color: #00d4ff;'>ALL-TERRAIN</div></div><style>@keyframes drive { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } } @keyframes road { 0% { transform: translateX(0); } 100% { transform: translateX(-40px); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'ALL-TERRAIN' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -793,7 +793,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: linear-gradient(135deg, #1a1a2e, #0f3460); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 100px; animation: drive 2s infinite;'>🚙</div><div style='position: absolute; width: 100%; height: 20px; bottom: 100px; background: repeating-linear-gradient(90deg, #fff 0px, #fff 20px, transparent 20px, transparent 40px); animation: road 0.5s linear infinite;'></div><div style='position: absolute; bottom: 30px; font-size: 36px; color: #00d4ff;'>ALL-TERRAIN</div></div><style>@keyframes drive { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } } @keyframes road { 0% { transform: translateX(0); } 100% { transform: translateX(-40px); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -820,7 +820,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ATW PROTOCOL' using a futuristic font
           sound_effect: Metallic stamp sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(135deg, #1a1a2e, #16213e); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='background: linear-gradient(135deg, #c0c0c0, #808080); padding: 30px 60px; border-radius: 10px; font-size: 48px; font-weight: bold; color: #1a1a2e; text-shadow: 2px 2px 4px rgba(255,255,255,0.5); animation: stamp 0.5s ease-out;'>ASC PROTOCOL</div></div><style>@keyframes stamp { 0% { transform: scale(2); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'ASC PROTOCOL' in #1a1a2e neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -829,7 +829,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: linear-gradient(135deg, #1a1a2e, #16213e); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='background: linear-gradient(135deg, #c0c0c0, #808080); padding: 30px 60px; border-radius: 10px; font-size: 48px; font-weight: bold; color: #1a1a2e; text-shadow: 2px 2px 4px rgba(255,255,255,0.5); animation: stamp 0.5s ease-out;'>ASC PROTOCOL</div></div><style>@keyframes stamp { 0% { transform: scale(2); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -850,7 +850,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE SYSTEM' using a futuristic font
           sound_effect: Ratchet tool sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a192f; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; gap: 20px;'><div style='display: flex; gap: 10px; align-items: center;'><div style='width: 80px; height: 80px; border: 4px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #00d4ff; font-size: 14px; animation: spin 4s linear infinite;'>ASSESS</div><div style='width: 80px; height: 80px; border: 4px solid #9b59b6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #9b59b6; font-size: 14px; animation: spin 4s linear infinite reverse;'>SIMULATE</div><div style='width: 80px; height: 80px; border: 4px solid #2ecc71; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #2ecc71; font-size: 14px; animation: spin 4s linear infinite;'>CERTIFY</div></div></div><style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'ASSESS' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -859,7 +859,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a192f; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; gap: 20px;'><div style='display: flex; gap: 10px; align-items: center;'><div style='width: 80px; height: 80px; border: 4px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #00d4ff; font-size: 14px; animation: spin 4s linear infinite;'>ASSESS</div><div style='width: 80px; height: 80px; border: 4px solid #9b59b6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #9b59b6; font-size: 14px; animation: spin 4s linear infinite reverse;'>SIMULATE</div><div style='width: 80px; height: 80px; border: 4px solid #2ecc71; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #2ecc71; font-size: 14px; animation: spin 4s linear infinite;'>CERTIFY</div></div></div><style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -880,7 +880,16 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'NOT RANDOM' using a futuristic font
           sound_effect: Paper crumping sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #2a2a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: space-around;'><div style='position: relative;'><div style='width: 200px; height: 200px; background: #f5f5dc; display: flex; flex-wrap: wrap; gap: 5px; padding: 10px; transform: rotate(-5deg);'><div style='width: 30px; height: 30px; background: #ffeb3b;'></div><div style='width: 30px; height: 30px; background: #ff9800;'></div><div style='width: 30px; height: 30px; background: #4caf50;'></div></div><div style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 72px; color: #ff0000;'>✗</div></div><div style='font-size: 36px; color: #ff0000;'>NOT RANDOM</div></div>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'NOT RANDOM' in #ff0000 neon glow with CSS animation effect, centered, futuristic style"
+          prompt_outputs:
+            image_output: ""
+            graphic_output: ""
+            music_output: ""
+            animation_output: ""
+            motion_graphics_output: ""
+            sound_effect_output: ""
+            diagram_output: ""
+            html_output: "<div style='background: #2a2a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: space-around;'><div style='position: relative;'><div style='width: 200px; height: 200px; background: #f5f5dc; display: flex; flex-wrap: wrap; gap: 5px; padding: 10px; transform: rotate(-5deg);'><div style='width: 30px; height: 30px; background: #ffeb3b;'></div><div style='width: 30px; height: 30px; background: #ff9800;'></div><div style='width: 30px; height: 30px; background: #4caf50;'></div></div><div style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 72px; color: #ff0000;'>✗</div></div><div style='font-size: 36px; color: #ff0000;'>NOT RANDOM</div></div>"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -911,15 +920,6 @@ scenes:
           sound_effect: Sci-fi scanner hum
           diagram: "Create Mermaid flowchart showing key concept relationships"
           html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 150px; height: 250px; background: linear-gradient(180deg, #333, #666); border-radius: 75px 75px 30px 30px; position: relative;'><div style='position: absolute; width: 100%; height: 100%; background: linear-gradient(180deg, transparent, #00d4ff, transparent); animation: scan 2s infinite;'></div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #00d4ff;'>TRANSFORM</div></div><style>@keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }</style>"
-          prompt_outputs:
-            image_output: ""
-            graphic_output: ""
-            music_output: ""
-            animation_output: ""
-            motion_graphics_output: ""
-            sound_effect_output: ""
-            diagram_output: ""
-            html_output: ""
         verified_prompts:
           image: false
           graphic: false
@@ -946,7 +946,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'POP THE HOOD' using a futuristic font
           sound_effect: Hydraulic hiss of the hood opening
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #1a1a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 300px; height: 200px; background: #333; border-radius: 10px; position: relative; overflow: hidden;'><div style='position: absolute; top: 0; width: 100%; height: 50%; background: #444; transform-origin: bottom; animation: openHood 3s forwards;'></div><div style='position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%); width: 80px; height: 80px; background: radial-gradient(circle, #00d4ff, #0066ff); border-radius: 50%; animation: glow 1s infinite;'></div></div><div style='position: absolute; bottom: 30px; font-size: 36px; color: #00d4ff;'>POP THE HOOD</div></div><style>@keyframes openHood { 0% { transform: rotateX(0); } 100% { transform: rotateX(-60deg); } } @keyframes glow { 0%, 100% { box-shadow: 0 0 20px #00d4ff; } 50% { box-shadow: 0 0 40px #00d4ff; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'POP THE HOOD' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -955,7 +955,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #1a1a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 300px; height: 200px; background: #333; border-radius: 10px; position: relative; overflow: hidden;'><div style='position: absolute; top: 0; width: 100%; height: 50%; background: #444; transform-origin: bottom; animation: openHood 3s forwards;'></div><div style='position: absolute; bottom: 30%; left: 50%; transform: translateX(-50%); width: 80px; height: 80px; background: radial-gradient(circle, #00d4ff, #0066ff); border-radius: 50%; animation: glow 1s infinite;'></div></div><div style='position: absolute; bottom: 30px; font-size: 36px; color: #00d4ff;'>POP THE HOOD</div></div><style>@keyframes openHood { 0% { transform: rotateX(0); } 100% { transform: rotateX(-60deg); } } @keyframes glow { 0%, 100% { box-shadow: 0 0 20px #00d4ff; } 50% { box-shadow: 0 0 40px #00d4ff; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -976,7 +976,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text '3 STEPS' using a futuristic font
           sound_effect: Mechanical parts sliding apart
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; gap: 40px;'><div style='text-align: center; animation: float1 2s infinite;'><div style='width: 100px; height: 100px; background: #3498db; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; color: white;'>1</div><div style='color: #3498db; margin-top: 10px;'>ASSESS</div></div><div style='text-align: center; animation: float2 2s infinite 0.3s;'><div style='width: 100px; height: 100px; background: #9b59b6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; color: white;'>2</div><div style='color: #9b59b6; margin-top: 10px;'>SIMULATE</div></div><div style='text-align: center; animation: float3 2s infinite 0.6s;'><div style='width: 100px; height: 100px; background: #2ecc71; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; color: white;'>3</div><div style='color: #2ecc71; margin-top: 10px;'>CERTIFY</div></div></div><style>@keyframes float1, float2, float3 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'ASSESS' in #3498db neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -985,7 +985,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; gap: 40px;'><div style='text-align: center; animation: float1 2s infinite;'><div style='width: 100px; height: 100px; background: #3498db; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; color: white;'>1</div><div style='color: #3498db; margin-top: 10px;'>ASSESS</div></div><div style='text-align: center; animation: float2 2s infinite 0.3s;'><div style='width: 100px; height: 100px; background: #9b59b6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; color: white;'>2</div><div style='color: #9b59b6; margin-top: 10px;'>SIMULATE</div></div><div style='text-align: center; animation: float3 2s infinite 0.6s;'><div style='width: 100px; height: 100px; background: #2ecc71; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; color: white;'>3</div><div style='color: #2ecc71; margin-top: 10px;'>CERTIFY</div></div></div><style>@keyframes float1, float2, float3 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1006,7 +1006,16 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ASSESS -> TRAIN' using a futuristic font
           sound_effect: Computer beep followed by a pneumatic drill sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex;'><div style='flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; border-right: 2px solid #333;'><div style='font-size: 64px;'>🔍</div><div style='color: #3498db; font-size: 24px; margin-top: 20px;'>ASSESS</div></div><div style='flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column;'><div style='font-size: 64px;'>💻</div><div style='color: #9b59b6; font-size: 24px; margin-top: 20px;'>SIMULATE</div></div></div>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'ASSESS' in #3498db neon glow with CSS animation effect, centered, futuristic style"
+          prompt_outputs:
+            image_output: ""
+            graphic_output: ""
+            music_output: ""
+            animation_output: ""
+            motion_graphics_output: ""
+            sound_effect_output: ""
+            diagram_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex;'><div style='flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; border-right: 2px solid #333;'><div style='font-size: 64px;'>🔍</div><div style='color: #3498db; font-size: 24px; margin-top: 20px;'>ASSESS</div></div><div style='flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column;'><div style='font-size: 64px;'>💻</div><div style='color: #9b59b6; font-size: 24px; margin-top: 20px;'>SIMULATE</div></div></div>"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1037,15 +1046,6 @@ scenes:
           sound_effect: Tires screeching and engine roar
           diagram: "Create Mermaid flowchart showing key concept relationships"
           html: "<div style='background: linear-gradient(180deg, #1a0a3a 0%, #ff6b00 100%); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 80px; animation: launch 2s infinite;'>🚀</div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #fff; text-shadow: 0 0 20px #ff6b00;'>CERTIFY</div></div><style>@keyframes launch { 0% { transform: translateX(-200px); } 100% { transform: translateX(200px); } }</style>"
-          prompt_outputs:
-            image_output: ""
-            graphic_output: ""
-            music_output: ""
-            animation_output: ""
-            motion_graphics_output: ""
-            sound_effect_output: ""
-            diagram_output: ""
-            html_output: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1072,7 +1072,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'STEP 1' using a futuristic font
           sound_effect: Connection click sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 200px; height: 200px; border: 4px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 48px; color: #00d4ff;'>STEP 1</div><div style='position: absolute; width: 100%; height: 100%; border: 2px solid rgba(0,212,255,0.3); border-radius: 50%; animation: pulse 2s infinite;'></div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #00d4ff;'>ASSESS</div></div><style>@keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'ASSESS' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1081,7 +1081,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 200px; height: 200px; border: 4px solid #00d4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 48px; color: #00d4ff;'>STEP 1</div><div style='position: absolute; width: 100%; height: 100%; border: 2px solid rgba(0,212,255,0.3); border-radius: 50%; animation: pulse 2s infinite;'></div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #00d4ff;'>ASSESS</div></div><style>@keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1102,7 +1102,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'FULL SCAN' using a futuristic font
           sound_effect: Digital scanning warble
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;'><div style='width: 400px; height: 300px; border: 2px solid #00ff00; position: relative;'><div style='position: absolute; width: 100%; height: 4px; background: linear-gradient(90deg, transparent, #00ff00, transparent); animation: scanLine 2s infinite;'></div></div><div style='position: absolute; bottom: 30px; font-size: 36px; color: #00ff00; font-family: monospace;'>SCANNING...</div></div><style>@keyframes scanLine { 0% { top: 0; } 100% { top: 100%; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #00ff00 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1111,7 +1111,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;'><div style='width: 400px; height: 300px; border: 2px solid #00ff00; position: relative;'><div style='position: absolute; width: 100%; height: 4px; background: linear-gradient(90deg, transparent, #00ff00, transparent); animation: scanLine 2s infinite;'></div></div><div style='position: absolute; bottom: 30px; font-size: 36px; color: #00ff00; font-family: monospace;'>SCANNING...</div></div><style>@keyframes scanLine { 0% { top: 0; } 100% { top: 100%; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1132,7 +1132,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'DEEP DIVE' using a futuristic font
           sound_effect: Three rapid camera shutter sounds
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; gap: 30px;'><div style='text-align: center; animation: pop 0.5s ease-out;'><div style='font-size: 64px;'>🔐</div><div style='color: #e74c3c; margin-top: 10px;'>Security</div></div><div style='text-align: center; animation: pop 0.5s ease-out 0.2s backwards;'><div style='font-size: 64px;'>👥</div><div style='color: #3498db; margin-top: 10px;'>Culture</div></div><div style='text-align: center; animation: pop 0.5s ease-out 0.4s backwards;'><div style='font-size: 64px;'>♾️</div><div style='color: #2ecc71; margin-top: 10px;'>CI/CD</div></div></div><style>@keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #e74c3c neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1141,7 +1141,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; gap: 30px;'><div style='text-align: center; animation: pop 0.5s ease-out;'><div style='font-size: 64px;'>🔐</div><div style='color: #e74c3c; margin-top: 10px;'>Security</div></div><div style='text-align: center; animation: pop 0.5s ease-out 0.2s backwards;'><div style='font-size: 64px;'>👥</div><div style='color: #3498db; margin-top: 10px;'>Culture</div></div><div style='text-align: center; animation: pop 0.5s ease-out 0.4s backwards;'><div style='font-size: 64px;'>♾️</div><div style='color: #2ecc71; margin-top: 10px;'>CI/CD</div></div></div><style>@keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1162,7 +1162,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ROOT CAUSE' using a futuristic font
           sound_effect: Alert ping
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 300px; height: 200px; background: rgba(255,0,0,0.1); border: 2px solid #ff0000; display: flex; align-items: center; justify-content: center;'><div style='width: 20px; height: 20px; background: #ff0000; border-radius: 50%; animation: blink 0.5s infinite;'></div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #ff0000;'>ROOT CAUSE FOUND</div></div><style>@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'ROOT CAUSE FOUND' in #ff0000 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1171,7 +1171,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 300px; height: 200px; background: rgba(255,0,0,0.1); border: 2px solid #ff0000; display: flex; align-items: center; justify-content: center;'><div style='width: 20px; height: 20px; background: #ff0000; border-radius: 50%; animation: blink 0.5s infinite;'></div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #ff0000;'>ROOT CAUSE FOUND</div></div><style>@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1198,7 +1198,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'STEP 2' using a futuristic font
           sound_effect: Virtual reality startup sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(135deg, #0a0a1a, #1a1a3a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 100%; height: 100%; background: linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.1) 50%, transparent 51%), linear-gradient(0deg, transparent 49%, rgba(255,255,255,0.1) 50%, transparent 51%); background-size: 40px 40px; animation: grid 1s linear infinite;'></div><div style='position: absolute; font-size: 48px; color: #9b59b6; text-shadow: 0 0 20px #9b59b6;'>STEP 2: SIMULATE</div></div><style>@keyframes grid { 0% { transform: perspective(500px) rotateX(60deg) translateY(0); } 100% { transform: perspective(500px) rotateX(60deg) translateY(40px); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #9b59b6 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1207,7 +1207,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: linear-gradient(135deg, #0a0a1a, #1a1a3a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 100%; height: 100%; background: linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.1) 50%, transparent 51%), linear-gradient(0deg, transparent 49%, rgba(255,255,255,0.1) 50%, transparent 51%); background-size: 40px 40px; animation: grid 1s linear infinite;'></div><div style='position: absolute; font-size: 48px; color: #9b59b6; text-shadow: 0 0 20px #9b59b6;'>STEP 2: SIMULATE</div></div><style>@keyframes grid { 0% { transform: perspective(500px) rotateX(60deg) translateY(0); } 100% { transform: perspective(500px) rotateX(60deg) translateY(40px); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1228,7 +1228,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'NO BORING' using a futuristic font
           sound_effect: Yawn sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #888; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='background: #666; padding: 40px; border-radius: 5px; filter: grayscale(100%);'><div style='font-size: 24px; color: #333;'>BORING TRAINING</div><div style='font-size: 100px; margin-top: 20px;'>😴</div></div><div style='position: absolute; font-size: 72px; color: #ff0000; transform: rotate(-20deg); animation: stamp 0.3s ease-out;'>❌</div></div><style>@keyframes stamp { 0% { transform: scale(3) rotate(-20deg); opacity: 0; } 100% { transform: scale(1) rotate(-20deg); opacity: 1; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'BORING TRAINING' in #ff0000 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1237,7 +1237,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #888; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='background: #666; padding: 40px; border-radius: 5px; filter: grayscale(100%);'><div style='font-size: 24px; color: #333;'>BORING TRAINING</div><div style='font-size: 100px; margin-top: 20px;'>😴</div></div><div style='position: absolute; font-size: 72px; color: #ff0000; transform: rotate(-20deg); animation: stamp 0.3s ease-out;'>❌</div></div><style>@keyframes stamp { 0% { transform: scale(3) rotate(-20deg); opacity: 0; } 100% { transform: scale(1) rotate(-20deg); opacity: 1; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1258,7 +1258,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'WEAKNESS' using a futuristic font
           sound_effect: " Alarm blip"
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='font-size: 100px; position: relative;'>🚙<div style='position: absolute; top: 20px; left: 10px; width: 80px; height: 60px; border: 3px solid #ff0000; border-radius: 5px; animation: highlight 1s infinite;'></div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #ff0000;'>WEAKNESS DETECTED</div></div><style>@keyframes highlight { 0%, 100% { opacity: 1; box-shadow: 0 0 20px #ff0000; } 50% { opacity: 0.5; box-shadow: 0 0 5px #ff0000; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'WEAKNESS DETECTED' in #ff0000 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1267,7 +1267,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='font-size: 100px; position: relative;'>🚙<div style='position: absolute; top: 20px; left: 10px; width: 80px; height: 60px; border: 3px solid #ff0000; border-radius: 5px; animation: highlight 1s infinite;'></div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #ff0000;'>WEAKNESS DETECTED</div></div><style>@keyframes highlight { 0%, 100% { opacity: 1; box-shadow: 0 0 20px #ff0000; } 50% { opacity: 0.5; box-shadow: 0 0 5px #ff0000; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1288,7 +1288,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'UPGRADES' using a futuristic font
           sound_effect: Impact wrench sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #1a1a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 100px;'>🚙</div><div style='position: absolute; display: flex; gap: 20px; bottom: 100px;'><div style='background: #2ecc71; padding: 10px 20px; border-radius: 5px; animation: slideIn 0.5s ease-out;'>DEFENSE +50</div><div style='background: #3498db; padding: 10px 20px; border-radius: 5px; animation: slideIn 0.5s ease-out 0.2s backwards;'>STABILITY +30</div></div><div style='position: absolute; top: 30px; font-size: 36px; color: #ffd700;'>UPGRADING...</div></div><style>@keyframes slideIn { 0% { transform: translateY(50px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #ffd700 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1297,7 +1297,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #1a1a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 100px;'>🚙</div><div style='position: absolute; display: flex; gap: 20px; bottom: 100px;'><div style='background: #2ecc71; padding: 10px 20px; border-radius: 5px; animation: slideIn 0.5s ease-out;'>DEFENSE +50</div><div style='background: #3498db; padding: 10px 20px; border-radius: 5px; animation: slideIn 0.5s ease-out 0.2s backwards;'>STABILITY +30</div></div><div style='position: absolute; top: 30px; font-size: 36px; color: #ffd700;'>UPGRADING...</div></div><style>@keyframes slideIn { 0% { transform: translateY(50px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1324,7 +1324,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'STEP 3' using a futuristic font
           sound_effect: Arc welder electric buzz
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(135deg, #1a0a0a, #2a1a0a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;'><div style='font-size: 48px; color: #ffa500; text-shadow: 0 0 30px #ffa500;'>STEP 3: CERTIFY</div><div style='position: absolute; width: 100%; height: 100%;'><div style='position: absolute; width: 10px; height: 10px; background: #ffd700; border-radius: 50%; animation: spark 0.5s infinite; left: 30%; top: 40%;'></div><div style='position: absolute; width: 8px; height: 8px; background: #ff6b00; border-radius: 50%; animation: spark 0.5s infinite 0.1s; left: 60%; top: 50%;'></div></div></div><style>@keyframes spark { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0) translateY(20px); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #ffa500 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1333,7 +1333,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: linear-gradient(135deg, #1a0a0a, #2a1a0a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;'><div style='font-size: 48px; color: #ffa500; text-shadow: 0 0 30px #ffa500;'>STEP 3: CERTIFY</div><div style='position: absolute; width: 100%; height: 100%;'><div style='position: absolute; width: 10px; height: 10px; background: #ffd700; border-radius: 50%; animation: spark 0.5s infinite; left: 30%; top: 40%;'></div><div style='position: absolute; width: 8px; height: 8px; background: #ff6b00; border-radius: 50%; animation: spark 0.5s infinite 0.1s; left: 60%; top: 50%;'></div></div></div><style>@keyframes spark { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0) translateY(20px); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1354,7 +1354,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'USELESS THEORY' using a futuristic font
           sound_effect: Blowing dust sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #2a2a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='position: relative;'><div style='width: 150px; height: 200px; background: linear-gradient(180deg, #8b4513, #654321); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 18px; font-family: serif;'>THEORY</div><div style='position: absolute; top: -10px; left: 0; width: 100%; height: 20px; background: rgba(200,200,200,0.3); filter: blur(5px); animation: dust 3s infinite;'></div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #666;'>USELESS ALONE</div></div><style>@keyframes dust { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'THEORY' in #d4af37 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1363,7 +1363,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #2a2a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='position: relative;'><div style='width: 150px; height: 200px; background: linear-gradient(180deg, #8b4513, #654321); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 18px; font-family: serif;'>THEORY</div><div style='position: absolute; top: -10px; left: 0; width: 100%; height: 20px; background: rgba(200,200,200,0.3); filter: blur(5px); animation: dust 3s infinite;'></div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #666;'>USELESS ALONE</div></div><style>@keyframes dust { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1384,7 +1384,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE MOMENT' using a futuristic font
           sound_effect: Slow motion sound distortion
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a0a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='position: relative;'><div style='width: 120px; height: 120px; background: radial-gradient(circle, #ff0000, #8b0000); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; box-shadow: 0 0 30px #ff0000; animation: pulse 1s infinite;'>IGNITION</div><div style='position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 48px; animation: finger 2s infinite;'>👆</div></div></div><style>@keyframes pulse { 0%, 100% { box-shadow: 0 0 30px #ff0000; } 50% { box-shadow: 0 0 60px #ff0000; } } @keyframes finger { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'IGNITION' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1393,7 +1393,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a0a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='position: relative;'><div style='width: 120px; height: 120px; background: radial-gradient(circle, #ff0000, #8b0000); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; box-shadow: 0 0 30px #ff0000; animation: pulse 1s infinite;'>IGNITION</div><div style='position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 48px; animation: finger 2s infinite;'>👆</div></div></div><style>@keyframes pulse { 0%, 100% { box-shadow: 0 0 30px #ff0000; } 50% { box-shadow: 0 0 60px #ff0000; } } @keyframes finger { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1414,7 +1414,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'SHIP IT' using a futuristic font
           sound_effect: Typing sounds maximizing into a rocket launch
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;'><div style='font-size: 100px; animation: launch 1s forwards;'>🚀</div><div style='position: absolute; font-size: 64px; color: #2ecc71; text-shadow: 0 0 30px #2ecc71; animation: fadeIn 0.5s 0.5s forwards; opacity: 0;'>SHIP IT!</div></div><style>@keyframes launch { 0% { transform: translateY(0); } 100% { transform: translateY(-500px); } } @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'SHIP IT!' in #2ecc71 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1423,7 +1423,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;'><div style='font-size: 100px; animation: launch 1s forwards;'>🚀</div><div style='position: absolute; font-size: 64px; color: #2ecc71; text-shadow: 0 0 30px #2ecc71; animation: fadeIn 0.5s 0.5s forwards; opacity: 0;'>SHIP IT!</div></div><style>@keyframes launch { 0% { transform: translateY(0); } 100% { transform: translateY(-500px); } } @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1450,7 +1450,16 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE RESULT' using a futuristic font
           sound_effect: Wind sweeping
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(180deg, #87ceeb 0%, #ffd700 50%, #ff6b00 100%); width: 800px; height: 450px; display: flex; align-items: flex-end; justify-content: center; position: relative;'><div style='width: 0; height: 0; border-left: 200px solid transparent; border-right: 200px solid transparent; border-bottom: 300px solid #4a4a4a;'></div><div style='position: absolute; bottom: 280px; font-size: 64px;'>🧍</div><div style='position: absolute; top: 30px; font-size: 48px; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);'>THE RESULT</div></div>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'THE RESULT' in #ffd700 neon glow with CSS animation effect, centered, futuristic style"
+          prompt_outputs:
+            image_output: ""
+            graphic_output: ""
+            music_output: ""
+            animation_output: ""
+            motion_graphics_output: ""
+            sound_effect_output: ""
+            diagram_output: ""
+            html_output: "<div style='background: linear-gradient(180deg, #87ceeb 0%, #ffd700 50%, #ff6b00 100%); width: 800px; height: 450px; display: flex; align-items: flex-end; justify-content: center; position: relative;'><div style='width: 0; height: 0; border-left: 200px solid transparent; border-right: 200px solid transparent; border-bottom: 300px solid #4a4a4a;'></div><div style='position: absolute; bottom: 280px; font-size: 64px;'>🧍</div><div style='position: absolute; top: 30px; font-size: 48px; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);'>THE RESULT</div></div>"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1481,15 +1490,6 @@ scenes:
           sound_effect: Footsteps crunching on gravel synchronized
           diagram: "Create Mermaid flowchart showing key concept relationships"
           html: "<div style='background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='display: flex; gap: 20px;'><div style='font-size: 64px; animation: walk 0.5s infinite;'>🧑‍💻</div><div style='font-size: 64px; animation: walk 0.5s infinite 0.1s;'>👩‍💻</div><div style='font-size: 64px; animation: walk 0.5s infinite 0.2s;'>🧑‍🔬</div><div style='font-size: 64px; animation: walk 0.5s infinite 0.3s;'>👨‍💻</div></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #ffd700;'>ALL-TERRAIN WORKFORCE</div></div><style>@keyframes walk { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }</style>"
-          prompt_outputs:
-            image_output: ""
-            graphic_output: ""
-            music_output: ""
-            animation_output: ""
-            motion_graphics_output: ""
-            sound_effect_output: ""
-            diagram_output: ""
-            html_output: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1510,7 +1510,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'READY' using a futuristic font
           sound_effect: Energy hum
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='position: relative;'><div style='font-size: 150px;'>👁️</div><div style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: linear-gradient(135deg, #00ff00, #00d4ff); border-radius: 50%; animation: code 0.5s infinite;'></div></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #00d4ff;'>READY</div></div><style>@keyframes code { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'READY' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1519,7 +1519,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='position: relative;'><div style='font-size: 150px;'>👁️</div><div style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: linear-gradient(135deg, #00ff00, #00d4ff); border-radius: 50%; animation: code 0.5s infinite;'></div></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #00d4ff;'>READY</div></div><style>@keyframes code { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1540,7 +1540,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'X-SHAPED' using a futuristic font
           sound_effect: Laser cross sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='position: relative; width: 200px; height: 200px;'><div style='position: absolute; width: 100%; height: 8px; background: linear-gradient(90deg, #ff0000, #ff6b00); top: 50%; transform: translateY(-50%) rotate(45deg); animation: beam1 0.5s ease-out;'></div><div style='position: absolute; width: 100%; height: 8px; background: linear-gradient(90deg, #00d4ff, #9b59b6); top: 50%; transform: translateY(-50%) rotate(-45deg); animation: beam2 0.5s ease-out 0.2s backwards;'></div></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #fff;'>X-SHAPED</div></div><style>@keyframes beam1 { 0% { width: 0; } 100% { width: 100%; } } @keyframes beam2 { 0% { width: 0; } 100% { width: 100%; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'X-SHAPED' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1549,7 +1549,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='position: relative; width: 200px; height: 200px;'><div style='position: absolute; width: 100%; height: 8px; background: linear-gradient(90deg, #ff0000, #ff6b00); top: 50%; transform: translateY(-50%) rotate(45deg); animation: beam1 0.5s ease-out;'></div><div style='position: absolute; width: 100%; height: 8px; background: linear-gradient(90deg, #00d4ff, #9b59b6); top: 50%; transform: translateY(-50%) rotate(-45deg); animation: beam2 0.5s ease-out 0.2s backwards;'></div></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #fff;'>X-SHAPED</div></div><style>@keyframes beam1 { 0% { width: 0; } 100% { width: 100%; } } @keyframes beam2 { 0% { width: 0; } 100% { width: 100%; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1576,7 +1576,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'DEEP KNOWLEDGE' using a futuristic font
           sound_effect: Flowing energy sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 200px; height: 200px; position: relative;'><div style='position: absolute; width: 8px; height: 100px; background: #e74c3c; top: 0; left: 50%; transform: translateX(-50%);'></div><div style='position: absolute; width: 8px; height: 100px; background: #3498db; bottom: 0; left: 50%; transform: translateX(-50%);'></div><div style='position: absolute; width: 100px; height: 8px; background: #2ecc71; left: 0; top: 50%; transform: translateY(-50%);'></div><div style='position: absolute; width: 100px; height: 8px; background: #9b59b6; right: 0; top: 50%; transform: translateY(-50%);'></div><div style='position: absolute; width: 30px; height: 30px; background: #fff; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: pulse 1s infinite;'></div></div><div style='position: absolute; bottom: 30px; font-size: 24px; color: #fff;'>Design | Implement | Plan | Operate</div></div><style>@keyframes pulse { 0%, 100% { box-shadow: 0 0 20px #fff; } 50% { box-shadow: 0 0 40px #fff; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1585,7 +1585,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 200px; height: 200px; position: relative;'><div style='position: absolute; width: 8px; height: 100px; background: #e74c3c; top: 0; left: 50%; transform: translateX(-50%);'></div><div style='position: absolute; width: 8px; height: 100px; background: #3498db; bottom: 0; left: 50%; transform: translateX(-50%);'></div><div style='position: absolute; width: 100px; height: 8px; background: #2ecc71; left: 0; top: 50%; transform: translateY(-50%);'></div><div style='position: absolute; width: 100px; height: 8px; background: #9b59b6; right: 0; top: 50%; transform: translateY(-50%);'></div><div style='position: absolute; width: 30px; height: 30px; background: #fff; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: pulse 1s infinite;'></div></div><div style='position: absolute; bottom: 30px; font-size: 24px; color: #fff;'>Design | Implement | Plan | Operate</div></div><style>@keyframes pulse { 0%, 100% { box-shadow: 0 0 20px #fff; } 50% { box-shadow: 0 0 40px #fff; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1606,7 +1606,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'INTERSECTION' using a futuristic font
           sound_effect: Resonant gong
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 150px; height: 150px; background: radial-gradient(circle, #fff, #ffd700, transparent); border-radius: 50%; animation: glow 2s infinite; box-shadow: 0 0 60px #ffd700;'></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #ffd700;'>THE INTERSECTION</div></div><style>@keyframes glow { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.8; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'THE INTERSECTION' in #ffd700 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1615,7 +1615,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 150px; height: 150px; background: radial-gradient(circle, #fff, #ffd700, transparent); border-radius: 50%; animation: glow 2s infinite; box-shadow: 0 0 60px #ffd700;'></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #ffd700;'>THE INTERSECTION</div></div><style>@keyframes glow { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.8; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1636,7 +1636,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'BRIDGE THE GAP' using a futuristic font
           sound_effect: Sci-fi bridge extension sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='position: absolute; left: 50px; width: 150px; height: 150px; background: #3498db; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white;'>DevOps</div><div style='position: absolute; right: 50px; width: 150px; height: 150px; background: #9b59b6; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white;'>ML</div><div style='width: 300px; height: 20px; background: linear-gradient(90deg, #3498db, #9b59b6); animation: bridge 2s ease-out forwards;'></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #fff;'>BRIDGE THE GAP</div></div><style>@keyframes bridge { 0% { width: 0; } 100% { width: 300px; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'ML' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1645,7 +1645,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='position: absolute; left: 50px; width: 150px; height: 150px; background: #3498db; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white;'>DevOps</div><div style='position: absolute; right: 50px; width: 150px; height: 150px; background: #9b59b6; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white;'>ML</div><div style='width: 300px; height: 20px; background: linear-gradient(90deg, #3498db, #9b59b6); animation: bridge 2s ease-out forwards;'></div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #fff;'>BRIDGE THE GAP</div></div><style>@keyframes bridge { 0% { width: 0; } 100% { width: 300px; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1666,7 +1666,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'SYSTEM VIEW' using a futuristic font
           sound_effect: Whoosh zoom out
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 400px; height: 300px; position: relative;'><div style='position: absolute; width: 10px; height: 10px; background: #00d4ff; border-radius: 50%; animation: node 3s infinite;' style='top: 20%; left: 30%;'></div><div style='position: absolute; width: 10px; height: 10px; background: #9b59b6; border-radius: 50%; animation: node 3s infinite 0.5s; top: 40%; left: 60%;'></div><div style='position: absolute; width: 10px; height: 10px; background: #2ecc71; border-radius: 50%; animation: node 3s infinite 1s; top: 70%; left: 40%;'></div></div><div style='position: absolute; font-size: 48px; color: #fff;'>SYSTEM VIEW</div></div><style>@keyframes node { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px currentColor; } 50% { transform: scale(1.5); box-shadow: 0 0 30px currentColor; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'SYSTEM VIEW' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1675,7 +1675,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 400px; height: 300px; position: relative;'><div style='position: absolute; width: 10px; height: 10px; background: #00d4ff; border-radius: 50%; animation: node 3s infinite;' style='top: 20%; left: 30%;'></div><div style='position: absolute; width: 10px; height: 10px; background: #9b59b6; border-radius: 50%; animation: node 3s infinite 0.5s; top: 40%; left: 60%;'></div><div style='position: absolute; width: 10px; height: 10px; background: #2ecc71; border-radius: 50%; animation: node 3s infinite 1s; top: 70%; left: 40%;'></div></div><div style='position: absolute; font-size: 48px; color: #fff;'>SYSTEM VIEW</div></div><style>@keyframes node { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px currentColor; } 50% { transform: scale(1.5); box-shadow: 0 0 30px currentColor; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1702,7 +1702,16 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'OLD MODEL' using a futuristic font
           sound_effect: Stone thud
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(180deg, #d4a574, #c2956e); width: 800px; height: 450px; display: flex; align-items: flex-end; justify-content: center;'><div style='width: 60px; height: 300px; background: linear-gradient(180deg, #f5f5f5, #d0d0d0); border-radius: 5px 5px 0 0;'></div><div style='position: absolute; top: 50px; font-size: 48px; color: #666;'>I-SHAPED</div><div style='position: absolute; bottom: 30px; font-size: 24px; color: #8b4513;'>ONE SKILL ONLY</div></div>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'I-SHAPED' in #8b4513 neon glow with CSS animation effect, centered, futuristic style"
+          prompt_outputs:
+            image_output: ""
+            graphic_output: ""
+            music_output: ""
+            animation_output: ""
+            motion_graphics_output: ""
+            sound_effect_output: ""
+            diagram_output: ""
+            html_output: "<div style='background: linear-gradient(180deg, #d4a574, #c2956e); width: 800px; height: 450px; display: flex; align-items: flex-end; justify-content: center;'><div style='width: 60px; height: 300px; background: linear-gradient(180deg, #f5f5f5, #d0d0d0); border-radius: 5px 5px 0 0;'></div><div style='position: absolute; top: 50px; font-size: 48px; color: #666;'>I-SHAPED</div><div style='position: absolute; bottom: 30px; font-size: 24px; color: #8b4513;'>ONE SKILL ONLY</div></div>"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1733,15 +1742,6 @@ scenes:
           sound_effect: Squeaky gear sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
           html: "<div style='background: #2a2a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='font-size: 120px; animation: bounce 1s infinite; filter: sepia(1) saturate(0.5);'>🎠</div><div style='position: absolute; bottom: 50px; font-size: 36px; color: #888;'>ONE TRICK PONY</div></div><style>@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }</style>"
-          prompt_outputs:
-            image_output: ""
-            graphic_output: ""
-            music_output: ""
-            animation_output: ""
-            motion_graphics_output: ""
-            sound_effect_output: ""
-            diagram_output: ""
-            html_output: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1762,7 +1762,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'FRAGILE' using a futuristic font
           sound_effect: Crash of stone
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #1a1a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 60px; height: 200px; background: linear-gradient(180deg, #f5f5f5, #d0d0d0); animation: shatter 2s forwards;'></div><div style='position: absolute; font-size: 48px; color: #ff0000; animation: fadeIn 1s 1.5s forwards; opacity: 0;'>FRAGILE</div></div><style>@keyframes shatter { 0% { transform: scale(1); } 50% { transform: scale(1) rotate(5deg); } 100% { transform: scale(0.5) rotate(45deg); opacity: 0.3; filter: blur(5px); } } @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'FRAGILE' in #ff0000 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1771,7 +1771,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #1a1a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='width: 60px; height: 200px; background: linear-gradient(180deg, #f5f5f5, #d0d0d0); animation: shatter 2s forwards;'></div><div style='position: absolute; font-size: 48px; color: #ff0000; animation: fadeIn 1s 1.5s forwards; opacity: 0;'>FRAGILE</div></div><style>@keyframes shatter { 0% { transform: scale(1); } 50% { transform: scale(1) rotate(5deg); } 100% { transform: scale(0.5) rotate(45deg); opacity: 0.3; filter: blur(5px); } } @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1792,7 +1792,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ADAPTABLE' using a futuristic font
           sound_effect: Liquid flowing sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 150px; height: 150px; background: linear-gradient(135deg, #c0c0c0, #a0a0a0); animation: morph 3s infinite; border-radius: 10%;'></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #c0c0c0;'>ADAPTABLE</div></div><style>@keyframes morph { 0%, 100% { border-radius: 10%; transform: rotate(0deg); } 25% { border-radius: 50%; transform: rotate(90deg); } 50% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(180deg); } 75% { border-radius: 50%; transform: rotate(270deg); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'ADAPTABLE' in #c0c0c0 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1801,7 +1801,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='width: 150px; height: 150px; background: linear-gradient(135deg, #c0c0c0, #a0a0a0); animation: morph 3s infinite; border-radius: 10%;'></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #c0c0c0;'>ADAPTABLE</div></div><style>@keyframes morph { 0%, 100% { border-radius: 10%; transform: rotate(0deg); } 25% { border-radius: 50%; transform: rotate(90deg); } 50% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(180deg); } 75% { border-radius: 50%; transform: rotate(270deg); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1828,7 +1828,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'DOES IT WORK?' using a futuristic font
           sound_effect: Ding sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(135deg, #1a1a2e, #2a1a4a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='font-size: 120px; animation: present 2s ease-out;'>🍰✨</div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #ffd700;'>DOES IT WORK?</div></div><style>@keyframes present { 0% { transform: scale(0) rotate(-180deg); } 100% { transform: scale(1) rotate(0deg); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'DOES IT WORK?' in #ffd700 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1837,7 +1837,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: linear-gradient(135deg, #1a1a2e, #2a1a4a); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center;'><div style='font-size: 120px; animation: present 2s ease-out;'>🍰✨</div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #ffd700;'>DOES IT WORK?</div></div><style>@keyframes present { 0% { transform: scale(0) rotate(-180deg); } 100% { transform: scale(1) rotate(0deg); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1858,7 +1858,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text '200+ REPOS' using a futuristic font
           sound_effect: Slot machine jackpot sound as numbers tick up
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; flex-direction: column;'><div style='font-size: 96px; color: #2ecc71; font-family: monospace; animation: count 3s forwards;'>200+</div><div style='font-size: 36px; color: #2ecc71; margin-top: 20px;'>REPOSITORIES SHIPPED</div><div style='display: flex; gap: 5px; margin-top: 30px;'><div style='width: 20px; height: 20px; background: #2ecc71; border-radius: 3px; animation: dot 0.5s infinite;'></div><div style='width: 20px; height: 20px; background: #2ecc71; border-radius: 3px; animation: dot 0.5s infinite 0.1s;'></div><div style='width: 20px; height: 20px; background: #2ecc71; border-radius: 3px; animation: dot 0.5s infinite 0.2s;'></div></div></div><style>@keyframes count { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); } } @keyframes dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'REPOSITORIES SHIPPED' in #2ecc71 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1867,7 +1867,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; flex-direction: column;'><div style='font-size: 96px; color: #2ecc71; font-family: monospace; animation: count 3s forwards;'>200+</div><div style='font-size: 36px; color: #2ecc71; margin-top: 20px;'>REPOSITORIES SHIPPED</div><div style='display: flex; gap: 5px; margin-top: 30px;'><div style='width: 20px; height: 20px; background: #2ecc71; border-radius: 3px; animation: dot 0.5s infinite;'></div><div style='width: 20px; height: 20px; background: #2ecc71; border-radius: 3px; animation: dot 0.5s infinite 0.1s;'></div><div style='width: 20px; height: 20px; background: #2ecc71; border-radius: 3px; animation: dot 0.5s infinite 0.2s;'></div></div></div><style>@keyframes count { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); } } @keyframes dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1888,7 +1888,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'NO FLUFF' using a futuristic font
           sound_effect: Trash can clang
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #2a2a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 100px; animation: throw 1s ease-in forwards;'>📄</div><div style='position: absolute; bottom: 80px; font-size: 80px;'>🗑️</div><div style='position: absolute; top: 50px; font-size: 48px; color: #e74c3c;'>NO FLUFF</div></div><style>@keyframes throw { 0% { transform: translateY(-100px) rotate(0deg); } 100% { transform: translateY(150px) rotate(180deg); opacity: 0; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'NO FLUFF' in #e74c3c neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1897,7 +1897,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #2a2a2a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 100px; animation: throw 1s ease-in forwards;'>📄</div><div style='position: absolute; bottom: 80px; font-size: 80px;'>🗑️</div><div style='position: absolute; top: 50px; font-size: 48px; color: #e74c3c;'>NO FLUFF</div></div><style>@keyframes throw { 0% { transform: translateY(-100px) rotate(0deg); } 100% { transform: translateY(150px) rotate(180deg); opacity: 0; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1918,7 +1918,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'RESULTS FACTORY' using a futuristic font
           sound_effect: Factory machinery hum
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #1a1a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;'><div style='position: absolute; bottom: 150px; width: 100%; height: 20px; background: #444;'></div><div style='display: flex; gap: 50px; animation: conveyor 3s linear infinite;'><div style='width: 60px; height: 60px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 5px;'></div><div style='width: 60px; height: 60px; background: linear-gradient(135deg, #2ecc71, #27ae60); border-radius: 5px;'></div><div style='width: 60px; height: 60px; background: linear-gradient(135deg, #9b59b6, #8e44ad); border-radius: 5px;'></div></div><div style='position: absolute; top: 50px; font-size: 48px; color: #ffa500;'>RESULTS FACTORY</div></div><style>@keyframes conveyor { 0% { transform: translateX(-200px); } 100% { transform: translateX(200px); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'RESULTS FACTORY' in #ffa500 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1927,7 +1927,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #1a1a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;'><div style='position: absolute; bottom: 150px; width: 100%; height: 20px; background: #444;'></div><div style='display: flex; gap: 50px; animation: conveyor 3s linear infinite;'><div style='width: 60px; height: 60px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 5px;'></div><div style='width: 60px; height: 60px; background: linear-gradient(135deg, #2ecc71, #27ae60); border-radius: 5px;'></div><div style='width: 60px; height: 60px; background: linear-gradient(135deg, #9b59b6, #8e44ad); border-radius: 5px;'></div></div><div style='position: absolute; top: 50px; font-size: 48px; color: #ffa500;'>RESULTS FACTORY</div></div><style>@keyframes conveyor { 0% { transform: translateX(-200px); } 100% { transform: translateX(200px); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1954,7 +1954,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'OPEN SOURCE' using a futuristic font
           sound_effect: Unlock click
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; flex-direction: column;'><div style='font-size: 120px; animation: unlock 1s ease-out;'>🔓</div><div style='font-size: 48px; color: #2ecc71; margin-top: 30px; text-shadow: 0 0 20px #2ecc71;'>OPEN SOURCE</div><div style='font-size: 18px; color: #666; margin-top: 10px;'>MIT LICENSE</div></div><style>@keyframes unlock { 0% { transform: rotate(-20deg); } 50% { transform: rotate(20deg); } 100% { transform: rotate(0deg); } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'OPEN SOURCE' in #2ecc71 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1963,7 +1963,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; flex-direction: column;'><div style='font-size: 120px; animation: unlock 1s ease-out;'>🔓</div><div style='font-size: 48px; color: #2ecc71; margin-top: 30px; text-shadow: 0 0 20px #2ecc71;'>OPEN SOURCE</div><div style='font-size: 18px; color: #666; margin-top: 10px;'>MIT LICENSE</div></div><style>@keyframes unlock { 0% { transform: rotate(-20deg); } 50% { transform: rotate(20deg); } 100% { transform: rotate(0deg); } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -1984,7 +1984,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'FORK IT' using a futuristic font
           sound_effect: Tree branch cracking/growing sound
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='position: relative; width: 300px; height: 200px;'><div style='position: absolute; width: 8px; height: 100px; background: #2ecc71; left: 50%; transform: translateX(-50%);'></div><div style='position: absolute; width: 8px; height: 80px; background: #3498db; left: 30%; top: 50px; transform: rotate(-30deg); animation: grow 1s ease-out;'></div><div style='position: absolute; width: 8px; height: 80px; background: #9b59b6; right: 30%; top: 50px; transform: rotate(30deg); animation: grow 1s ease-out 0.3s backwards;'></div></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #2ecc71;'>FORK IT</div></div><style>@keyframes grow { 0% { height: 0; } 100% { height: 80px; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'FORK IT' in #2ecc71 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -1993,7 +1993,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='position: relative; width: 300px; height: 200px;'><div style='position: absolute; width: 8px; height: 100px; background: #2ecc71; left: 50%; transform: translateX(-50%);'></div><div style='position: absolute; width: 8px; height: 80px; background: #3498db; left: 30%; top: 50px; transform: rotate(-30deg); animation: grow 1s ease-out;'></div><div style='position: absolute; width: 8px; height: 80px; background: #9b59b6; right: 30%; top: 50px; transform: rotate(30deg); animation: grow 1s ease-out 0.3s backwards;'></div></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #2ecc71;'>FORK IT</div></div><style>@keyframes grow { 0% { height: 0; } 100% { height: 80px; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -2014,7 +2014,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'MOVE' using a futuristic font
           sound_effect: Heavy breathing and running steps
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(180deg, #1a1a2e 0%, #fff 100%); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 80px; animation: run 0.3s infinite;'>🏃</div><div style='position: absolute; font-size: 64px; color: #ff0000; text-shadow: 0 0 20px #ff0000; animation: pulse 0.5s infinite;'>MOVE!</div></div><style>@keyframes run { 0%, 100% { transform: translateX(-5px); } 50% { transform: translateX(5px); } } @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'MOVE!' in #ff0000 neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -2023,7 +2023,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: linear-gradient(180deg, #1a1a2e 0%, #fff 100%); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 80px; animation: run 0.3s infinite;'>🏃</div><div style='position: absolute; font-size: 64px; color: #ff0000; text-shadow: 0 0 20px #ff0000; animation: pulse 0.5s infinite;'>MOVE!</div></div><style>@keyframes run { 0%, 100% { transform: translateX(-5px); } 50% { transform: translateX(5px); } } @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }</style>"
         verified_prompts:
           image: false
           graphic: false
@@ -2044,7 +2044,7 @@ scenes:
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'LETS BUILD' using a futuristic font
           sound_effect: Wind and final boom
           diagram: "Create Mermaid flowchart showing key concept relationships"
-          html: "<div style='background: linear-gradient(180deg, #1a0a3a 0%, #ff6b00 30%, #ffd700 100%); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 100px; animation: sunset 3s infinite;'>🚙</div><div style='position: absolute; top: 0; width: 100%; height: 30%; background: linear-gradient(180deg, #1a0a3a, transparent);'></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #fff; text-shadow: 0 0 30px #ffd700; animation: fadeIn 2s;'>LET'S BUILD</div></div><style>@keyframes sunset { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.2); } } @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }</style>"
+          html: "Generate 800x450px dark themed HTML/CSS visual displaying 'VISUAL' in #00d4ff neon glow with CSS animation effect, centered, futuristic style"
           prompt_outputs:
             image_output: ""
             graphic_output: ""
@@ -2053,7 +2053,7 @@ scenes:
             motion_graphics_output: ""
             sound_effect_output: ""
             diagram_output: ""
-            html_output: ""
+            html_output: "<div style='background: linear-gradient(180deg, #1a0a3a 0%, #ff6b00 30%, #ffd700 100%); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative;'><div style='font-size: 100px; animation: sunset 3s infinite;'>🚙</div><div style='position: absolute; top: 0; width: 100%; height: 30%; background: linear-gradient(180deg, #1a0a3a, transparent);'></div><div style='position: absolute; bottom: 50px; font-size: 48px; color: #fff; text-shadow: 0 0 30px #ffd700; animation: fadeIn 2s;'>LET'S BUILD</div></div><style>@keyframes sunset { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.2); } } @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }</style>"
         verified_prompts:
           image: false
           graphic: false
