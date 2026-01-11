@@ -1956,6 +1956,8 @@
                             <span id="chevron-${sceneIndex}" class="transform transition-transform rotate-0 text-gray-400">▼</span>
                             <h2 class="text-xl font-bold text-white text-left">${scene.title}</h2>
                             <span class="text-xs text-gray-500 bg-gray-700 px-2 py-0.5 rounded ml-2">${scene.id}</span>
+                            ${scene.act ? `<span class="text-xs text-blue-400 bg-blue-900/30 px-2 py-0.5 rounded border border-blue-800/50" title="Act">${scene.act}</span>` : ''}
+                            ${scene.act_type ? `<span class="text-xs text-purple-400 bg-purple-900/30 px-2 py-0.5 rounded border border-purple-800/50" title="Act Type">${scene.act_type}</span>` : ''}
                         </div>
                         <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">${scene.lines.length} Lines</span>
                     </div>
