@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Canvas Recorder</title>
+<style>
+body { font-family: sans-serif; padding: 20px; background: #f0f0f0; }
+.container { max-width: 850px; margin: 0 auto; background: white; padding: 20px; border-radius: 5px; }
+button { padding: 10px 20px; margin: 5px; font-size: 14px; cursor: pointer; border: none; border-radius: 3px; color: white; }
+#start { background: #e74c3c; }
+#stop { background: #27ae60; }
+#download { background: #3498db; }
+button:disabled { background: #95a5a6; cursor: not-allowed; }
+canvas { border: 1px solid #ddd; margin: 10px 0; display: block; }
+#status { padding: 10px; background: #ecf0f1; margin: 10px 0; border-radius: 3px; }
+video { max-width: 100%; margin: 10px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+<h2>Canvas Animation Recorder</h2>
+<p>Records canvas animation as WebM video - no permissions needed!</p>
+
+<div>
+<button id="start">Start Recording</button>
+<button id="stop" disabled>Stop Recording</button>
+<button id="download" disabled>Download WebM</button>
+<select id="duration">
+<option value="5">5 sec</option>
+<option value="10" selected>10 sec</option>
+<option value="20">20 sec</option>
+<option value="0">Manual</option>
+</select>
+</div>
+
+<div id="status">Ready</div>
+<canvas id="c" width="800" height="450"></canvas>
+<video id="v" controls style="display:none"></video>
+</div>
+
+<script>
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+const startBtn = document.getElementById('start');
+const stopBtn = document.getElementById('stop');
+const dlBtn = document.getElementById('download');
+const durSel = document.getElementById('duration');
+const status = document.getElementById('status');
+const video = document.getElementById('v');
+
+let recorder;
+let chunks = [];
+let animFrame;
+let timeout;
+
+// Animation
+const balls = [
+  {x:100, y:225, vx:3, vy:-2, r:20, c:'#e74c3c'},
+  {x:300, y:225, vx:-2, vy:2.5, r:25, c:'#3498db'},
+  {x:500, y:225, vx:2.5, vy:-1.5, r:18, c:'#2ecc71'},
+  {x:700, y:225, vx:-3, vy:2, r:22, c:'#f39c12'}
+];
+
+function draw() {
+  // Background
+  const grd = ctx.createLinearGradient(0, 0, 800, 450);
+  grd.addColorStop(0, '#667eea');
+  grd.addColorStop(1, '#764ba2');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, 800, 450);
+  
+  // Update and draw balls
+  balls.forEach(b => {
+    b.x += b.vx;
+    b.y += b.vy;
+    
+    if (b.x - b.r < 0 || b.x + b.r > 800) {
+      b.vx *= -1;
+      b.x = Math.max(b.r, Math.min(800 - b.r, b.x));
+    }
+    if (b.y - b.r < 0 || b.y + b.r > 450) {
+      b.vy *= -1;
+      b.y = Math.max(b.r, Math.min(450 - b.r, b.y));
+    }
+    
+    ctx.fillStyle = b.c;
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  
+  animFrame = requestAnimationFrame(draw);
+}
+
+function startRec() {
+  chunks = [];
+  
+  const stream = c.captureStream(30);
+  const opts = { mimeType: 'video/webm' };
+  
+  if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9')) {
+    opts.mimeType = 'video/webm;codecs=vp9';
+  } else if (MediaRecorder.isTypeSupported('video/webm;codecs=vp8')) {
+    opts.mimeType = 'video/webm;codecs=vp8';
+  }
+  
+  recorder = new MediaRecorder(stream, opts);
+  
+  recorder.ondataavailable = e => {
+    if (e.data.size > 0) chunks.push(e.data);
+  };
+  
+  recorder.onstop = () => {
+    const blob = new Blob(chunks, { type: 'video/webm' });
+    const url = URL.createObjectURL(blob);
+    video.src = url;
+    video.style.display = 'block';
+    dlBtn.disabled = false;
+    dlBtn.onclick = () => {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'animation.webm';
+      a.click();
+    };
+    status.textContent = 'Recording complete!';
+  };
+  
+  recorder.start();
+  startBtn.disabled = true;
+  stopBtn.disabled = false;
+  durSel.disabled = true;
+  status.textContent = 'Recording...';
+  
+  const dur = parseInt(durSel.value);
+  if (dur > 0) {
+    timeout = setTimeout(stopRec, dur * 1000);
+  }
+}
+
+function stopRec() {
+  if (recorder && recorder.state !== 'inactive') {
+    recorder.stop();
+  }
+  if (timeout) clearTimeout(timeout);
+  startBtn.disabled = false;
+  stopBtn.disabled = true;
+  durSel.disabled = false;
+}
+
+startBtn.onclick = startRec;
+stopBtn.onclick = stopRec;
+
+draw();
+</script>
+</body>
+</html>
