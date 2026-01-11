@@ -1918,6 +1918,10 @@
             document.getElementById('preview-transition-context').value = transitionCtx || "(No Transition)";
             document.getElementById('preview-final-prompt').value = finalPrompt;
 
+            // 4b. Populate Negative Prompt from YAML
+            const negativePrompt = scenes[sceneIndex].lines[lineIndex].negative_prompt || getDefaultNegativePrompt(type);
+            document.getElementById('preview-negative-prompt').value = negativePrompt;
+
             // 5. Store State
             pendingGeneration = {
                 uniqueId: uniqueId,
@@ -1928,6 +1932,21 @@
 
             // 6. Show Modal
             document.getElementById('context-preview-modal').classList.remove('hidden');
+        }
+
+        // Get default negative prompts based on generation type
+        function getDefaultNegativePrompt(type) {
+            const defaults = {
+                image: "blurry, low quality, watermark, text, deformed, ugly, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck",
+                graphic: "blurry, low resolution, pixelated, cluttered, messy layout, unreadable text, inconsistent style, poor contrast, amateur design",
+                animation: "jerky motion, flickering, glitchy, low fps, stuttering, frame drops, compression artifacts, blurry motion",
+                music: "distorted, clipping, off-key, arrhythmic, harsh noise, static, poor mixing, inconsistent tempo",
+                sound_effect: "clipping, distorted, too loud, muffled, background noise, echo, reverb artifacts",
+                diagram: "cluttered, unreadable, overlapping text, broken arrows, inconsistent styling, missing labels",
+                motion_graphics: "static, boring, no movement, poor timing, misaligned elements, jarring transitions",
+                html: "broken layout, misaligned elements, inconsistent colors, poor responsive design, accessibility issues"
+            };
+            return defaults[type] || "low quality, errors, inconsistent, unprofessional";
         }
 
         function saveFinalPrompt() {
@@ -1972,6 +1991,49 @@
             document.getElementById('preview-final-prompt').value = finalPrompt;
             
             showToast("🧹 Final Prompt Cleared & Regenerated!");
+        }
+
+        // ==========================================
+        // NEGATIVE PROMPT FUNCTIONS
+        // ==========================================
+        
+        function copyNegativePrompt(btn) {
+            const text = document.getElementById('preview-negative-prompt').value;
+            navigator.clipboard.writeText(text);
+            const original = btn.innerHTML;
+            btn.innerHTML = "✅ Copied!";
+            setTimeout(() => btn.innerHTML = original, 1500);
+        }
+
+        function saveNegativePrompt() {
+            if (!pendingGeneration) return;
+            const { uniqueId } = pendingGeneration;
+            
+            const negativePrompt = document.getElementById('preview-negative-prompt').value;
+            const parts = uniqueId.split('_');
+            const sceneIndex = parseInt(parts[0].substring(1));
+            const lineIndex = parseInt(parts[1].substring(1));
+
+            scenes[sceneIndex].lines[lineIndex].negative_prompt = negativePrompt;
+            
+            showToast("✅ Negative Prompt Saved!");
+        }
+
+        function clearNegativePrompt() {
+            if (!pendingGeneration) return;
+            const { uniqueId, type } = pendingGeneration;
+            
+            const parts = uniqueId.split('_');
+            const sceneIndex = parseInt(parts[0].substring(1));
+            const lineIndex = parseInt(parts[1].substring(1));
+
+            delete scenes[sceneIndex].lines[lineIndex].negative_prompt;
+            
+            // Reset to default
+            const defaultPrompt = getDefaultNegativePrompt(type);
+            document.getElementById('preview-negative-prompt').value = defaultPrompt;
+            
+            showToast("🧹 Negative Prompt Reset to Default!");
         }
 
         // ==========================================
@@ -2246,6 +2308,12 @@
                     container.classList.remove('hidden');
                     status.innerText = "✅ Done";
                     status.className = "text-xs text-green-500";
+                    
+                    // Save text output to prompt_outputs
+                    const parts = id.split('_');
+                    const sceneIndex = parseInt(parts[0].substring(1));
+                    const lineIndex = parseInt(parts[1].substring(1));
+                    updatePromptOutput(sceneIndex, lineIndex, 'text', text);
                 } else {
                     throw new Error("Unexpected response format");
                 }
@@ -2728,6 +2796,10 @@
                    const driveLink = await autoUploadToDrive(id, audioBlob, filename);
                    if (driveLink) {
                        updateArtifactData(sceneIndex, lineIndex, 'music', filename, driveLink);
+                       
+                       // Save audio prompt to prompt_outputs
+                       updatePromptOutput(sceneIndex, lineIndex, type === 'music' ? 'music' : 'sound_effect', prompt);
+                       
                        await saveChanges(true); 
                        const toast = document.createElement('div');
                        toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-purple-900 border border-purple-700 text-purple-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
@@ -2863,6 +2935,9 @@
                     
                     // Update YAML with video_name
                     updateVideoName(sceneIndex, lineIndex, filename);
+                    
+                    // Save video prompt to prompt_outputs
+                    updatePromptOutput(sceneIndex, lineIndex, 'animation', prompt);
                     
                     container.innerHTML = videoHtml;
                     container.classList.remove('hidden');

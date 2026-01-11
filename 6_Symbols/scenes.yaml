@@ -3,6 +3,15 @@ main_context: 'High-production value documentary style for youtube weekly video 
 verified_main_context: false
 version: 12
 last_updated: '2026-01-11T12:20:28.350Z'
+default_negative_prompts:
+  image: 'blurry, low quality, watermark, text, deformed, ugly, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, amateur, stock photo'
+  graphic: 'blurry, low resolution, pixelated, cluttered, messy layout, unreadable text, inconsistent style, poor contrast, amateur design, childish, clip art'
+  animation: 'jerky motion, flickering, glitchy, low fps, stuttering, frame drops, compression artifacts, blurry motion, unnatural movement'
+  music: 'distorted, clipping, off-key, arrhythmic, harsh noise, static, poor mixing, inconsistent tempo, amateur, royalty-free generic'
+  sound_effect: 'clipping, distorted, too loud, muffled, background noise, echo, reverb artifacts, stock sound'
+  diagram: 'cluttered, unreadable, overlapping text, broken arrows, inconsistent styling, missing labels, too complex'
+  motion_graphics: 'static, boring, no movement, poor timing, misaligned elements, jarring transitions, amateur'
+  html: 'broken layout, misaligned elements, inconsistent colors, poor responsive design, accessibility issues, outdated styling'
 scenes:
   - id: SCENE 01
     title: The New Age
@@ -15,6 +24,7 @@ scenes:
       - id: '1'
         time: '0:00'
         script: Alright, let's dive right in. Today, we're looking at a pretty powerful framework.
+        negative_prompt: 'blurry, low quality, watermark, cartoon, anime, illustrated, low resolution, amateur lighting, overexposed, underexposed, stock photo feel'
         prompts:
           image: Cinematic medium shot of a confident tech presenter in a modern, dimly lit studio with dynamic blue and orange rim lighting, shallow depth of field, 8k resolution, high production value
           graphic: a transformation logo
@@ -61,6 +71,7 @@ scenes:
       - id: '2'
         time: '0:04'
         script: ...for, well, surviving and thriving in this new age of AI. If you're in the tech world...
+        negative_prompt: 'blurry, low quality, watermark, static image, boring composition, flat lighting, generic stock imagery, cluttered background'
         prompts:
           image: A chaotic but artistic collage of glowing holographic news headlines about Artificial Intelligence and Tech market shifts, cyberpunk aesthetic, motion blur, floating in dark void
           graphic: Digital stock ticker scrolling rapidly at the bottom with 'AI UP', 'JOBS DOWN', 'MARKET SHIFT'
