@@ -1501,11 +1501,11 @@
 
         function toggleDebug() {
             const panel = document.getElementById('debug-panel');
-            const isHidden = panel.classList.contains('translate-y-[calc(100%)]');
+            const isHidden = panel.classList.contains('translate-y-full');
             if (isHidden) {
-                panel.classList.remove('translate-y-[calc(100%)]');
+                panel.classList.remove('translate-y-full');
             } else {
-                panel.classList.add('translate-y-[calc(100%)]');
+                panel.classList.add('translate-y-full');
             }
         }
 
