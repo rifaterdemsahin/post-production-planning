@@ -1911,7 +1911,7 @@
                 // We'll rely on the value being there.
                 // Could add a visual cue if needed.
             } else {
-                 finalPrompt = await constructFullPrompt(sceneIndex, promptText, type);
+                 finalPrompt = await constructFullPrompt(sceneIndex, promptText, type, lineIndex);
             }
 
             // 4. Populate Modal
@@ -1995,7 +1995,7 @@
             const promptText = textArea.value;
             
             showToast("⏳ Regenerating Prompt...");
-            const finalPrompt = await constructFullPrompt(sceneIndex, promptText, type);
+            const finalPrompt = await constructFullPrompt(sceneIndex, promptText, type, lineIndex);
             document.getElementById('preview-final-prompt').value = finalPrompt;
             
             showToast("🧹 Final Prompt Cleared & Regenerated!");
@@ -3094,7 +3094,7 @@
             }
         }
 
-        async function constructFullPrompt(sceneIndex, promptText, type) {
+        async function constructFullPrompt(sceneIndex, promptText, type, lineIndex = null) {
             // 2. Gather Contexts
             const mainCtx = window.mainContext || "";
             const sceneCtx = scenes[sceneIndex].context || "";
@@ -3170,6 +3170,18 @@
                         constraintLabel.classList.remove('hidden');
                     }
                 }
+            }
+
+            // Auto-Inject Negative Prompt
+            let negativePrompt = "";
+            if (lineIndex !== null && scenes[sceneIndex].lines[lineIndex] && scenes[sceneIndex].lines[lineIndex].negative_prompt) {
+                negativePrompt = scenes[sceneIndex].lines[lineIndex].negative_prompt;
+            } else {
+                negativePrompt = getDefaultNegativePrompt(type);
+            }
+            
+            if (negativePrompt) {
+                finalPrompt += `\n\n[NEGATIVE PROMPT - AVOID]: ${negativePrompt}`;
             }
 
             if (type === 'motion_graphics') {
@@ -4030,7 +4042,7 @@ async function autoUploadToDrive(uniqueId, blob, filename) {
                              
                              // Get scene index and prompt text for preview construction
                              const promptText = line.prompts ? line.prompts[type] : "";
-                             const fullPrompt = constructFullPrompt(sIdx, promptText, type);
+                             const fullPrompt = constructFullPrompt(sIdx, promptText, type, lIdx);
 
                              const li = document.createElement('li');
                              li.innerHTML = `
@@ -4118,9 +4130,10 @@ async function autoUploadToDrive(uniqueId, blob, filename) {
                      // 1. Get IDs
                     const parts = task.uniqueId.split('_'); 
                     const sceneIndex = parseInt(parts[0].substring(1));
+                    const lineIndex = parseInt(parts[1].substring(1));
                     
                     // 3. Construct Context Block using Helper
-                    const finalPrompt = constructFullPrompt(sceneIndex, task.prompt, task.type);
+                    const finalPrompt = constructFullPrompt(sceneIndex, task.prompt, task.type, lineIndex);
 
                     // Call specific generation function
                     // Note: These functions update the main UI. 
