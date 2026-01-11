@@ -77,6 +77,11 @@
         }
 
         async function initApp() {
+            // Initialize Mermaid
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+            }
+
             // Restore API Key
             // Try Cookie first, then LocalStorage
             let savedKey = getCookie('google_api_key') || localStorage.getItem('google_api_key');
@@ -1129,7 +1134,8 @@
                                                 'sound_effect': '🔊',
                                                 'animation': '🎬',
                                                 'graphic': '📊',
-                                                'motion_graphics': '✨'
+                                                'motion_graphics': '✨',
+                                                'diagram': '📐'
                                             };
                                             const icon = typeIcons[type.toLowerCase()] || '📄';
                                             
@@ -1199,6 +1205,7 @@
                                         ${renderTabButton(uniqueId, 'animation', '🎬 Animation', 'veo-3.0-generate-001')}
                                         ${renderTabButton(uniqueId, 'motion_graphics', '✨ Motion Graphics', 'gemini-2.0-flash')}
                                         ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'eleven_turbo_v2_sfx')}
+                                        ${renderTabButton(uniqueId, 'diagram', '📐 Diagram', 'gemini-2.0-flash')}
                                     </div>
                                     
                                     <div class="flex items-center gap-2 mb-2 px-1">
@@ -1954,6 +1961,8 @@
                 generateVideoContent(uniqueId, finalPrompt, action);
             } else if (type === 'music' || type === 'sound_effect') {
                 generateAudioContent(uniqueId, finalPrompt, action);
+            } else if (type === 'diagram') {
+                generateDiagramContent(uniqueId, finalPrompt, action);
             } else {
                 generateContent(uniqueId, finalPrompt);
             }
@@ -2122,6 +2131,133 @@
             }
         }
 
+        // 4f. Diagram Generation
+        async function generateDiagramContent(id, prompt, action = 'generate') {
+            const apiKey = document.getElementById('apiKey').value;
+            if (!apiKey) {
+                alert("⚠️ Please paste your Google API Key at the top first.");
+                return;
+            }
+
+            const loader = document.getElementById(`loader-${id}`);
+            const status = document.getElementById(`status-${id}`);
+            const container = document.getElementById(`result-container-${id}`);
+
+            loader.style.display = "block";
+            status.innerText = "Designing...";
+            status.className = "text-xs text-purple-400";
+            container.classList.add('hidden');
+
+            const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+            // Explicitly ask for mermaid code
+            const systemPrompt = "You are an expert technical diagram generator. Create a Mermaid JS diagram based on the user request. Output ONLY the mermaid code block (```mermaid ... ```). Do not add explanations. Use 'graph TD' or 'sequenceDiagram' etc.";
+            
+            const payload = {
+                contents: [{ 
+                    parts: [{ text: `SYSTEM: ${systemPrompt}\n\nUSER REQUEST: ${prompt}` }] 
+                }]
+            };
+
+            logDebug('REQ', 'Sending Diagram Request', { url, payload });
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) throw new Error(data.error?.message || `API Error: ${response.status}`);
+                
+                if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    let text = data.candidates[0].content.parts[0].text;
+                    // Extract code block
+                    const match = text.match(/```mermaid\n([\s\S]*?)\n```/) || text.match(/```\n([\s\S]*?)\n```/);
+                    let mermaidCode = match ? match[1] : text;
+                    mermaidCode = mermaidCode.trim();
+                    // Remove any remaining markdown ticks if regex failed to catch perfectly
+                    mermaidCode = mermaidCode.replace(/```mermaid/g, '').replace(/```/g, '').trim();
+
+                    // Render Mermaid
+                    const svgId = `mermaid-svg-${id}-${Date.now()}`;
+                    try {
+                         // Mermaid render returns { svg } promise
+                         const { svg } = await mermaid.render(svgId, mermaidCode);
+                         
+                         // Generate Filename
+                         const filename = `diagram_${id}.svg`;
+                         const encodedSvg = encodeURIComponent(svg);
+                         const rawCodeId = `mermaid-code-${id}`;
+
+                         container.innerHTML = `
+                            <div class="bg-white p-2 rounded overflow-auto mb-2">${svg}</div>
+                            <div class="flex flex-wrap gap-2 text-[10px]">
+                                <button onclick="copyElementText('${rawCodeId}')" class="bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-600 px-2 py-1 rounded">📋 Copy Code</button>
+                                <button onclick="downloadSVG('${filename}', '${encodedSvg}')" class="bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 border border-blue-800 px-2 py-1 rounded">📥 Download SVG</button>
+                            </div>
+                            <details class="mt-2">
+                                <summary class="cursor-pointer text-gray-500 hover:text-white">View Code</summary>
+                                <pre id="${rawCodeId}" class="text-[10px] text-gray-400 mt-1 overflow-x-auto">${mermaidCode.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
+                            </details>
+                         `;
+                         
+                         container.classList.remove('hidden');
+                         status.innerText = "✅ Designed";
+                         status.className = "text-xs text-green-500";
+                         
+                    } catch (renderErr) {
+                        console.error("Mermaid Render Error", renderErr);
+                        container.innerHTML = `<div class="text-red-400 p-2">Failed to render diagram. Code:</div><pre class="text-xs text-gray-400">${mermaidCode.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`;
+                         container.classList.remove('hidden');
+                         status.innerText = "⚠️ Render Fail";
+                    }
+
+                } else {
+                    throw new Error("No content generated");
+                }
+
+            } catch (error) {
+                console.error(error);
+                logDebug('ERROR', error.message, error);
+                status.innerText = "❌ Failed";
+                status.className = "text-xs text-red-500";
+                container.innerHTML = `<span class="text-red-400">Error: ${error.message}</span>`;
+                container.classList.remove('hidden');
+            } finally {
+                loader.style.display = "none";
+            }
+        }
+
+        function copyElementText(elementId) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                const text = el.innerText || el.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    const btn = document.querySelector(`button[onclick="copyElementText('${elementId}')"]`);
+                    if(btn) {
+                        const originalInfo = btn.innerText;
+                        btn.innerText = "✅ Copied";
+                        setTimeout(() => btn.innerText = originalInfo, 2000);
+                    }
+                });
+            }
+        }
+
+        function downloadSVG(filename, encodedSvg) {
+            const svg = decodeURIComponent(encodedSvg);
+            const blob = new Blob([svg], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
         // 4e. Cost Estimation
         function estimateCost(uniqueId) {
             const textArea = document.getElementById(`text-${uniqueId}`);
@@ -2153,6 +2289,7 @@
                     reason = "Audio Gen";
                     break;
                 case 'motion_graphics':
+                case 'diagram':
                      // Flash: negligible for text, but let's assume complex prompt
                      cost = 0.001;
                      reason = "Text/Code Gen";
