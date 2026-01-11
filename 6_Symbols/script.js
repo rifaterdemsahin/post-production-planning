@@ -7,6 +7,222 @@
         let currentSceneIndex = 0;
         let currentSelectedLineIndex = 0; // Track selected line within the scene
 
+        // ==========================================
+        // GOOGLE SHEETS CONFIGURATION
+        // ==========================================
+        const GOOGLE_SHEETS_CONFIG = {
+            spreadsheetId: '19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30',
+            sheetsApiKey: '', // Will be loaded from storage
+            // Sheet names/gids for different data
+            sheets: {
+                metadata: { name: 'Metadata', gid: '0' },
+                scenes: { name: 'Scenes', gid: '440551049' },
+                lines: { name: 'Lines', gid: '440551049' } // Same sheet, different columns
+            }
+        };
+
+        // Get Google Sheets API key from storage
+        function getSheetsApiKey() {
+            return getCookie('google_api_key') || localStorage.getItem('google_api_key') || '';
+        }
+
+        // Build Google Sheets API URL
+        function buildSheetsApiUrl(range, apiKey) {
+            const { spreadsheetId } = GOOGLE_SHEETS_CONFIG;
+            return `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`;
+        }
+
+        // Load data from Google Sheets
+        async function loadFromGoogleSheets() {
+            const apiKey = getSheetsApiKey();
+            if (!apiKey) {
+                logDebug("WARN", "Sheets API", "No API key found, falling back to YAML");
+                return null;
+            }
+
+            try {
+                logDebug("INFO", "Loading from Google Sheets", GOOGLE_SHEETS_CONFIG.spreadsheetId);
+
+                // Fetch the main data range (adjust based on your sheet structure)
+                // Assuming Sheet1 has: title, main_context, version, last_updated in first rows
+                // And scene data starts from a specific row
+                const metadataUrl = buildSheetsApiUrl('Sheet1!A1:B10', apiKey);
+                const scenesUrl = buildSheetsApiUrl('Sheet1!A1:Z1000', apiKey);
+
+                const [metadataRes, scenesRes] = await Promise.all([
+                    fetch(metadataUrl),
+                    fetch(scenesUrl)
+                ]);
+
+                if (!metadataRes.ok || !scenesRes.ok) {
+                    throw new Error(`Sheets API error: Metadata=${metadataRes.status}, Scenes=${scenesRes.status}`);
+                }
+
+                const metadataJson = await metadataRes.json();
+                const scenesJson = await scenesRes.json();
+
+                logDebug("SUCCESS", "Google Sheets loaded", `${scenesJson.values?.length || 0} rows`);
+
+                return transformSheetsToData(metadataJson, scenesJson);
+            } catch (error) {
+                logDebug("ERROR", "Google Sheets load failed", error.message);
+                console.error("Google Sheets Error:", error);
+                return null;
+            }
+        }
+
+        // Transform Google Sheets data to match YAML structure
+        function transformSheetsToData(metadataJson, scenesJson) {
+            const rows = scenesJson.values || [];
+            if (rows.length < 2) {
+                logDebug("WARN", "Sheets Transform", "No data rows found");
+                return null;
+            }
+
+            // First row is headers
+            const headers = rows[0].map(h => h.toLowerCase().trim().replace(/\s+/g, '_'));
+            const dataRows = rows.slice(1);
+
+            // Find column indices
+            const colIndex = {};
+            headers.forEach((h, i) => colIndex[h] = i);
+
+            // Extract metadata from first few rows or dedicated columns
+            // Check if there's a 'title' column, otherwise use first cell
+            let title = 'Plan your AI transformation journey'; // Default
+            let mainContext = '';
+            let version = 1;
+            let lastUpdatedVal = new Date().toISOString();
+
+            // Try to find metadata in the sheet
+            if (colIndex['title'] !== undefined && dataRows[0]) {
+                title = dataRows[0][colIndex['title']] || title;
+            } else if (metadataJson.values) {
+                // Parse key-value metadata
+                metadataJson.values.forEach(row => {
+                    const key = (row[0] || '').toLowerCase().trim();
+                    const value = row[1] || '';
+                    if (key === 'title') title = value;
+                    else if (key === 'main_context') mainContext = value;
+                    else if (key === 'version') version = parseInt(value) || 1;
+                    else if (key === 'last_updated') lastUpdatedVal = value;
+                });
+            }
+
+            // Group rows by scene
+            const scenesMap = new Map();
+            
+            dataRows.forEach((row, idx) => {
+                const sceneId = row[colIndex['scene_id']] || row[colIndex['scene']] || `SCENE ${Math.floor(idx / 5) + 1}`;
+                const sceneTitle = row[colIndex['scene_title']] || row[colIndex['scene_name']] || 'Untitled Scene';
+                
+                if (!scenesMap.has(sceneId)) {
+                    scenesMap.set(sceneId, {
+                        id: sceneId,
+                        title: sceneTitle,
+                        color: row[colIndex['color']] || 'border-l-4 border-blue-500',
+                        context: row[colIndex['scene_context']] || row[colIndex['context']] || '',
+                        verified_context: row[colIndex['verified_context']] === 'TRUE' || row[colIndex['verified_context']] === 'true',
+                        transition: row[colIndex['transition']] || '',
+                        verified_transition: row[colIndex['verified_transition']] === 'TRUE' || row[colIndex['verified_transition']] === 'true',
+                        lines: []
+                    });
+                }
+
+                // Add line to scene
+                const scene = scenesMap.get(sceneId);
+                const lineId = row[colIndex['line_id']] || row[colIndex['id']] || String(scene.lines.length + 1);
+                
+                scene.lines.push({
+                    id: lineId,
+                    time: row[colIndex['time']] || '0:00',
+                    script: row[colIndex['script']] || row[colIndex['line']] || row[colIndex['text']] || '',
+                    negative_prompt: row[colIndex['negative_prompt']] || '',
+                    prompts: {
+                        image: row[colIndex['image_prompt']] || row[colIndex['image']] || '',
+                        graphic: row[colIndex['graphic_prompt']] || row[colIndex['graphic']] || '',
+                        music: row[colIndex['music_prompt']] || row[colIndex['music']] || '',
+                        animation: row[colIndex['animation_prompt']] || row[colIndex['animation']] || '',
+                        motion_graphics: row[colIndex['motion_graphics_prompt']] || row[colIndex['motion_graphics']] || '',
+                        sound_effect: row[colIndex['sound_effect_prompt']] || row[colIndex['sound_effect']] || '',
+                        diagram: row[colIndex['diagram_prompt']] || row[colIndex['diagram']] || '',
+                        html: row[colIndex['html_prompt']] || row[colIndex['html']] || '',
+                        prompt_outputs: {
+                            image_output: row[colIndex['image_output']] || '',
+                            graphic_output: row[colIndex['graphic_output']] || '',
+                            music_output: row[colIndex['music_output']] || '',
+                            animation_output: row[colIndex['animation_output']] || '',
+                            motion_graphics_output: row[colIndex['motion_graphics_output']] || '',
+                            sound_effect_output: row[colIndex['sound_effect_output']] || '',
+                            diagram_output: row[colIndex['diagram_output']] || '',
+                            html_output: row[colIndex['html_output']] || ''
+                        }
+                    },
+                    verified_prompts: {
+                        image: row[colIndex['verified_image']] === 'TRUE' || row[colIndex['verified_image']] === 'true',
+                        graphic: row[colIndex['verified_graphic']] === 'TRUE' || row[colIndex['verified_graphic']] === 'true',
+                        music: row[colIndex['verified_music']] === 'TRUE' || row[colIndex['verified_music']] === 'true',
+                        animation: row[colIndex['verified_animation']] === 'TRUE' || row[colIndex['verified_animation']] === 'true',
+                        motion_graphics: row[colIndex['verified_motion_graphics']] === 'TRUE' || row[colIndex['verified_motion_graphics']] === 'true',
+                        sound_effect: row[colIndex['verified_sound_effect']] === 'TRUE' || row[colIndex['verified_sound_effect']] === 'true',
+                        html: row[colIndex['verified_html']] === 'TRUE' || row[colIndex['verified_html']] === 'true'
+                    },
+                    uploaded_assets: {}
+                });
+            });
+
+            return {
+                title,
+                main_context: mainContext,
+                verified_main_context: false,
+                version,
+                last_updated: lastUpdatedVal,
+                scenes: Array.from(scenesMap.values())
+            };
+        }
+
+        // Update Google Sheets with new data
+        async function updateGoogleSheet(range, values) {
+            const apiKey = getSheetsApiKey();
+            if (!apiKey) {
+                logDebug("ERROR", "Sheets Update", "No API key found");
+                showToast("❌ Google API key required for Sheets update", 3000);
+                return false;
+            }
+
+            try {
+                const { spreadsheetId } = GOOGLE_SHEETS_CONFIG;
+                const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}?valueInputOption=USER_ENTERED&key=${apiKey}`;
+
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        range: range,
+                        majorDimension: 'ROWS',
+                        values: values
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error?.message || `HTTP ${response.status}`);
+                }
+
+                logDebug("SUCCESS", "Sheets Updated", range);
+                return true;
+            } catch (error) {
+                logDebug("ERROR", "Sheets Update Failed", error.message);
+                console.error("Sheets Update Error:", error);
+                return false;
+            }
+        }
+
+        // Toggle between YAML and Sheets data source
+        let useGoogleSheets = true; // Default to using Google Sheets
+
 
         function updateURL(index) {
             const url = new URL(window.location);
@@ -182,13 +398,104 @@
             });
 
             try {
-                // Fetch the YAML file (Default load)
-                await loadYAMLFromURL('scenes.yaml');
+                // Try loading from Google Sheets first (if API key available)
+                let sheetsData = null;
+                if (useGoogleSheets) {
+                    sheetsData = await loadFromGoogleSheets();
+                }
+
+                if (sheetsData && sheetsData.scenes && sheetsData.scenes.length > 0) {
+                    // Successfully loaded from Google Sheets
+                    loadDataIntoApp(sheetsData);
+                    showToast("📊 Data loaded from Google Sheets", 2000);
+                    logDebug("SUCCESS", "Data Source", "Google Sheets");
+                } else {
+                    // Fallback to YAML file
+                    logDebug("INFO", "Fallback", "Loading from YAML file");
+                    await loadYAMLFromURL('scenes.yaml');
+                }
+                
                 // Pre-load templates
                 loadTemplates(); 
             } catch (error) {
                 console.error("Error loading scenes:", error);
                 logDebug("ERROR", "InitApp Failed", error.message);
+            }
+        }
+
+        // Load transformed data into the app (shared by both YAML and Sheets)
+        function loadDataIntoApp(data) {
+            if (!data || !data.scenes) {
+                logDebug("ERROR", "Invalid Data", "Missing 'scenes' property");
+                throw new Error("Invalid data format");
+            }
+            
+            scenes = data.scenes;
+            window.mainContext = data.main_context || "";
+            window.verifiedMainContext = data.verified_main_context || false;
+            window.projectTitle = data.title || "";
+            window.defaultNegativePrompts = data.default_negative_prompts || {};
+            projectVersion = data.version || 1;
+            lastUpdated = data.last_updated || new Date().toISOString();
+
+            // Update YAML Date Display
+            updateDateDisplay();
+
+            // Check URL for initial scene
+            const urlParams = new URLSearchParams(window.location.search);
+            const sceneParam = urlParams.get('scene');
+            if (sceneParam) {
+                const index = parseInt(sceneParam) - 1;
+                if (index >= 0 && index < scenes.length) {
+                    currentSceneIndex = index;
+                }
+            }
+
+            renderScenes();
+            
+            // Update Title Input
+            const titleInput = document.getElementById('project-title-input');
+            if(titleInput) titleInput.value = window.projectTitle || "";
+
+            // Update history state for the initial load
+            const url = new URL(window.location);
+            url.searchParams.set('scene', currentSceneIndex + 1);
+            window.history.replaceState({ sceneIndex: currentSceneIndex }, '', url);
+        }
+
+        function updateDateDisplay() {
+            const dateEl = document.getElementById('yaml-update-date');
+            if (dateEl) {
+                try {
+                    const date = new Date(lastUpdated);
+                    const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    dateEl.innerText = `📅 ${formattedDate}`;
+                    
+                    // Calculate relative time for tooltip
+                    const now = new Date();
+                    const diffMs = now - date;
+                    const diffMins = Math.round(diffMs / 60000);
+                    const diffHours = Math.round(diffMs / 3600000);
+                    const diffDays = Math.round(diffMs / 86400000);
+
+                    let relativeTimeStr = "";
+                    if (diffMins < 1) {
+                        relativeTimeStr = "Updated just now";
+                    } else if (diffMins < 60) {
+                        relativeTimeStr = `Updated ${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`;
+                    } else if (diffHours < 24) {
+                        relativeTimeStr = `Updated ${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`;
+                    } else {
+                        relativeTimeStr = `Updated ${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
+                    }
+                    
+                    dateEl.title = relativeTimeStr;
+
+                } catch(e) {
+                    console.error("Date format error", e);
+                    dateEl.innerText = `📅 ${lastUpdated}`;
+                    dateEl.title = "Date format error";
+                }
             }
         }
 
@@ -247,78 +554,126 @@
                  return;
              }
 
-             if (!data || !data.scenes) {
-                 logDebug("ERROR", "Invalid YAML", "Missing 'scenes' property");
-                 throw new Error("Invalid YAML format");
-             }
-             
-             scenes = data.scenes;
-             window.mainContext = data.main_context || "";
-             window.verifiedMainContext = data.verified_main_context || false;
-             window.projectTitle = data.title || "";
-             window.defaultNegativePrompts = data.default_negative_prompts || {};
-             projectVersion = data.version || 1;
-             lastUpdated = data.last_updated || new Date().toISOString();
-
-             // Update YAML Date Display
-             const dateEl = document.getElementById('yaml-update-date');
-             if (dateEl) {
-                 try {
-                     const date = new Date(lastUpdated);
-                     const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                     dateEl.innerText = `📅 ${formattedDate}`;
-                     
-                     // Calculate relative time for tooltip
-                     const now = new Date();
-                     const diffMs = now - date;
-                     const diffMins = Math.round(diffMs / 60000);
-                     const diffHours = Math.round(diffMs / 3600000);
-                     const diffDays = Math.round(diffMs / 86400000);
-
-                     let relativeTimeStr = "";
-                     if (diffMins < 1) {
-                        relativeTimeStr = "Updated just now";
-                     } else if (diffMins < 60) {
-                        relativeTimeStr = `Updated ${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`;
-                     } else if (diffHours < 24) {
-                        relativeTimeStr = `Updated ${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`;
-                     } else {
-                         relativeTimeStr = `Updated ${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
-                     }
-                     
-                     dateEl.title = relativeTimeStr;
-
-                 } catch(e) {
-                     console.error("Date format error", e);
-                     dateEl.innerText = `📅 ${lastUpdated}`;
-                     dateEl.title = "Date format error";
-                 }
-             }
-
-             // Check URL for initial scene
-             const urlParams = new URLSearchParams(window.location.search);
-             const sceneParam = urlParams.get('scene');
-             if (sceneParam) {
-                 const index = parseInt(sceneParam) - 1;
-                 if (index >= 0 && index < scenes.length) {
-                     currentSceneIndex = index;
-                 }
-             }
-
-             renderScenes();
-             
-             // Update Title Input
-             const titleInput = document.getElementById('project-title-input');
-             if(titleInput) titleInput.value = window.projectTitle || "";
-
-             // Update history state for the initial load
-             const url = new URL(window.location);
-             url.searchParams.set('scene', currentSceneIndex + 1);
-             window.history.replaceState({ sceneIndex: currentSceneIndex }, '', url);
+             // Use shared data loading function
+             loadDataIntoApp(data);
         }
 
         function handleProjectTitleChange(val) {
              window.projectTitle = val;
+        }
+
+        // ==========================================
+        // DATA SOURCE TOGGLE FUNCTIONS
+        // ==========================================
+        function toggleDataSource() {
+            useGoogleSheets = !useGoogleSheets;
+            const btn = document.getElementById('data-source-toggle');
+            if (btn) {
+                btn.innerHTML = useGoogleSheets 
+                    ? '📊 Using: Google Sheets'
+                    : '📄 Using: YAML File';
+            }
+            showToast(useGoogleSheets 
+                ? '📊 Switched to Google Sheets. Reload to apply.' 
+                : '📄 Switched to YAML file. Reload to apply.', 3000);
+            logDebug("INFO", "Data Source", useGoogleSheets ? "Google Sheets" : "YAML");
+        }
+
+        async function reloadFromSheets() {
+            showToast("🔄 Reloading from Google Sheets...", 2000);
+            logDebug("INFO", "Reload", "Fetching fresh data from Google Sheets");
+            
+            try {
+                const sheetsData = await loadFromGoogleSheets();
+                if (sheetsData && sheetsData.scenes && sheetsData.scenes.length > 0) {
+                    loadDataIntoApp(sheetsData);
+                    showToast("✅ Data reloaded from Google Sheets!", 2000);
+                    logDebug("SUCCESS", "Reload", `Loaded ${sheetsData.scenes.length} scenes`);
+                } else {
+                    showToast("⚠️ No data found in Google Sheets. Check API key.", 3000);
+                    logDebug("WARN", "Reload", "No data returned from Sheets");
+                }
+            } catch (error) {
+                showToast("❌ Failed to reload from Sheets: " + error.message, 3000);
+                logDebug("ERROR", "Reload Failed", error.message);
+            }
+        }
+
+        // Save current data to Google Sheets
+        async function saveToGoogleSheets() {
+            const apiKey = getSheetsApiKey();
+            if (!apiKey) {
+                showToast("❌ Google API key required to save to Sheets", 3000);
+                return false;
+            }
+
+            logDebug("INFO", "Saving to Sheets", "Converting data to rows...");
+
+            try {
+                // Convert current scenes data to spreadsheet rows
+                const rows = [];
+                
+                // Add header row
+                rows.push([
+                    'scene_id', 'scene_title', 'scene_context', 'verified_context', 
+                    'transition', 'verified_transition', 'color',
+                    'line_id', 'time', 'script', 'negative_prompt',
+                    'image_prompt', 'graphic_prompt', 'music_prompt', 'animation_prompt',
+                    'motion_graphics_prompt', 'sound_effect_prompt', 'diagram_prompt', 'html_prompt',
+                    'image_output', 'html_output',
+                    'verified_image', 'verified_graphic', 'verified_music'
+                ]);
+
+                // Add data rows
+                scenes.forEach(scene => {
+                    scene.lines.forEach(line => {
+                        rows.push([
+                            scene.id || '',
+                            scene.title || '',
+                            scene.context || '',
+                            scene.verified_context ? 'TRUE' : 'FALSE',
+                            scene.transition || '',
+                            scene.verified_transition ? 'TRUE' : 'FALSE',
+                            scene.color || '',
+                            line.id || '',
+                            line.time || '',
+                            line.script || '',
+                            line.negative_prompt || '',
+                            line.prompts?.image || '',
+                            line.prompts?.graphic || '',
+                            line.prompts?.music || '',
+                            line.prompts?.animation || '',
+                            line.prompts?.motion_graphics || '',
+                            line.prompts?.sound_effect || '',
+                            line.prompts?.diagram || '',
+                            line.prompts?.html || '',
+                            line.prompts?.prompt_outputs?.image_output || '',
+                            line.prompts?.prompt_outputs?.html_output || '',
+                            line.verified_prompts?.image ? 'TRUE' : 'FALSE',
+                            line.verified_prompts?.graphic ? 'TRUE' : 'FALSE',
+                            line.verified_prompts?.music ? 'TRUE' : 'FALSE'
+                        ]);
+                    });
+                });
+
+                // Note: Direct write to Google Sheets requires OAuth, not just API key
+                // For API key only, we can read but not write
+                // Show instructions for manual update
+                showToast("⚠️ Sheets API write requires OAuth. Use 'Save to GitHub' instead.", 4000);
+                logDebug("WARN", "Sheets Save", "Write operations require OAuth authentication");
+                
+                // Open the sheet for manual editing
+                const sheetsUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEETS_CONFIG.spreadsheetId}/edit`;
+                if (confirm("Direct Sheets write requires OAuth.\n\nWould you like to open the spreadsheet to edit manually?")) {
+                    window.open(sheetsUrl, '_blank');
+                }
+
+                return false;
+            } catch (error) {
+                logDebug("ERROR", "Sheets Save Failed", error.message);
+                showToast("❌ Failed to save to Sheets: " + error.message, 3000);
+                return false;
+            }
         }
 
         let apiKeyDebounceTimer;
