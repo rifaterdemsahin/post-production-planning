@@ -1979,14 +1979,9 @@
                                                 oninput="handleTextChange('${uniqueId}', ${sceneIndex}, ${lineIndex})">${currentPrompt}</textarea>
                                                 
                                         <button onclick="openSheetsEditCell(document.getElementById('text-${uniqueId}').dataset.currentType + '_prompt', ${globalRowIndex})" 
-                                                class="absolute top-2 right-28 text-gray-600 hover:text-green-400 transition opacity-0 group-hover:opacity-100"
+                                                class="absolute top-2 right-20 text-gray-600 hover:text-green-400 transition opacity-0 group-hover:opacity-100"
                                                 title="Edit in Google Sheets">
                                             <span class="text-lg">📝</span>
-                                        </button>
-                                        <button onclick="downloadYAML()" 
-                                                class="absolute top-2 right-20 text-gray-600 hover:text-white transition opacity-0 group-hover:opacity-100"
-                                                title="Save Updates to YAML">
-                                            <span class="text-lg">💾</span>
                                         </button>
                                         <button onclick="clearText('${uniqueId}', ${sceneIndex}, ${lineIndex})" 
                                                 class="absolute top-2 right-11 text-gray-600 hover:text-red-500 transition opacity-0 group-hover:opacity-100"
