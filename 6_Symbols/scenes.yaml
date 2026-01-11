@@ -181,7 +181,6 @@ scenes:
           motion_graphics: false
           sound_effect: false
           html: false
-          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -201,7 +200,6 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
-          html: false
           html: false
         uploaded_assets: {}
   - id: SCENE 03
