@@ -1538,6 +1538,24 @@
             }
         }
 
+        function reloadApp() {
+            logDebug("INFO", "Reloading Application...", "User triggered reload");
+            const app = document.getElementById('app');
+            if (app) {
+                app.innerHTML = `
+                <div id="loading-indicator" class="flex flex-col items-center justify-center py-20 gap-4">
+                    <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500"></div>
+                    <p class="text-gray-400 text-sm">Reloading project data...</p>
+                </div>`;
+            }
+            // Clear data
+            scenes = [];
+            // Re-fetch
+            loadYAMLFromURL('scenes.yaml').catch(err => {
+                logDebug("ERROR", "Reload Failed", err.message);
+            });
+        }
+
         function logDebug(type, title, data) {
             const logContainer = document.getElementById('debug-log');
             const entry = document.createElement('div');
