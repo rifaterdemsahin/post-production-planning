@@ -1168,7 +1168,7 @@
                                         ${renderTabButton(uniqueId, 'image', '🖼️ Image', 'gemini-3-pro-image-preview', true)}
                                         ${renderTabButton(uniqueId, 'graphic', '📊 Graphic', 'gemini-3-pro-image-preview')}
                                         ${renderTabButton(uniqueId, 'music', '🎵 Music', 'eleven_turbo_v2')}
-                                        ${renderTabButton(uniqueId, 'animation', '🎬 Animation', 'veo-2.0-generate-001')}
+                                        ${renderTabButton(uniqueId, 'animation', '🎬 Animation', 'veo-3.0-generate-001')}
                                         ${renderTabButton(uniqueId, 'motion_graphics', '✨ Motion Graphics', 'gemini-2.0-flash')}
                                         ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'eleven_turbo_v2_sfx')}
                                     </div>
@@ -1801,6 +1801,16 @@
             const sceneCtx = scenes[sceneIndex].context || "";
             const transitionCtx = scenes[sceneIndex].transition || "";
 
+            // Get Model Name from Active Tab
+            const activeTab = document.getElementById(`tab-${uniqueId}-${type}`);
+            const modelName = activeTab ? activeTab.getAttribute('data-model') : "Unknown Model";
+            
+            const modelIndicator = document.getElementById('preview-model-indicator');
+            if(modelIndicator) {
+                modelIndicator.innerText = `Model: ${modelName}`;
+                modelIndicator.classList.remove('hidden');
+            }
+
             // 3. Construct Context Block
             const finalPrompt = await constructFullPrompt(sceneIndex, promptText, type);
 
@@ -2400,7 +2410,7 @@
             status.className = "text-xs text-blue-400";
             container.classList.add('hidden');
 
-            const modelId = "veo-2.0-generate-001";
+            const modelId = "veo-3.0-generate-001";
             const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:predictLongRunning`;
 
             const payload = {
