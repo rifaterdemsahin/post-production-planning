@@ -239,7 +239,7 @@
             const dataRows = rows.slice(1);
             
             // Parse uploaded assets from dedicated sheet
-            // Expected columns: line_id, asset_type, url (or similar)
+            // Sheet structure: Scene ID | Scene Title | Line Number | Asset Type | Filename | URL
             const uploadedAssetsMap = new Map();
             if (uploadedAssetsJson?.values && uploadedAssetsJson.values.length > 1) {
                 const assetHeaders = uploadedAssetsJson.values[0].map(h => h.toLowerCase().trim().replace(/\s+/g, '_'));
@@ -257,31 +257,34 @@
                 console.log('  Column mapping:', assetColIndex);
                 
                 assetDataRows.forEach((row, idx) => {
-                    // Try multiple possible column names for line_id
-                    const lineId = row[assetColIndex['line_id']] || row[assetColIndex['lineid']] || row[assetColIndex['id']] || '';
-                    // Try multiple possible column names for asset type
-                    const assetType = row[assetColIndex['asset_type']] || row[assetColIndex['assettype']] || row[assetColIndex['type']] || '';
-                    // Try multiple possible column names for URL
-                    const url = row[assetColIndex['url']] || row[assetColIndex['asset_url']] || row[assetColIndex['link']] || '';
-                    // Optional filename
-                    const filename = row[assetColIndex['filename']] || row[assetColIndex['name']] || 'Uploaded Asset';
+                    // Support multiple column naming conventions
+                    // Format 1: scene_id, scene_title, line_number, asset_type, filename, url
+                    // Format 2: scene, title, line, type, name, link
+                    const sceneId = row[assetColIndex['scene_id']] || row[assetColIndex['sceneid']] || row[assetColIndex['scene']] || row[0] || '';
+                    const lineNum = row[assetColIndex['line_number']] || row[assetColIndex['linenumber']] || row[assetColIndex['line']] || row[assetColIndex['line_id']] || row[2] || '';
+                    const assetType = row[assetColIndex['asset_type']] || row[assetColIndex['assettype']] || row[assetColIndex['type']] || row[3] || '';
+                    const filename = row[assetColIndex['filename']] || row[assetColIndex['name']] || row[4] || 'Uploaded Asset';
+                    const url = row[assetColIndex['url']] || row[assetColIndex['asset_url']] || row[assetColIndex['link']] || row[5] || '';
                     
-                    console.log(`  Asset row ${idx + 2}: line_id="${lineId}", type="${assetType}", url="${url.substring(0, 50)}${url.length > 50 ? '...' : ''}"`);
+                    // Create composite key: "SCENE_ID:LINE_NUM" (e.g., "SCENE 03:1")
+                    const compositeKey = `${sceneId.toString().trim()}:${lineNum.toString().trim()}`;
                     
-                    if (lineId && url) {
-                        if (!uploadedAssetsMap.has(lineId)) {
-                            uploadedAssetsMap.set(lineId, {});
+                    console.log(`  Asset row ${idx + 2}: scene="${sceneId}", line="${lineNum}", key="${compositeKey}", type="${assetType}", filename="${filename}", url="${url.substring(0, 40)}${url.length > 40 ? '...' : ''}"`);
+                    
+                    if (sceneId && lineNum && url) {
+                        if (!uploadedAssetsMap.has(compositeKey)) {
+                            uploadedAssetsMap.set(compositeKey, {});
                         }
-                        const lineAssets = uploadedAssetsMap.get(lineId);
+                        const lineAssets = uploadedAssetsMap.get(compositeKey);
                         
                         // Map asset type to the correct structure
                         const normalizedType = assetType.toLowerCase().replace(/\s+/g, '_');
                         if (normalizedType === 'image' || normalizedType === 'images') {
                             if (!lineAssets.image) lineAssets.image = [];
                             lineAssets.image.push({ url, filename, last_uploaded: new Date().toISOString() });
-                        } else if (normalizedType === 'music' || normalizedType === 'audio') {
+                        } else if (normalizedType === 'music') {
                             lineAssets.music = { url, filename, last_uploaded: new Date().toISOString() };
-                        } else if (normalizedType === 'voiceover' || normalizedType === 'voice') {
+                        } else if (normalizedType === 'audio' || normalizedType === 'voiceover' || normalizedType === 'voice') {
                             lineAssets.audio = { url, filename, last_uploaded: new Date().toISOString() };
                         } else if (normalizedType === 'video') {
                             lineAssets.video = { url, filename, last_uploaded: new Date().toISOString() };
@@ -293,9 +296,9 @@
                 });
                 
                 console.log('%c✅ UPLOADED ASSETS MAPPED:', 'color: #34a853; font-weight: bold;');
-                console.log(`  Total lines with assets: ${uploadedAssetsMap.size}`);
-                uploadedAssetsMap.forEach((assets, lineId) => {
-                    console.log(`  Line ${lineId}:`, Object.keys(assets).join(', '));
+                console.log(`  Total asset keys: ${uploadedAssetsMap.size}`);
+                uploadedAssetsMap.forEach((assets, key) => {
+                    console.log(`  Key "${key}":`, Object.keys(assets).join(', '));
                 });
             } else {
                 console.log('%c⚠️ NO UPLOADED ASSETS FOUND:', 'color: #ff9800;', 'Sheet is empty or missing');
@@ -465,7 +468,24 @@
                 }
                 
                 // Merge assets from the dedicated Uploaded Assets sheet
-                const sheetAssets = uploadedAssetsMap.get(lineId) || {};
+                // Try multiple key formats to match:
+                // 1. Composite key: "SCENE 03:1" (sceneId:lineNumber)
+                // 2. Just lineId for backward compatibility
+                const compositeKey = `${sceneId}:${lineId}`;
+                const lineNumInScene = scene.lines.length + 1; // Current line number within scene (1-indexed)
+                const compositeKeyByNum = `${sceneId}:${lineNumInScene}`;
+                
+                console.log(`  Looking for assets with keys: "${compositeKey}", "${compositeKeyByNum}", or "${lineId}"`);
+                
+                const sheetAssets = uploadedAssetsMap.get(compositeKey) || 
+                                   uploadedAssetsMap.get(compositeKeyByNum) || 
+                                   uploadedAssetsMap.get(lineId) || 
+                                   {};
+                                   
+                if (Object.keys(sheetAssets).length > 0) {
+                    console.log(`  ✅ FOUND ASSETS for key:`, Object.keys(sheetAssets).join(', '));
+                }
+                
                 Object.keys(sheetAssets).forEach(assetKey => {
                     if (!uploadedAssets[assetKey]) {
                         uploadedAssets[assetKey] = sheetAssets[assetKey];
