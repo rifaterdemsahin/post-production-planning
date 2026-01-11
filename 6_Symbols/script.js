@@ -339,6 +339,8 @@
         }
 
         // Update Google Sheets with new data
+        // NOTE: Google Sheets API requires OAuth for write operations.
+        // This function prepares data for manual copy or uses Apps Script Web App
         async function updateGoogleSheet(range, values) {
             const apiKey = getSheetsApiKey();
             if (!apiKey) {
@@ -347,34 +349,162 @@
                 return false;
             }
 
+            // Show info about write limitations
+            console.log('%c⚠️ SHEETS WRITE LIMITATION', 'background: #fbbc04; color: black; padding: 4px 8px; border-radius: 4px;');
+            console.log('Google Sheets API requires OAuth (not just API key) for write operations.');
+            console.log('Data prepared for range:', range);
+            console.log('Values:', values);
+            
+            logDebug("INFO", "Sheets Update", "Prepared data - OAuth required for write");
+            return false;
+        }
+
+        // Save changes to Google Sheets (main save function)
+        async function saveChangesToSheets() {
+            showToast("⏳ Preparing data for Google Sheets...", 2000);
+            
             try {
-                const { spreadsheetId } = GOOGLE_SHEETS_CONFIG;
-                const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}?valueInputOption=USER_ENTERED&key=${apiKey}`;
-
-                const response = await fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        range: range,
-                        majorDimension: 'ROWS',
-                        values: values
-                    })
+                // Increment Version & Update Date
+                projectVersion = (parseInt(projectVersion) || 0) + 1;
+                lastUpdated = new Date().toISOString();
+                
+                // Build header row based on expected columns
+                const headers = [
+                    'scene_id', 'scenetitle', 'context', 'transition', 
+                    'line_id', 'time', 'script', 'negative_prompt',
+                    'image_prompt', 'graphic_prompt', 'music_prompt', 'animation_prompt',
+                    'motion_graphics_prompt', 'sound_effect_prompt', 'diagram_prompt', 'html_prompt',
+                    'image_output', 'graphic_output', 'music_output', 'animation_output',
+                    'motion_graphics_output', 'sound_effect_output', 'diagram_output', 'html_output',
+                    'verified_image', 'verified_graphic', 'verified_music', 'verified_animation',
+                    'verified_motion_graphics', 'verified_sound_effect', 'verified_html'
+                ];
+                
+                // Build data rows from scenes
+                const dataRows = [];
+                scenes.forEach(scene => {
+                    scene.lines.forEach(line => {
+                        dataRows.push([
+                            scene.id || '',
+                            scene.title || '',
+                            scene.context || '',
+                            scene.transition || '',
+                            line.id || '',
+                            line.time || '',
+                            line.script || '',
+                            line.negative_prompt || '',
+                            line.prompts?.image || '',
+                            line.prompts?.graphic || '',
+                            line.prompts?.music || '',
+                            line.prompts?.animation || '',
+                            line.prompts?.motion_graphics || '',
+                            line.prompts?.sound_effect || '',
+                            line.prompts?.diagram || '',
+                            line.prompts?.html || '',
+                            line.prompts?.prompt_outputs?.image_output || '',
+                            line.prompts?.prompt_outputs?.graphic_output || '',
+                            line.prompts?.prompt_outputs?.music_output || '',
+                            line.prompts?.prompt_outputs?.animation_output || '',
+                            line.prompts?.prompt_outputs?.motion_graphics_output || '',
+                            line.prompts?.prompt_outputs?.sound_effect_output || '',
+                            line.prompts?.prompt_outputs?.diagram_output || '',
+                            line.prompts?.prompt_outputs?.html_output || '',
+                            line.verified_prompts?.image ? 'TRUE' : 'FALSE',
+                            line.verified_prompts?.graphic ? 'TRUE' : 'FALSE',
+                            line.verified_prompts?.music ? 'TRUE' : 'FALSE',
+                            line.verified_prompts?.animation ? 'TRUE' : 'FALSE',
+                            line.verified_prompts?.motion_graphics ? 'TRUE' : 'FALSE',
+                            line.verified_prompts?.sound_effect ? 'TRUE' : 'FALSE',
+                            line.verified_prompts?.html ? 'TRUE' : 'FALSE'
+                        ]);
+                    });
                 });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error?.message || `HTTP ${response.status}`);
-                }
-
-                logDebug("SUCCESS", "Sheets Updated", range);
+                
+                // Store data for copy modal
+                window.sheetsExportData = {
+                    headers: headers,
+                    rows: dataRows,
+                    projectTitle: window.projectTitle,
+                    version: projectVersion,
+                    lastUpdated: lastUpdated
+                };
+                
+                // Open modal to show/copy data
+                openSheetsExportModal();
+                
+                logDebug("SUCCESS", "Data Prepared", `${dataRows.length} rows ready for export`);
                 return true;
+                
             } catch (error) {
-                logDebug("ERROR", "Sheets Update Failed", error.message);
-                console.error("Sheets Update Error:", error);
+                console.error('Save Error:', error);
+                logDebug('ERROR', 'Save Failed', error.message);
+                showToast("❌ Failed to prepare data: " + error.message, 4000);
                 return false;
             }
+        }
+        
+        // Open modal to show exportable data for Google Sheets
+        function openSheetsExportModal() {
+            const data = window.sheetsExportData;
+            if (!data) {
+                showToast("❌ No data to export", 3000);
+                return;
+            }
+            
+            // Create TSV (Tab-Separated Values) for easy paste into Sheets
+            const tsvContent = [
+                data.headers.join('\t'),
+                ...data.rows.map(row => row.join('\t'))
+            ].join('\n');
+            
+            // Store for copy function
+            window.tsvExportContent = tsvContent;
+            
+            const modal = document.getElementById('sheets-export-modal');
+            if (modal) {
+                document.getElementById('sheets-export-stats').innerHTML = `
+                    <span class="text-green-400">📊 ${data.rows.length} rows</span> • 
+                    <span class="text-blue-400">${data.headers.length} columns</span> • 
+                    <span class="text-purple-400">v${data.version}</span>
+                `;
+                document.getElementById('sheets-export-content').value = tsvContent;
+                modal.classList.remove('hidden');
+            } else {
+                // Fallback: copy to clipboard directly
+                copyToClipboard(tsvContent);
+                showToast("📋 Data copied! Paste into Google Sheets (Ctrl+V)", 4000);
+            }
+        }
+        
+        function closeSheetsExportModal() {
+            const modal = document.getElementById('sheets-export-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+        
+        function copySheetsExportData() {
+            const content = window.tsvExportContent;
+            if (content) {
+                copyToClipboard(content);
+                showToast("📋 Copied! Paste into Google Sheets (Ctrl+V)", 3000);
+            }
+        }
+        
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).catch(err => {
+                console.error('Clipboard error:', err);
+                // Fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            });
+        }
+        
+        function openSheetsDirectLink() {
+            const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEETS_CONFIG.spreadsheetId}/edit`;
+            window.open(url, '_blank');
         }
 
         // Google Sheets is the ONLY data source (YAML removed)
@@ -775,7 +905,7 @@
                 // Note: Direct write to Google Sheets requires OAuth, not just API key
                 // For API key only, we can read but not write
                 // Show instructions for manual update
-                showToast("⚠️ Sheets API write requires OAuth. Use 'Save to GitHub' instead.", 4000);
+                showToast("⚠️ Use 'Save' to export data for Google Sheets.", 4000);
                 logDebug("WARN", "Sheets Save", "Write operations require OAuth authentication");
                 
                 // Open the sheet for manual editing
@@ -1922,7 +2052,7 @@
             displayEl.classList.remove('hidden');
             editEl.classList.add('hidden');
             
-            // 3. Trigger Save to GitHub
+            // 3. Trigger Save to Sheets
             // skipConfirm = true for smoother UX
             await saveChanges(true);
         }
@@ -2930,7 +3060,7 @@
                                      // Save mermaid code to prompt_outputs
                                      updatePromptOutput(sceneIndex, lineIndex, 'diagram', mermaidCode);
                                      
-                                     await saveChanges(true); // Save to GitHub
+                                     await saveChanges(true); // Save to Sheets
                                      
                                      // Toast
                                      const toast = document.createElement('div');
@@ -3179,7 +3309,7 @@
                                     // Save the base64 image data to prompt_outputs
                                     updatePromptOutput(sceneIndex, lineIndex, 'image', `data:${part.inlineData.mimeType};base64,${part.inlineData.data.substring(0, 500)}...`);
                                     
-                                    await saveChanges(true); // Save YAML to GitHub
+                                    await saveChanges(true); // Save to Sheets
                                     
                                      // Show Toast
                                     const toast = document.createElement('div');
@@ -3925,13 +4055,13 @@
                         const lineIndex = parseInt(parts[2]);
                         updateArtifactData(sceneIndex, lineIndex, type.toLowerCase(), filename, uploadData.webViewLink);
                         
-                        // Auto-save to GitHub to persist the Drive link
+                        // Auto-save to Sheets to persist the Drive link
                         await saveChanges(true);
 
                         // Show localized toast for double save
                         const toast = document.createElement('div');
                         toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-green-900 border border-green-700 text-green-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
-                        toast.innerHTML = `<span>☁️ Drive Link Saved to GitHub!</span>`;
+                        toast.innerHTML = `<span>☁️ Drive Link Saved!</span>`;
                         document.body.appendChild(toast);
                         setTimeout(() => toast.remove(), 4000);
                      }
@@ -4306,116 +4436,13 @@
         }
 
         async function saveChanges(skipConfirm = false) {
-            const config = checkGithubConfig();
-            if (!config) {
-                openGithubModal();
-                return;
-            }
-
+            // Save to Google Sheets (GitHub removed)
             if (!skipConfirm) {
-                const confirmSave = confirm(`Save changes to ${config.owner}/${config.repo}/${config.path}?`);
+                const confirmSave = confirm("Save changes to Google Sheets?");
                 if (!confirmSave) return;
             }
 
-            // Show Modal
-            showProgressModal("Saving to GitHub", "Connecting to repository...");
-
-            const btn = document.querySelector('button[onclick="saveChanges()"]');
-            const originalText = btn ? btn.innerText : "💾 Save YAML";
-            if (btn) {
-                btn.innerText = "⏳ Saving...";
-                btn.disabled = true;
-            }
-
-            try {
-                // 1. Prepare YAML Content
-                updateProgressModal(null, "Generating YAML...");
-                
-                // Increment Version & Update Date
-                projectVersion = (parseInt(projectVersion) || 0) + 1;
-                lastUpdated = new Date().toISOString();
-
-                const exportData = { 
-                    title: window.projectTitle || "",
-                    main_context: window.mainContext || "",
-                    verified_main_context: window.verifiedMainContext || false,
-                    version: projectVersion,
-                    last_updated: lastUpdated,
-                    scenes: scenes 
-                };
-                const yamlStr = jsyaml.dump(exportData, { lineWidth: -1 });
-                // Robust Base64 encoding for UTF-8 content
-                const contentBase64 = btoa(unescape(encodeURIComponent(yamlStr))); 
-
-                // 2. Get current file SHA (needed for update)
-                updateProgressModal(null, "Fetching file info...");
-                const apiUrl = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.branch}`;
-                
-                logDebug('REQ', 'Getting File SHA', { url: apiUrl });
-                
-                const getRes = await fetch(apiUrl, {
-                    headers: {
-                        'Authorization': `token ${config.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-
-                if (!getRes.ok && getRes.status !== 404) {
-                    throw new Error(`Failed to fetch file info: ${getRes.status} ${getRes.statusText}`);
-                }
-
-                let sha = null;
-                if (getRes.ok) {
-                    const getData = await getRes.json();
-                    sha = getData.sha;
-                }
-
-                // 3. Update File
-                updateProgressModal(null, "Uploading new content...");
-                const putBody = {
-                    message: `Update scenes.yaml via Gemini Scene Creator - ${String(new Date().getHours()).padStart(2, '0')}:${String(new Date().getMinutes()).padStart(2, '0')}`,
-                    content: contentBase64,
-                    branch: config.branch
-                };
-                if (sha) putBody.sha = sha;
-
-                logDebug('REQ', 'Updating File', { url: apiUrl, sha: sha });
-
-                const putRes = await fetch(apiUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${config.token}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(putBody)
-                });
-
-                if (!putRes.ok) {
-                    const errData = await putRes.json();
-                    throw new Error(errData.message || `Save failed: ${putRes.status}`);
-                }
-
-                const putData = await putRes.json();
-                logDebug('RES', 'File Saved', putData);
-                
-                showProgressSuccess("Successfully saved to GitHub!");
-                
-            } catch (error) {
-                console.error('GitHub Save Error:', error);
-                logDebug('ERROR', 'GitHub Save Failed', error.message);
-                
-                if (error.message.includes('401')) {
-                     showProgressError("Authentication Failed", "Your GitHub token is invalid or expired (401).", "Update Settings", openGithubModal);
-                } else {
-                     showProgressError("Failed to save", error.message);
-                }
-            } finally {
-                if (btn) {
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                }
-            }
+            await saveChangesToSheets();
         }
 
 
