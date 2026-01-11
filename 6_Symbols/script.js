@@ -362,6 +362,51 @@
                             html_output: htmlOutput
                         }
                     },
+                // Map uploaded assets
+                const uploadedAssets = {};
+                
+                const imageAssetUrl = row[colIndex['image_asset']] || row[colIndex['image_url']] || '';
+                if (imageAssetUrl) {
+                    uploadedAssets.image = [{ url: imageAssetUrl, filename: 'Sheet Asset', last_uploaded: new Date().toISOString() }];
+                }
+                
+                const musicAssetUrl = row[colIndex['music_asset']] || row[colIndex['music_url']] || '';
+                if (musicAssetUrl) {
+                    uploadedAssets.music = { url: musicAssetUrl, filename: 'Sheet Asset', last_uploaded: new Date().toISOString() };
+                }
+
+                const audioAssetUrl = row[colIndex['audio_asset']] || row[colIndex['audio_url']] || row[colIndex['voiceover']] || '';
+                if (audioAssetUrl) {
+                    uploadedAssets.audio = { url: audioAssetUrl, filename: 'Sheet Asset', last_uploaded: new Date().toISOString() };
+                }
+
+                const videoName = row[colIndex['video_name']] || '';
+
+                scene.lines.push({
+                    id: lineId,
+                    time: time,
+                    script: script,
+                    negative_prompt: negativePrompt,
+                    prompts: {
+                        image: imagePrompt,
+                        graphic: graphicPrompt,
+                        music: musicPrompt,
+                        animation: animationPrompt,
+                        motion_graphics: motionGraphicsPrompt,
+                        sound_effect: soundEffectPrompt,
+                        diagram: diagramPrompt,
+                        html: htmlPrompt,
+                        prompt_outputs: {
+                            image_output: imageOutput,
+                            graphic_output: graphicOutput,
+                            music_output: musicOutput,
+                            animation_output: animationOutput,
+                            motion_graphics_output: motionGraphicsOutput,
+                            sound_effect_output: soundEffectOutput,
+                            diagram_output: diagramOutput,
+                            html_output: htmlOutput
+                        }
+                    },
                     verified_prompts: {
                         image: verifiedImage,
                         graphic: verifiedGraphic,
@@ -371,7 +416,8 @@
                         sound_effect: verifiedSoundEffect,
                         html: verifiedHtml
                     },
-                    uploaded_assets: {}
+                    uploaded_assets: uploadedAssets,
+                    video_name: videoName
                 });
             });
 
