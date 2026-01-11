@@ -14,15 +14,17 @@
             spreadsheetId: '19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30',
             sheetsApiKey: '', // Will be loaded from storage
             // Actual sheet names from the spreadsheet:
-            // 1. Overview, 2. Scenes Summary, 3. All Lines, 4. Uploaded Assets
-            sheetName: 'All Lines', // Main data sheet with all line details
+            // 1. Overview (gid=0), 2. Scenes Summary (gid=440551049), 
+            // 3. All Lines, 4. Uploaded Assets, 5. Asset Lines (gid=1278766054)
+            sheetName: 'Asset Lines', // Main data sheet - UPDATE THIS if sheet name is different
             titleSheet: 'Overview', // Sheet containing project title in B3
             // Sheet names/gids for different data
             sheets: {
                 overview: { name: 'Overview', gid: '0' },
                 scenesSummary: { name: 'Scenes Summary', gid: '440551049' },
                 allLines: { name: 'All Lines', gid: '' },
-                uploadedAssets: { name: 'Uploaded Assets', gid: '' }
+                uploadedAssets: { name: 'Uploaded Assets', gid: '' },
+                assetLines: { name: 'Asset Lines', gid: '1278766054' } // New sheet for asset lines
             }
         };
 
