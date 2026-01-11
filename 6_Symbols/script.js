@@ -2070,6 +2070,29 @@
             }
         }
 
+        function copyDebugLog() {
+            const logContainer = document.getElementById('debug-log');
+            if (!logContainer) return;
+
+            // Get text content, filtering out the empty state message if present
+            let text = logContainer.innerText;
+            if (text.includes('-- Debug logs will appear here --')) {
+                text = "";
+            }
+
+            if (!text.trim()) {
+                showToast("ℹ️ Nothing to copy");
+                return;
+            }
+
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("✅ Debug log copied to clipboard");
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                showToast("❌ Failed to copy debug log");
+            });
+        }
+
         function reloadApp() {
             logDebug("INFO", "Reloading Application...", "User triggered reload");
             const app = document.getElementById('app');
