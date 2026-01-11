@@ -902,58 +902,27 @@
                 // Load ALL data from Google Sheets (no YAML fallback)
                 console.log('%c🚀 LOADING DATA FROM GOOGLE SHEETS ONLY', 'background: #4285f4; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
                 
-                // Check if URL has scene filter parameter
+                // Check if URL has scene/line parameters for initial navigation (NOT filtering)
                 const urlParams = new URLSearchParams(window.location.search);
-                const sceneFilterParam = urlParams.get('scene');
-                if (sceneFilterParam) {
-                    console.log('%c🎯 SCENE FILTER ACTIVE:', 'background: #ff5722; color: white; padding: 4px 8px; border-radius: 4px;', `scene=${sceneFilterParam}`);
+                const sceneParam = urlParams.get('scene');
+                const lineParam = urlParams.get('line');
+                if (sceneParam) {
+                    console.log('%c📍 STARTING POSITION FROM URL:', 'background: #673ab7; color: white; padding: 4px 8px; border-radius: 4px;', `scene=${sceneParam}, line=${lineParam || 1}`);
                 }
                 
                 const sheetsData = await loadFromGoogleSheets();
 
                 if (sheetsData && sheetsData.scenes && sheetsData.scenes.length > 0) {
-                    // Log all available scenes before filtering
-                    console.log('%c📋 AVAILABLE SCENES BEFORE FILTER:', 'color: #2196f3; font-weight: bold;');
+                    // Log all available scenes (NO FILTERING - load all scenes)
+                    console.log('%c📋 ALL SCENES LOADED:', 'color: #2196f3; font-weight: bold;', `${sheetsData.scenes.length} total scenes`);
                     sheetsData.scenes.forEach((scene, idx) => {
                         console.log(`  [${idx + 1}] id="${scene.id}", title="${scene.title}", lines=${scene.lines?.length || 0}`);
                     });
                     
-                    // Apply scene filter if specified in URL
-                    if (sceneFilterParam) {
-                        const sceneNum = parseInt(sceneFilterParam);
-                        const sceneStr = sceneFilterParam.toString().toLowerCase();
-                        
-                        const filteredScenes = sheetsData.scenes.filter((scene, idx) => {
-                            const sceneId = (scene.id || '').toString().toLowerCase();
-                            // Extract number from scene ID (e.g., "SCENE 3" -> 3, "Scene3" -> 3, "3" -> 3)
-                            const sceneIdNum = parseInt(sceneId.replace(/\D/g, '')) || 0;
-                            // 1-indexed position
-                            const sceneIndex = idx + 1;
-                            
-                            // Match by: exact ID, ID contains the number, extracted number matches, or position matches
-                            const matchById = sceneId === sceneStr || sceneId === `scene ${sceneStr}` || sceneId === `scene${sceneStr}`;
-                            const matchByIdNum = sceneIdNum === sceneNum;
-                            const matchByIndex = sceneIndex === sceneNum;
-                            
-                            console.log(`  Checking scene[${idx}]: id="${sceneId}", idNum=${sceneIdNum}, index=${sceneIndex}, matchById=${matchById}, matchByIdNum=${matchByIdNum}, matchByIndex=${matchByIndex}`);
-                            
-                            return matchById || matchByIdNum || matchByIndex;
-                        });
-                        
-                        if (filteredScenes.length > 0) {
-                            console.log('%c✅ FILTERED TO SCENE:', 'color: #34a853; font-weight: bold;', sceneFilterParam, `(${filteredScenes.length} scene(s) matched, ${filteredScenes.reduce((sum, s) => sum + (s.lines?.length || 0), 0)} lines)`);
-                            sheetsData.scenes = filteredScenes;
-                            showToast(`🎯 Filtered to Scene ${sceneFilterParam} (${filteredScenes[0].lines?.length || 0} lines)`, 2000);
-                        } else {
-                            console.warn('%c⚠️ NO MATCHING SCENE:', 'color: #ff9800;', `scene=${sceneFilterParam} not found, showing all scenes`);
-                            showToast(`⚠️ Scene ${sceneFilterParam} not found, showing all`, 3000);
-                        }
-                    }
-                    
-                    // Successfully loaded from Google Sheets
+                    // Successfully loaded from Google Sheets (all scenes loaded, URL params used for navigation only)
                     loadDataIntoApp(sheetsData);
-                    showToast("📊 Data loaded from Google Sheets", 2000);
-                    logDebug("SUCCESS", "Data Source", "Google Sheets");
+                    showToast(`📊 Loaded ${sheetsData.scenes.length} scenes from Google Sheets`, 2000);
+                    logDebug("SUCCESS", "Data Source", `Google Sheets - ${sheetsData.scenes.length} scenes`);
                     updateDataSourceIndicator('sheets');
                 } else {
                     // No data available - show error
