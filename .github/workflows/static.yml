@@ -22,8 +22,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Validate YAML files before deployment
+  validate-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Install yamllint
+        run: pip install yamllint
+      
+      - name: Validate YAML files
+        run: |
+          echo "🔍 Validating YAML files..."
+          
+          # Validate scenes.yaml with relaxed rules (allows long lines)
+          echo "Checking 6_Symbols/scenes.yaml..."
+          python3 -c "import yaml; yaml.safe_load(open('6_Symbols/scenes.yaml'))" && echo "✅ scenes.yaml is valid" || exit 1
+          
+          # Validate template.yaml
+          echo "Checking 6_Symbols/template.yaml..."
+          python3 -c "import yaml; yaml.safe_load(open('6_Symbols/template.yaml'))" && echo "✅ template.yaml is valid" || exit 1
+          
+          # Validate constraints.yaml
+          echo "Checking 6_Symbols/constraints.yaml..."
+          python3 -c "import yaml; yaml.safe_load(open('6_Symbols/constraints.yaml'))" && echo "✅ constraints.yaml is valid" || exit 1
+          
+          echo "✅ All YAML files validated successfully!"
+
   # Single deploy job since we're just deploying
   deploy:
+    needs: validate-yaml
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
