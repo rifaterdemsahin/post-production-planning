@@ -787,10 +787,10 @@
                                     <div class="flex border-b border-gray-700 mb-2 space-x-1 overflow-x-auto no-scrollbar">
                                         ${renderTabButton(uniqueId, 'image', '🖼️ Image', 'gemini-3-pro-image-preview', true)}
                                         ${renderTabButton(uniqueId, 'graphic', '📊 Graphic', 'gemini-3-pro-image-preview')}
-                                        ${renderTabButton(uniqueId, 'music', '🎵 Music', 'gemini-2.5-pro-preview-tts')}
+                                        ${renderTabButton(uniqueId, 'music', '🎵 Music', 'music-generation-001')}
                                         ${renderTabButton(uniqueId, 'animation', '🎬 Animation', 'veo-2.0-generate-001')}
                                         ${renderTabButton(uniqueId, 'motion_graphics', '✨ Motion Graphics', 'gemini-2.0-flash')}
-                                        ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'gemini-2.5-pro-preview-tts')}
+                                        ${renderTabButton(uniqueId, 'sound_effect', '🔊 SFX', 'music-generation-001')}
                                     </div>
                                     
                                     <div class="flex items-center gap-2 mb-2 px-1">
@@ -1751,7 +1751,7 @@
             }
         }
 
-        // 4c. Audio Generation
+        // 4c. Audio Generation (MusicLM / MusicFX)
         async function generateAudioContent(id, prompt, action = 'generate') {
             const parts = id.split('_'); 
             const sceneIndex = parseInt(parts[0].substring(1));
@@ -1767,50 +1767,35 @@
             const container = document.getElementById(`result-container-${id}`);
 
             loader.style.display = "block";
-            status.innerText = "Composing...";
+            status.innerText = "Composing Music/SFX...";
             status.className = "text-xs text-yellow-400";
             container.classList.add('hidden');
 
-            const modelId = "gemini-2.5-pro-preview-tts";
-            // Use generateContent for simplicity; assuming it supports the audio output same as stream
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`;
+            // Using MusicLM / MusicFX model
+            const modelId = "music-generation-001"; 
+            // Using predict endpoint for specialized media generation
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:predict`;
+
+            // Determine duration based on type (default 10s)
+            let durationSeconds = 10;
+            const promptLower = prompt.toLowerCase();
+            if (promptLower.includes("sound effect") || promptLower.includes("sfx")) {
+                durationSeconds = 5;
+            }
 
             const payload = {
-                contents: [
+                instances: [
                     {
-                        role: "user",
-                        parts: [{ text: prompt }]
+                        prompt: prompt
                     }
                 ],
-                generationConfig: {
-                    responseModalities: ["audio"],
-                    temperature: 1,
-                    speech_config: {
-                        multi_speaker_voice_config: {
-                            speaker_voice_configs: [
-                                {
-                                    speaker: "Speaker 1",
-                                    voice_config: {
-                                        prebuilt_voice_config: {
-                                            voice_name: "Zephyr"
-                                        }
-                                    }
-                                },
-                                {
-                                    speaker: "Speaker 2",
-                                    voice_config: {
-                                        prebuilt_voice_config: {
-                                            voice_name: "Puck"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
+                parameters: {
+                    sampleCount: 1,
+                    durationSeconds: durationSeconds
                 }
             };
 
-            logDebug('REQ', 'Sending Audio Request', { url, payload });
+            logDebug('REQ', 'Sending Audio Request (MusicLM)', { url, payload });
 
             try {
                 const response = await fetch(url, {
@@ -1820,6 +1805,8 @@
                 });
 
                 const data = await response.json();
+                
+                // Log ID is often different for predict, but checking header
                 const requestId = response.headers.get('x-goog-request-id');
                 const logUrl = requestId ? `https://aistudio.google.com/logs/${requestId}` : "https://aistudio.google.com/logs";
                 
@@ -1829,51 +1816,59 @@
 
                 let htmlOutput = "";
                 
-                if (data.candidates?.[0]?.content?.parts) {
-                    data.candidates[0].content.parts.forEach(part => {
-                        if (part.inlineData) {
-                            // Render Audio Player
-                            const audioSrc = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
-                            const filename = getArtifactFilename(id, 'Audio') + '.mp3';
-                            htmlOutput += `
-                                <div class="mb-4">
-                                    <audio controls src="${audioSrc}" class="w-full mb-2 bg-gray-800 rounded"></audio>
-                                    <div class="flex flex-wrap gap-2 mt-2">
-                                        <a href="${audioSrc}" download="${filename}" class="flex items-center gap-2 bg-yellow-900/30 hover:bg-yellow-900/50 text-yellow-300 border border-yellow-800 px-3 py-1.5 rounded text-xs transition">
-                                            📥 Download Audio
-                                        </a>
-                                        <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="flex items-center gap-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-800 px-3 py-1.5 rounded text-xs transition">
-                                            ☁️ Upload to Drive
-                                        </button>
-                                    </div>
-                                </div>`;
-                            
-                            // Update YAML with video_name (or generalized artifact name)
-                            updateVideoName(sceneIndex, lineIndex, filename);
+                // Parse 'predictions' for MusicLM/Vertex style response
+                if (data.predictions && data.predictions.length > 0) {
+                    const prediction = data.predictions[0];
+                    
+                    // MusicLM usually returns 'audio' or 'bytes' in base64
+                    // Check structure: prediction.audio? prediction.bytes? prediction.content?
+                    // Common Vertex pattern: { audio: "base64..." } or { content: "base64..." }
+                    
+                    let audioBase64 = null;
+                    if (prediction.audio) audioBase64 = prediction.audio;
+                    else if (prediction.bytes) audioBase64 = prediction.bytes;
+                    else if (prediction.content) audioBase64 = prediction.content;
+                    
+                    // If prediction is just a string, it might be the base64
+                    if (typeof prediction === 'string') audioBase64 = prediction;
 
-                            // Auto Upload to Google Drive
-                            (async () => {
-                                // Fetch blob from src (since it's a blob URL or base64 data URI)
-                                const res = await fetch(audioSrc);
-                                const blob = await res.blob();
+                    if (audioBase64) {
+                        const audioSrc = `data:audio/mp3;base64,${audioBase64}`; // Assuming MP3 or WAV, usually MP3
+                        const filename = getArtifactFilename(id, 'Audio') + '.mp3';
+                        
+                        htmlOutput += `
+                            <div class="mb-4">
+                                <p class="text-xs text-yellow-400 mb-2">✅ Audio Generated (MusicLM)</p>
+                                <audio controls src="${audioSrc}" class="w-full mb-2 bg-gray-800 rounded"></audio>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    <a href="${audioSrc}" download="${filename}" class="flex items-center gap-2 bg-yellow-900/30 hover:bg-yellow-900/50 text-yellow-300 border border-yellow-800 px-3 py-1.5 rounded text-xs transition">
+                                        📥 Download Audio
+                                    </a>
+                                    <button onclick="uploadArtifactFromDOM(this, '${filename}')" class="flex items-center gap-2 bg-indigo-900/30 hover:bg-indigo-900/50 text-indigo-300 border border-indigo-800 px-3 py-1.5 rounded text-xs transition">
+                                        ☁️ Upload to Drive
+                                    </button>
+                                </div>
+                            </div>`;
+                        
+                        // Update YAML
+                        updateVideoName(sceneIndex, lineIndex, filename);
 
-                                // Upload
-                                const driveLink = await autoUploadToDrive(id, blob, filename + '.mp3');
-                                
-                                if (driveLink) {
-                                    updateArtifactData(sceneIndex, lineIndex, 'music', filename, driveLink);
-                                    await saveChanges(true); // Save YAML to GitHub
-
-                                    // Show Toast
-                                    const toast = document.createElement('div');
-                                    toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-purple-900 border border-purple-700 text-purple-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
-                                    toast.innerHTML = `<span>☁️ Auto-uploaded Audio to Drive!</span>`;
-                                    document.body.appendChild(toast);
-                                    setTimeout(() => toast.remove(), 4000);
-                                }
-                            })();
-                        }
-                    });
+                        // Auto Upload
+                        (async () => {
+                            const res = await fetch(audioSrc);
+                            const blob = await res.blob();
+                            const driveLink = await autoUploadToDrive(id, blob, filename);
+                            if (driveLink) {
+                                updateArtifactData(sceneIndex, lineIndex, 'music', filename, driveLink);
+                                await saveChanges(true); 
+                                const toast = document.createElement('div');
+                                toast.className = 'fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-purple-900 border border-purple-700 text-purple-100 px-4 py-2 rounded shadow-xl z-[200] text-xs font-bold flex items-center gap-2 animate-bounce';
+                                toast.innerHTML = `<span>☁️ Auto-uploaded Audio to Drive!</span>`;
+                                document.body.appendChild(toast);
+                                setTimeout(() => toast.remove(), 4000);
+                            }
+                        })();
+                    }
                 }
 
                 if (htmlOutput) {
@@ -1883,7 +1878,7 @@
                     status.innerText = "✅ Done";
                     status.className = "text-xs text-green-500";
                 } else {
-                    throw new Error("No audio content generated.");
+                    throw new Error("No audio content returned in predictions.");
                 }
 
             } catch (error) {
