@@ -1059,7 +1059,7 @@
                             </div>
 
                             <!-- Uploaded Assets (Right Hand Side - Compact Links) -->
-                            <div class="w-1/4 min-w-[150px] ml-4 pl-4 border-l border-gray-800 text-xs text-right">
+                            <div id="assets-container-${uniqueId}" class="w-1/4 min-w-[150px] ml-4 pl-4 border-l border-gray-800 text-xs text-right">
                                 <span class="font-bold text-gray-500 block mb-2 text-[10px] uppercase tracking-wider">Assets</span>
                                 ${(() => {
                                     if (line.uploaded_assets && Object.keys(line.uploaded_assets).length > 0) {
@@ -1076,12 +1076,32 @@
                                             };
                                             const icon = typeIcons[type.toLowerCase()] || '📄';
                                             
+                                            let audioPlayerHtml = '';
+                                            if ((type === 'music' || type === 'sound_effect') && asset.url.includes('drive.google.com')) {
+                                                // Extract File ID
+                                                const match = asset.url.match(/\/d\/([a-zA-Z0-9_-]+)|id=([a-zA-Z0-9_-]+)/);
+                                                const fileId = match ? (match[1] || match[2]) : null;
+                                                
+                                                if (fileId) {
+                                                    const exportUrl = `https://docs.google.com/uc?export=download&id=${fileId}`;
+                                                    // Compact Audio Player
+                                                    audioPlayerHtml = `
+                                                        <div class="mt-1">
+                                                            <audio controls class="w-full h-6 opacity-70 hover:opacity-100 transition-opacity">
+                                                                <source src="${exportUrl}" type="audio/mpeg">
+                                                            </audio>
+                                                        </div>
+                                                    `;
+                                                }
+                                            }
+
                                             return `
-                                                <div class="mb-1">
-                                                    <a href="${asset.url}" target="_blank" class="text-blue-400 hover:text-white hover:underline truncate inline-flex items-center gap-1" title="${asset.filename}">
+                                                <div class="mb-2">
+                                                    <a href="${asset.url}" target="_blank" class="text-blue-400 hover:text-white hover:underline truncate inline-flex items-center gap-1 max-w-full justify-end" title="${asset.filename}">
                                                        <span>${icon}</span>
-                                                       <span class="truncate max-w-[100px]">${type} ↗</span>
+                                                       <span class="truncate">${type} ↗</span>
                                                     </a>
+                                                    ${audioPlayerHtml}
                                                 </div>
                                             `;
                                         }).join('');
