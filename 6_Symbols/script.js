@@ -2348,6 +2348,10 @@
                                      
                                      updateVideoName(sceneIndex, lineIndex, pngFilename);
                                      updateArtifactData(sceneIndex, lineIndex, 'diagram', pngFilename, driveLink);
+                                     
+                                     // Save mermaid code to prompt_outputs
+                                     updatePromptOutput(sceneIndex, lineIndex, 'diagram', mermaidCode);
+                                     
                                      await saveChanges(true); // Save to GitHub
                                      
                                      // Toast
