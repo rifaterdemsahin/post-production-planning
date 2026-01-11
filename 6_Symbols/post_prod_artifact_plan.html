@@ -820,9 +820,10 @@
              <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">🔑 Manage API Keys</h3>
              
              <div class="space-y-6">
-                <!-- Google Gemini -->
+                <!-- Google API Key (Gemini + Sheets) -->
                 <div>
-                    <label class="block text-xs font-bold text-gray-400 mb-1">Google Gemini API Key</label>
+                    <label class="block text-xs font-bold text-gray-400 mb-1">Google API Key</label>
+                    <p class="text-[10px] text-blue-400 mb-2">📊 Used for: <strong>Google Sheets</strong> (data loading) + <strong>Gemini AI</strong></p>
                     <div class="flex gap-2">
                         <input type="password" id="modal-google-key" placeholder="Enter Google API Key" 
                             oninput="debouncedSaveApiKey(this.value)"
@@ -834,6 +835,12 @@
                     <div class="flex justify-between items-center mt-1">
                         <p class="text-[10px] text-gray-500">Stored securely in cookies/local storage.</p>
                         <span id="modal-google-status" class="text-[10px] font-bold"></span>
+                    </div>
+                    <div class="mt-2 p-2 bg-gray-800/50 rounded border border-gray-700">
+                        <p class="text-[10px] text-gray-400">
+                            <span class="text-yellow-500">⚠️</span> This key must have <strong>Google Sheets API</strong> enabled in Google Cloud Console.
+                            <a href="https://console.cloud.google.com/apis/library/sheets.googleapis.com" target="_blank" class="text-blue-400 hover:underline ml-1">Enable Sheets API →</a>
+                        </p>
                     </div>
                 </div>
 
