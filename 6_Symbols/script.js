@@ -1864,17 +1864,14 @@
                         contentHtml = `<div class="p-2 bg-gray-800 rounded mt-1 text-center border border-gray-700">📄 File Preview</div>`;
                     }
 
-                    const assetLabel = assets.length > 1 ? `${type} #${assetIndex + 1}` : type;
+                    const assetLabel = asset.filename || (assets.length > 1 ? `${type} #${assetIndex + 1}` : type);
                     html += `
                         <div class="bg-gray-900/50 p-2 rounded border border-gray-800 relative group hover:border-gray-600 transition-colors mb-2">
                             <div class="flex justify-between items-center mb-1">
-                                <span class="text-[10px] uppercase text-blue-300 font-bold">${assetLabel}</span>
-                                <a href="${asset.url}" target="_blank" class="text-gray-500 hover:text-white" title="Open in new tab">↗</a>
+                                <span class="text-[10px] uppercase text-blue-300 font-bold truncate max-w-[200px]" title="${asset.filename || type}">${assetLabel}</span>
+                                <a href="${asset.url}" target="_blank" class="text-gray-500 hover:text-white flex-shrink-0 ml-1" title="Open in new tab">↗</a>
                             </div>
                             ${contentHtml}
-                            <div class="mt-1">
-                                <span class="text-[9px] text-gray-500 truncate block" title="${asset.filename}">${asset.filename}</span>
-                            </div>
                         </div>
                     `;
                     }); // End assets.forEach
