@@ -1433,15 +1433,6 @@ scenes:
             sound_effect_output: ""
             diagram_output: ""
             html_output: "<div style='background: linear-gradient(180deg, #87ceeb 0%, #ffd700 50%, #ff6b00 100%); width: 800px; height: 450px; display: flex; align-items: flex-end; justify-content: center; position: relative;'><div style='width: 0; height: 0; border-left: 200px solid transparent; border-right: 200px solid transparent; border-bottom: 300px solid #4a4a4a;'></div><div style='position: absolute; bottom: 280px; font-size: 64px;'>🧍</div><div style='position: absolute; top: 30px; font-size: 48px; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);'>THE RESULT</div></div>"
-          prompt_outputs:
-            image_output: ""
-            graphic_output: ""
-            music_output: ""
-            animation_output: ""
-            motion_graphics_output: ""
-            sound_effect_output: ""
-            diagram_output: ""
-            html_output: ""
         verified_prompts:
           image: false
           graphic: false
@@ -1685,15 +1676,6 @@ scenes:
             sound_effect_output: ""
             diagram_output: ""
             html_output: "<div style='background: linear-gradient(180deg, #d4a574, #c2956e); width: 800px; height: 450px; display: flex; align-items: flex-end; justify-content: center;'><div style='width: 60px; height: 300px; background: linear-gradient(180deg, #f5f5f5, #d0d0d0); border-radius: 5px 5px 0 0;'></div><div style='position: absolute; top: 50px; font-size: 48px; color: #666;'>I-SHAPED</div><div style='position: absolute; bottom: 30px; font-size: 24px; color: #8b4513;'>ONE SKILL ONLY</div></div>"
-          prompt_outputs:
-            image_output: ""
-            graphic_output: ""
-            music_output: ""
-            animation_output: ""
-            motion_graphics_output: ""
-            sound_effect_output: ""
-            diagram_output: ""
-            html_output: ""
         verified_prompts:
           image: false
           graphic: false
