@@ -364,31 +364,6 @@
                 console.log(`  MAP verified_sound_effect: ${verifiedSoundEffect}`);
                 console.log(`  MAP verified_html: ${verifiedHtml}`);
                 
-                scene.lines.push({
-                    id: lineId,
-                    time: time,
-                    script: script,
-                    negative_prompt: negativePrompt,
-                    prompts: {
-                        image: imagePrompt,
-                        graphic: graphicPrompt,
-                        music: musicPrompt,
-                        animation: animationPrompt,
-                        motion_graphics: motionGraphicsPrompt,
-                        sound_effect: soundEffectPrompt,
-                        diagram: diagramPrompt,
-                        html: htmlPrompt,
-                        prompt_outputs: {
-                            image_output: imageOutput,
-                            graphic_output: graphicOutput,
-                            music_output: musicOutput,
-                            animation_output: animationOutput,
-                            motion_graphics_output: motionGraphicsOutput,
-                            sound_effect_output: soundEffectOutput,
-                            diagram_output: diagramOutput,
-                            html_output: htmlOutput
-                        }
-                    },
                 // Map uploaded assets
                 const uploadedAssets = {};
                 
