@@ -861,7 +861,36 @@
                     if (isImage) {
                         contentHtml = `<img src="${embedUrl}" class="w-full h-auto rounded border border-gray-700 mt-1" alt="${type}" loading="lazy" onerror="this.style.display='none';">`;
                     } else if (isAudio) {
-                        contentHtml = `<audio controls src="${embedUrl}" class="w-full h-8 mt-1"></audio>`;
+                        // Check for Google Drive Audio
+                        const isDriveAudio = isDrive && (typeLower === 'music' || typeLower === 'sound_effect');
+                        let driveFileId = null;
+                        
+                        if (isDriveAudio) {
+                            const match = asset.url.match(/\/d\/([a-zA-Z0-9_-]+)|id=([a-zA-Z0-9_-]+)/);
+                            driveFileId = match ? (match[1] || match[2]) : null;
+                        }
+
+                        if (driveFileId) {
+                             const playerContainerId = `sidebar-drive-player-${driveFileId}-${line.id}`; // Ensure unique ID
+                             contentHtml = `
+                                <div id="${playerContainerId}" class="mt-1">
+                                    <button onclick="fetchAndPlayDriveAudio('${driveFileId}', '${playerContainerId}')" 
+                                        class="text-xs bg-blue-900/30 hover:bg-blue-900/50 text-blue-300 border border-blue-800 px-2 py-1 rounded w-full flex items-center justify-center gap-1 transition">
+                                        <span>🔓</span> Load & Play (API)
+                                    </button>
+                                </div>
+                                <div class="mt-1 flex justify-end">
+                                     <button onclick="fetchAndPlayDriveModal('${driveFileId}', '${asset.filename || 'Audio'}')" 
+                                        class="text-[9px] bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white px-1.5 py-0.5 rounded border border-gray-700"
+                                        title="Play in Popup (API)">
+                                        ⏵ Popup
+                                    </button>
+                                </div>
+                             `;
+                        } else {
+                            // Fallback for non-Drive audio
+                            contentHtml = `<audio controls src="${embedUrl}" class="w-full h-8 mt-1"></audio>`;
+                        }
                     } else if (isVideo) {
                         contentHtml = `<video controls src="${embedUrl}" class="w-full h-auto rounded border border-gray-700 mt-1"></video>`;
                     } else {
