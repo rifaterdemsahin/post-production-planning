@@ -52,17 +52,53 @@
         }
 
 
+        // ==========================================
+        // COOKIE HELPERS
+        // ==========================================
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Strict";
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i=0;i < ca.length;i++) {
+                let c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+
         async function initApp() {
             // Restore API Key
+            // Try Cookie first, then LocalStorage
+            let savedKey = getCookie('google_api_key') || localStorage.getItem('google_api_key');
+            
             if (savedKey) {
                 document.getElementById('apiKey').value = savedKey;
+                // If it was in local storage but not cookie, migrate it
+                if (!getCookie('google_api_key')) {
+                    setCookie('google_api_key', savedKey, 365);
+                }
                 verifyApiKey(savedKey);
             }
 
             // Restore ElevenLabs Key
-            const savedElevenKey = localStorage.getItem('elevenlabs_api_key');
+            let savedElevenKey = getCookie('elevenlabs_api_key') || localStorage.getItem('elevenlabs_api_key');
+            
             if (savedElevenKey) {
                 document.getElementById('elevenApiKey').value = savedElevenKey;
+                 // If it was in local storage but not cookie, migrate it
+                 if (!getCookie('elevenlabs_api_key')) {
+                    setCookie('elevenlabs_api_key', savedElevenKey, 365);
+                }
             }
 
             // Scroll Listener for "Scroll to Top"
@@ -279,11 +315,13 @@
         }
 
         function saveApiKey(key) {
-            localStorage.setItem('google_api_key', key);
+            setCookie('google_api_key', key, 365);
+            localStorage.setItem('google_api_key', key); // Sync backup
         }
 
         function saveElevenKey(key) {
-            localStorage.setItem('elevenlabs_api_key', key);
+             setCookie('elevenlabs_api_key', key, 365);
+             localStorage.setItem('elevenlabs_api_key', key); // Sync backup
         }
 
         async function verifyApiKey(key) {
