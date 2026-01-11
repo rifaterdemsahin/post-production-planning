@@ -1077,6 +1077,8 @@
                                             const icon = typeIcons[type.toLowerCase()] || '📄';
                                             
                                             let audioPlayerHtml = '';
+                                            let modalButton = '';
+                                            
                                             if ((type === 'music' || type === 'sound_effect') && asset.url.includes('drive.google.com')) {
                                                 // Extract File ID
                                                 const match = asset.url.match(/\/d\/([a-zA-Z0-9_-]+)|id=([a-zA-Z0-9_-]+)/);
@@ -1092,15 +1094,27 @@
                                                             </audio>
                                                         </div>
                                                     `;
+                                                    
+                                                    // Modal Button
+                                                    modalButton = `
+                                                        <button onclick="openMediaModal('${exportUrl}', '${asset.filename || 'Audio'}', 'audio')" 
+                                                            class="text-[10px] bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white px-1.5 py-0.5 rounded border border-gray-700 ml-1"
+                                                            title="Play in Popup">
+                                                            ⏵ Popup
+                                                        </button>
+                                                    `;
                                                 }
                                             }
 
                                             return `
                                                 <div class="mb-2">
-                                                    <a href="${asset.url}" target="_blank" class="text-blue-400 hover:text-white hover:underline truncate inline-flex items-center gap-1 max-w-full justify-end" title="${asset.filename}">
-                                                       <span>${icon}</span>
-                                                       <span class="truncate">${type} ↗</span>
-                                                    </a>
+                                                    <div class="flex justify-end items-center gap-1 mb-0.5">
+                                                        <a href="${asset.url}" target="_blank" class="text-blue-400 hover:text-white hover:underline truncate inline-flex items-center gap-1 max-w-[80%]" title="${asset.filename}">
+                                                           <span>${icon}</span>
+                                                           <span class="truncate">${type} ↗</span>
+                                                        </a>
+                                                        ${modalButton}
+                                                    </div>
                                                     ${audioPlayerHtml}
                                                 </div>
                                             `;
@@ -3936,3 +3950,50 @@ async function autoUploadToDrive(uniqueId, blob, filename) {
             initApp();
             initDocumentationMenus();
         });
+
+        // ==========================================
+        // MEDIA MODAL LOGIC
+        // ==========================================
+        function openMediaModal(url, filename, type) {
+            const modal = document.getElementById('media-modal');
+            const titleEl = document.getElementById('media-modal-title');
+            const contentEl = document.getElementById('media-modal-content');
+            
+            titleEl.innerHTML = `▶ ${filename}`;
+            
+            if (type === 'audio' || type === 'music' || type === 'sound_effect') {
+                contentEl.innerHTML = `
+                    <div class="w-full text-center">
+                        <audio controls autoplay class="w-full mb-4">
+                            <source src="${url}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <p class="text-xs text-gray-400">Playing: ${filename}</p>
+                    </div>
+                `;
+            } else if (type === 'video') {
+                 contentEl.innerHTML = `
+                    <div class="w-full text-center">
+                        <video controls autoplay class="w-full max-h-[70vh]">
+                            <source src="${url}" type="video/mp4">
+                            Your browser does not support the video element.
+                        </video>
+                        <p class="text-xs text-gray-400 mt-2">Playing: ${filename}</p>
+                    </div>
+                `;
+            } else {
+                contentEl.innerHTML = `<p class="text-red-400">Unsupported media type</p>`;
+            }
+            
+            modal.classList.remove('hidden');
+        }
+
+        function closeMediaModal() {
+            const modal = document.getElementById('media-modal');
+            const contentEl = document.getElementById('media-modal-content');
+            
+            // Stop playback
+            contentEl.innerHTML = '';
+            
+            modal.classList.add('hidden');
+        }
