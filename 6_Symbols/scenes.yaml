@@ -998,15 +998,6 @@ scenes:
             sound_effect_output: ""
             diagram_output: ""
             html_output: "<div style='background: #0a0a1a; width: 800px; height: 450px; display: flex;'><div style='flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; border-right: 2px solid #333;'><div style='font-size: 64px;'>🔍</div><div style='color: #3498db; font-size: 24px; margin-top: 20px;'>ASSESS</div></div><div style='flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column;'><div style='font-size: 64px;'>💻</div><div style='color: #9b59b6; font-size: 24px; margin-top: 20px;'>SIMULATE</div></div></div>"
-          prompt_outputs:
-            image_output: ""
-            graphic_output: ""
-            music_output: ""
-            animation_output: ""
-            motion_graphics_output: ""
-            sound_effect_output: ""
-            diagram_output: ""
-            html_output: ""
         verified_prompts:
           image: false
           graphic: false
