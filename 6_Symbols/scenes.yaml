@@ -1,8 +1,8 @@
 title: Plan your AI transformation journey
 main_context: 'High-production value documentary style for youtube weekly video for rifat erdem sahin channel. Futuristic technology, serious but inspiring tone. Visuals should be cinematic, 8k resolution, with a mix of photorealism and high-end motion graphics. Color palette: Dark mode with neon accents (blue, purple, teal).'
 verified_main_context: false
-version: 13
-last_updated: '2026-01-11T13:05:14.268Z'
+version: 14
+last_updated: '2026-01-11T13:07:56.175Z'
 scenes:
   - id: SCENE 01
     title: The New Age
@@ -53,6 +53,9 @@ scenes:
             - filename: Line1_Image_2026-01-11_13-05.png
               url: https://drive.google.com/file/d/1u5aBDq2JNkWzhji1x7eEPzNyq8KdUJl0/view?usp=drivesdk
               last_uploaded: '2026-01-11T13:05:14.263Z'
+            - filename: Line1_Image_2026-01-11_13-07.png
+              url: https://drive.google.com/file/d/1QzPDpRq98ZYut8ZbinVBmlEYGFzKML8Y/view?usp=drivesdk
+              last_uploaded: '2026-01-11T13:07:56.174Z'
           music:
             filename: Plan_your_AI_transformation_journey_The_New_Age_Line1_Audio_2026-01-11_08-20.mp3
             url: https://drive.google.com/file/d/1aVhbsec5fmztFqCEMzxYFK9Co0_7jLwt/view?usp=drivesdk
