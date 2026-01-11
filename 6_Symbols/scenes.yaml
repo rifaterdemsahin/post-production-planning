@@ -1,8 +1,8 @@
 title: Plan your AI transformation journey
 main_context: 'High-production value documentary style for youtube weekly video for rifat erdem sahin channel. Futuristic technology, serious but inspiring tone. Visuals should be cinematic, 8k resolution, with a mix of photorealism and high-end motion graphics. Color palette: Dark mode with neon accents (blue, purple, teal).'
 verified_main_context: false
-version: 11
-last_updated: '2026-01-11T12:12:17.136Z'
+version: 12
+last_updated: '2026-01-11T12:20:28.350Z'
 scenes:
   - id: SCENE 01
     title: The New Age
@@ -17,7 +17,7 @@ scenes:
         script: Alright, let's dive right in. Today, we're looking at a pretty powerful framework.
         prompts:
           image: Cinematic medium shot of a confident tech presenter in a modern, dimly lit studio with dynamic blue and orange rim lighting, shallow depth of field, 8k resolution, high production value
-          graphic: ''
+          graphic: a transformation logo
           music: Low, pulsing synth pad establishing a serious but curious tone, 120 BPM
           animation: ''
           motion_graphics: Create a cinematic title card in Canva with the text 'THE NEW AGE' using a futuristic sans-serif font, glowing neon blue outline, set against a dark, high-tech abstract background
@@ -43,9 +43,12 @@ scenes:
           html: false
         uploaded_assets:
           image:
-            filename: Line1_Image_2026-01-11_12-12.png
-            url: https://drive.google.com/file/d/1WOtEy9cSe4IncRNZeLhmrA_N1-CNZIAX/view?usp=drivesdk
-            last_uploaded: '2026-01-11T12:12:17.132Z'
+            - filename: Line1_Image_2026-01-11_12-12.png
+              url: https://drive.google.com/file/d/1WOtEy9cSe4IncRNZeLhmrA_N1-CNZIAX/view?usp=drivesdk
+              last_uploaded: '2026-01-11T12:12:17.132Z'
+            - filename: Line1_Image_2026-01-11_12-20.png
+              url: https://drive.google.com/file/d/1P2Yt4OBFekH0KbV3Ur2LaClr_m5l82WN/view?usp=drivesdk
+              last_uploaded: '2026-01-11T12:20:28.346Z'
           music:
             filename: Plan_your_AI_transformation_journey_The_New_Age_Line1_Audio_2026-01-11_08-20.mp3
             url: https://drive.google.com/file/d/1aVhbsec5fmztFqCEMzxYFK9Co0_7jLwt/view?usp=drivesdk
@@ -54,7 +57,7 @@ scenes:
             filename: Line1_Audio_2026-01-11_08-20
             url: https://drive.google.com/file/d/1UxzfqUsedWDf5Iw6h4IX3YYoCeZMEqzq/view?usp=drivesdk
             last_uploaded: '2026-01-11T08:20:22.448Z'
-        video_name: Plan_your_AI_transformation_journey_The_New_Age_Line1_Image_2026-01-11_12-11.png
+        video_name: Plan_your_AI_transformation_journey_The_New_Age_Line1_Image_2026-01-11_12-20.png
       - id: '2'
         time: '0:04'
         script: ...for, well, surviving and thriving in this new age of AI. If you're in the tech world...
