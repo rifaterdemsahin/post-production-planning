@@ -40,9 +40,15 @@
         // Load data from Google Sheets (ONLY data source - YAML removed)
         async function loadFromGoogleSheets() {
             const apiKey = getSheetsApiKey();
+            
+            console.log('%c🔐 API KEY CHECK', 'background: #673ab7; color: white; padding: 4px 8px; border-radius: 4px;');
+            console.log(`  API Key exists: ${apiKey ? '✅ Yes (' + apiKey.substring(0, 10) + '...)' : '❌ No'}`);
+            console.log(`  Key from cookie: ${getCookie('google_api_key') ? '✅' : '❌'}`);
+            console.log(`  Key from localStorage: ${localStorage.getItem('google_api_key') ? '✅' : '❌'}`);
+            
             if (!apiKey) {
                 logDebug("ERROR", "Sheets API", "No API key found - cannot load data");
-                showToast("❌ Google API key required. Set it in Settings.", 5000);
+                showToast("❌ Google API key required. Set it in 🔑 Manage API Keys.", 5000);
                 return null;
             }
 
@@ -1150,16 +1156,46 @@
         // ==========================================
         async function testGoogleKey() {
             const key = document.getElementById('modal-google-key').value;
-             if (!key) {
+            if (!key) {
                 showToast("❌ Please enter a Google API Key first.");
                 return;
             }
-            showToast("⏳ Testing Google API Key...");
-            const isValid = await verifyApiKey(key, true);
-            if(isValid) {
-                showToast("✅ Google API Key is valid!");
+            showToast("⏳ Testing Google API Key (Gemini + Sheets)...");
+            
+            // Test 1: Gemini API
+            const geminiValid = await verifyApiKey(key, true);
+            
+            // Test 2: Google Sheets API
+            let sheetsValid = false;
+            try {
+                const testUrl = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEETS_CONFIG.spreadsheetId}?key=${key}&fields=properties.title`;
+                console.log('%c🧪 Testing Sheets API:', 'color: #4285f4;', testUrl.replace(key, 'KEY_HIDDEN'));
+                
+                const response = await fetch(testUrl);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    sheetsValid = true;
+                    console.log('%c✅ Sheets API Test PASSED:', 'color: #34a853;', data);
+                } else {
+                    console.error('%c❌ Sheets API Test FAILED:', 'color: #ea4335;', data);
+                    if (data.error?.message) {
+                        showToast(`❌ Sheets API: ${data.error.message}`, 5000);
+                    }
+                }
+            } catch (e) {
+                console.error('Sheets API test error:', e);
+            }
+            
+            // Show results
+            if (geminiValid && sheetsValid) {
+                showToast("✅ API Key valid for both Gemini & Sheets!", 3000);
+            } else if (sheetsValid) {
+                showToast("✅ Sheets API works, ⚠️ Gemini may have issues", 3000);
+            } else if (geminiValid) {
+                showToast("⚠️ Gemini works, ❌ Sheets API FAILED - Enable Sheets API in Google Cloud Console", 5000);
             } else {
-                showToast("❌ Google API Key is invalid.");
+                showToast("❌ API Key is invalid for both services", 3000);
             }
         }
 
