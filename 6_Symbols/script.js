@@ -1579,7 +1579,18 @@
         // Initialize state
         document.addEventListener('DOMContentLoaded', () => {
              // No initialization needed for fixed player
-             initDocumentationMenus();
+             if (typeof initDocumentationMenus === 'function') {
+                 initDocumentationMenus();
+             }
+             // START APP
+             console.log("DOM loaded. Starting App...");
+             logDebug("INFO", "App Startup", "DOM Loaded. Calling initApp()...");
+             if (typeof initApp === 'function') {
+                 initApp();
+             } else {
+                 console.error("initApp function not found!");
+                 logDebug("ERROR", "Startup Failed", "initApp() not found");
+             }
         });
 
 
