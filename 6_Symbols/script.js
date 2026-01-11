@@ -42,6 +42,10 @@
 
             try {
                 const titleUrl = buildSheetsApiUrl('Sheet1!B3', apiKey);
+                console.log('%c🔗 FETCHING PROJECT TITLE FROM SHEETS', 'background: #1a73e8; color: white; padding: 4px 8px; border-radius: 4px;');
+                console.log(`  URL: ${titleUrl}`);
+                console.log(`  Cell: Sheet1!B3`);
+                
                 const response = await fetch(titleUrl);
                 
                 if (!response.ok) {
@@ -49,9 +53,12 @@
                 }
                 
                 const titleJson = await response.json();
+                console.log('%c📄 RAW RESPONSE FROM B3:', 'color: #fbbc04;', titleJson);
+                
                 const title = titleJson.values?.[0]?.[0] || null;
                 
                 if (title) {
+                    console.log('%c✅ PROJECT TITLE MAPPED FROM B3:', 'color: #34a853; font-weight: bold;', `"${title}"`);
                     logDebug("SUCCESS", "Project Title from Sheets B3", title);
                 }
                 return title;
@@ -70,6 +77,8 @@
             }
 
             try {
+                console.log('%c📡 GOOGLE SHEETS API CALLS', 'background: #4285f4; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
+                console.log('%cSpreadsheet: https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30', 'color: #1a73e8; font-style: italic;');
                 logDebug("INFO", "Loading from Google Sheets", GOOGLE_SHEETS_CONFIG.spreadsheetId);
 
                 // Fetch the main data range (adjust based on your sheet structure)
@@ -79,11 +88,21 @@
                 const metadataUrl = buildSheetsApiUrl('Sheet1!A1:B10', apiKey);
                 const scenesUrl = buildSheetsApiUrl('Sheet1!A1:Z1000', apiKey);
 
+                console.log('%c🔗 API URLs being fetched:', 'color: #fbbc04; font-weight: bold;');
+                console.log(`  [1] Project Title (B3): ${projectTitleUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
+                console.log(`  [2] Metadata (A1:B10): ${metadataUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
+                console.log(`  [3] Scenes (A1:Z1000): ${scenesUrl.replace(apiKey, 'API_KEY_HIDDEN')}`);
+
                 const [titleRes, metadataRes, scenesRes] = await Promise.all([
                     fetch(projectTitleUrl),
                     fetch(metadataUrl),
                     fetch(scenesUrl)
                 ]);
+
+                console.log('%c📥 API Response Status:', 'color: #34a853;');
+                console.log(`  Title: ${titleRes.status} ${titleRes.ok ? '✅' : '❌'}`);
+                console.log(`  Metadata: ${metadataRes.status} ${metadataRes.ok ? '✅' : '❌'}`);
+                console.log(`  Scenes: ${scenesRes.status} ${scenesRes.ok ? '✅' : '❌'}`);
 
                 if (!titleRes.ok || !metadataRes.ok || !scenesRes.ok) {
                     throw new Error(`Sheets API error: Title=${titleRes.status}, Metadata=${metadataRes.status}, Scenes=${scenesRes.status}`);
@@ -95,6 +114,8 @@
 
                 // Extract project title from B3
                 const projectTitle = titleJson.values?.[0]?.[0] || 'Plan your AI transformation journey';
+                console.log('%c🏷️ RAW TITLE JSON FROM B3:', 'color: #ea4335;', titleJson);
+                console.log('%c✅ PROJECT TITLE EXTRACTED:', 'color: #34a853; font-weight: bold;', `"${projectTitle}"`);
                 logDebug("INFO", "Project Title from B3", projectTitle);
                 logDebug("SUCCESS", "Google Sheets loaded", `${scenesJson.values?.length || 0} rows`);
 
@@ -108,6 +129,9 @@
 
         // Transform Google Sheets data to match YAML structure
         function transformSheetsToData(metadataJson, scenesJson, projectTitleFromCell = null) {
+            console.log('%c📊 GOOGLE SHEETS DATA MAPPING START', 'background: #4285f4; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
+            console.log('%cSource: https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30', 'color: #1a73e8; font-style: italic;');
+            
             const rows = scenesJson.values || [];
             if (rows.length < 2) {
                 logDebug("WARN", "Sheets Transform", "No data rows found");
@@ -127,20 +151,28 @@
             });
 
             // Log found columns for debugging
+            console.log('%c📋 COLUMN INDEX MAPPING:', 'color: #fbbc04; font-weight: bold;');
+            headers.forEach((h, i) => {
+                console.log(`  [${i}] "${h}" → colIndex["${h}"] = ${i}`);
+            });
             logDebug("INFO", "Sheet Columns", headers.join(', '));
             logDebug("INFO", "Data Rows", `${dataRows.length} rows found`);
 
             // Project title ONLY from Google Sheets cell B3
             let title = projectTitleFromCell || 'Untitled Project';
+            console.log('%c🏷️ PROJECT TITLE (from B3):', 'color: #34a853; font-weight: bold;', title);
+            
             let mainContext = '';
             let version = 1;
             let lastUpdatedVal = new Date().toISOString();
 
             // Parse other metadata from sheet (not title - that comes from B3 only)
             if (metadataJson.values) {
+                console.log('%c📝 METADATA MAPPING:', 'color: #ea4335; font-weight: bold;');
                 metadataJson.values.forEach(row => {
                     const key = (row[0] || '').toLowerCase().trim();
                     const value = row[1] || '';
+                    console.log(`  MAP metadata: "${key}" → "${value}"`);
                     if (key === 'main_context') mainContext = value;
                     else if (key === 'version') version = parseInt(value) || 1;
                     else if (key === 'last_updated') lastUpdatedVal = value;
@@ -150,19 +182,37 @@
             // Group rows by scene
             const scenesMap = new Map();
             
+            console.log('%c🎬 SCENE DATA MAPPING:', 'color: #9c27b0; font-weight: bold;');
             dataRows.forEach((row, idx) => {
+                console.log(`%c--- Row ${idx + 1} ---`, 'color: #666; font-style: italic;');
+                
                 const sceneId = row[colIndex['scene_id']] || row[colIndex['sceneid']] || row[colIndex['scene']] || `SCENE ${Math.floor(idx / 5) + 1}`;
+                console.log(`  MAP scene_id: "${sceneId}" (from columns: scene_id|sceneid|scene)`);
+                
                 const sceneTitle = row[colIndex['scenetitle']] || row[colIndex['scene_title']] || row[colIndex['scene_name']] || row[colIndex['title']] || 'Untitled Scene';
+                console.log(`  MAP sceneTitle: "${sceneTitle}" (from columns: scenetitle|scene_title|scene_name|title)`);
                 
                 if (!scenesMap.has(sceneId)) {
+                    const color = row[colIndex['color']] || 'border-l-4 border-blue-500';
+                    const context = row[colIndex['scene_context']] || row[colIndex['scenecontext']] || row[colIndex['context']] || '';
+                    const verifiedContext = row[colIndex['verified_context']] === 'TRUE' || row[colIndex['verified_context']] === 'true';
+                    const transition = row[colIndex['transition']] || '';
+                    const verifiedTransition = row[colIndex['verified_transition']] === 'TRUE' || row[colIndex['verified_transition']] === 'true';
+                    
+                    console.log(`  MAP color: "${color}"`);
+                    console.log(`  MAP context: "${context.substring(0, 50)}${context.length > 50 ? '...' : ''}"`);
+                    console.log(`  MAP verified_context: ${verifiedContext}`);
+                    console.log(`  MAP transition: "${transition}"`);
+                    console.log(`  MAP verified_transition: ${verifiedTransition}`);
+                    
                     scenesMap.set(sceneId, {
                         id: sceneId,
                         title: sceneTitle,
-                        color: row[colIndex['color']] || 'border-l-4 border-blue-500',
-                        context: row[colIndex['scene_context']] || row[colIndex['scenecontext']] || row[colIndex['context']] || '',
-                        verified_context: row[colIndex['verified_context']] === 'TRUE' || row[colIndex['verified_context']] === 'true',
-                        transition: row[colIndex['transition']] || '',
-                        verified_transition: row[colIndex['verified_transition']] === 'TRUE' || row[colIndex['verified_transition']] === 'true',
+                        color: color,
+                        context: context,
+                        verified_context: verifiedContext,
+                        transition: transition,
+                        verified_transition: verifiedTransition,
                         lines: []
                     });
                 }
@@ -170,44 +220,111 @@
                 // Add line to scene
                 const scene = scenesMap.get(sceneId);
                 const lineId = row[colIndex['line_id']] || row[colIndex['id']] || String(scene.lines.length + 1);
+                const time = row[colIndex['time']] || '0:00';
+                const script = row[colIndex['script']] || row[colIndex['line']] || row[colIndex['text']] || '';
+                const negativePrompt = row[colIndex['negative_prompt']] || '';
+                
+                console.log(`  MAP line_id: "${lineId}"`);
+                console.log(`  MAP time: "${time}"`);
+                console.log(`  MAP script: "${script.substring(0, 50)}${script.length > 50 ? '...' : ''}"`);
+                console.log(`  MAP negative_prompt: "${negativePrompt.substring(0, 30)}${negativePrompt.length > 30 ? '...' : ''}"`);
+                
+                // Log prompt mappings
+                const imagePrompt = row[colIndex['image_prompt']] || row[colIndex['image']] || '';
+                const graphicPrompt = row[colIndex['graphic_prompt']] || row[colIndex['graphic']] || '';
+                const musicPrompt = row[colIndex['music_prompt']] || row[colIndex['music']] || '';
+                const animationPrompt = row[colIndex['animation_prompt']] || row[colIndex['animation']] || '';
+                const motionGraphicsPrompt = row[colIndex['motion_graphics_prompt']] || row[colIndex['motion_graphics']] || '';
+                const soundEffectPrompt = row[colIndex['sound_effect_prompt']] || row[colIndex['sound_effect']] || '';
+                const diagramPrompt = row[colIndex['diagram_prompt']] || row[colIndex['diagram']] || '';
+                const htmlPrompt = row[colIndex['html_prompt']] || row[colIndex['html']] || '';
+                
+                console.log(`  MAP image_prompt: "${imagePrompt.substring(0, 40)}${imagePrompt.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP graphic_prompt: "${graphicPrompt.substring(0, 40)}${graphicPrompt.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP music_prompt: "${musicPrompt.substring(0, 40)}${musicPrompt.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP animation_prompt: "${animationPrompt.substring(0, 40)}${animationPrompt.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP motion_graphics_prompt: "${motionGraphicsPrompt.substring(0, 40)}${motionGraphicsPrompt.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP sound_effect_prompt: "${soundEffectPrompt.substring(0, 40)}${soundEffectPrompt.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP diagram_prompt: "${diagramPrompt.substring(0, 40)}${diagramPrompt.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP html_prompt: "${htmlPrompt.substring(0, 40)}${htmlPrompt.length > 40 ? '...' : ''}"`);
+                
+                // Log output mappings
+                const imageOutput = row[colIndex['image_output']] || '';
+                const graphicOutput = row[colIndex['graphic_output']] || '';
+                const musicOutput = row[colIndex['music_output']] || '';
+                const animationOutput = row[colIndex['animation_output']] || '';
+                const motionGraphicsOutput = row[colIndex['motion_graphics_output']] || '';
+                const soundEffectOutput = row[colIndex['sound_effect_output']] || '';
+                const diagramOutput = row[colIndex['diagram_output']] || '';
+                const htmlOutput = row[colIndex['html_output']] || '';
+                
+                console.log(`  MAP image_output: "${imageOutput.substring(0, 40)}${imageOutput.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP graphic_output: "${graphicOutput.substring(0, 40)}${graphicOutput.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP music_output: "${musicOutput.substring(0, 40)}${musicOutput.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP animation_output: "${animationOutput.substring(0, 40)}${animationOutput.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP motion_graphics_output: "${motionGraphicsOutput.substring(0, 40)}${motionGraphicsOutput.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP sound_effect_output: "${soundEffectOutput.substring(0, 40)}${soundEffectOutput.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP diagram_output: "${diagramOutput.substring(0, 40)}${diagramOutput.length > 40 ? '...' : ''}"`);
+                console.log(`  MAP html_output: "${htmlOutput.substring(0, 40)}${htmlOutput.length > 40 ? '...' : ''}"`);
+                
+                // Log verified status
+                const verifiedImage = row[colIndex['verified_image']] === 'TRUE' || row[colIndex['verified_image']] === 'true';
+                const verifiedGraphic = row[colIndex['verified_graphic']] === 'TRUE' || row[colIndex['verified_graphic']] === 'true';
+                const verifiedMusic = row[colIndex['verified_music']] === 'TRUE' || row[colIndex['verified_music']] === 'true';
+                const verifiedAnimation = row[colIndex['verified_animation']] === 'TRUE' || row[colIndex['verified_animation']] === 'true';
+                const verifiedMotionGraphics = row[colIndex['verified_motion_graphics']] === 'TRUE' || row[colIndex['verified_motion_graphics']] === 'true';
+                const verifiedSoundEffect = row[colIndex['verified_sound_effect']] === 'TRUE' || row[colIndex['verified_sound_effect']] === 'true';
+                const verifiedHtml = row[colIndex['verified_html']] === 'TRUE' || row[colIndex['verified_html']] === 'true';
+                
+                console.log(`  MAP verified_image: ${verifiedImage}`);
+                console.log(`  MAP verified_graphic: ${verifiedGraphic}`);
+                console.log(`  MAP verified_music: ${verifiedMusic}`);
+                console.log(`  MAP verified_animation: ${verifiedAnimation}`);
+                console.log(`  MAP verified_motion_graphics: ${verifiedMotionGraphics}`);
+                console.log(`  MAP verified_sound_effect: ${verifiedSoundEffect}`);
+                console.log(`  MAP verified_html: ${verifiedHtml}`);
                 
                 scene.lines.push({
                     id: lineId,
-                    time: row[colIndex['time']] || '0:00',
-                    script: row[colIndex['script']] || row[colIndex['line']] || row[colIndex['text']] || '',
-                    negative_prompt: row[colIndex['negative_prompt']] || '',
+                    time: time,
+                    script: script,
+                    negative_prompt: negativePrompt,
                     prompts: {
-                        image: row[colIndex['image_prompt']] || row[colIndex['image']] || '',
-                        graphic: row[colIndex['graphic_prompt']] || row[colIndex['graphic']] || '',
-                        music: row[colIndex['music_prompt']] || row[colIndex['music']] || '',
-                        animation: row[colIndex['animation_prompt']] || row[colIndex['animation']] || '',
-                        motion_graphics: row[colIndex['motion_graphics_prompt']] || row[colIndex['motion_graphics']] || '',
-                        sound_effect: row[colIndex['sound_effect_prompt']] || row[colIndex['sound_effect']] || '',
-                        diagram: row[colIndex['diagram_prompt']] || row[colIndex['diagram']] || '',
-                        html: row[colIndex['html_prompt']] || row[colIndex['html']] || '',
+                        image: imagePrompt,
+                        graphic: graphicPrompt,
+                        music: musicPrompt,
+                        animation: animationPrompt,
+                        motion_graphics: motionGraphicsPrompt,
+                        sound_effect: soundEffectPrompt,
+                        diagram: diagramPrompt,
+                        html: htmlPrompt,
                         prompt_outputs: {
-                            image_output: row[colIndex['image_output']] || '',
-                            graphic_output: row[colIndex['graphic_output']] || '',
-                            music_output: row[colIndex['music_output']] || '',
-                            animation_output: row[colIndex['animation_output']] || '',
-                            motion_graphics_output: row[colIndex['motion_graphics_output']] || '',
-                            sound_effect_output: row[colIndex['sound_effect_output']] || '',
-                            diagram_output: row[colIndex['diagram_output']] || '',
-                            html_output: row[colIndex['html_output']] || ''
+                            image_output: imageOutput,
+                            graphic_output: graphicOutput,
+                            music_output: musicOutput,
+                            animation_output: animationOutput,
+                            motion_graphics_output: motionGraphicsOutput,
+                            sound_effect_output: soundEffectOutput,
+                            diagram_output: diagramOutput,
+                            html_output: htmlOutput
                         }
                     },
                     verified_prompts: {
-                        image: row[colIndex['verified_image']] === 'TRUE' || row[colIndex['verified_image']] === 'true',
-                        graphic: row[colIndex['verified_graphic']] === 'TRUE' || row[colIndex['verified_graphic']] === 'true',
-                        music: row[colIndex['verified_music']] === 'TRUE' || row[colIndex['verified_music']] === 'true',
-                        animation: row[colIndex['verified_animation']] === 'TRUE' || row[colIndex['verified_animation']] === 'true',
-                        motion_graphics: row[colIndex['verified_motion_graphics']] === 'TRUE' || row[colIndex['verified_motion_graphics']] === 'true',
-                        sound_effect: row[colIndex['verified_sound_effect']] === 'TRUE' || row[colIndex['verified_sound_effect']] === 'true',
-                        html: row[colIndex['verified_html']] === 'TRUE' || row[colIndex['verified_html']] === 'true'
+                        image: verifiedImage,
+                        graphic: verifiedGraphic,
+                        music: verifiedMusic,
+                        animation: verifiedAnimation,
+                        motion_graphics: verifiedMotionGraphics,
+                        sound_effect: verifiedSoundEffect,
+                        html: verifiedHtml
                     },
                     uploaded_assets: {}
                 });
             });
+
+            console.log('%c📊 GOOGLE SHEETS DATA MAPPING COMPLETE', 'background: #34a853; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
+            console.log(`  Total scenes: ${scenesMap.size}`);
+            console.log(`  Total rows processed: ${dataRows.length}`);
 
             return {
                 title,
