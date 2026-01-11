@@ -2,100 +2,197 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Canvas Recorder</title>
+<title>Dynamic HTML Recorder</title>
 <style>
-body { font-family: sans-serif; padding: 20px; background: #f0f0f0; }
-.container { max-width: 850px; margin: 0 auto; background: white; padding: 20px; border-radius: 5px; }
+body { font-family: sans-serif; padding: 20px; background: #f0f0f0; margin: 0; }
+.container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 5px; }
 button { padding: 10px 20px; margin: 5px; font-size: 14px; cursor: pointer; border: none; border-radius: 3px; color: white; }
 #start { background: #e74c3c; }
 #stop { background: #27ae60; }
 #download { background: #3498db; }
+#loadHtml { background: #9b59b6; }
 button:disabled { background: #95a5a6; cursor: not-allowed; }
-canvas { border: 1px solid #ddd; margin: 10px 0; display: block; }
 #status { padding: 10px; background: #ecf0f1; margin: 10px 0; border-radius: 3px; }
-video { max-width: 100%; margin: 10px 0; }
+video { max-width: 100%; margin: 10px 0; border: 1px solid #ddd; }
+.preview-container { border: 2px solid #3498db; margin: 10px 0; background: white; position: relative; }
+#preview { width: 100%; min-height: 400px; }
+textarea { width: 100%; height: 200px; font-family: monospace; font-size: 12px; padding: 10px; border: 1px solid #ddd; border-radius: 3px; }
+.tabs { display: flex; gap: 5px; margin: 10px 0; }
+.tab { padding: 10px 20px; background: #ecf0f1; border: none; cursor: pointer; border-radius: 3px 3px 0 0; }
+.tab.active { background: #3498db; color: white; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+label { display: block; margin: 10px 0 5px; font-weight: bold; }
+.size-inputs { display: flex; gap: 10px; align-items: center; }
+.size-inputs input { width: 100px; padding: 5px; }
 </style>
 </head>
 <body>
 <div class="container">
-<h2>Canvas Animation Recorder</h2>
-<p>Records canvas animation as WebM video - no permissions needed!</p>
+<h2>Dynamic HTML Animation Recorder</h2>
+<p>Paste your HTML content below, preview it, then record it as WebM video!</p>
+
+<div class="tabs">
+<button class="tab active" onclick="switchTab('input')">Input HTML</button>
+<button class="tab" onclick="switchTab('preview')">Preview</button>
+</div>
+
+<div id="inputTab" class="tab-content active">
+<label>Paste your HTML content here:</label>
+<textarea id="htmlInput" placeholder="<div style='background: linear-gradient(45deg, #667eea, #764ba2); width: 800px; height: 450px; display: flex; align-items: center; justify-content: center; font-size: 48px; color: white; font-family: Arial;'>
+  <div class='box' style='animation: spin 2s linear infinite;'>Hello World!</div>
+</div>
+
+<style>
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+</style>"></textarea>
+
+<label>Canvas Size:</label>
+<div class="size-inputs">
+<span>Width: <input type="number" id="width" value="800" min="100"> px</span>
+<span>Height: <input type="number" id="height" value="450" min="100"> px</span>
+</div>
+
+<label>Recording Duration:</label>
+<select id="duration">
+<option value="3">3 seconds</option>
+<option value="5">5 seconds</option>
+<option value="10" selected>10 seconds</option>
+<option value="15">15 seconds</option>
+<option value="20">20 seconds</option>
+<option value="30">30 seconds</option>
+<option value="0">Manual stop</option>
+</select>
+
+<div style="margin-top: 15px;">
+<button id="loadHtml">Load HTML to Preview</button>
+</div>
+</div>
+
+<div id="previewTab" class="tab-content">
+<div class="preview-container">
+<div id="preview"></div>
+</div>
 
 <div>
 <button id="start">Start Recording</button>
 <button id="stop" disabled>Stop Recording</button>
 <button id="download" disabled>Download WebM</button>
-<select id="duration">
-<option value="5">5 sec</option>
-<option value="10" selected>10 sec</option>
-<option value="20">20 sec</option>
-<option value="0">Manual</option>
-</select>
 </div>
 
-<div id="status">Ready</div>
-<canvas id="c" width="800" height="450"></canvas>
-<video id="v" controls style="display:none"></video>
+<div id="status">Load HTML first, then start recording</div>
+
+<canvas id="canvas" style="display: none;"></canvas>
+<video id="video" controls style="display:none"></video>
+</div>
+
 </div>
 
 <script>
-const c = document.getElementById('c');
-const ctx = c.getContext('2d');
+const htmlInput = document.getElementById('htmlInput');
+const preview = document.getElementById('preview');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 const startBtn = document.getElementById('start');
 const stopBtn = document.getElementById('stop');
 const dlBtn = document.getElementById('download');
+const loadBtn = document.getElementById('loadHtml');
 const durSel = document.getElementById('duration');
+const widthInput = document.getElementById('width');
+const heightInput = document.getElementById('height');
 const status = document.getElementById('status');
-const video = document.getElementById('v');
+const video = document.getElementById('video');
 
 let recorder;
 let chunks = [];
 let animFrame;
 let timeout;
+let isRecording = false;
 
-// Animation
-const balls = [
-  {x:100, y:225, vx:3, vy:-2, r:20, c:'#e74c3c'},
-  {x:300, y:225, vx:-2, vy:2.5, r:25, c:'#3498db'},
-  {x:500, y:225, vx:2.5, vy:-1.5, r:18, c:'#2ecc71'},
-  {x:700, y:225, vx:-3, vy:2, r:22, c:'#f39c12'}
-];
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  
+  if (tab === 'input') {
+    document.querySelector('.tab:nth-child(1)').classList.add('active');
+    document.getElementById('inputTab').classList.add('active');
+  } else {
+    document.querySelector('.tab:nth-child(2)').classList.add('active');
+    document.getElementById('previewTab').classList.add('active');
+  }
+}
 
-function draw() {
-  // Background
-  const grd = ctx.createLinearGradient(0, 0, 800, 450);
-  grd.addColorStop(0, '#667eea');
-  grd.addColorStop(1, '#764ba2');
-  ctx.fillStyle = grd;
-  ctx.fillRect(0, 0, 800, 450);
+function loadHtml() {
+  const html = htmlInput.value.trim();
+  if (!html) {
+    alert('Please enter some HTML content first!');
+    return;
+  }
   
-  // Update and draw balls
-  balls.forEach(b => {
-    b.x += b.vx;
-    b.y += b.vy;
-    
-    if (b.x - b.r < 0 || b.x + b.r > 800) {
-      b.vx *= -1;
-      b.x = Math.max(b.r, Math.min(800 - b.r, b.x));
-    }
-    if (b.y - b.r < 0 || b.y + b.r > 450) {
-      b.vy *= -1;
-      b.y = Math.max(b.r, Math.min(450 - b.r, b.y));
-    }
-    
-    ctx.fillStyle = b.c;
-    ctx.beginPath();
-    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-    ctx.fill();
-  });
+  const width = parseInt(widthInput.value) || 800;
+  const height = parseInt(heightInput.value) || 450;
   
-  animFrame = requestAnimationFrame(draw);
+  // Set canvas size
+  canvas.width = width;
+  canvas.height = height;
+  
+  // Load HTML into preview
+  preview.innerHTML = html;
+  preview.style.width = width + 'px';
+  preview.style.height = height + 'px';
+  
+  status.textContent = 'HTML loaded! Click "Start Recording" to begin.';
+  startBtn.disabled = false;
+  
+  // Switch to preview tab
+  switchTab('preview');
+  
+  // Start capture loop
+  startCaptureLoop();
+}
+
+function startCaptureLoop() {
+  function capture() {
+    // Use html2canvas-like technique: draw DOM to canvas
+    // For now, we'll use a simpler approach - you can enhance this
+    
+    // Simple method: create a foreign object in SVG
+    const data = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">
+        <foreignObject width="100%" height="100%">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="width:${canvas.width}px;height:${canvas.height}px;">
+            ${preview.innerHTML}
+          </div>
+        </foreignObject>
+      </svg>
+    `;
+    
+    const img = new Image();
+    const blob = new Blob([data], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    
+    img.onload = function() {
+      ctx.drawImage(img, 0, 0);
+      URL.revokeObjectURL(url);
+      if (isRecording) {
+        animFrame = requestAnimationFrame(capture);
+      }
+    };
+    
+    img.src = url;
+  }
+  
+  isRecording = true;
+  capture();
 }
 
 function startRec() {
   chunks = [];
   
-  const stream = c.captureStream(30);
+  const stream = canvas.captureStream(30);
   const opts = { mimeType: 'video/webm' };
   
   if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9')) {
@@ -119,10 +216,11 @@ function startRec() {
     dlBtn.onclick = () => {
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'animation.webm';
+      a.download = 'recording-' + Date.now() + '.webm';
       a.click();
     };
-    status.textContent = 'Recording complete!';
+    status.textContent = 'Recording complete! Download your video below.';
+    isRecording = false;
   };
   
   recorder.start();
@@ -142,15 +240,18 @@ function stopRec() {
     recorder.stop();
   }
   if (timeout) clearTimeout(timeout);
+  if (animFrame) cancelAnimationFrame(animFrame);
   startBtn.disabled = false;
   stopBtn.disabled = true;
   durSel.disabled = false;
 }
 
+loadBtn.onclick = loadHtml;
 startBtn.onclick = startRec;
 stopBtn.onclick = stopRec;
 
-draw();
+// Load default example
+loadHtml();
 </script>
 </body>
 </html>

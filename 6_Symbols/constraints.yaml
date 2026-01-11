@@ -5,3 +5,4 @@ Constraint_Prompt_Animation: "Ensure the animation prompt is no more than 1420 c
 Constraint_Prompt_MotionGraphics: "Ensure the motion graphics prompt is no more than 1420 characters."
 Constraint_Prompt_SFX: "Ensure the SFX prompt is no more than 420 characters."
 Constraint_Prompt_Diagram: "Ensure the output is valid Mermaid JS syntax inside a markdown code block."
+Constraint_Prompt_HTML: "Ensure the output is valid HTML code block."

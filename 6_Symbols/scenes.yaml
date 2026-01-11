@@ -54,6 +54,7 @@ scenes:
           animation: Floating icons and headlines drifting towards the camera, parallex effect
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'AI REVOLUTION' using a futuristic font
           sound_effect: Digital data processing chirps and beeps
+          html:
         verified_prompts:
           image: false
           graphic: false
@@ -72,6 +73,7 @@ scenes:
           animation: Camera spins 360 degrees rapidly
           motion_graphics: ""
           sound_effect: Deep, airy whoosh sound syncs with the spin
+          html:
         verified_prompts:
           image: false
           graphic: false
@@ -90,6 +92,7 @@ scenes:
           animation: Slow motion disintegration of the book cover
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'RULES BROKEN' using a futuristic font
           sound_effect: Sound of heavy stone cracking or dry paper crumbling
+          html:
         verified_prompts:
           image: false
           graphic: false
@@ -114,6 +117,7 @@ scenes:
           animation: Ladder extending infinitely upwards but leading nowhere
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'SKILLS GAP' using a futuristic font
           sound_effect: Hollow wind howling sound
+          html:
         verified_prompts:
           image: false
           graphic: false
@@ -137,6 +141,7 @@ scenes:
           animation: Storm clouds swirling aggressively
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'ARE YOU READY?' using a futuristic font
           sound_effect: Distant thunder rumble mixed with digital static
+          html:
         verified_prompts:
           image: false
           graphic: false
@@ -160,6 +165,7 @@ scenes:
           animation: Slow panoramic pan up the mountain face
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'THE FORCE' using a futuristic font
           sound_effect: Sudden silence followed by a low frequency wind build-up
+          html:
         verified_prompts:
           image: false
           graphic: false
@@ -167,6 +173,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
       - id: "4"
         time: "0:12"
@@ -178,6 +185,7 @@ scenes:
           animation: Camera shake effect to simulate impact
           motion_graphics: Create a modern, neon-style motion graphic in Canva with the text 'WARNING' using a futuristic font
           sound_effect: Roar of the avalanche, like a freight train
+          html:
         verified_prompts:
           image: false
           graphic: false
@@ -185,6 +193,7 @@ scenes:
           animation: false
           motion_graphics: false
           sound_effect: false
+          html: false
         uploaded_assets: {}
   - id: SCENE 03
     title: Reshaping
