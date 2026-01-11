@@ -6,7 +6,12 @@
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <title>Dynamic HTML Recorder</title>
 <style>
-body { font-family: sans-serif; padding: 20px; background: #f0f0f0; margin: 0; }
+body { font-family: sans-serif; padding: 20px; background: #f0f0f0; margin: 0; padding-top: 60px; }
+.top-nav { position: fixed; top: 0; left: 0; right: 0; background: #2c3e50; padding: 10px 20px; display: flex; gap: 15px; align-items: center; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.top-nav a { color: white; text-decoration: none; padding: 8px 15px; border-radius: 4px; font-size: 14px; transition: background 0.2s; }
+.top-nav a:hover { background: #34495e; }
+.top-nav a.active { background: #3498db; }
+.top-nav .nav-title { color: #ecf0f1; font-weight: bold; margin-right: 20px; font-size: 16px; }
 .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 5px; }
 button { padding: 10px 20px; margin: 5px; font-size: 14px; cursor: pointer; border: none; border-radius: 3px; color: white; }
 #start { background: #e74c3c; }
@@ -47,6 +52,13 @@ label { display: block; margin: 10px 0 5px; font-weight: bold; }
 </style>
 </head>
 <body>
+<nav class="top-nav">
+    <span class="nav-title">📹 Post Production</span>
+    <a href="post_prod_artifact_plan.html">📋 Plan</a>
+    <a href="producer_flow.html">🎬 Producer</a>
+    <a href="editor_flow.html">✂️ Editor</a>
+    <a href="simple-recorder.html" class="active">🎥 Recorder</a>
+</nav>
 <div class="container">
 <h2>Dynamic HTML Animation Recorder</h2>
 <p>Paste your HTML content below, preview it, then record it as WebM video!</p>
