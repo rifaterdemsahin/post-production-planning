@@ -369,17 +369,21 @@
             }, 800);
         }
 
-        async function verifyElevenApiKey(key) {
+        async function verifyElevenApiKey(key, isManual = false) {
              const icon = document.getElementById('eleven-status-icon');
              const input = document.getElementById('elevenApiKey');
              const inputContainer = document.getElementById('eleven-key-container');
              const verifiedContainer = document.getElementById('eleven-key-verified');
+             const modalStatus = document.getElementById('modal-eleven-status');
 
              if (!key) {
                  if(icon) icon.innerText = "";
                  if(input) input.classList.remove('border-green-500', 'border-red-500');
-                 return;
+                 if(modalStatus) modalStatus.innerText = "";
+                 return false;
              }
+
+             if(modalStatus && isManual) modalStatus.innerText = "⏳ Testing...";
 
              try {
                  const response = await fetch('https://api.elevenlabs.io/v1/user', {
@@ -396,10 +400,17 @@
                         input.classList.remove('border-red-500');
                     }
                     
+                    if(modalStatus) {
+                        modalStatus.innerText = "✅ Verified";
+                        modalStatus.className = "text-[10px] font-bold text-green-400";
+                    }
+
                     setTimeout(() => {
                         if(inputContainer) inputContainer.classList.add('hidden');
                         if(verifiedContainer) verifiedContainer.classList.remove('hidden');
                     }, 500);
+                    
+                    return true;
 
                  } else {
                      throw new Error("Invalid Key");
@@ -410,6 +421,11 @@
                     input.classList.add('border-red-500');
                     input.classList.remove('border-green-500');
                  }
+                 if(modalStatus) {
+                        modalStatus.innerText = "❌ Invalid Key";
+                        modalStatus.className = "text-[10px] font-bold text-red-400";
+                 }
+                 return false;
              }
         }
 
@@ -428,18 +444,21 @@
             }
         }
 
-        async function verifyApiKey(key) {
+        async function verifyApiKey(key, isManual = false) {
             const icon = document.getElementById('api-status-icon');
             const input = document.getElementById('apiKey');
             const inputContainer = document.getElementById('api-key-input-container');
             const verifiedContainer = document.getElementById('api-key-verified');
+            const modalStatus = document.getElementById('modal-google-status');
             
             if (!key) {
-                icon.innerText = "";
-                input.classList.remove('border-green-500', 'border-red-500');
-                // Ensure input is visible if empty? Or just stay as is.
-                return;
+                if(icon) icon.innerText = "";
+                if(input) input.classList.remove('border-green-500', 'border-red-500');
+                if(modalStatus) modalStatus.innerText = "";
+                return false;
             }
+
+            if(modalStatus && isManual) modalStatus.innerText = "⏳ Testing...";
 
             try {
                 // Lightweight call to list models to verify key
@@ -447,23 +466,38 @@
                 const response = await fetch(url);
                 
                 if (response.ok) {
-                    icon.innerText = "✅";
-                    input.classList.add('border-green-500');
-                    input.classList.remove('border-red-500');
+                    if(icon) icon.innerText = "✅";
+                    if(input) {
+                        input.classList.add('border-green-500');
+                        input.classList.remove('border-red-500');
+                    }
+                    if(modalStatus) {
+                        modalStatus.innerText = "✅ Verified";
+                        modalStatus.className = "text-[10px] font-bold text-green-400";
+                    }
                     
                     // Hide Input, Show Verified Badge
                     setTimeout(() => {
-                        inputContainer.classList.add('hidden');
-                        verifiedContainer.classList.remove('hidden');
-                    }, 500); // Small delay to see the checkmark
+                        if(inputContainer) inputContainer.classList.add('hidden');
+                        if(verifiedContainer) verifiedContainer.classList.remove('hidden');
+                    }, 500);
+                    
+                    return true;
 
                 } else {
                     throw new Error("Invalid Key");
                 }
             } catch (e) {
-                icon.innerText = "❌";
-                input.classList.add('border-red-500');
-                input.classList.remove('border-green-500');
+                if(icon) icon.innerText = "❌";
+                if(input) {
+                    input.classList.add('border-red-500');
+                    input.classList.remove('border-green-500');
+                }
+                if(modalStatus) {
+                    modalStatus.innerText = "❌ Invalid Key";
+                    modalStatus.className = "text-[10px] font-bold text-red-400";
+                }
+                return false;
             }
         }
 
@@ -606,6 +640,39 @@
         }
 
 
+
+        // ==========================================
+        // MANUAL TEST FUNCTIONS
+        // ==========================================
+        async function testGoogleKey() {
+            const key = document.getElementById('modal-google-key').value;
+             if (!key) {
+                showToast("❌ Please enter a Google API Key first.");
+                return;
+            }
+            showToast("⏳ Testing Google API Key...");
+            const isValid = await verifyApiKey(key, true);
+            if(isValid) {
+                showToast("✅ Google API Key is valid!");
+            } else {
+                showToast("❌ Google API Key is invalid.");
+            }
+        }
+
+        async function testElevenLabsKey() {
+            const key = document.getElementById('modal-eleven-key').value;
+            if (!key) {
+                showToast("❌ Please enter an ElevenLabs API Key first.");
+                return;
+            }
+            showToast("⏳ Testing ElevenLabs API Key...");
+            const isValid = await verifyElevenApiKey(key, true);
+            if(isValid) {
+                showToast("✅ ElevenLabs API Key is valid!");
+            } else {
+                showToast("❌ ElevenLabs API Key is invalid.");
+            }
+        }
 
         // ==========================================
         // TOAST NOTIFICATIONS
