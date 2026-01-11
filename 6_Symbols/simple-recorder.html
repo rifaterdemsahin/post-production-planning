@@ -148,6 +148,16 @@ label { display: block; margin: 10px 0 5px; font-weight: bold; }
             <label>Target Folder ID:</label>
             <input type="text" id="driveFolderId" value="1E_ctpNSyieC_fr2xowbg_RfXZDVWbgzJ" placeholder="Folder ID from URL">
         </div>
+        <div class="form-group">
+            <label>Browse Subfolders:</label>
+            <div style="display: flex; gap: 5px; align-items: center;">
+                <select id="subfolderSelect" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                    <option value="">-- Click 'Load' to browse subfolders --</option>
+                </select>
+                <button onclick="loadSubfolders()" style="background: #9b59b6; padding: 8px 12px; font-size: 12px;">📂 Load</button>
+            </div>
+            <div id="folderPath" style="font-size: 11px; color: #666; margin-top: 5px;"></div>
+        </div>
         <div class="modal-footer">
             <button class="btn-cancel" onclick="closeDriveModal()">Cancel</button>
             <button class="btn-save" onclick="saveDriveConfig()">Save Config</button>
@@ -218,6 +228,7 @@ const stopBtn = document.getElementById('stop');
 const dlBtn = document.getElementById('download');
 const loadBtn = document.getElementById('loadHtml');
 const durSel = document.getElementById('duration');
+const widthInput = document.getElementById('width');
 const heightInput = document.getElementById('height');
 const status = document.getElementById('status');
 const video = document.getElementById('video');
@@ -268,6 +279,70 @@ function saveDriveConfig() {
     initTokenClient(clientId);
     alert("Configuration Saved!");
 }
+
+async function loadSubfolders() {
+    const parentFolderId = document.getElementById('driveFolderId').value.trim();
+    const subfolderSelect = document.getElementById('subfolderSelect');
+    const folderPath = document.getElementById('folderPath');
+    
+    if (!parentFolderId) {
+        alert('Please enter a parent Folder ID first.');
+        return;
+    }
+    
+    try {
+        const token = await getAccessToken();
+        subfolderSelect.innerHTML = '<option value="">⏳ Loading...</option>';
+        
+        // Fetch subfolders
+        const query = `'${parentFolderId}' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false`;
+        const url = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(query)}&fields=files(id,name)&orderBy=name`;
+        
+        const res = await fetch(url, {
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
+        
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error?.message || 'Failed to load folders');
+        
+        subfolderSelect.innerHTML = '<option value="">-- Select a subfolder --</option>';
+        subfolderSelect.innerHTML += `<option value="${parentFolderId}">📁 (Current folder)</option>`;
+        
+        if (data.files && data.files.length > 0) {
+            data.files.forEach(folder => {
+                const option = document.createElement('option');
+                option.value = folder.id;
+                option.textContent = '📂 ' + folder.name;
+                subfolderSelect.appendChild(option);
+            });
+            folderPath.textContent = `Found ${data.files.length} subfolder(s)`;
+        } else {
+            folderPath.textContent = 'No subfolders found in this folder';
+        }
+        
+    } catch (err) {
+        console.error('Error loading subfolders:', err);
+        subfolderSelect.innerHTML = '<option value="">-- Error loading folders --</option>';
+        folderPath.textContent = 'Error: ' + err.message;
+    }
+}
+
+function selectSubfolder() {
+    const subfolderSelect = document.getElementById('subfolderSelect');
+    const folderId = document.getElementById('driveFolderId');
+    
+    if (subfolderSelect.value) {
+        folderId.value = subfolderSelect.value;
+    }
+}
+
+// Add event listener for subfolder selection
+document.addEventListener('DOMContentLoaded', () => {
+    const subfolderSelect = document.getElementById('subfolderSelect');
+    if (subfolderSelect) {
+        subfolderSelect.addEventListener('change', selectSubfolder);
+    }
+});
 
 function initTokenClient(clientId) {
     if (!window.google) return;
