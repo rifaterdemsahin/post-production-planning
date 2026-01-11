@@ -2552,6 +2552,26 @@
         // 5. HELPER FUNCTIONS
         // ==========================================
 
+        let constraintsCache = null;
+
+        async function loadConstraints() {
+            if (constraintsCache) return constraintsCache;
+            
+            try {
+                logDebug("INFO", "Fetching Constraints", "constraints.yaml");
+                const response = await fetch('constraints.yaml');
+                if (!response.ok) throw new Error("Failed to load constraints.yaml");
+                const text = await response.text();
+                constraintsCache = jsyaml.load(text);
+                return constraintsCache;
+            } catch (e) {
+                console.error("Error loading constraints", e);
+                logDebug("ERROR", "Constraint Load Failed", e.message);
+                // Don't alert blocking error, just log it, as app can work without constraints
+                return null;
+            }
+        }
+
         async function constructFullPrompt(sceneIndex, promptText, type) {
             // 2. Gather Contexts
             const mainCtx = window.mainContext || "";
@@ -2594,11 +2614,38 @@
                 if (templateKey && templates[templateKey]) {
                     finalPrompt += `\n\n[STYLE TEMPLATE]: ${templates[templateKey]}`;
                     
-                    // Update UI Label if function runs in context of modal opening
+                    // Update UI Label
                     const templateLabel = document.getElementById('template-indicator');
                     if (templateLabel) {
                         templateLabel.innerText = `Using Template: ${templateKey.replace('Sample_Prompt_', '')}`;
                         templateLabel.classList.remove('hidden');
+                    }
+                }
+            }
+
+            // Auto-Inject Constraints
+            const constraints = await loadConstraints();
+            const constraintLabel = document.getElementById('constraint-indicator');
+            // Reset constraint label first
+            if (constraintLabel) constraintLabel.classList.add('hidden');
+
+            if (constraints) {
+                let constraintKey = "";
+                switch(type) {
+                    case 'image': constraintKey = 'Constraint_Prompt_Image'; break;
+                    case 'graphic': constraintKey = 'Constraint_Prompt_Graphic'; break;
+                    case 'music': constraintKey = 'Constraint_Prompt_Music'; break;
+                    case 'animation': constraintKey = 'Constraint_Prompt_Animation'; break;
+                    case 'motion_graphics': constraintKey = 'Constraint_Prompt_MotionGraphics'; break;
+                    case 'sound_effect': constraintKey = 'Constraint_Prompt_SFX'; break;
+                }
+
+                if (constraintKey && constraints[constraintKey]) {
+                    finalPrompt += `\n\n[CONSTRAINT]: ${constraints[constraintKey]}`;
+                    
+                    // Show UI Label
+                    if (constraintLabel) {
+                        constraintLabel.classList.remove('hidden');
                     }
                 }
             }
