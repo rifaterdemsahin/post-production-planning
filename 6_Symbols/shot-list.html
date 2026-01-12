@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shot List - Production Planning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        .table-container {
+            max-height: calc(100vh - 200px);
+            overflow: auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th {
+            position: sticky;
+            top: 0;
+            background: #4c1d95;
+            z-index: 10;
+        }
+        th, td {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 12px;
+            text-align: left;
+        }
+        tr:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+        .loader {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #8b5cf6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .shot-card {
+            transition: all 0.3s ease;
+        }
+        .shot-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+        }
+    </style>
+</head>
+<body class="p-6 text-gray-100">
+    
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto mb-6">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold text-white flex items-center gap-3">
+                    <span class="text-4xl">🎬</span>
+                    Shot List
+                </h1>
+                <p class="text-gray-400 text-sm mt-1">Production shot planning and tracking</p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="refreshData()" class="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition">
+                    🔄 Refresh
+                </button>
+                <a href="https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30/edit?gid=1278766054#gid=1278766054" 
+                   target="_blank" rel="noopener noreferrer"
+                   class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition">
+                    📝 Edit in Sheets
+                </a>
+                <a href="post_prod_artifact_plan.html" 
+                   class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition">
+                    🎯 Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Toggle -->
+    <div class="max-w-7xl mx-auto mb-4">
+        <div class="flex gap-2">
+            <button onclick="showView('table')" id="btn-table" class="px-4 py-2 rounded-lg text-sm font-bold transition bg-purple-600 text-white">
+                📋 Table View
+            </button>
+            <button onclick="showView('cards')" id="btn-cards" class="px-4 py-2 rounded-lg text-sm font-bold transition bg-gray-700 text-gray-300 hover:bg-gray-600">
+                🃏 Card View
+            </button>
+            <button onclick="showView('embed')" id="btn-embed" class="px-4 py-2 rounded-lg text-sm font-bold transition bg-gray-700 text-gray-300 hover:bg-gray-600">
+                🖼️ Embed View
+            </button>
+        </div>
+    </div>
+
+    <!-- Table View -->
+    <div id="view-table" class="max-w-7xl mx-auto">
+        <div class="glass-card rounded-xl neon-glow overflow-hidden">
+            <div class="table-container">
+                <!-- Loading State -->
+                <div id="loading" class="flex flex-col items-center justify-center py-20">
+                    <div class="loader mb-4"></div>
+                    <p class="text-gray-400 text-sm">Loading shot list data...</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="error" class="hidden flex flex-col items-center justify-center py-20">
+                    <div class="text-red-500 text-5xl mb-4">⚠️</div>
+                    <p class="text-red-400 text-lg font-bold mb-2">Failed to Load Data</p>
+                    <p class="text-gray-400 text-sm" id="error-message"></p>
+                    <button onclick="refreshData()" class="mt-4 bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition">
+                        Try Again
+                    </button>
+                </div>
+
+                <!-- Table -->
+                <table id="data-table" class="hidden">
+                    <thead id="table-head"></thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card View -->
+    <div id="view-cards" class="hidden max-w-7xl mx-auto">
+        <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Cards will be rendered here -->
+        </div>
+    </div>
+
+    <!-- Embed View -->
+    <div id="view-embed" class="hidden max-w-7xl mx-auto">
+        <div class="glass-card rounded-xl neon-glow overflow-hidden p-6">
+            <iframe 
+                src="https://docs.google.com/spreadsheets/d/19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30/edit?widget=true&headers=false&gid=1278766054&rm=minimal"
+                class="w-full h-[calc(100vh-200px)] border-0 rounded-lg"
+            ></iframe>
+        </div>
+    </div>
+
+    <script>
+        const SPREADSHEET_ID = '19Oof1uMH-fh5Lt8_thltIoUOCufWbY0tY-gM88GEO30';
+        const SHEET_GID = '1278766054'; // Shot List sheet GID
+        const SHEET_NAME = 'Shot List'; // Adjust this to match your actual sheet name
+
+        async function loadData() {
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const table = document.getElementById('data-table');
+            
+            loading.classList.remove('hidden');
+            error.classList.add('hidden');
+            table.classList.add('hidden');
+            
+            try {
+                // Export as CSV from Google Sheets
+                const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&gid=${SHEET_GID}`;
+                
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+                }
+                
+                const csv = await response.text();
+                const rows = parseCSV(csv);
+                
+                loading.classList.add('hidden');
+                table.classList.remove('hidden');
+                
+                renderTable(rows);
+                renderCards(rows);
+                
+                console.log(`✅ Loaded ${rows.length} rows from Shot List`);
+            } catch (err) {
+                console.error('Error loading data:', err);
+                loading.classList.add('hidden');
+                error.classList.remove('hidden');
+                document.getElementById('error-message').textContent = err.message;
+            }
+        }
+
+        function parseCSV(csv) {
+            const lines = csv.split('\n');
+            const result = [];
+            
+            for (let line of lines) {
+                if (line.trim() === '') continue;
+                
+                const row = [];
+                let inQuotes = false;
+                let cell = '';
+                
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    
+                    if (char === '"') {
+                        if (inQuotes && line[i + 1] === '"') {
+                            cell += '"';
+                            i++;
+                        } else {
+                            inQuotes = !inQuotes;
+                        }
+                    } else if (char === ',' && !inQuotes) {
+                        row.push(cell.trim());
+                        cell = '';
+                    } else {
+                        cell += char;
+                    }
+                }
+                row.push(cell.trim());
+                result.push(row);
+            }
+            
+            return result;
+        }
+
+        function renderTable(rows) {
+            const thead = document.getElementById('table-head');
+            const tbody = document.getElementById('table-body');
+            
+            thead.innerHTML = '';
+            tbody.innerHTML = '';
+            
+            if (rows.length === 0) return;
+            
+            // Header row
+            const headerRow = document.createElement('tr');
+            rows[0].forEach((cell, idx) => {
+                const th = document.createElement('th');
+                th.textContent = cell || `Column ${idx + 1}`;
+                th.className = 'font-bold text-purple-200';
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            
+            // Data rows
+            for (let i = 1; i < rows.length; i++) {
+                const tr = document.createElement('tr');
+                tr.className = i % 2 === 0 ? 'bg-purple-900/20' : '';
+                
+                rows[i].forEach((cell, idx) => {
+                    const td = document.createElement('td');
+                    
+                    // Check if it's a URL
+                    if (cell && (cell.startsWith('http://') || cell.startsWith('https://'))) {
+                        const link = document.createElement('a');
+                        link.href = cell;
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+                        link.className = 'text-purple-400 hover:underline';
+                        link.textContent = cell.length > 50 ? cell.substring(0, 50) + '...' : cell;
+                        td.appendChild(link);
+                    } else {
+                        td.textContent = cell;
+                    }
+                    
+                    tr.appendChild(td);
+                });
+                
+                tbody.appendChild(tr);
+            }
+        }
+
+        function renderCards(rows) {
+            const container = document.getElementById('cards-container');
+            container.innerHTML = '';
+            
+            if (rows.length < 2) return;
+            
+            const headers = rows[0];
+            
+            // Render cards for each data row
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-lg p-4 shot-card';
+                
+                let cardHTML = '<div class="space-y-2">';
+                
+                row.forEach((cell, idx) => {
+                    if (cell && cell.trim() !== '') {
+                        const header = headers[idx] || `Field ${idx + 1}`;
+                        
+                        // Check if it's a URL
+                        if (cell.startsWith('http://') || cell.startsWith('https://')) {
+                            cardHTML += `
+                                <div class="border-b border-gray-700 pb-2">
+                                    <div class="text-xs text-gray-500 uppercase">${header}</div>
+                                    <a href="${cell}" target="_blank" rel="noopener noreferrer" 
+                                       class="text-sm text-purple-400 hover:underline break-all">
+                                        ${cell.length > 60 ? cell.substring(0, 60) + '...' : cell}
+                                    </a>
+                                </div>
+                            `;
+                        } else {
+                            cardHTML += `
+                                <div class="border-b border-gray-700 pb-2">
+                                    <div class="text-xs text-gray-500 uppercase">${header}</div>
+                                    <div class="text-sm text-gray-200">${cell}</div>
+                                </div>
+                            `;
+                        }
+                    }
+                });
+                
+                cardHTML += '</div>';
+                card.innerHTML = cardHTML;
+                container.appendChild(card);
+            }
+        }
+
+        function refreshData() {
+            loadData();
+        }
+
+        function showView(view) {
+            const tableView = document.getElementById('view-table');
+            const cardsView = document.getElementById('view-cards');
+            const embedView = document.getElementById('view-embed');
+            const btnTable = document.getElementById('btn-table');
+            const btnCards = document.getElementById('btn-cards');
+            const btnEmbed = document.getElementById('btn-embed');
+            
+            // Hide all views
+            tableView.classList.add('hidden');
+            cardsView.classList.add('hidden');
+            embedView.classList.add('hidden');
+            
+            // Reset all buttons
+            btnTable.className = 'px-4 py-2 rounded-lg text-sm font-bold transition bg-gray-700 text-gray-300 hover:bg-gray-600';
+            btnCards.className = 'px-4 py-2 rounded-lg text-sm font-bold transition bg-gray-700 text-gray-300 hover:bg-gray-600';
+            btnEmbed.className = 'px-4 py-2 rounded-lg text-sm font-bold transition bg-gray-700 text-gray-300 hover:bg-gray-600';
+            
+            // Show selected view
+            if (view === 'table') {
+                tableView.classList.remove('hidden');
+                btnTable.className = 'px-4 py-2 rounded-lg text-sm font-bold transition bg-purple-600 text-white';
+            } else if (view === 'cards') {
+                cardsView.classList.remove('hidden');
+                btnCards.className = 'px-4 py-2 rounded-lg text-sm font-bold transition bg-purple-600 text-white';
+            } else if (view === 'embed') {
+                embedView.classList.remove('hidden');
+                btnEmbed.className = 'px-4 py-2 rounded-lg text-sm font-bold transition bg-purple-600 text-white';
+            }
+        }
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>
